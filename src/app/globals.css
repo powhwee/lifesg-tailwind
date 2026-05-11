@@ -9,6 +9,24 @@
 @import "./markup-tokens.css";
 @import "./layout-tokens.css";
 @import "./error-display-tokens.css";
+@import "./card-tokens.css";
+@import "./table-tokens.css";
+@import "./uneditable-section-tokens.css";
+@import "./box-container-tokens.css";
+@import "./tab-tokens.css";
+@import "./accordion-tokens.css";
+@import "./data-table-tokens.css";
+@import "./modal-tokens.css";
+@import "./fullscreen-image-carousel-tokens.css";
+@import "./avatar-tokens.css";
+@import "./breadcrumb-tokens.css";
+@import "./link-list-tokens.css";
+@import "./masthead-tokens.css";
+@import "./pagination-tokens.css";
+@import "./local-nav-tokens.css";
+@import "./sidenav-tokens.css";
+@import "./navbar-tokens.css";
+@import "./footer-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 

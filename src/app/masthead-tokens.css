@@ -1,0 +1,12 @@
+/* Layer 3 — Component tokens for Masthead. */
+
+:root {
+  --masthead-bg:               var(--lifesg-bg-stronger);
+  --masthead-text:             var(--lifesg-text);
+  --masthead-link:             var(--lifesg-text-primary);
+  --masthead-icon:             var(--lifesg-icon-primary);
+  --masthead-crest:            #EE2536;
+
+  --masthead-font-size:        0.75rem;   /* 12px */
+  --masthead-line-height:      1.125rem;  /* 18px */
+}

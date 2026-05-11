@@ -1,0 +1,24 @@
+/* Layer 3 — Component tokens for DataTable. */
+
+:root {
+  --data-table-border:                 var(--lifesg-border);
+  --data-table-row-border:             var(--lifesg-border);
+  --data-table-row-bg-hover:           var(--lifesg-bg-hover);
+  --data-table-row-bg-selected:        var(--lifesg-bg-selected);
+  --data-table-row-bg-alt:             var(--lifesg-bg-strong);
+  --data-table-head-bg:                var(--lifesg-bg-stronger);
+  --data-table-action-bar-bg:          var(--lifesg-bg-primary-subtlest);
+  --data-table-radius:                 0.5rem;
+  --data-table-cell-x:                 1rem;
+  --data-table-cell-x-first:           1.5rem;
+  --data-table-cell-y:                 1rem;
+  --data-table-head-y:                 1rem;
+
+  --data-table-icon-strong:            var(--lifesg-icon-strongest);
+  --data-table-icon-subtle:            var(--lifesg-icon-subtle);
+
+  --data-table-checkbox-bg:            var(--lifesg-bg);
+  --data-table-checkbox-border:        var(--lifesg-border-stronger);
+  --data-table-checkbox-checked-bg:    var(--lifesg-bg-primary);
+  --data-table-checkbox-tick:          var(--lifesg-text-inverse);
+}

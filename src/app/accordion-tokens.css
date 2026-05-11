@@ -1,0 +1,8 @@
+/* Layer 3 — Component tokens for Accordion. */
+
+:root {
+  --accordion-border:    var(--lifesg-border);
+  --accordion-divider:   var(--lifesg-border);
+  --accordion-radius:    0.5rem;
+  --accordion-x:         1rem;
+}

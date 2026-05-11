@@ -1,0 +1,18 @@
+/* Layer 3 — Component tokens for LinkList. */
+
+:root {
+  --link-list-link:                 var(--lifesg-text-primary);
+  --link-list-border:               var(--lifesg-border-subtle);
+
+  /* default size */
+  --link-list-title-default-size:   1.375rem; /* 22px — HeadingSM */
+  --link-list-title-default-line:   1.75rem;
+  --link-list-desc-default-size:    1.125rem; /* 18px — BodyBL */
+  --link-list-desc-default-line:    1.625rem;
+
+  /* small size */
+  --link-list-title-small-size:     1.125rem; /* 18px */
+  --link-list-title-small-line:     1.625rem;
+  --link-list-desc-small-size:      1rem;     /* 16px */
+  --link-list-desc-small-line:      1.5rem;
+}

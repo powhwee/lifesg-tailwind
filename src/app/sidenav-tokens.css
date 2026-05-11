@@ -1,0 +1,13 @@
+/* Layer 3 — Component tokens for Sidenav. */
+
+:root {
+  --sidenav-bg:                var(--lifesg-bg);
+  --sidenav-bg-hover:          var(--lifesg-bg-hover);
+  --sidenav-bg-selected:       var(--lifesg-bg-selected);
+  --sidenav-drawer-bg:         var(--lifesg-bg);
+  --sidenav-border:            var(--lifesg-border-subtle);
+  --sidenav-icon:              var(--lifesg-icon-primary);
+  --sidenav-icon-selected:     var(--lifesg-icon-primary);
+  --sidenav-text:              var(--lifesg-text-primary);
+  --sidenav-text-subtle:       var(--lifesg-text-subtle);
+}

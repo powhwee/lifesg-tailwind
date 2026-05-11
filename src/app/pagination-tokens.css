@@ -1,0 +1,11 @@
+/* Layer 3 — Component tokens for Pagination. */
+
+:root {
+  --pagination-text:           var(--lifesg-text);
+  --pagination-text-active:    var(--lifesg-text-inverse);
+  --pagination-bg:             var(--lifesg-bg);
+  --pagination-bg-hover:       var(--lifesg-bg-hover);
+  --pagination-bg-active:      var(--lifesg-bg-primary);
+  --pagination-border:         var(--lifesg-border);
+  --pagination-chevron:        var(--lifesg-text-primary);
+}

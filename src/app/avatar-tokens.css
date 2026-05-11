@@ -1,0 +1,12 @@
+/* Layer 3 — Component tokens for Avatar. */
+
+:root {
+  --avatar-bg:                 var(--lifesg-primary-95);
+  --avatar-text:               var(--lifesg-text-primary);
+
+  --avatar-size-default:       2.5rem;   /* 40px */
+  --avatar-size-small:         1.5rem;   /* 24px */
+
+  --avatar-font-default:       1rem;     /* 16px */
+  --avatar-font-small:         1rem;     /* 16px */
+}

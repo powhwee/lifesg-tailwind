@@ -1,0 +1,9 @@
+/* Layer 3 — Component tokens for Navbar. */
+
+:root {
+  --navbar-bg:               var(--lifesg-bg);
+  --navbar-bg-hover:         var(--lifesg-bg-hover);
+  --navbar-text:             var(--lifesg-text);
+  --navbar-border:           var(--lifesg-border-subtle);
+  --navbar-indicator:        var(--lifesg-bg-primary);
+}

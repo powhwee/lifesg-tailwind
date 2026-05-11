@@ -1,0 +1,14 @@
+/* Layer 3 — Component tokens for FullscreenImageCarousel.
+ * Populated in the carousel port step.
+ */
+
+:root {
+  --fic-backdrop:           color-mix(in srgb, var(--lifesg-neutral-10) 90%, transparent);
+  --fic-toolbar-bg:         transparent;
+  --fic-text:               #FFFFFF;
+  --fic-icon:               #FFFFFF;
+  --fic-button-bg:          color-mix(in srgb, #FFFFFF 12%, transparent);
+  --fic-button-bg-hover:    color-mix(in srgb, #FFFFFF 24%, transparent);
+  --fic-thumb-border:       color-mix(in srgb, #FFFFFF 40%, transparent);
+  --fic-thumb-border-active:#FFFFFF;
+}
