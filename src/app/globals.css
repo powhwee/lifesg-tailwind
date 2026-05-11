@@ -30,6 +30,8 @@
 @import "./checkbox-tokens.css";
 @import "./radio-button-tokens.css";
 @import "./toggle-tokens.css";
+@import "./icon-button-tokens.css";
+@import "./image-button-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 

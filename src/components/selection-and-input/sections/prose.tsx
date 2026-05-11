@@ -166,7 +166,24 @@ export function ToggleIntro() {
 export function IconButtonIntro() {
   return (
     <Page title="IconButton">
-      <p>Coming next sub-batch.</p>
+      <p>
+        Square icon-only button. Mirrors LifeSG&rsquo;s prop surface:{" "}
+        <code>styleType</code> (<code>primary | secondary | light</code>),{" "}
+        <code>sizeType</code> (<code>large | default | small</code>), all standard{" "}
+        <code>ButtonHTMLAttributes</code>.
+      </p>
+      <p>
+        Built on Base UI <code>@base-ui/react/button</code> for the same{" "}
+        <code>aria-pressed</code> / <code>aria-disabled</code> contract as Button. Sizes pair an
+        outer dimension with an inner SVG size: small (40&times;40 / 16px), default (48&times;48 / 20px),
+        large (56&times;56 / 24px). Override per call with an explicit{" "}
+        <code>className=&quot;size-N&quot;</code> on the SVG.
+      </p>
+      <p>
+        <strong>Always pass <code>aria-label</code></strong> &mdash; an icon-only button with no
+        accessible name fails a basic a11y check. The component itself doesn&rsquo;t enforce this
+        (would be too restrictive for label-via-tooltip patterns), but treat it as required.
+      </p>
     </Page>
   );
 }
@@ -174,7 +191,25 @@ export function IconButtonIntro() {
 export function ImageButtonIntro() {
   return (
     <Page title="ImageButton">
-      <p>Coming next sub-batch.</p>
+      <p>
+        Square image-shaped tappable card with optional selection and error states. Mirrors
+        LifeSG&rsquo;s contract: <code>imgSrc</code>, <code>selected</code>, <code>error</code>,
+        plus standard <code>ButtonHTMLAttributes</code>. Common use: a chooser grid of avatars,
+        themes, or thumbnails.
+      </p>
+      <p>
+        Visual: the image fills the button. <code>selected</code> renders a primary-coloured
+        checkmark badge in the top-right corner and a primary-coloured border.{" "}
+        <code>error</code> swaps the border to the error-strong colour. <code>aria-pressed</code>{" "}
+        is wired to <code>selected</code>; <code>aria-invalid</code> to <code>error</code>.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Sizing</h2>
+      <p>
+        Defaults to <code>aspect-square</code> &mdash; consumer controls the actual size by setting
+        a <code>className</code> width (e.g. <code>w-20</code>) on the parent grid. LifeSG&rsquo;s
+        version requires explicit <code>style={`{{ width, height }}`}</code> &mdash; ours uses
+        Tailwind utilities and aspect-ratio.
+      </p>
     </Page>
   );
 }

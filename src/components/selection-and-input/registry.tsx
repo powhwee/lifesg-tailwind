@@ -4,6 +4,8 @@ import * as buttonDefault from "./sections/button-default";
 import * as checkboxDefault from "./sections/checkbox-default";
 import * as radioButtonDefault from "./sections/radio-button-default";
 import * as toggleDefault from "./sections/toggle-default";
+import * as iconButtonDefault from "./sections/icon-button-default";
+import * as imageButtonDefault from "./sections/image-button-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -60,6 +62,14 @@ export const tree: Node[] = [
   folder("toggle", "Toggle", [
     leaf("introduction", "Introduction", { Prose: prose.ToggleIntro }),
     leaf("default",      "Default",      { Ours: toggleDefault.OursPane, LifeSG: toggleDefault.LifeSGPane }),
+  ]),
+  folder("icon-button", "IconButton", [
+    leaf("introduction", "Introduction", { Prose: prose.IconButtonIntro }),
+    leaf("default",      "Default",      { Ours: iconButtonDefault.OursPane, LifeSG: iconButtonDefault.LifeSGPane }),
+  ]),
+  folder("image-button", "ImageButton", [
+    leaf("introduction", "Introduction", { Prose: prose.ImageButtonIntro }),
+    leaf("default",      "Default",      { Ours: imageButtonDefault.OursPane, LifeSG: imageButtonDefault.LifeSGPane }),
   ]),
 ];
 
