@@ -224,3 +224,124 @@ Five of seven non-colour categories shipped with `Colour`'s exact shape: `(props
 
 - We haven't tested the dark-mode story end-to-end with the rest of the app. The `.dark` class works on `/foundations/themes/dark-mode` but Button hasn't been audited in dark.
 - Tailwind 4 `@theme` only loads a subset of our tokens (colours, radius). Spacing/font sizes still flow through Tailwind's defaults — utilities like `gap-2`, `text-lg` aren't pinned to LifeSG's scale. If we want `gap-2` to mean LifeSG's `--lifesg-spacing-8`, that's a separate Tailwind config exercise.
+
+## 2026-05-11 — Port LifeSG Layout and ErrorDisplay
+
+### Scope
+
+Two Core entries that didn't fit the simple "tokens + class strings" shape: **Layout** (4 primitives, a 12-column grid contract) and **ErrorDisplay** (a 19-type app-shell template with raster illustrations).
+
+### Layout — kept the wrapper, dropped the styled-components dependency
+
+Tailwind's `grid-cols-12` + `col-span-N` cover the same ground as LifeSG's `Layout.ColDiv` in fewer characters when you're building from scratch. We still ship `Section` / `Container` / `Content` / `ColDiv` for two reasons:
+
+1. **Migration cost.** Mirroring the prop surface (`type="flex|flex-column|grid"` defaulting to `flex`, `xxsCols`...`xxlCols` accepting either `number` or `[start, end)` tuples) means a LifeSG screen migrates with an import swap. Without the wrapper, every `<Layout.ColDiv lgCols={[1, 5]}>` needs a per-call rewrite.
+2. **Single source of truth for breakpoints.** The 8-col → 12-col flip at `lg-min`, the margin/gutter step (24→48px outer, 16→32px gutter), and the 1440px max-width are encoded once in `layout-tokens.css`. Pages don't need to know.
+
+Two divergences worth noting:
+
+- **No `ThemeProvider` dependency.** LifeSG's `ColDiv` reads `theme.maxColumns` at render. Ours reads breakpoints from `layout-tokens.css` directly — keeps Layout usable without wrapping the tree.
+- **Range typing relaxed.** LifeSG types `BreakpointSpan` as a literal `Range<Max>` per breakpoint, so the type system enforces `xxsCols` (8 max) can't take `9`. Ours accepts `number | [number, number | -1]` — runtime-clamped at the CSS layer, not exhaustively typed. `-1` is the "to end" sentinel from LifeSG (`[3, -1]` means cols 3 through max).
+
+The exclusive-end convention surprises Tailwind muscle memory: `[1, 5]` spans cols 1–4, not 1–5. Matches LifeSG, breaks Tailwind expectations. Documented on the Layout introduction page.
+
+### ErrorDisplay — three illustration paths, one honest caveat
+
+LifeSG's ErrorDisplay ships 19 built-in `type`s (`400`...`504`, `maintenance`, `no-item-found`, `logout`, `inactivity`, etc.) with a per-type title, description, and PNG illustration served from `assets.life.gov.sg/react-design-system/img/error/<type>.png`. Mirrored all 19 types verbatim (titles, descriptions, dynamic `renderDescription` for `maintenance` + `inactivity` countdowns).
+
+Illustrations were the real decision. Three paths:
+
+1. **Default** — proxy LifeSG's CDN with `@2x` / `@3x` srcset. Visual parity in the comparison, zero asset pipeline today. `CDN_BASE` constant is the swap point.
+2. **Override** — `img={{ src, srcSet, width, height, alt }}` matches LifeSG's prop shape for one-off illustrations.
+3. **Fallback** — `img={null}` renders a Lucide-icon-on-disc in the type's semantic tone (red errors, orange warnings, green success). Sane for offline / SSR-without-network / storybook.
+
+**Honest caveat documented on the introduction page**: pointing at `assets.life.gov.sg` in production for non-LifeSG properties is borrowed branding. Treat the CDN default as a pilot-only convenience. The override and fallback exist for the same reason.
+
+### Findings
+
+1. **A wrapper that looks redundant can still earn its keep through migration leverage.** Layout doesn't add anything Tailwind grid can't express. It earns its keep by making the LifeSG → ours diff a one-line import change instead of a per-call rewrite. We'd revisit if the agency picks a different grid contract.
+2. **For raster assets, ship three paths.** Default (proxy), override (per-page), fallback (offline). Decoupling means we don't block the port on the agency's illustration set being designed, and the fallback gives us a clean offline story for free.
+3. **`[start, end)` exclusive-end is a load-bearing convention to call out.** It's the kind of off-by-one a Tailwind-fluent reader will get wrong on first read. Worth a line in the migration guide and a comment in `layout.tsx` if anyone ever questions why we didn't use inclusive bounds.
+
+### Things still to verify
+
+- Layout is exercised by every component below it in the next batch — if a Container/Section/ColDiv divergence surfaces, it'll surface there. Hasn't yet.
+- The fallback Lucide-icon-on-disc was matched to LifeSG's tone semantics by eye, not by `getComputedStyle` — fine because it's an offline-only path that doesn't need pixel parity.
+- **Long-form content + Layout interaction.** A page combining `Markup` + `Layout.ColDiv` with `xxsCols=12 lgCols=[3,11]` hasn't been built. Will surface any prose-readability decisions Layout makes implicitly.
+
+### Artifacts
+
+- `src/components/ui/{layout,error-display}.tsx`
+- `src/app/{layout,error-display}-tokens.css`
+- `src/components/core/sections/{layout,errordisplay}-default.tsx` + matching `prose.tsx` entries
+- `scripts/{inspect-errord-layout,inspect-errordisplay-imgs,inspect-layout-grid,verify-layout-errordisplay}.mjs` — diagnostic probes; kept rather than deleted in case the divergences re-emerge.
+
+## 2026-05-12 — Port LifeSG Content, Overlays, Navigation
+
+### Scope
+
+Three taxonomy folders, 17 components in one batch:
+
+- **Content** (8): Card, Table, UneditableSection, BoxContainer, Tab, Accordion, DataTable, FullscreenImageCarousel.
+- **Overlays** (1): Modal — required by the carousel and by every Form component downstream.
+- **Navigation** (8 of 10): Avatar, Breadcrumb, LinkList, Masthead, Pagination, LocalNav, Sidenav, Navbar, Footer. Language Switcher dropped (agency is English-monolingual). Drawer not ported as a standalone — Navbar inlines it, matching LifeSG's private internal.
+
+Same `[ours-pane | LifeSG-pane]` shape as Foundations / Core. Each component has an `Introduction` prose page documenting kept/dropped/diverged decisions, plus a `Default` page for visual comparison.
+
+### Behavioural parity is the new bar
+
+Up through Core, the pilot's "can shadcn match LifeSG?" question was visual. This batch is the first where keyboard, focus, and ARIA semantics matter more than pixels. Components that exercise it: **Tab** (arrow keys cycle, automatic activation, animated indicator), **Accordion** (Enter/Space toggle, ARIA disclosure), **Modal** (focus trap, restore-on-close, scroll lock, Escape, outside click), **DataTable** (Checkbox indeterminate state, `aria-sort`), **LocalNav** (`IntersectionObserver` scroll-spy + sticky offset), **Sidenav** (drawer open/close + focus management), **FullscreenImageCarousel** (Modal-mounted, ArrowLeft/Right cycling, zoom toggle).
+
+Verified Tab keyboard nav with `scripts/probe-tab-kbd.mjs` — both panes show `tabindex="0"` on the active tab, `tabindex="-1"` on the rest, and ArrowRight correctly shifts `aria-selected` on both. Identical behaviour, different libraries (Base UI vs LifeSG's hand-rolled).
+
+The pattern: **Base UI primitives carry the load**. `@base-ui/react/{tabs,accordion,collapsible,dialog,checkbox}` provided focus + keyboard + ARIA for free across this batch. LifeSG's hand-rolled equivalents took the same amount of code to wrap; the difference is Base UI handles the edge cases (RTL keyboard, restore-on-close to the right element, scroll-locked iOS Safari) that LifeSG's implementation doesn't always.
+
+### Deliberate divergences worth pinning down
+
+- **Tab** — drops `fadeColor` / overflow-fade flourish; `overflow-x-auto` on the wrapper is enough.
+- **Accordion** — drops imperative refs (`expand()` / `collapse()` on `AccordionItem`). Base UI's controlled `value` pattern is the replacement. **Migration cost**: any LifeSG code using these refs needs a state-lift rewrite. Worth a callout in the migration guide.
+- **DataTable** — defers `enableStickyHeader` (LifeSG uses a scroll-watching observer) until a real screen exercises it. Empty-view supports plain `ReactNode` via `emptyView`; the structured `ErrorDisplayAttributes` prop-passthrough is one adapter away.
+- **UneditableSection** — defers masking entirely (`maskState`/`maskLoadingState`/`maskRange`/`maskRegex` + toggle UI). Separate sub-feature that needs its own design pass.
+- **FullscreenImageCarousel** — zoom is a 1× / 1.5× toggle, not LifeSG's continuous magnifier with pan. No swipe gestures. Pointer + keyboard work today.
+- **Modal** — drops `rootComponentId` (target a non-`document.body` portal container). Base UI defaults to body; can wrap `Dialog.Portal container={ref}` if a screen needs it.
+- **Breadcrumb** — drops `fadeColor` / `fadePosition` overflow flourish (parent uses `overflow-x-auto`).
+- **Navbar** + **Footer** — explicitly **skeletal**. Visual shell + desktop/mobile switch only. The brand-pinned bits (download-button helper, action-button typing, `showDownloadAddon`/`showResourceAddon` cross-product addons) are dropped pending agency branding. Marked as such in the prose so nobody mistakes them for production-ready.
+
+### Surprises worth flagging
+
+- **Footer was server-only by accident.** The original port shipped with `"use client"` because it was copy-shaped from Navbar. The component has no hooks, handlers, or state — pure server-renderable. Dropped the directive (`src/components/ui/footer.tsx:1`). Small bundle / hydration win and an honest signal of where the client/server boundary actually is.
+- **Base UI `@base-ui/react` vs `@base-ui/react-components`.** The package layout has stabilised since the batch we used in Button — current installs ship a flatter import surface (`@base-ui/react/dialog` instead of `…/react-components/dialog`). The whole batch uses the new path. If older shadcn examples import differently, prefer the path that matches what's installed.
+- **Pagination's window-and-ellipsis is non-trivial to match exactly.** First / last / current ± 1 / ellipsis-fill — easy to describe, easy to get off-by-one. Mirrored LifeSG's algorithm verbatim by reading their source rather than reinventing. The button count matches at any `(activePage, totalItems, pageSize)` triple.
+- **Sidenav inlines its drawer, matching LifeSG.** Tempting to extract Drawer as a separate Overlays primitive (filter panels, settings sheets would reuse it). Held off until a second consumer appears — premature factor otherwise.
+
+### Outstanding parity issues — documented, not fixed
+
+Two real divergences surfaced and weren't resolved before the commit landed. Probe scripts capture them so we can re-test after a fix lands.
+
+**1. Table row height (24px taller on LifeSG).** Same content, same cell padding (`20px 16px`), same `<tr>` computed styles, no wrapper element inside `<td>`. All five LifeSG cells in row 1 are uniformly 113px; ours are uniformly 89px. Source of the 24px is somewhere we haven't isolated — possibly `<table>` border-spacing, possibly a `<tbody>` rule, possibly a styled-components-injected stylesheet not visible via element-level inspection. `scripts/probe-{table-row,row-detail}.mjs` pin the measurement. Visual impact: LifeSG tables look airier; ours look denser. Decide before any production use whether to match LifeSG (add row breathing room to `table-tokens.css`) or assert that ours is the correct density.
+
+**2. Dark mode is currently a no-op outside Foundations.** `globals.css:31` declares `@custom-variant dark (&:is(.dark *))`, but the consumed tokens (`--background → var(--lifesg-bg)` etc.) are only defined under `:root`. There is no `.dark { … }` block re-binding `--lifesg-bg` to a dark value. Adding the `dark` class to `<html>` therefore changes nothing — `--lifesg-bg` stays `#fff`, and so does `--card-bg`, `--background`, etc. Verified with `scripts/probe-dark.mjs`. Foundations' `/foundations/themes/dark-mode` route works only because that page swaps individual tokens locally for demo; the system-wide dark mode plumbing was never wired. Fix path: either add a `.dark` block to `lifesg-tokens.css` (rebind L2 tokens to dark equivalents from the LifeSG dark theme) or to `globals.css` (override the L1 → L2 chain). The L2 fix is cleaner — every L3 token inherits.
+
+### Findings
+
+1. **Behavioural parity favours headless-primitive libraries.** Six of this batch's components (Tab, Accordion, BoxContainer, Modal, DataTable's checkbox, LocalNav's collapsible variant) sit on Base UI primitives. The wrapper code is class strings + token references. The interaction surface is delegated to a library whose explicit job is keyboard / focus / ARIA. This is the real cost-of-ownership argument for shadcn over LifeSG-as-dep — we don't maintain the disclosure machinery.
+2. **L3-tokens-per-component is now load-bearing.** This batch added 18 `<component>-tokens.css` files (one per component). At 18 files the consolidation question from the Foundations entry ("may consolidate at 5+ components") is overdue — but the per-file shape has worked fine for editing and review, so deferring. Revisit if the import list in `globals.css` becomes unwieldy or if a re-theme exercise benefits from fewer files.
+3. **"Skeletal" is an honest port state.** Navbar and Footer are 60% of LifeSG's prop surface. The prose pages say so explicitly. The alternative — hand-waving over the missing 40% — would have made these look production-ready when they aren't.
+4. **One commit, three folders, eighteen components is a viable batch size for this kind of port** — provided each component is small, each gets its own `Introduction` + `Default` page, and the harder ones (DataTable, FullscreenImageCarousel, Sidenav) are interleaved with quick wins (Avatar, Breadcrumb, LinkList) so the diff doesn't feel like one slog.
+
+### Things still to verify
+
+- **The two outstanding parity issues above** (table row height, dark mode no-op). Both are real and currently undocumented anywhere except this entry. If the pilot conclusion will reference visual parity, both need to be addressed or scoped out explicitly.
+- **DataTable sticky header** — deferred. First real screen with a tall data table will surface whether the deferral was right.
+- **Mobile UX of Navbar drawer + Sidenav drawer** — both ship today but haven't been touch-device tested. Hover-vs-tap states and outside-tap dismissal are the obvious risks.
+- **Focus order across LocalNav + page sections** — scroll-spy + anchor links + focus restoration is the kind of triple where a subtle bug bites accessibility audits. Hasn't been tested with a screen reader.
+- **FullscreenImageCarousel + custom-render slides (PDF/iframe)** — the prop shape supports it, no real consumer has exercised it.
+
+### Artifacts
+
+- `src/components/ui/{accordion,avatar,box-container,breadcrumb,card,data-table,footer,fullscreen-image-carousel,link-list,local-nav,masthead,modal,navbar,pagination,sidenav,tab,table,uneditable-section}.tsx`
+- `src/app/{accordion,avatar,box-container,breadcrumb,card,data-table,footer,fullscreen-image-carousel,link-list,local-nav,masthead,modal,navbar,pagination,sidenav,tab,table,uneditable-section}-tokens.css`
+- `src/app/{content,navigation,overlays}/[...slug]/page.tsx` + `layout.tsx` per folder; `src/components/{content,navigation,overlays}/registry.tsx` lists the per-folder taxonomy.
+- `scripts/{measure,smoke,snap}-{content,navigation}.mjs`, `scripts/behavioral-content.mjs`, `scripts/{carousel,modal}-test.mjs` — measurement + behavioural probes.
+- `scripts/probe-{dark,padding,row-detail,tab-kbd,table-row}.mjs` — diagnostic probes for the outstanding parity issues. Kept rather than deleted; small, no dependencies, useful for re-measuring after a fix.
+- `Dockerfile` + `.dockerignore` — added in this commit. Out of scope for this entry; flagged here so it's not surprising in the diff.
