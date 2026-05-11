@@ -17,8 +17,9 @@ export function CoreIntro() {
         L3-tokened implementation on the left and the equivalent LifeSG component on the right.
       </p>
       <p>
-        Coverage for this batch: Typography, Divider, Icon, Markup, TextList. Layout and ErrorDisplay
-        are deferred — see <code>working-logs/pilot-findings.md</code>.
+        Coverage: Typography, Layout, Icon, Divider, ErrorDisplay, Markup, TextList. Each component
+        has an <em>Introduction</em> page that documents what we kept and what we deliberately diverged
+        on, and a <em>Default</em> page that renders the comparison side-by-side.
       </p>
     </Page>
   );
@@ -130,6 +131,105 @@ export function MarkupIntro() {
       </ul>
       <p>
         The Markup CSS lives in <code>src/app/markup-tokens.css</code> — under 60 lines.
+      </p>
+    </Page>
+  );
+}
+
+export function LayoutIntro() {
+  return (
+    <Page title="Layout">
+      <p>
+        Four primitives mirror LifeSG&rsquo;s <code>Layout</code> namespace:{" "}
+        <code>Section</code>, <code>Container</code>, <code>Content</code>, <code>ColDiv</code>.
+        Same prop shapes (<code>type=&quot;flex|flex-column|grid&quot;</code> defaulting to{" "}
+        <code>flex</code>, <code>stretch</code>, <code>xxsCols</code>...<code>xxlCols</code> with{" "}
+        <code>[start, end)</code> tuple support — end is <strong>exclusive</strong>, matching
+        LifeSG: <code>[1, 5]</code> spans cols 1–4) so call sites migrate mechanically. Backed by
+        CSS Grid + a small cascade of media queries in <code>src/app/layout-tokens.css</code>.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Why we kept it (vs. raw Tailwind)</h2>
+      <p>
+        Tailwind&rsquo;s grid utilities (<code>grid-cols-12</code>, <code>col-span-N</code>) cover
+        the same job in fewer characters when you&rsquo;re building from scratch. We still ship a
+        LifeSG-shaped wrapper for two reasons:
+      </p>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <strong>Migration cost.</strong> Mirroring the API means a LifeSG screen is a search-and-replace
+          import swap. Without the wrapper, every <code>&lt;Layout.ColDiv lgCols=...&gt;</code> needs a
+          per-call rewrite.
+        </li>
+        <li>
+          <strong>Single source of truth for breakpoints.</strong> The 8-col → 12-col flip at lg-min, the
+          margin and gutter step (24→48px, 16→32px), and the 1440px max-width are encoded once in{" "}
+          <code>layout-tokens.css</code>. Pages don&rsquo;t need to know.
+        </li>
+      </ul>
+      <h2 className="text-base font-semibold pt-2">Divergences</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <strong>No styled-components <code>ThemeProvider</code> dependency.</strong> LifeSG&rsquo;s
+          ColDiv reads <code>theme.maxColumns</code> at render. Ours reads breakpoints from{" "}
+          <code>layout-tokens.css</code> directly.
+        </li>
+        <li>
+          <strong>Range typing relaxed.</strong> LifeSG types <code>BreakpointSpan</code> as a literal{" "}
+          <code>Range&lt;Max&gt;</code> per breakpoint, so the type system enforces that{" "}
+          <code>xxsCols</code> (8 cols max) can&rsquo;t take <code>9</code>. Ours accepts{" "}
+          <code>number | [number, number | -1]</code> — runtime-checked, not exhaustively typed.
+          Out-of-range values clamp at the CSS layer.
+        </li>
+      </ul>
+    </Page>
+  );
+}
+
+export function ErrorDisplayIntro() {
+  return (
+    <Page title="ErrorDisplay">
+      <p>
+        A centered illustration + title + description + action button, parameterised by{" "}
+        <code>type</code>. Mirrors LifeSG&rsquo;s 19 built-in types
+        (<code>400</code>...<code>504</code>, <code>maintenance</code>, <code>no-item-found</code>,{" "}
+        <code>logout</code>, <code>inactivity</code>, etc.) with the same titles and copy.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Illustrations — placeholder, two paths</h2>
+      <p>
+        Illustrations are the one component-shipped raster asset in LifeSG&rsquo;s library
+        (<code>assets.life.gov.sg/react-design-system/img/error/&lt;type&gt;.png</code>). Until the
+        agency&rsquo;s own illustration set is designed, we proxy LifeSG&rsquo;s CDN as the default for
+        every built-in type — visual parity in the comparison, zero asset pipeline today.
+      </p>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <strong>Default</strong>: LifeSG CDN PNG (with <code>@2x</code> / <code>@3x</code> srcset).
+          Swap the <code>CDN_BASE</code> constant in <code>error-display.tsx</code> to repoint at the
+          agency&rsquo;s bucket once illustrations are ready.
+        </li>
+        <li>
+          <strong>Override</strong>: <code>img={`{{ src, srcSet, width, height, alt }}`}</code>{" "}
+          (matches LifeSG&rsquo;s prop shape) — useful for one-off illustrations on a specific page.
+        </li>
+        <li>
+          <strong>Fallback</strong>: <code>img={`{null}`}</code> renders a Lucide-icon-on-disc in the
+          type&rsquo;s semantic tone (red for errors, orange for warnings, green for success). Useful
+          for storybook/test environments without network access, and a sane offline state.
+        </li>
+      </ul>
+      <p>
+        The honest caveat: pointing at <code>assets.life.gov.sg</code> in production for non-LifeSG
+        properties is borrowed branding. Treat the CDN default as a pilot-only convenience, not a
+        long-term answer. The override and fallback paths exist for the same reason.
+      </p>
+      <h2 className="text-base font-semibold pt-2">What we kept verbatim</h2>
+      <p>
+        Default <code>title</code>, default <code>description</code>, and the dynamic{" "}
+        <code>renderDescription</code> for <code>maintenance</code> (interpolates{" "}
+        <code>dateString</code>) and <code>inactivity</code> (interpolates a minutes/seconds countdown
+        from <code>secondsLeft</code>). The <code>actionButton</code> slot maps to our{" "}
+        <code>&lt;Button&gt;</code>, so use <code>variant=&quot;secondary&quot;</code> where LifeSG
+        uses <code>styleType=&quot;secondary&quot;</code>.
       </p>
     </Page>
   );

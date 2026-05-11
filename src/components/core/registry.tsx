@@ -1,8 +1,10 @@
 import type { ComponentType } from "react";
 import * as prose from "./sections/prose";
 import * as typographyDefault from "./sections/typography-default";
+import * as layoutDefault from "./sections/layout-default";
 import * as dividerDefault from "./sections/divider-default";
 import * as iconDefault from "./sections/icon-default";
+import * as errorDisplayDefault from "./sections/errordisplay-default";
 import * as markupDefault from "./sections/markup-default";
 import * as textlistDefault from "./sections/textlist-default";
 
@@ -43,6 +45,10 @@ export const tree: Node[] = [
     leaf("introduction", "Introduction", { Prose: prose.TypographyIntro }),
     leaf("default",      "Default",      { Ours: typographyDefault.OursPane, LifeSG: typographyDefault.LifeSGPane }),
   ]),
+  folder("layout", "Layout", [
+    leaf("introduction", "Introduction", { Prose: prose.LayoutIntro }),
+    leaf("default",      "Default",      { Ours: layoutDefault.OursPane, LifeSG: layoutDefault.LifeSGPane }),
+  ]),
   folder("divider", "Divider", [
     leaf("introduction", "Introduction", { Prose: prose.DividerIntro }),
     leaf("default",      "Default",      { Ours: dividerDefault.OursPane, LifeSG: dividerDefault.LifeSGPane }),
@@ -50,6 +56,10 @@ export const tree: Node[] = [
   folder("icon", "Icon", [
     leaf("introduction", "Introduction", { Prose: prose.IconIntro }),
     leaf("default",      "Default",      { Ours: iconDefault.OursPane, LifeSG: iconDefault.LifeSGPane }),
+  ]),
+  folder("error-display", "ErrorDisplay", [
+    leaf("introduction", "Introduction", { Prose: prose.ErrorDisplayIntro }),
+    leaf("default",      "Default",      { Ours: errorDisplayDefault.OursPane, LifeSG: errorDisplayDefault.LifeSGPane }),
   ]),
   folder("markup", "Markup", [
     leaf("introduction", "Introduction", { Prose: prose.MarkupIntro }),
