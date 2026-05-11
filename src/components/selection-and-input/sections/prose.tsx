@@ -1,0 +1,220 @@
+import type { ReactNode } from "react";
+
+function Page({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <article className="max-w-3xl p-8 space-y-4">
+      <h1 className="text-2xl font-semibold">{title}</h1>
+      <div className="text-sm text-foreground/80 space-y-3">{children}</div>
+    </article>
+  );
+}
+
+export function SelectionAndInputIntro() {
+  return (
+    <Page title="Selection and Input">
+      <p>
+        Mirrors LifeSG&rsquo;s Storybook <em>Selection and Input</em> taxonomy. Components in this
+        category capture user choice or input &mdash; buttons, selection primitives, file actions,
+        date pickers, and specialty inputs.
+      </p>
+      <p>
+        First sub-batch: <strong>Button</strong> (slotted in from the original pilot port),
+        <strong> Checkbox</strong>, <strong>RadioButton</strong>, <strong>Toggle</strong>. Each
+        comparison page renders our L3-tokened implementation on the left and the equivalent
+        LifeSG component on the right.
+      </p>
+      <p>
+        Subsequent batches will add IconButton, ImageButton, OtpInput, FeedbackRating,
+        DateNavigator, Calendar, and Filter. SingpassButton is intentionally dropped &mdash;
+        Singapore-government-platform-specific. The TimeSlot family (Schedule, TimeSlotBar,
+        TimeSlotBarWeek, TimeSlotWeekView, TimeTable) is deferred to a focused follow-up batch.
+      </p>
+    </Page>
+  );
+}
+
+export function ButtonIntro() {
+  return (
+    <Page title="Button">
+      <p>
+        The Button was the first component ported in this pilot &mdash; it lives at{" "}
+        <code>src/components/ui/button.tsx</code> with its L3 tokens in{" "}
+        <code>src/app/button-tokens.css</code>. Six variants (default / outline / secondary / ghost
+        / destructive / link), four sizes, plus icon-shaped variants (<code>icon</code>,{" "}
+        <code>icon-xs</code>, <code>icon-sm</code>, <code>icon-lg</code>).
+      </p>
+      <p>
+        Built on Base UI <code>@base-ui/react/button</code> for proper{" "}
+        <code>aria-pressed</code> / <code>aria-disabled</code> wiring, plus LifeSG&rsquo;s
+        line-height and disabled-state convention. Pixel-identical bounding boxes vs LifeSG across
+        all six variants &mdash; verified with <code>scripts/measure.mjs</code>. See the entry in{" "}
+        <code>working-logs/pilot-findings.md</code> from 2026-05-10.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Why slotted into Selection and Input</h2>
+      <p>
+        LifeSG&rsquo;s Storybook taxonomy puts Button under <em>Selection and Input</em>, alongside
+        Checkbox / RadioButton / Toggle / etc. We&rsquo;re mirroring that grouping here so the
+        sidebar matches LifeSG&rsquo;s docs. The Button itself isn&rsquo;t re-implemented &mdash;
+        the registry just points at the existing component.
+      </p>
+    </Page>
+  );
+}
+
+export function CheckboxIntro() {
+  return (
+    <Page title="Checkbox">
+      <p>
+        A checkbox with checked / unchecked / indeterminate / disabled / error states. Built on
+        Base UI <code>@base-ui/react/checkbox</code> &mdash; gives us the indeterminate state
+        primitive, focus management, and a hidden native input for form submission.
+      </p>
+      <p>
+        Mirrors LifeSG&rsquo;s prop surface: <code>checked</code>, <code>indeterminate</code>,{" "}
+        <code>displaySize</code> (<code>default | small</code>),{" "}
+        <code>disabled</code>, plus normal HTML input attributes. Use <code>aria-invalid</code>
+        for the error state &mdash; matches the pattern established on Button.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Sizing convention</h2>
+      <p>
+        <code>default</code> is 24px, <code>small</code> is 20px &mdash; matches LifeSG. Tick icon
+        is Lucide <code>Check</code> (3px stroke), indeterminate is <code>Minus</code>. Feel free
+        to swap to a heavier icon if the agency design calls for it.
+      </p>
+    </Page>
+  );
+}
+
+export function RadioButtonIntro() {
+  return (
+    <Page title="RadioButton">
+      <p>
+        A single radio with checked / unchecked / disabled / error states. Built on Base UI{" "}
+        <code>@base-ui/react/radio</code> + <code>@base-ui/react/radio-group</code> &mdash; the
+        group component manages the controlled <code>value</code>, keyboard arrow-key cycling, and
+        focus traversal.
+      </p>
+      <p>
+        Mirrors LifeSG&rsquo;s prop surface: <code>checked</code>, <code>displaySize</code>{" "}
+        (<code>default | small</code>), <code>disabled</code>, plus normal input attributes. The
+        <code>value</code> prop is required by Base UI&rsquo;s RadioGroup contract, even when used
+        standalone.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Standalone vs grouped</h2>
+      <p>
+        Unlike LifeSG, Base UI distinguishes between a single radio and a group. Almost every real
+        usage wants a group &mdash; <code>RadioGroup</code> is re-exported from this module so
+        callers can do <code>import {`{ RadioButton, RadioGroup }`} from</code>{" "}
+        <code>&quot;@/components/ui/radio-button&quot;</code>. For one-off checkbox-shaped
+        single-radio usage, prefer Checkbox.
+      </p>
+    </Page>
+  );
+}
+
+export function ToggleIntro() {
+  return (
+    <Page title="Toggle">
+      <p>
+        <strong>Important:</strong> LifeSG&rsquo;s Toggle is <em>not</em> a switch. It&rsquo;s a
+        labelled selection card &mdash; a bordered tile with a checkbox, radio, or yes/no
+        indicator inside. Mirrors LifeSG&rsquo;s prop surface: <code>type</code>{" "}
+        (<code>checkbox | radio | yes | no</code>), <code>checked</code>, <code>subLabel</code>,
+        <code> compositeSection</code>, <code>disabled</code>, <code>error</code>,{" "}
+        <code>styleType</code> (<code>default | no-border</code>).
+      </p>
+      <h2 className="text-base font-semibold pt-2">Indicator semantics</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <code>checkbox</code> &mdash; allows deselection, renders our <code>Checkbox</code>{" "}
+          inside the tile.
+        </li>
+        <li>
+          <code>radio</code> &mdash; does not allow deselection, renders our{" "}
+          <code>RadioButton</code>; pair with a parent <code>RadioGroup</code> for grouped
+          behaviour.
+        </li>
+        <li>
+          <code>yes</code> / <code>no</code> &mdash; specialised disc-shaped indicator (green check
+          or red cross). Behaves like a checkbox for state purposes.
+        </li>
+      </ul>
+      <h2 className="text-base font-semibold pt-2">What we deferred</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <code>removable</code> + <code>onRemove</code> (in-tile remove button).
+        </li>
+        <li>
+          <code>compositeSection.collapsible</code> + <code>initialExpanded</code> (collapsible
+          sub-content).
+        </li>
+        <li>
+          <code>childrenMaxLines</code> truncation (mobile / tablet / desktop line clamps).
+        </li>
+        <li>
+          <code>useContentWidth</code> (min-width: fit-content variant).
+        </li>
+      </ul>
+      <p>
+        These are real LifeSG features but not load-bearing for the pilot&rsquo;s parity question.
+        Add when a real screen needs them.
+      </p>
+    </Page>
+  );
+}
+
+export function IconButtonIntro() {
+  return (
+    <Page title="IconButton">
+      <p>Coming next sub-batch.</p>
+    </Page>
+  );
+}
+
+export function ImageButtonIntro() {
+  return (
+    <Page title="ImageButton">
+      <p>Coming next sub-batch.</p>
+    </Page>
+  );
+}
+
+export function OtpInputIntro() {
+  return (
+    <Page title="OtpInput">
+      <p>Coming next sub-batch.</p>
+    </Page>
+  );
+}
+
+export function FeedbackRatingIntro() {
+  return (
+    <Page title="FeedbackRating">
+      <p>Coming next sub-batch.</p>
+    </Page>
+  );
+}
+
+export function DateNavigatorIntro() {
+  return (
+    <Page title="DateNavigator">
+      <p>Coming next sub-batch.</p>
+    </Page>
+  );
+}
+
+export function CalendarIntro() {
+  return (
+    <Page title="Calendar">
+      <p>Coming next sub-batch.</p>
+    </Page>
+  );
+}
+
+export function FilterIntro() {
+  return (
+    <Page title="Filter">
+      <p>Coming next sub-batch.</p>
+    </Page>
+  );
+}

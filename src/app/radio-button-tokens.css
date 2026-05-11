@@ -1,0 +1,19 @@
+/* Layer 3 — Component tokens for RadioButton. */
+
+:root {
+  --radio-bg:                     var(--lifesg-bg);
+  --radio-bg-hover:               var(--lifesg-bg-hover);
+  --radio-bg-disabled:            var(--lifesg-bg-disabled);
+
+  --radio-border:                 var(--lifesg-border);
+  --radio-border-hover:           var(--lifesg-border-hover);
+  --radio-border-checked:         var(--lifesg-bg-primary);
+  --radio-border-disabled:        var(--lifesg-border-disabled);
+  --radio-border-error:           var(--lifesg-bg-error-strong);
+
+  --radio-dot:                    var(--lifesg-bg-primary);
+  --radio-dot-disabled:           var(--lifesg-text-disabled);
+
+  --radio-ring-focus:             color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+  --radio-ring-error:             color-mix(in srgb, var(--lifesg-bg-error-strong) 20%, transparent);
+}

@@ -27,6 +27,9 @@
 @import "./sidenav-tokens.css";
 @import "./navbar-tokens.css";
 @import "./footer-tokens.css";
+@import "./checkbox-tokens.css";
+@import "./radio-button-tokens.css";
+@import "./toggle-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 

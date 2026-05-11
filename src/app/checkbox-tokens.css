@@ -1,0 +1,21 @@
+/* Layer 3 — Component tokens for Checkbox. */
+
+:root {
+  --checkbox-bg:                  var(--lifesg-bg);
+  --checkbox-bg-hover:            var(--lifesg-bg-hover);
+  --checkbox-bg-checked:          var(--lifesg-bg-primary);
+  --checkbox-bg-disabled:         var(--lifesg-bg-disabled);
+
+  --checkbox-border:              var(--lifesg-border);
+  --checkbox-border-hover:        var(--lifesg-border-hover);
+  --checkbox-border-checked:      var(--lifesg-bg-primary);
+  --checkbox-border-disabled:     var(--lifesg-border-disabled);
+  --checkbox-border-error:        var(--lifesg-bg-error-strong);
+
+  --checkbox-text:                transparent;
+  --checkbox-text-checked:        var(--lifesg-text-inverse);
+  --checkbox-text-disabled:       var(--lifesg-text-disabled);
+
+  --checkbox-ring-focus:          color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+  --checkbox-ring-error:          color-mix(in srgb, var(--lifesg-bg-error-strong) 20%, transparent);
+}

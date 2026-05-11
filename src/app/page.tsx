@@ -5,6 +5,7 @@ import { tree as coreTree } from "@/components/core/registry";
 import { tree as contentTree } from "@/components/content/registry";
 import { tree as overlaysTree } from "@/components/overlays/registry";
 import { tree as navigationTree } from "@/components/navigation/registry";
+import { tree as selectionAndInputTree } from "@/components/selection-and-input/registry";
 
 const linkCx = "underline underline-offset-4 hover:text-primary text-sm";
 
@@ -186,6 +187,46 @@ export default function Home() {
                     <li key={child.slug}>
                       <Link
                         href={`/navigation/${node.slug}/${child.slug}`}
+                        className={linkCx}
+                      >
+                        {child.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="text-lg font-semibold mb-3">Selection and Input</h2>
+        <p className="text-sm text-muted-foreground mb-3">
+          Mirrors LifeSG&rsquo;s Storybook <em>Selection and Input</em> taxonomy.{" "}
+          <Link href="/selection-and-input/introduction" className={linkCx}>Start →</Link>
+        </p>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-5">
+          {selectionAndInputTree.map((node) => {
+            if (node.kind === "leaf") {
+              return (
+                <div key={node.slug} className="col-span-2">
+                  <Link href={`/selection-and-input/${node.slug}`} className={linkCx}>
+                    {node.title}
+                  </Link>
+                </div>
+              );
+            }
+            return (
+              <div key={node.slug}>
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
+                  {node.title}
+                </div>
+                <ul className="flex flex-col gap-1">
+                  {node.children.map((child) => (
+                    <li key={child.slug}>
+                      <Link
+                        href={`/selection-and-input/${node.slug}/${child.slug}`}
                         className={linkCx}
                       >
                         {child.title}
