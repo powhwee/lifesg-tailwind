@@ -8,6 +8,8 @@ import * as iconButtonDefault from "./sections/icon-button-default";
 import * as imageButtonDefault from "./sections/image-button-default";
 import * as otpInputDefault from "./sections/otp-input-default";
 import * as feedbackRatingDefault from "./sections/feedback-rating-default";
+import * as dateNavigatorDefault from "./sections/date-navigator-default";
+import * as calendarDefault from "./sections/calendar-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -80,6 +82,14 @@ export const tree: Node[] = [
   folder("feedback-rating", "FeedbackRating", [
     leaf("introduction", "Introduction", { Prose: prose.FeedbackRatingIntro }),
     leaf("default",      "Default",      { Ours: feedbackRatingDefault.OursPane, LifeSG: feedbackRatingDefault.LifeSGPane }),
+  ]),
+  folder("date-navigator", "DateNavigator", [
+    leaf("introduction", "Introduction", { Prose: prose.DateNavigatorIntro }),
+    leaf("default",      "Default",      { Ours: dateNavigatorDefault.OursPane, LifeSG: dateNavigatorDefault.LifeSGPane }),
+  ]),
+  folder("calendar", "Calendar", [
+    leaf("introduction", "Introduction", { Prose: prose.CalendarIntro }),
+    leaf("default",      "Default",      { Ours: calendarDefault.OursPane, LifeSG: calendarDefault.LifeSGPane }),
   ]),
 ];
 

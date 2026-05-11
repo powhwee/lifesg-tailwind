@@ -277,7 +277,27 @@ export function FeedbackRatingIntro() {
 export function DateNavigatorIntro() {
   return (
     <Page title="DateNavigator">
-      <p>Coming next sub-batch.</p>
+      <p>
+        Day-stepper navigation: previous arrow, date display, next arrow. Optional click-the-date
+        to open a calendar dropdown for jump-to-date. Mirrors LifeSG&rsquo;s contract:{" "}
+        <code>selectedDate</code> (YYYY-MM-DD), <code>minDate</code>, <code>maxDate</code>,{" "}
+        <code>view</code> (<code>day | week</code>), <code>showDateAsShortForm</code>,{" "}
+        <code>showCurrentDateAsToday</code>, <code>loading</code>, plus the
+        <code> onLeftArrowClick</code> / <code>onRightArrowClick</code> /{" "}
+        <code>onCalendarDateSelect</code> handlers.
+      </p>
+      <p>
+        The dropdown calendar uses Base UI <code>@base-ui/react/popover</code> &mdash; gives us
+        portal mounting, focus management, escape-to-close, and outside-click dismissal. Inside
+        the popover we render the ported <code>Calendar</code>.
+      </p>
+      <h2 className="text-base font-semibold pt-2">What we deferred</h2>
+      <p>
+        <code>dropdownRootNode</code> &mdash; LifeSG lets you scope the portal to a specific
+        DOM container for z-index isolation. Base UI&rsquo;s default is <code>document.body</code>;
+        a wrapper that threads <code>container={`{ref}`}</code> to <code>Popover.Portal</code>{" "}
+        is one small change away when needed.
+      </p>
     </Page>
   );
 }
@@ -285,7 +305,40 @@ export function DateNavigatorIntro() {
 export function CalendarIntro() {
   return (
     <Page title="Calendar">
-      <p>Coming next sub-batch.</p>
+      <p>
+        Single or multi-select date picker. Mirrors LifeSG&rsquo;s contract:{" "}
+        <code>variant</code> (<code>single | multi</code>), per-variant{" "}
+        <code>value</code>/<code>values</code> + <code>onChange</code>,{" "}
+        <code>minDate</code>/<code>maxDate</code>, <code>disabledDates</code>,{" "}
+        <code>minSelectable</code>/<code>maxSelectable</code> (multi), <code>styleType</code>{" "}
+        (<code>no-border | bordered</code>), <code>onHover</code>,{" "}
+        <code>onYearMonthDisplayChange</code>.
+      </p>
+      <p>
+        Built on <code>react-day-picker</code> &mdash; the canonical shadcn pick. Gives us the
+        month grid, navigation, weekday header, day-cell rendering, and keyboard navigation
+        (Arrow keys, Home / End, PageUp / PageDown for month / year jumps). All visual properties
+        flow through L3 tokens in <code>calendar-tokens.css</code>.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Date format</h2>
+      <p>
+        LifeSG uses <code>YYYY-MM-DD</code> string everywhere; we convert to/from{" "}
+        <code>Date</code> at the component boundary. Avoids ISO-with-time and timezone gotchas
+        from <code>new Date(&quot;2026-05-12&quot;)</code>, which would parse as UTC midnight
+        and shift to the previous day in some locales.
+      </p>
+      <h2 className="text-base font-semibold pt-2">What we deferred</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <code>onSelect</code> alias for <code>onChange</code> &mdash; LifeSG marks it deprecated;
+          we don&rsquo;t need both.
+        </li>
+        <li>
+          Year and month-only views &mdash; LifeSG ships these as variants of the same component
+          via <code>currentView</code>. react-day-picker exposes them via captionLayout; not
+          surfaced yet.
+        </li>
+      </ul>
     </Page>
   );
 }

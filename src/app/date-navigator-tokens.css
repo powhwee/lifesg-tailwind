@@ -1,0 +1,10 @@
+/* Layer 3 — Component tokens for DateNavigator. */
+
+:root {
+  --date-navigator-bg:                var(--lifesg-bg);
+  --date-navigator-bg-hover:          var(--lifesg-bg-hover);
+
+  --date-navigator-border:            var(--lifesg-border);
+
+  --date-navigator-ring-focus:        color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+}

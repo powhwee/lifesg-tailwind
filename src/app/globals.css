@@ -34,6 +34,8 @@
 @import "./image-button-tokens.css";
 @import "./otp-input-tokens.css";
 @import "./feedback-rating-tokens.css";
+@import "./calendar-tokens.css";
+@import "./date-navigator-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
