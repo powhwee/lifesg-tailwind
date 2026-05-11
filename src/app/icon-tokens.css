@@ -1,0 +1,13 @@
+/* Layer 3 — Component tokens for Icon. */
+
+:root {
+  --icon-color-default:    var(--lifesg-icon);
+  --icon-color-subtle:     var(--lifesg-icon-subtle);
+  --icon-color-strong:     var(--lifesg-icon-strongest);
+  --icon-color-primary:    var(--lifesg-icon-primary);
+  --icon-color-success:    var(--lifesg-icon-success);
+  --icon-color-warning:    var(--lifesg-icon-warning);
+  --icon-color-error:      var(--lifesg-icon-error);
+  --icon-color-info:       var(--lifesg-icon-info);
+  --icon-color-inverse:    var(--lifesg-icon-inverse);
+}

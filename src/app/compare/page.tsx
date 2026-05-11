@@ -4,6 +4,12 @@ import { comparisons } from "@/components/compare/registry";
 export default function ComparisonsIndex() {
   return (
     <main className="mx-auto max-w-3xl p-8">
+      <Link
+        href="/"
+        className="inline-block text-xs text-muted-foreground hover:text-primary mb-3"
+      >
+        ← Pilot home
+      </Link>
       <h1 className="text-2xl font-semibold mb-2">Component comparisons</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Each page renders the shadcn-built component on the left and the LifeSG component on the right,

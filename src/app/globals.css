@@ -2,6 +2,11 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "./lifesg-tokens.css";
+@import "./button-tokens.css";
+@import "./typography-tokens.css";
+@import "./divider-tokens.css";
+@import "./icon-tokens.css";
+@import "./markup-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -95,4 +100,15 @@
   html {
     @apply font-sans;
   }
+}
+
+@keyframes motion-slide {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(160px); }
+  100% { transform: translateX(0); }
+}
+.motion-slide {
+  animation-name: motion-slide;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }

@@ -1,0 +1,14 @@
+/* Layer 3 — Component tokens for Divider.
+ *
+ * Divider here is *layout-agnostic*. Unlike LifeSG's Divider — which extends
+ * ColProps and accepts xxsCols/xsCols/.../desktopCols + layoutType="flex|grid"
+ * — ours is just a styled <hr>. Span responsive columns by placing the
+ * <Divider> inside a grid cell and using Tailwind grid utilities. Rationale
+ * lives in working-logs/pilot-findings.md.
+ */
+
+:root {
+  --divider-thickness:      var(--lifesg-border-width-010);
+  --divider-color:          var(--lifesg-border);
+  --divider-style:          var(--lifesg-border-solid);
+}

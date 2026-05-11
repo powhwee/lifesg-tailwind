@@ -20,8 +20,11 @@ export default async function ComparisonPage({
   return (
     <main className="min-h-screen flex flex-col">
       <header className="border-b border-border px-6 py-3 flex items-center gap-4">
+        <Link href="/" className="text-sm text-muted-foreground hover:text-primary">
+          ← Pilot home
+        </Link>
         <Link href="/compare" className="text-sm text-muted-foreground hover:text-primary">
-          ← All comparisons
+          All comparisons
         </Link>
         <h1 className="text-lg font-semibold">{title}</h1>
       </header>

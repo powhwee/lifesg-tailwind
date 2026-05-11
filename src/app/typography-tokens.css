@@ -1,0 +1,42 @@
+/* Layer 3 — Component tokens for Typography. */
+
+:root {
+  --typography-font-family:          var(--lifesg-font-body-font-family);
+
+  --typography-weight-light:         var(--lifesg-font-weight-light);
+  --typography-weight-regular:       var(--lifesg-font-weight-regular);
+  --typography-weight-semibold:      var(--lifesg-font-weight-semibold);
+  --typography-weight-bold:          var(--lifesg-font-weight-bold);
+
+  --typography-heading-xxl-size:     var(--lifesg-font-heading-size-xxl);
+  --typography-heading-xxl-lh:       var(--lifesg-font-heading-lh-xxl);
+  --typography-heading-xxl-ls:       var(--lifesg-font-heading-ls-xxl);
+  --typography-heading-xl-size:      var(--lifesg-font-heading-size-xl);
+  --typography-heading-xl-lh:        var(--lifesg-font-heading-lh-xl);
+  --typography-heading-xl-ls:        var(--lifesg-font-heading-ls-xl);
+  --typography-heading-lg-size:      var(--lifesg-font-heading-size-lg);
+  --typography-heading-lg-lh:        var(--lifesg-font-heading-lh-lg);
+  --typography-heading-lg-ls:        var(--lifesg-font-heading-ls-lg);
+  --typography-heading-md-size:      var(--lifesg-font-heading-size-md);
+  --typography-heading-md-lh:        var(--lifesg-font-heading-lh-md);
+  --typography-heading-md-ls:        var(--lifesg-font-heading-ls-md);
+  --typography-heading-sm-size:      var(--lifesg-font-heading-size-sm);
+  --typography-heading-sm-lh:        var(--lifesg-font-heading-lh-sm);
+  --typography-heading-sm-ls:        var(--lifesg-font-heading-ls-sm);
+  --typography-heading-xs-size:      var(--lifesg-font-heading-size-xs);
+  --typography-heading-xs-lh:        var(--lifesg-font-heading-lh-xs);
+  --typography-heading-xs-ls:        var(--lifesg-font-heading-ls-xs);
+
+  --typography-body-bl-size:         var(--lifesg-font-body-size-baseline);
+  --typography-body-bl-lh:           var(--lifesg-font-body-lh-baseline);
+  --typography-body-bl-ls:           var(--lifesg-font-body-ls-baseline);
+  --typography-body-md-size:         var(--lifesg-font-body-size-md);
+  --typography-body-md-lh:           var(--lifesg-font-body-lh-md);
+  --typography-body-md-ls:           var(--lifesg-font-body-ls-md);
+  --typography-body-sm-size:         var(--lifesg-font-body-size-sm);
+  --typography-body-sm-lh:           var(--lifesg-font-body-lh-sm);
+  --typography-body-sm-ls:           var(--lifesg-font-body-ls-sm);
+  --typography-body-xs-size:         var(--lifesg-font-body-size-xs);
+  --typography-body-xs-lh:           var(--lifesg-font-body-lh-xs);
+  --typography-body-xs-ls:           var(--lifesg-font-body-ls-xs);
+}

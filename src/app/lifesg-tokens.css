@@ -2,7 +2,7 @@
 /* Run: npm run extract-tokens */
 
 :root {
-  /* primitives */
+  /* colour primitives */
   --lifesg-brand-10: #2C0C0B;
   --lifesg-brand-20: #4C1513;
   --lifesg-brand-30: #6C1D1B;
@@ -95,7 +95,7 @@
   --lifesg-black: #000000;
   --lifesg-primary-inverse: #FEAB10;
 
-  /* semantic (light) */
+  /* colour semantic (light) */
   --lifesg-text: #282828;
   --lifesg-text-subtle: #393939;
   --lifesg-text-subtler: #686868;
@@ -210,10 +210,152 @@
   --lifesg-hyperlink-inverse: #FEAB10;
   --lifesg-focus-ring: #1768BE;
   --lifesg-focus-ring-inverse: #FFFFFF;
+
+  /* font */
+  --lifesg-font-heading-size-xxl: 3rem;
+  --lifesg-font-heading-size-xl: 2.5rem;
+  --lifesg-font-heading-size-lg: 2rem;
+  --lifesg-font-heading-size-md: 1.625rem;
+  --lifesg-font-heading-size-sm: 1.375rem;
+  --lifesg-font-heading-size-xs: 1.125rem;
+  --lifesg-font-heading-lh-xxl: 3.5rem;
+  --lifesg-font-heading-lh-xl: 3rem;
+  --lifesg-font-heading-lh-lg: 2.5rem;
+  --lifesg-font-heading-lh-md: 2.25rem;
+  --lifesg-font-heading-lh-sm: 1.75rem;
+  --lifesg-font-heading-lh-xs: 1.625rem;
+  --lifesg-font-heading-ls-xxl: -0.035rem;
+  --lifesg-font-heading-ls-xl: -0.02rem;
+  --lifesg-font-heading-ls-lg: -0.02rem;
+  --lifesg-font-heading-ls-md: 0rem;
+  --lifesg-font-heading-ls-sm: 0rem;
+  --lifesg-font-heading-ls-xs: 0rem;
+  --lifesg-font-weight-light: 300;
+  --lifesg-font-weight-regular: 400;
+  --lifesg-font-weight-semibold: 600;
+  --lifesg-font-weight-bold: 700;
+  --lifesg-font-family: Open Sans;
+  --lifesg-font-heading-font-family: Open Sans;
+  --lifesg-font-body-font-family: Open Sans;
+  --lifesg-font-body-size-baseline: 1.125rem;
+  --lifesg-font-body-size-md: 1rem;
+  --lifesg-font-body-size-sm: 0.875rem;
+  --lifesg-font-body-size-xs: 0.75rem;
+  --lifesg-font-body-lh-baseline: 1.625rem;
+  --lifesg-font-body-lh-md: 1.5rem;
+  --lifesg-font-body-lh-sm: 1.625rem;
+  --lifesg-font-body-lh-xs: 1.25rem;
+  --lifesg-font-body-ls-baseline: 0rem;
+  --lifesg-font-body-ls-md: 0.009rem;
+  --lifesg-font-body-ls-sm: 0.008rem;
+  --lifesg-font-body-ls-xs: 0.008rem;
+  --lifesg-font-form-label-size: 1rem;
+  --lifesg-font-form-description-size: 0.875rem;
+  --lifesg-font-form-label-lh: 1.5rem;
+  --lifesg-font-form-description-lh: 1.625rem;
+  --lifesg-font-form-label-ls: 0.009rem;
+  --lifesg-font-form-description-ls: 0.008rem;
+
+  /* spacing */
+  --lifesg-spacing-0: 0px;
+  --lifesg-spacing-4: 4px;
+  --lifesg-spacing-8: 8px;
+  --lifesg-spacing-12: 12px;
+  --lifesg-spacing-16: 16px;
+  --lifesg-spacing-20: 20px;
+  --lifesg-spacing-24: 24px;
+  --lifesg-spacing-32: 32px;
+  --lifesg-spacing-40: 40px;
+  --lifesg-spacing-48: 48px;
+  --lifesg-spacing-64: 64px;
+  --lifesg-spacing-72: 72px;
+  --lifesg-layout-xs: 8px;
+  --lifesg-layout-sm: 16px;
+  --lifesg-layout-md: 24px;
+  --lifesg-layout-lg: 32px;
+  --lifesg-layout-xl: 48px;
+  --lifesg-layout-xxl: 64px;
+  --lifesg-layout-xxxl: 128px;
+
+  /* radius */
+  --lifesg-radius-none: 0px;
+  --lifesg-radius-xs: 2px;
+  --lifesg-radius-sm: 4px;
+  --lifesg-radius-md: 8px;
+  --lifesg-radius-lg: 12px;
+  --lifesg-radius-full: 9999px;
+
+  /* border (widths + style) */
+  --lifesg-border-width-005: 0.5px;
+  --lifesg-border-width-010: 1px;
+  --lifesg-border-width-020: 2px;
+  --lifesg-border-width-040: 4px;
+  --lifesg-border-solid: solid;
+
+  /* motion */
+  --lifesg-motion-duration-150: 150ms;
+  --lifesg-motion-duration-250: 250ms;
+  --lifesg-motion-duration-350: 350ms;
+  --lifesg-motion-duration-500: 500ms;
+  --lifesg-motion-duration-800: 800ms;
+  --lifesg-motion-duration-1000: 1000ms;
+  --lifesg-motion-ease-default: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --lifesg-motion-ease-standard: cubic-bezier(0.86, 0, 0.07, 1);
+  --lifesg-motion-ease-entrance: cubic-bezier(0.18, 0.13, 0, 1);
+  --lifesg-motion-ease-exit: cubic-bezier(1, 0, 0.8, 0.85);
+
+  /* shadow */
+  --lifesg-shadow-xs-subtle: 0 0 4px 1px rgba(from #686868 r g b / 24%);
+  --lifesg-shadow-xs-strong: 0 0 4px 1px rgba(from #686868 r g b / 50%);
+  --lifesg-shadow-xs-focus-strong: 0 0 4px 1px rgba(from #3C91EC r g b / 50%);
+  --lifesg-shadow-xs-error-strong: 0 0 4px 1px rgba(from #DE6C6C r g b / 50%);
+  --lifesg-shadow-sm-subtle: 0 2px 4px 0 rgba(from #686868 r g b / 24%);
+  --lifesg-shadow-sm-strong: 0 2px 4px 0 rgba(from #686868 r g b / 50%);
+  --lifesg-shadow-md-subtle: 0 2px 8px 0 rgba(from #686868 r g b / 24%);
+  --lifesg-shadow-md-strong: 0 2px 8px 0 rgba(from #686868 r g b / 50%);
+  --lifesg-shadow-lg-subtle: 0 2px 12px 1px rgba(from #686868 r g b / 24%);
+  --lifesg-shadow-lg-strong: 0 2px 12px 1px rgba(from #686868 r g b / 50%);
+
+  /* breakpoint */
+  --lifesg-breakpoint-xxs-min: 0px;
+  --lifesg-breakpoint-xxs-max: 320px;
+  --lifesg-breakpoint-xs-min: 321px;
+  --lifesg-breakpoint-xs-max: 375px;
+  --lifesg-breakpoint-sm-min: 376px;
+  --lifesg-breakpoint-sm-max: 480px;
+  --lifesg-breakpoint-md-min: 481px;
+  --lifesg-breakpoint-md-max: 768px;
+  --lifesg-breakpoint-lg-min: 769px;
+  --lifesg-breakpoint-lg-max: 1200px;
+  --lifesg-breakpoint-xl-min: 1201px;
+  --lifesg-breakpoint-xl-max: 1440px;
+  --lifesg-breakpoint-xxl-min: 1441px;
+  --lifesg-breakpoint-xxs-column: 8;
+  --lifesg-breakpoint-xs-column: 8;
+  --lifesg-breakpoint-sm-column: 8;
+  --lifesg-breakpoint-md-column: 8;
+  --lifesg-breakpoint-lg-column: 12;
+  --lifesg-breakpoint-xl-column: 12;
+  --lifesg-breakpoint-xxl-column: 12;
+  --lifesg-breakpoint-xxs-gutter: 16px;
+  --lifesg-breakpoint-xs-gutter: 16px;
+  --lifesg-breakpoint-sm-gutter: 16px;
+  --lifesg-breakpoint-md-gutter: 16px;
+  --lifesg-breakpoint-lg-gutter: 32px;
+  --lifesg-breakpoint-xl-gutter: 32px;
+  --lifesg-breakpoint-xxl-gutter: 32px;
+  --lifesg-breakpoint-xxs-margin: 24px;
+  --lifesg-breakpoint-xs-margin: 24px;
+  --lifesg-breakpoint-sm-margin: 24px;
+  --lifesg-breakpoint-md-margin: 24px;
+  --lifesg-breakpoint-lg-margin: 48px;
+  --lifesg-breakpoint-xl-margin: 48px;
+  --lifesg-breakpoint-xxl-margin: 48px;
+
 }
 
 .dark {
-  /* semantic (dark) */
+  /* colour semantic (dark) */
   --lifesg-text: #F9F9F9;
   --lifesg-text-subtle: #C7CACA;
   --lifesg-text-subtler: #8E8E8E;
@@ -328,4 +470,5 @@
   --lifesg-hyperlink-inverse: #FEAB10;
   --lifesg-focus-ring: #3C91EC;
   --lifesg-focus-ring-inverse: #000000;
+
 }

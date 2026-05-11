@@ -1,0 +1,60 @@
+/* Layer 3 — Component tokens for Markup.
+ *
+ * Markup styles arbitrary CMS HTML using the design-system body text. It
+ * deliberately flattens visual hierarchy: <h1>..<h6> render at the base body
+ * size, block-level elements have no inter-block spacing, and only inline
+ * semantics (<strong>, <em>, <a>, <code>) get styled. This matches LifeSG's
+ * <Markup> behaviour — see /core/markup/introduction for the reasoning. The
+ * baseline + colour come from --_markup-* private vars set by the React
+ * component from props.
+ *
+ * If a consumer wants heading visual hierarchy, they should compose
+ * <Typography variant="heading-..."> at the call site, not inside Markup.
+ */
+
+.markup-root {
+  font-family:     var(--typography-font-family);
+  font-size:       var(--_markup-text-size,  inherit);
+  line-height:     var(--_markup-text-lh,    inherit);
+  letter-spacing:  var(--_markup-text-ls,    inherit);
+  color:           var(--_markup-text-color, inherit);
+}
+
+.markup-root h1,
+.markup-root h2,
+.markup-root h3,
+.markup-root h4,
+.markup-root h5,
+.markup-root h6,
+.markup-root p,
+.markup-root ul,
+.markup-root ol {
+  font-size:       inherit;
+  line-height:     inherit;
+  font-weight:     var(--typography-weight-regular);
+  margin:          0;
+}
+
+.markup-root ul,
+.markup-root ol {
+  padding-inline-start: 2.5rem;
+}
+.markup-root ul { list-style: disc; }
+.markup-root ol { list-style: decimal; }
+
+.markup-root a {
+  color:           var(--lifesg-hyperlink);
+  font-weight:     var(--typography-weight-semibold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.markup-root a:hover { color: var(--lifesg-hyperlink-hover); }
+.markup-root a:visited { color: var(--lifesg-hyperlink-visited); }
+
+.markup-root strong { font-weight: var(--typography-weight-semibold); }
+.markup-root em { font-style: italic; }
+
+.markup-root code {
+  font-family:     var(--font-mono, ui-monospace, monospace);
+  /* size + colour inherit from root — same as LifeSG */
+}
