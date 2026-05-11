@@ -6,6 +6,8 @@ import * as radioButtonDefault from "./sections/radio-button-default";
 import * as toggleDefault from "./sections/toggle-default";
 import * as iconButtonDefault from "./sections/icon-button-default";
 import * as imageButtonDefault from "./sections/image-button-default";
+import * as otpInputDefault from "./sections/otp-input-default";
+import * as feedbackRatingDefault from "./sections/feedback-rating-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -70,6 +72,14 @@ export const tree: Node[] = [
   folder("image-button", "ImageButton", [
     leaf("introduction", "Introduction", { Prose: prose.ImageButtonIntro }),
     leaf("default",      "Default",      { Ours: imageButtonDefault.OursPane, LifeSG: imageButtonDefault.LifeSGPane }),
+  ]),
+  folder("otp-input", "OtpInput", [
+    leaf("introduction", "Introduction", { Prose: prose.OtpInputIntro }),
+    leaf("default",      "Default",      { Ours: otpInputDefault.OursPane, LifeSG: otpInputDefault.LifeSGPane }),
+  ]),
+  folder("feedback-rating", "FeedbackRating", [
+    leaf("introduction", "Introduction", { Prose: prose.FeedbackRatingIntro }),
+    leaf("default",      "Default",      { Ours: feedbackRatingDefault.OursPane, LifeSG: feedbackRatingDefault.LifeSGPane }),
   ]),
 ];
 

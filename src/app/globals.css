@@ -32,6 +32,8 @@
 @import "./toggle-tokens.css";
 @import "./icon-button-tokens.css";
 @import "./image-button-tokens.css";
+@import "./otp-input-tokens.css";
+@import "./feedback-rating-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 

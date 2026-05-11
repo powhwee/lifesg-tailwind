@@ -217,7 +217,34 @@ export function ImageButtonIntro() {
 export function OtpInputIntro() {
   return (
     <Page title="OtpInput">
-      <p>Coming next sub-batch.</p>
+      <p>
+        Segmented one-time-password input with a verify/resend button and cooldown timer. Mirrors
+        LifeSG&rsquo;s contract: <code>numOfInput</code>, <code>value</code>,{" "}
+        <code>onChange(value: string[])</code>, <code>cooldownDuration</code>,{" "}
+        <code>actionButtonProps</code>, optional <code>prefix</code> ({" "}
+        <code>{`{ value, separator: "-" }`}</code>), <code>errorMessage</code>,{" "}
+        <code>otpOnly</code>, plus the cooldown lifecycle callbacks{" "}
+        <code>onCountdownChange</code> / <code>onCooldownStart</code> / <code>onCooldownEnd</code>.
+      </p>
+      <p>
+        Built on Base UI <code>@base-ui/react/otp-field</code> &mdash; gives us the auto-focus
+        progression between slots, paste-to-fill across slots, backspace-to-previous-slot, and
+        proper <code>autocomplete=&quot;one-time-code&quot;</code> wiring for SMS autofill on iOS
+        / Android.
+      </p>
+      <h2 className="text-base font-semibold pt-2">What we deferred</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <strong>Imperative <code>ref.startCooldown()</code></strong> &mdash; LifeSG exposes a
+          ref-method to programmatically trigger the cooldown. We deferred this; cooldown starts
+          on action-button click. If a real screen needs it (e.g. trigger cooldown on form-submit
+          rather than button-click), expose it via <code>useImperativeHandle</code>.
+        </li>
+        <li>
+          <strong>Multi-character separator</strong> &mdash; LifeSG hard-codes <code>&quot;-&quot;</code>{" "}
+          and types it as such. We mirror.
+        </li>
+      </ul>
     </Page>
   );
 }
@@ -225,7 +252,24 @@ export function OtpInputIntro() {
 export function FeedbackRatingIntro() {
   return (
     <Page title="FeedbackRating">
-      <p>Coming next sub-batch.</p>
+      <p>
+        A complete &ldquo;rate your experience&rdquo; widget &mdash; not just stars. Mirrors
+        LifeSG&rsquo;s contract: <code>imgSrc</code> (optional header image),{" "}
+        <code>description</code>, <code>buttonLabel</code>, <code>rating</code>{" "}
+        (1&ndash;5, 0 means none), <code>onRatingChange</code>, <code>onSubmit</code>.
+      </p>
+      <p>
+        The five stars are <code>role=&quot;radio&quot;</code> buttons inside a{" "}
+        <code>role=&quot;radiogroup&quot;</code> &mdash; selecting a star sets <code>rating</code>{" "}
+        and the user submits via the action button. Active stars fill with the warning-50 tone;
+        keyboard focus is fully wired.
+      </p>
+      <h2 className="text-base font-semibold pt-2">CDN proxy for the default image</h2>
+      <p>
+        For the comparison page the <code>imgSrc</code> example points at LifeSG&rsquo;s{" "}
+        <code>assets.life.gov.sg</code> CDN &mdash; same logic as ErrorDisplay. Replace with the
+        agency&rsquo;s own asset when illustrations are designed; the prop accepts any URL.
+      </p>
     </Page>
   );
 }
