@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Masthead } from "@/components/ui/masthead";
 
 export interface NavbarItem {
@@ -41,11 +41,13 @@ function ActionButton({ action }: { action: NavbarAction }) {
   const v = action.variant ?? "default";
   if (action.href) {
     return (
-      <Button asChild={false as never} variant={v} size="sm">
-        <a href={action.href} onClick={action.onClick}>
-          {action.label}
-        </a>
-      </Button>
+      <a
+        href={action.href}
+        onClick={action.onClick}
+        className={buttonVariants({ variant: v, size: "sm" })}
+      >
+        {action.label}
+      </a>
     );
   }
   return (

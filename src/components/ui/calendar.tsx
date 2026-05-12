@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, type Matcher } from "react-day-picker";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -55,8 +55,8 @@ function isMulti(p: CalendarProps): p is CalendarMultiProps {
 function Calendar(props: CalendarProps) {
   const { className, id, styleType = "no-border", minDate, maxDate, disabledDates, onHover, onYearMonthDisplayChange } = props;
 
-  const disabled = React.useMemo(() => {
-    const items: Array<{ before?: Date; after?: Date } | Date> = [];
+  const disabled = React.useMemo<Matcher | Matcher[] | undefined>(() => {
+    const items: Matcher[] = [];
     if (minDate) items.push({ before: fromIso(minDate)! });
     if (maxDate) items.push({ after: fromIso(maxDate)! });
     if (disabledDates) for (const s of disabledDates) {

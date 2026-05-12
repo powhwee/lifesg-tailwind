@@ -94,7 +94,6 @@ function OtpInput({
         {Array.from({ length: numOfInput }).map((_, i) => (
           <OTPField.Input
             key={i}
-            index={i}
             aria-invalid={isError || undefined}
             className={cn(
               "size-12 rounded-md border bg-[var(--otp-bg)] text-center text-lg font-semibold outline-none transition-colors",
