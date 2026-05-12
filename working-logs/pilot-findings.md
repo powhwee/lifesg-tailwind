@@ -345,3 +345,117 @@ Two real divergences surfaced and weren't resolved before the commit landed. Pro
 - `scripts/{measure,smoke,snap}-{content,navigation}.mjs`, `scripts/behavioral-content.mjs`, `scripts/{carousel,modal}-test.mjs` — measurement + behavioural probes.
 - `scripts/probe-{dark,padding,row-detail,tab-kbd,table-row}.mjs` — diagnostic probes for the outstanding parity issues. Kept rather than deleted; small, no dependencies, useful for re-measuring after a fix.
 - `Dockerfile` + `.dockerignore` — added in this commit. Out of scope for this entry; flagged here so it's not surprising in the diff.
+
+## 2026-05-12 — Port LifeSG Selection and Input
+
+### Scope
+
+Eleven components in five sub-batches mirroring LifeSG's Storybook **Selection and Input** taxonomy:
+
+- **Selection primitives (3)**: Checkbox, RadioButton, Toggle.
+- **Button family (3)**: Button (slotted in from the original Button port), IconButton, ImageButton.
+- **Specialty inputs (2)**: OtpInput, FeedbackRating.
+- **Date (2)**: DateNavigator, Calendar.
+- **Filter (1)**: sidebar mode + checkbox item type.
+
+Excluded from this batch:
+- **Time-slot family** (Schedule, TimeSlotBar, TimeSlotBarWeek, TimeSlotWeekView, TimeTable) — five components in a focused follow-up batch.
+- **SingpassButton** — Singapore-government-platform-specific OAuth, dropped same as Language Switcher.
+
+Five commits, one per sub-batch (`26e8821`, `73488fd`, `d8688aa`, `4f0961d`, `0984148`), then this findings entry.
+
+### The taxonomy lesson — package layout ≠ Storybook layout
+
+Initial scoping went sideways because we built the candidate list by reading `node_modules/@lifesg/react-design-system/*/` and grouping by what *looked* like "selection / input shapes" — text inputs, selects, sliders. That's the JavaScript package boundary. LifeSG's Storybook organises by **user-flow purpose** ("things that capture user choice or input"), which is a broader and more pragmatic grouping that sweeps in Calendar, FileDownload/Upload, FeedbackRating, the Schedule / TimeSlot family, and IconButton / ImageButton — components that share *no implementation shape* but live in the same mental category for someone designing a screen.
+
+The text inputs we initially listed (Input, InputTextarea, InputSelect, etc.) live in a different Storybook category — likely "Form" or "Form Field" — that we haven't audited yet. **Mirror the taxonomy by reading the user-facing sidebar, not the package directory.** Update the migration guide accordingly.
+
+### LifeSG's "Toggle" is not a switch
+
+This was the biggest individual surprise of the batch and would have been a quiet bug if we'd just mapped `Toggle → @base-ui/react/switch` based on the name. LifeSG's `Toggle` is a **labelled selection card**: a bordered tile with a checkbox, radio, or yes/no indicator inside, plus an optional sub-label and an optional collapsible composite section. Closer to what other systems call "TileSelect" or "OptionCard". `type="checkbox" | "radio" | "yes" | "no"` selects which indicator appears.
+
+Our port wraps Checkbox / RadioButton (built earlier in the same sub-batch) with a styled label container. Worth noting: shadcn's own `Toggle` is a third thing again — a toolbar toggle button (pressed/unpressed), like in a rich-text editor toolbar. **Three components, three different meanings of "toggle".** The migration guide needs a clear glossary line.
+
+### Behavioural-parity story keeps holding
+
+Continuing the pattern from the Content / Overlays / Navigation batch — Base UI primitives carried the load on every component that has real interaction:
+
+- **Checkbox** → `@base-ui/react/checkbox` (indeterminate, focus, keyboard).
+- **RadioButton** + **RadioGroup** → `@base-ui/react/radio` + `radio-group` (Arrow-key cycling, focus traversal).
+- **Toggle** → wraps the above two for `type="checkbox|radio"`; hand-rolled disc indicator for `yes|no`.
+- **OtpInput** → `@base-ui/react/otp-field` (auto-focus progression, paste-to-fill, backspace-to-previous, `autocomplete="one-time-code"` for SMS autofill on iOS / Android).
+- **DateNavigator** dropdown → `@base-ui/react/popover` (portal, focus trap, escape, outside-click).
+- **Filter** sections → `@base-ui/react/accordion` (per-section disclosure, ARIA, keyboard).
+
+The wrapper code in each is class strings + L3 token references. The wins compound — every component that needed disclosure / collapse / portal / form-association behaviour reached for an existing Base UI part instead of hand-rolling. **The library is no longer a curiosity; it's load-bearing infrastructure for the pilot's parity claim.**
+
+### New external dependency: react-day-picker (+ date-fns)
+
+Calendar is the first port in the pilot to require a third-party library beyond Base UI / Lucide. Added `react-day-picker@10` and `date-fns@4`. Reasoning:
+
+- **Calendar grid is genuinely complex** — month view, navigation, weekday header, leap years, locale-aware first-day-of-week, keyboard nav. Hand-rolling is a multi-day project; `react-day-picker` is the canonical shadcn pick and we were going to use it eventually.
+- **Footprint is small** — `date-fns` is tree-shakeable; `react-day-picker` is ~30KB minified. Not free, but appropriate cost.
+- **L3 styling cleanly applies** — `react-day-picker`'s `classNames` prop accepts Tailwind class strings per part, so `calendar-tokens.css` redirects flow through unchanged.
+
+If a future audit wants to drop react-day-picker, the Calendar wrapper is ~150 lines and could be re-implemented from scratch — but the cost / benefit doesn't favour it today.
+
+### Package-shape gotchas worth saving
+
+- **Base UI OTP field is in their preview namespace** as of 1.4.1. The export is `OTPFieldPreview` (not `OTPField` or `OtpField`). Aliased on import. Worth re-checking when bumping `@base-ui/react`.
+- **Lucide icons use post-rebrand names**, LifeSG icons keep older convention. Bit us on `Cog → Gear` (LifeSG ships `GearIcon`, not `CogIcon`). The icon-naming search/replace table flagged in the Core entry is a real artifact, not theoretical.
+- **LifeSG Button has a namespaced shape** (`Button.Default`, `Button.Small`, `Button.Large`) not a single `Button` with a size prop. Mirroring that on the comparison page needs `<LifeSGButton.Default styleType="secondary">`, not the more obvious `<LifeSGButton variant="secondary">`.
+- **Heredoc + apostrophes burned ~30 seconds.** Multi-line commit message with `LifeSG's` in body — bash heredoc through `cat <<'EOF'` inside a `$(...)` works, but quoting it through `git commit -m "..."` doesn't. Solution: write to `/tmp/commit-msg.txt` and `git commit -F`. Worth keeping in muscle memory for future longer commits.
+
+### Deliberate divergences
+
+Compiled across the batch — these are intentional choices, not bugs:
+
+| Component       | Divergence                                                                                   | Reason                                                                                  |
+| --------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Checkbox        | `error` via `aria-invalid` instead of an `error` prop                                        | LifeSG handles error via FormField wrapper; `aria-invalid` is the standard a11y pattern |
+| RadioButton     | Same as Checkbox                                                                             | Same                                                                                    |
+| Toggle          | Indicator visible by default (LifeSG hides until checked / hover)                            | Discoverability — easier to scan a list of options                                      |
+| Toggle          | `compositeSection` renders inline when checked (LifeSG ships a collapsible "Show more")      | Simpler; collapsible variant deferred                                                   |
+| ImageButton     | Selected state shows a checkmark badge in the top-right corner                               | Redundant a11y signal beyond the border colour change                                   |
+| Calendar        | 2-letter weekday labels (LifeSG: 3-letter)                                                   | Matches `react-day-picker` default; trivially flippable                                 |
+| Calendar        | No month / year dropdown (arrow-only navigation)                                             | Caption-only nav is the `react-day-picker` default; add `captionLayout` if needed       |
+| DateNavigator   | More compact layout with icon + date in a single small bordered container                    | Tighter visual; LifeSG's wider trigger feels app-shell-shaped                            |
+| FeedbackRating  | Lucide `Star` icon (LifeSG ships custom blue-outlined star SVGs)                             | Standard rating-control look; brand stars are an agency decision                        |
+| Filter          | Sidebar mode only (no `Filter.Modal` mobile variant yet)                                     | Mobile UX awaits agency decision; modal mode shares ~80% of the surface                 |
+| Filter          | `Filter.Checkbox` only (no `.Radio` / `.Toggle` / `.Search`)                                 | Defer until first real consumer needs them                                               |
+
+### What was deferred
+
+Worth listing in one place so the next batch knows what's load-bearing for "production" and what isn't:
+
+- **Toggle**: `removable`/`onRemove`, `compositeSection.collapsible`, `childrenMaxLines` truncation, `useContentWidth`.
+- **OtpInput**: imperative `ref.startCooldown()`.
+- **Calendar**: deprecated `onSelect` alias (use `onChange`), year-only / month-only views.
+- **DateNavigator**: `dropdownRootNode` (custom portal container).
+- **Filter**: modal mode, all non-Checkbox item types, nested options, `labelExtractor` / `valueExtractor` exercised in tests.
+- **Filter.Item**: `initialExpanded` is accepted for API parity but no-op (Base UI Accordion controls open-state at Root level via `defaultValue`; need to either pass through to Root or move to a context-driven registration).
+
+### Things still to verify
+
+- **Form-component integration.** Every component in this batch will eventually be used inside a Form with field-level error display, field-level help text, and field-level focus management. The next batch (Form / Inputs) will exercise this. None of these have been wired into a `<Field>` parent yet.
+- **Mobile experience.** Toggle's `childrenMaxLines`, Filter's modal mode, DateNavigator's dropdownRootNode, Calendar's mobile-friendly month/year-jump — all unverified on touch devices.
+- **Calendar keyboard nav.** `react-day-picker` says it provides Arrow / Home / End / PageUp / PageDown; we haven't smoke-tested.
+- **OtpInput SMS autofill.** `autocomplete="one-time-code"` is set by Base UI's OTPField. Real SMS-with-OTP test needs an actual phone, which we'll only get when a real screen exists.
+- **DateNavigator + Calendar timezone behaviour.** Both use `YYYY-MM-DD` strings to dodge timezone gotchas, but that hasn't been verified across SG / UTC / non-SG locales. Needs a test before any production use that involves backend-stored dates.
+- **L3 token file count is now 30** in `globals.css` import block. The "consolidate at 5+" question from the Foundations entry is genuinely overdue. Worth a small refactor pass — combine into category-bundled files (`selection-and-input-tokens.css`, `content-tokens.css`, etc.) — when no other batch is in flight.
+
+### Findings
+
+1. **Read the user-facing taxonomy, not the package layout.** This batch started with the wrong list because we inferred groupings from the file system. LifeSG's Storybook category puts Calendar next to Checkbox because both are "the user picks something" — perfectly sensible from a screen-design perspective, surprising from a JS-engineer perspective. Future batches: open the live LifeSG Storybook sidebar first.
+2. **Component names lie.** LifeSG `Toggle` ≠ shadcn `Toggle` ≠ Base UI `Switch`. All three are distinct components in distinct mental categories. The migration guide needs a *concept-to-component* mapping line, not just an *API-to-API* mapping table.
+3. **Headless primitives are the load-bearing decision.** Six of eleven components in this batch reached for a Base UI primitive for the interaction surface. The wrapper code is small. The cost-of-ownership delta vs LifeSG-as-dep is roughly: we wrap a primitive whose full-time job is keyboard / focus / ARIA, vs we adopt a styled-components library where every interaction was hand-rolled by a single team in their spare time. The primitive library wins on edge-case coverage (RTL, restore-on-close, scroll-locked iOS Safari, paste-into-OTP, etc.).
+4. **The "skeletal" port pattern continues to be honest.** Filter shipped as sidebar-mode-only with the "what's deferred" list explicit on the introduction page. Same for Toggle's `compositeSection` / `removable` / `childrenMaxLines` deferrals. **Better to ship 60% of a component with a public deferral list than ship 100% with hidden bugs in the 40% you didn't actually exercise.**
+5. **Package-shape drift is real.** Base UI's OTP field is in a `Preview` namespace that won't survive their next stable. The migration cost when these stabilise will be ~10 lines per consumer file. Worth a `// TODO(base-ui-stable):` comment on each preview-namespace import, but not worth blocking on.
+
+### Artifacts
+
+- `src/components/ui/{checkbox,radio-button,toggle,icon-button,image-button,otp-input,feedback-rating,calendar,date-navigator,filter}.tsx` — 10 new components, plus the existing `button.tsx` slotted in.
+- `src/app/{checkbox,radio-button,toggle,icon-button,image-button,otp-input,feedback-rating,calendar,date-navigator,filter}-tokens.css` — 10 new L3 token files.
+- `src/app/selection-and-input/[...slug]/page.tsx` + `layout.tsx`, `src/components/selection-and-input/registry.tsx`, `src/components/selection-and-input/sections/prose.tsx` + 11 default sections.
+- New runtime dependencies in `package.json`: `react-day-picker@10`, `date-fns@4`.
+- Linked from the home page (`src/app/page.tsx`).
