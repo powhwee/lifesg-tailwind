@@ -30,7 +30,7 @@ export interface DateInputProps {
 function formatDisplay(value: string | undefined): string {
   if (!value) return "";
   try {
-    return format(parse(value, "yyyy-MM-dd", new Date()), "d MMM yyyy");
+    return format(parse(value, "yyyy-MM-dd", new Date()), "dd / MM / yyyy");
   } catch {
     return value;
   }
@@ -45,7 +45,7 @@ function DateInput({
   disabled,
   readOnly,
   error,
-  placeholder = "Select date",
+  placeholder = "DD / MM / YYYY",
   withButton = false,
   className,
   id,

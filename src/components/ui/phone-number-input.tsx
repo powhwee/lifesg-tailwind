@@ -91,7 +91,7 @@ function PhoneNumberInput({
               aria-label={`Country code: ${country.name}`}
               {...triggerProps}
               className={cn(
-                "flex items-center gap-1 px-3 border-r border-[var(--input-border)] text-[var(--input-text)] hover:bg-[var(--lifesg-bg-hover)] disabled:cursor-not-allowed disabled:bg-[var(--input-bg-disabled)] disabled:text-[var(--input-text-disabled)]",
+                "flex items-center gap-1 px-3 text-[var(--input-text)] hover:bg-[var(--lifesg-bg-hover)] disabled:cursor-not-allowed disabled:bg-[var(--input-bg-disabled)] disabled:text-[var(--input-text-disabled)]",
                 triggerProps.className
               )}
             >

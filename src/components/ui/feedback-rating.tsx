@@ -40,7 +40,7 @@ function FeedbackRating({
       )}
 
       {description && (
-        <p className="text-center text-base text-[var(--feedback-rating-text)]">{description}</p>
+        <p className="text-center text-lg font-semibold text-[var(--feedback-rating-text)]">{description}</p>
       )}
 
       <div role="radiogroup" aria-label="Rating" className="flex items-center gap-2">
@@ -63,7 +63,7 @@ function FeedbackRating({
               aria-label={`${value} star${value === 1 ? "" : "s"}`}
             >
               <Star
-                className="size-8"
+                className="size-10"
                 fill={isActive ? "currentColor" : "none"}
                 strokeWidth={1.5}
               />
@@ -72,7 +72,7 @@ function FeedbackRating({
         })}
       </div>
 
-      <Button onClick={onSubmit} disabled={rating === 0}>{buttonLabel}</Button>
+      <Button onClick={onSubmit} disabled={rating === 0} className="w-full">{buttonLabel}</Button>
     </div>
   );
 }

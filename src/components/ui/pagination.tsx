@@ -62,7 +62,7 @@ function Pagination({
     onPageChange?.(p);
   };
   return (
-    <nav aria-label="Pagination" className={cn("flex flex-wrap items-center gap-2", className)}>
+    <nav aria-label="Pagination" className={cn("flex items-center gap-2 overflow-x-auto", className)}>
       {showFirstAndLastNav && (
         <button
           type="button"
@@ -121,7 +121,7 @@ function Pagination({
         </button>
       )}
       {showPageSizeChanger && (
-        <label className="ml-2 inline-flex items-center gap-2 text-sm text-[var(--lifesg-text)]">
+        <label className="ml-auto inline-flex items-center gap-2 text-sm text-[var(--lifesg-text)] shrink-0">
           <span className="sr-only">Page size</span>
           <select
             value={pageSize}

@@ -29,9 +29,9 @@ function StateIcon({ state }: { state: BoxContainerDisplayState }) {
 
 function stateClass(state: BoxContainerDisplayState) {
   if (state === "error")
-    return "border-[var(--box-container-border-error)] bg-[var(--box-container-bg-error)]";
+    return "border-[var(--box-container-border-error)] bg-[var(--box-container-bg)]";
   if (state === "warning")
-    return "border-[var(--box-container-border-warning)] bg-[var(--box-container-bg-warning)]";
+    return "border-[var(--box-container-border-warning)] bg-[var(--box-container-bg)]";
   return "border-[var(--box-container-border)] bg-[var(--box-container-bg)]";
 }
 
@@ -64,10 +64,12 @@ export function BoxContainer({
       <section id={id} data-slot="box-container" className={rootClass}>
         <div className="flex items-center gap-3 px-[var(--box-container-padding-x)] py-[var(--box-container-header-y)]">
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <StateIcon state={displayState} />
             <div className="text-base font-semibold text-[var(--lifesg-text)] truncate">{title}</div>
           </div>
-          {callToActionComponent && <div className="flex items-center">{callToActionComponent}</div>}
+          <div className="flex items-center gap-2">
+            {callToActionComponent}
+            <StateIcon state={displayState} />
+          </div>
         </div>
         <div className={bodyCx}>{children}</div>
       </section>
@@ -91,7 +93,6 @@ export function BoxContainer({
           }
         >
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <StateIcon state={displayState} />
             <div className="text-base font-semibold text-[var(--lifesg-text)] truncate">{title}</div>
           </div>
           <div className="flex items-center gap-3">
@@ -104,6 +105,7 @@ export function BoxContainer({
                 {callToActionComponent}
               </span>
             )}
+            <StateIcon state={displayState} />
             <ChevronDown
               aria-hidden
               className="size-5 text-[var(--lifesg-icon)] transition-transform group-aria-expanded/trigger:rotate-180"

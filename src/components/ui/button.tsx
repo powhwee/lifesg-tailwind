@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "border border-[var(--button-border-ghost)] bg-[var(--button-bg-ghost)] text-[var(--button-text-ghost)] hover:bg-[var(--button-bg-ghost-hover)] aria-expanded:bg-[var(--button-bg-ghost-hover)]",
         destructive:
           "bg-[var(--button-bg-destructive)] text-[var(--button-text-destructive)] hover:bg-[var(--button-bg-destructive-hover)] focus-visible:border-[var(--button-border-destructive-focus)] focus-visible:ring-[var(--button-ring-destructive-focus)]",
-        link: "text-[var(--button-text-link)] underline underline-offset-4 hover:underline",
+        link: "text-[var(--button-text-link)] underline-offset-4 hover:underline",
       },
       size: {
         default: "h-12 gap-2 px-4",

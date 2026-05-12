@@ -18,7 +18,6 @@ const TOPPINGS = [
 export function OursPane() {
   const [a, setA] = useState<typeof TOPPINGS[number][]>([]);
   const [b, setB] = useState<typeof TOPPINGS[number][]>([TOPPINGS[0], TOPPINGS[1]]);
-  const [capped, setCapped] = useState<typeof TOPPINGS[number][]>([]);
   return (
     <div className="flex flex-col gap-10 max-w-md" data-token="default">
       <section>
@@ -41,21 +40,6 @@ export function OursPane() {
             selectedOptions={b}
             onSelectOptions={setB}
           />
-        </div>
-      </section>
-      <section>
-        <code className="text-xs text-muted-foreground">maxSelectable=3</code>
-        <div className="mt-3">
-          <MultiSelect
-            options={TOPPINGS}
-            selectedOptions={capped}
-            onSelectOptions={setCapped}
-            maxSelectable={3}
-            placeholder="Pick up to 3"
-          />
-          <p className="mt-2 text-xs text-muted-foreground">
-            selected: <code>{capped.length}</code> / 3
-          </p>
         </div>
       </section>
       <section>

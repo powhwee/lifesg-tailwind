@@ -24,7 +24,7 @@ function InputGroup({
 }
 
 const addonCx =
-  "flex shrink-0 items-center bg-[var(--input-group-addon-bg)] px-3 text-[var(--input-group-addon-text)] text-[length:var(--input-font-size)] leading-[var(--input-line-height)] [&:not(:last-child)]:border-r [&:not(:first-child)]:border-l border-[var(--input-group-addon-border)]";
+  "flex shrink-0 items-center px-3 text-[var(--input-group-addon-text)] text-[length:var(--input-font-size)] leading-[var(--input-line-height)]";
 
 function InputGroupAddon({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (

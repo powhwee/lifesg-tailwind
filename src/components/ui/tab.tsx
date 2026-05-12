@@ -69,7 +69,7 @@ function TabRoot({
               key={item.props.id ?? `${item.props.title}-${i}`}
               value={i}
               className={cn(
-                "shrink-0 px-[var(--tab-x)] py-[var(--tab-y)] text-base font-semibold whitespace-nowrap outline-none cursor-pointer text-[var(--tab-text)] hover:text-[var(--tab-text-hover)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--lifesg-border-focus)] aria-selected:text-[var(--tab-text-selected)] border-b-2 border-transparent aria-selected:border-[var(--tab-indicator-color)]"
+                "shrink-0 px-[var(--tab-x)] py-[var(--tab-y)] text-base font-semibold whitespace-nowrap outline-none cursor-pointer text-[var(--tab-text)] hover:text-[var(--tab-text-hover)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--lifesg-border-focus)] aria-selected:text-[var(--tab-text-selected)] border-b-[3px] border-transparent aria-selected:border-[var(--tab-indicator-color)]"
               )}
               style={item.props.width ? { width: item.props.width } : undefined}
             >

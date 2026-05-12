@@ -6,11 +6,11 @@ import { Form } from "@lifesg/react-design-system/form";
 import { InputSelect as LifeSGInputSelect } from "@lifesg/react-design-system/input-select";
 
 const FRUITS = [
-  { value: "apple",      label: "Apple"      },
-  { value: "banana",     label: "Banana"     },
-  { value: "cherry",     label: "Cherry"     },
-  { value: "durian",     label: "Durian"     },
-  { value: "elderberry", label: "Elderberry" },
+  { value: "apple",      label: "apple"      },
+  { value: "banana",     label: "banana"     },
+  { value: "cherry",     label: "cherry"     },
+  { value: "durian",     label: "durian"     },
+  { value: "elderberry", label: "elderberry" },
 ];
 
 export function OursPane() {

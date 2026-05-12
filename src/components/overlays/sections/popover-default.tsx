@@ -14,7 +14,7 @@ export function OursPane() {
           <Popover>
             <PopoverTrigger
               render={(triggerProps) => (
-                <Button {...triggerProps} variant="secondary" size="sm">
+                <Button {...triggerProps} variant="outline" size="sm">
                   Open popover
                 </Button>
               )}
@@ -60,7 +60,7 @@ export function OursPane() {
           <Popover>
             <PopoverTrigger
               render={(triggerProps) => (
-                <Button {...triggerProps} variant="ghost" size="sm">
+                <Button {...triggerProps} variant="outline" size="sm">
                   Above + end
                 </Button>
               )}

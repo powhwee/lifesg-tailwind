@@ -75,8 +75,8 @@ function Footer({
           )}
         </div>
 
-        <div className="pt-6 border-t border-[var(--footer-border)] flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-[var(--lifesg-text)]">
-          <ul className="flex flex-wrap items-center gap-x-8 gap-y-2 list-none m-0 p-0">
+        <div className="pt-6 border-t border-[var(--footer-border)] flex items-center justify-between gap-4 text-sm text-[var(--lifesg-text)]">
+          <ul className="flex items-center gap-x-8 list-none m-0 p-0">
             <li><a className={linkCx} {...disclaimer.privacy}>Privacy Statement</a></li>
             <li><a className={linkCx} {...disclaimer.termsOfUse}>Terms of Use</a></li>
             <li>
@@ -86,13 +86,7 @@ function Footer({
               </a>
             </li>
           </ul>
-          <div className="flex flex-wrap items-center gap-4 text-[var(--lifesg-text-subtle)]">
-            {lastUpdated && (
-              <span>
-                Last updated{" "}
-                {lastUpdated.toLocaleDateString("en-SG", { year: "numeric", month: "short", day: "numeric" })}
-              </span>
-            )}
+          <div className="flex items-center gap-4 text-[var(--lifesg-text-subtle)] shrink-0">
             {copyrightInfo && <span>{copyrightInfo}</span>}
           </div>
         </div>

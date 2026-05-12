@@ -25,7 +25,7 @@ function Textarea({ className, showCounter, value, maxLength, ...props }: Textar
           {...props}
         />
         <div className="mt-1 text-right text-xs text-[var(--input-counter-text)] tabular-nums">
-          {len} / {maxLength}
+          {maxLength - len} characters left
         </div>
       </div>
     );

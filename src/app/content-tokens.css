@@ -25,7 +25,7 @@
   --table-radius:         0.5rem;
   --table-cell-x:         1rem;
   --table-cell-x-first:   1.5rem;
-  --table-cell-y:         1.25rem;
+  --table-cell-y:         1.5rem;
   --table-head-y:         1.25rem;
 }
 
@@ -97,7 +97,7 @@
   --data-table-radius:                 0.5rem;
   --data-table-cell-x:                 1rem;
   --data-table-cell-x-first:           1.5rem;
-  --data-table-cell-y:                 1rem;
+  --data-table-cell-y:                 1.25rem;
   --data-table-head-y:                 1rem;
 
   --data-table-icon-strong:            var(--lifesg-icon-strongest);

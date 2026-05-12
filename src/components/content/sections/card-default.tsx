@@ -2,7 +2,6 @@
 
 import { Card } from "@/components/ui/card";
 import { Card as LifeSGCard } from "@lifesg/react-design-system/card";
-import { Button } from "@/components/ui/button";
 
 const SampleCopy = () => (
   <>
@@ -22,10 +21,6 @@ export function OursPane() {
             <Card.Description>2:30 pm — Tampines branch</Card.Description>
           </Card.Header>
           <Card.Body><SampleCopy /></Card.Body>
-          <Card.Footer>
-            <Button size="sm" variant="secondary">Reschedule</Button>
-            <Button size="sm" variant="ghost">Cancel</Button>
-          </Card.Footer>
         </Card>
       </div>
 

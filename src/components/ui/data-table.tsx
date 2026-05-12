@@ -206,9 +206,14 @@ export function DataTable({
             {loadState === "loading" && (
               <tr>
                 <td colSpan={headerItems.length + (enableMultiSelect ? 1 : 0)} className="text-center py-12">
-                  <span className="inline-flex items-center gap-2 text-sm text-[var(--lifesg-text-subtle)]">
-                    <span className="inline-block size-4 rounded-full border-2 border-[var(--lifesg-border)] border-t-[var(--lifesg-border-primary)] animate-spin" />
-                    Loading…
+                  <span className="inline-flex items-center gap-1.5" aria-label="Loading">
+                    {[0, 1, 2, 3].map((i) => (
+                      <span
+                        key={i}
+                        className="size-2.5 rounded-full bg-[var(--lifesg-bg-primary)] animate-bounce"
+                        style={{ animationDelay: `${i * 0.15}s`, animationDuration: "0.6s" }}
+                      />
+                    ))}
                   </span>
                 </td>
               </tr>

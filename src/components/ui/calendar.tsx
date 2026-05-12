@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { DayPicker, type Matcher } from "react-day-picker";
+import { DayPicker, type Matcher, type DateLibOptions } from "react-day-picker";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -83,19 +83,23 @@ function Calendar(props: CalendarProps) {
     button_next: "size-8 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer",
     month_grid: "w-full border-collapse",
     weekdays: "flex",
-    weekday: "size-9 text-xs text-[var(--calendar-text-subtle)] font-normal flex items-center justify-center",
+    weekday: "size-10 text-xs text-[var(--calendar-text-subtle)] font-normal flex items-center justify-center",
     week: "flex",
-    day: "size-9 p-0 text-sm",
+    day: "size-10 p-0 text-sm",
     day_button: cn(
-      "size-9 inline-flex items-center justify-center rounded-md cursor-pointer text-sm",
+      "size-10 inline-flex items-center justify-center rounded-full cursor-pointer text-sm",
       "hover:bg-[var(--calendar-bg-hover)]",
       "focus-visible:ring-3 focus-visible:ring-[var(--calendar-ring-focus)] focus-visible:outline-none"
     ),
     today: "font-semibold text-[var(--calendar-text-today)]",
-    selected: "bg-[var(--calendar-bg-selected)] text-[var(--calendar-text-selected)] [&>button]:bg-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)] [&>button:hover]:bg-[var(--calendar-bg-selected-hover)]",
+    selected: "[&>button]:ring-2 [&>button]:ring-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)] [&>button:hover]:bg-[var(--calendar-bg-hover)]",
     outside: "text-[var(--calendar-text-disabled)]",
     disabled: "text-[var(--calendar-text-disabled)] cursor-not-allowed [&>button]:cursor-not-allowed [&>button:hover]:bg-transparent",
     hidden: "invisible",
+  };
+
+  const formatWeekdayName = (date: Date) => {
+    return date.toLocaleDateString("en-US", { weekday: "short" });
   };
 
   const handleMonthChange = (m: Date) => {
@@ -110,6 +114,7 @@ function Calendar(props: CalendarProps) {
       <div id={id} className={baseClasses} data-slot="calendar">
         <DayPicker
           mode="multiple"
+          captionLayout="dropdown"
           selected={selected}
           onSelect={(dates) => {
             const next = (dates ?? []).map(toIso);
@@ -122,6 +127,7 @@ function Calendar(props: CalendarProps) {
           onMonthChange={handleMonthChange}
           onDayMouseEnter={handleDayMouseEnter}
           classNames={dayPickerClassNames}
+          formatters={{ formatWeekdayName }}
           components={{
             Chevron: ({ orientation }) =>
               orientation === "left" ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />,
@@ -136,6 +142,7 @@ function Calendar(props: CalendarProps) {
     <div id={id} className={baseClasses} data-slot="calendar">
       <DayPicker
         mode="single"
+        captionLayout="dropdown"
         selected={selected}
         onSelect={(d) => {
           const v = toIso(d);
@@ -146,6 +153,7 @@ function Calendar(props: CalendarProps) {
         onMonthChange={handleMonthChange}
         onDayMouseEnter={handleDayMouseEnter}
         classNames={dayPickerClassNames}
+        formatters={{ formatWeekdayName }}
         components={{
           Chevron: ({ orientation }) =>
             orientation === "left" ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />,

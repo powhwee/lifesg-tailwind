@@ -96,7 +96,7 @@ function OtpInput({
             key={i}
             aria-invalid={isError || undefined}
             className={cn(
-              "size-12 rounded-md border bg-[var(--otp-bg)] text-center text-lg font-semibold outline-none transition-colors",
+              "size-14 rounded-lg border bg-[var(--otp-bg)] text-center text-lg font-semibold outline-none transition-colors",
               "border-[var(--otp-border)] text-[var(--otp-text)]",
               "focus:border-[var(--otp-border-focus)] focus:ring-3 focus:ring-[var(--otp-ring-focus)]",
               "aria-invalid:border-[var(--otp-border-error)] aria-invalid:ring-3 aria-invalid:ring-[var(--otp-ring-error)]"
@@ -110,8 +110,10 @@ function OtpInput({
       )}
 
       {!otpOnly && (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-3">
           <Button
+            variant="outline"
+            className="w-full"
             {...actionButtonProps}
             onClick={handleClick}
             disabled={(actionButtonProps?.disabled ?? false) || remaining > 0}
@@ -119,7 +121,7 @@ function OtpInput({
             {actionButtonProps?.children ?? "Verify"}
           </Button>
           {remaining > 0 && (
-            <span className="text-sm text-[var(--lifesg-text-subtle)]">Resend in {remaining}s</span>
+            <span className="text-sm text-[var(--lifesg-text-subtle)] text-center">Resend in {remaining}s</span>
           )}
         </div>
       )}

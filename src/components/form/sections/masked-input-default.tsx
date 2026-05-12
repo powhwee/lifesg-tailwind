@@ -20,7 +20,7 @@ export function OursPane() {
       <section>
         <code className="text-xs text-muted-foreground">NRIC mask — chars 1-5 hidden, others visible</code>
         <div className="mt-3">
-          <MaskedInput value="S1234567A" maskRange={[1, 5]} maskChar="*" />
+          <MaskedInput value="S1234567A" maskRange={[1, 6]} maskChar="*" />
         </div>
       </section>
       <section>
@@ -54,7 +54,7 @@ export function LifeSGPane() {
       <section>
         <code className="text-xs text-muted-foreground">NRIC mask — chars 1-5 hidden</code>
         <div className="mt-3">
-          <LifeSGMaskedInput value="S1234567A" maskRange={[1, 5]} maskChar="*" />
+          <LifeSGMaskedInput value="S1234567A" maskRange={[1, 6]} maskChar="*" />
         </div>
       </section>
       <section>

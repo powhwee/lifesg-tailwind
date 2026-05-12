@@ -32,10 +32,6 @@ export function OursPane() {
             <Checkbox disabled checked />
             <span className="text-sm">Disabled checked</span>
           </label>
-          <label className="flex items-center gap-2">
-            <Checkbox aria-invalid />
-            <span className="text-sm">Error</span>
-          </label>
         </div>
       </section>
       <section>
@@ -46,7 +42,6 @@ export function OursPane() {
           <Checkbox displaySize="small" indeterminate />
           <Checkbox displaySize="small" disabled />
           <Checkbox displaySize="small" disabled checked />
-          <Checkbox displaySize="small" aria-invalid />
         </div>
       </section>
     </div>

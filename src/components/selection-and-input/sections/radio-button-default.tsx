@@ -40,15 +40,11 @@ export function OursPane() {
             <RadioButton value="c" disabled />
             <span className="text-sm">Disabled</span>
           </label>
-          <label className="flex items-center gap-2">
-            <RadioButton value="d" aria-invalid />
-            <span className="text-sm">Error</span>
-          </label>
         </RadioGroup>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">small size</code>
-        <RadioGroup defaultValue="a" className="mt-3 flex items-center gap-6">
+        <RadioGroup defaultValue="b" className="mt-3 flex items-center gap-6">
           <RadioButton value="a" displaySize="small" />
           <RadioButton value="b" displaySize="small" />
           <RadioButton value="c" displaySize="small" disabled />

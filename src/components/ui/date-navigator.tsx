@@ -50,13 +50,14 @@ function formatDate(iso: string, opts: { short: boolean; today: boolean; view: "
     const monStart = (opts.short ? MONTHS_SHORT : MONTHS_LONG)[start.getMonth()];
     const monEnd = (opts.short ? MONTHS_SHORT : MONTHS_LONG)[end.getMonth()];
     return start.getMonth() === end.getMonth()
-      ? `${start.getDate()} – ${end.getDate()} ${monStart} ${end.getFullYear()}`
-      : `${start.getDate()} ${monStart} – ${end.getDate()} ${monEnd} ${end.getFullYear()}`;
+      ? `${start.getDate()} ${monStart} - ${end.getDate()} ${monStart}, ${end.getFullYear()}`
+      : `${start.getDate()} ${monStart} - ${end.getDate()} ${monEnd}, ${end.getFullYear()}`;
   }
-  if (opts.today && isToday(d)) return "Today";
-  const day = DAYS_SHORT[d.getDay()];
   const month = (opts.short ? MONTHS_SHORT : MONTHS_LONG)[d.getMonth()];
-  return `${day}, ${d.getDate()} ${month} ${d.getFullYear()}`;
+  const dateStr = `${d.getDate()} ${month} ${d.getFullYear()}`;
+  if (opts.today && isToday(d)) return `${dateStr}, Today`;
+  const dayName = DAYS_SHORT[d.getDay()];
+  return `${dateStr}, ${dayName}`;
 }
 
 function shiftIso(iso: string, deltaDays: number): string {
@@ -119,7 +120,6 @@ function DateNavigator({
             className="inline-flex items-center gap-2 px-3 h-10 rounded-md text-sm font-semibold hover:bg-[var(--date-navigator-bg-hover)] cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-[var(--date-navigator-ring-focus)]"
             disabled={loading}
           >
-            <CalendarDays className="size-4" aria-hidden="true" />
             <span className="min-w-[12rem] text-center">{display}</span>
           </PopoverTrigger>
           <PopoverContent sideOffset={6} align="center">

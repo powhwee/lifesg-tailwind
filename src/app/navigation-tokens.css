@@ -97,9 +97,9 @@
   --sidenav-bg-selected:       var(--lifesg-bg-selected);
   --sidenav-drawer-bg:         var(--lifesg-bg);
   --sidenav-border:            var(--lifesg-border-subtle);
-  --sidenav-icon:              var(--lifesg-icon-primary);
+  --sidenav-icon:              var(--lifesg-icon);
   --sidenav-icon-selected:     var(--lifesg-icon-primary);
-  --sidenav-text:              var(--lifesg-text-primary);
+  --sidenav-text:              var(--lifesg-text);
   --sidenav-text-subtle:       var(--lifesg-text-subtle);
 }
 

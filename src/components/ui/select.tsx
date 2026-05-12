@@ -52,7 +52,7 @@ function Select<T = OptionShape>({
   onSelectOption,
   valueExtractor = defaultValueExtractor,
   listExtractor = defaultListExtractor,
-  placeholder = "Select an option",
+  placeholder = "Select",
   disabled,
   readOnly,
   error,

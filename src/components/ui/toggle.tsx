@@ -16,7 +16,7 @@ const toggleVariants = cva(
     "border bg-[var(--toggle-bg)] border-[var(--toggle-border)] text-[var(--toggle-text)]",
     "hover:bg-[var(--toggle-bg-hover)] hover:border-[var(--toggle-border-hover)]",
     "has-[input:focus-visible]:ring-3 has-[input:focus-visible]:ring-[var(--toggle-ring-focus)]",
-    "has-[[data-checked]]:bg-[var(--toggle-bg-checked)] has-[[data-checked]]:border-[var(--toggle-border-checked)]",
+    "has-[[data-checked]]:bg-[var(--toggle-bg-checked)] has-[[data-checked]]:border-[var(--toggle-border-checked)] has-[[data-checked]]:border-l-[3px] has-[[data-checked]]:border-l-[var(--lifesg-border-primary)]",
     "[&:has([data-disabled])]:bg-[var(--toggle-bg-disabled)] [&:has([data-disabled])]:border-[var(--toggle-border-disabled)] [&:has([data-disabled])]:text-[var(--toggle-text-disabled)] [&:has([data-disabled])]:cursor-not-allowed"
   ),
   {
@@ -124,11 +124,8 @@ function Toggle({
         className="sr-only peer"
         aria-invalid={error || undefined}
       />
-      <span className="mt-0.5">
-        <Indicator type={type} displaySize="default" />
-      </span>
       <span className="flex flex-col gap-1 min-w-0 flex-1">
-        <span className="text-base font-semibold">{children}</span>
+        <span className={cn("text-base font-semibold", isChecked && "text-[var(--lifesg-text-primary)]")}>{children}</span>
         {subLabel && <span className="text-sm text-[var(--lifesg-text-subtle)]">{subLabel}</span>}
         {isChecked && compositeSection && (
           <span className="mt-3 block border-t border-[var(--toggle-border)] pt-3 text-sm">

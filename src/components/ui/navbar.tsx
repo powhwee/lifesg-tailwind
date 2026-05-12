@@ -103,7 +103,7 @@ function Navbar({
                 aria-current={selected ? "page" : undefined}
                 className={cn(
                   "relative inline-flex items-center h-16 px-4 text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)] outline-none focus-visible:bg-[var(--navbar-bg-hover)]",
-                  selected && "after:content-[''] after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-[var(--navbar-indicator)] font-semibold"
+                  selected && "after:content-[''] after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:bg-[var(--navbar-indicator)] font-semibold"
                 )}
               >
                 {item.label}

@@ -82,6 +82,12 @@ function UnitNumberInput({
         className
       )}
     >
+      <span
+        aria-hidden="true"
+        className="grid place-items-center pl-3 text-[var(--input-text)] select-none text-[length:var(--input-font-size)]"
+      >
+        #
+      </span>
       <input
         type="text"
         inputMode="numeric"
