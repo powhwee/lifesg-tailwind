@@ -1,8 +1,0 @@
-/* Layer 3 — Component tokens for Footer. */
-
-:root {
-  --footer-bg:               var(--lifesg-bg-strong);
-  --footer-text:             var(--lifesg-text);
-  --footer-link:             var(--lifesg-text);
-  --footer-border:           var(--lifesg-border-subtle);
-}

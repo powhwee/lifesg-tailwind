@@ -1,0 +1,127 @@
+/* Layer 3 — content component tokens (consolidated). */
+
+/* ═══════════ card ═══════════ */
+/* Layer 3 — Component tokens for Card. */
+
+:root {
+  --card-bg:        var(--lifesg-bg);
+  --card-text:      var(--lifesg-text);
+  --card-border:    transparent;
+  --card-radius:    0.5rem;
+  --card-shadow:    0 2px 8px 0 color-mix(in srgb, var(--lifesg-neutral-50) 24%, transparent);
+  --card-padding-y: 1rem;
+  --card-padding-x: 2rem;
+}
+
+/* ═══════════ table ═══════════ */
+/* Layer 3 — Component tokens for Table. */
+
+:root {
+  --table-border:         var(--lifesg-border);
+  --table-row-border:     var(--lifesg-border);
+  --table-row-bg-hover:   var(--lifesg-bg-hover);
+  --table-head-bg:        var(--lifesg-bg-stronger);
+  --table-head-text:      var(--lifesg-text);
+  --table-radius:         0.5rem;
+  --table-cell-x:         1rem;
+  --table-cell-x-first:   1.5rem;
+  --table-cell-y:         1.25rem;
+  --table-head-y:         1.25rem;
+}
+
+/* ═══════════ uneditable-section ═══════════ */
+/* Layer 3 — Component tokens for UneditableSection. */
+
+:root {
+  --uneditable-section-bg:      var(--lifesg-bg-strong);
+  --uneditable-section-radius:  0.5rem;
+  --uneditable-section-padding: 1.5rem;
+}
+
+/* ═══════════ box-container ═══════════ */
+/* Layer 3 — Component tokens for BoxContainer. */
+
+:root {
+  --box-container-bg:               var(--lifesg-bg);
+  --box-container-border:           var(--lifesg-border);
+
+  --box-container-bg-error:         var(--lifesg-bg-error);
+  --box-container-border-error:     var(--lifesg-border-error);
+  --box-container-icon-error:       var(--lifesg-icon-error);
+
+  --box-container-bg-warning:       var(--lifesg-bg-warning);
+  --box-container-border-warning:   var(--lifesg-border-warning);
+  --box-container-icon-warning:     var(--lifesg-icon-warning);
+
+  --box-container-radius:           0.5rem;
+  --box-container-padding-x:        1rem;
+  --box-container-header-y:         0.75rem;
+  --box-container-body-y:           1rem;
+}
+
+/* ═══════════ tab ═══════════ */
+/* Layer 3 — Component tokens for Tab. */
+
+:root {
+  --tab-text:               var(--lifesg-text-subtle);
+  --tab-text-hover:         var(--lifesg-text);
+  --tab-text-selected:      var(--lifesg-text-primary);
+  --tab-indicator-color:    var(--lifesg-bg-primary);
+  --tab-track-color:        var(--lifesg-border);
+  --tab-x:                  1.25rem;
+  --tab-y:                  0.75rem;
+  --tab-panel-pt:           1.25rem;
+}
+
+/* ═══════════ accordion ═══════════ */
+/* Layer 3 — Component tokens for Accordion. */
+
+:root {
+  --accordion-border:    var(--lifesg-border);
+  --accordion-divider:   var(--lifesg-border);
+  --accordion-radius:    0.5rem;
+  --accordion-x:         1rem;
+}
+
+/* ═══════════ data-table ═══════════ */
+/* Layer 3 — Component tokens for DataTable. */
+
+:root {
+  --data-table-border:                 var(--lifesg-border);
+  --data-table-row-border:             var(--lifesg-border);
+  --data-table-row-bg-hover:           var(--lifesg-bg-hover);
+  --data-table-row-bg-selected:        var(--lifesg-bg-selected);
+  --data-table-row-bg-alt:             var(--lifesg-bg-strong);
+  --data-table-head-bg:                var(--lifesg-bg-stronger);
+  --data-table-action-bar-bg:          var(--lifesg-bg-primary-subtlest);
+  --data-table-radius:                 0.5rem;
+  --data-table-cell-x:                 1rem;
+  --data-table-cell-x-first:           1.5rem;
+  --data-table-cell-y:                 1rem;
+  --data-table-head-y:                 1rem;
+
+  --data-table-icon-strong:            var(--lifesg-icon-strongest);
+  --data-table-icon-subtle:            var(--lifesg-icon-subtle);
+
+  --data-table-checkbox-bg:            var(--lifesg-bg);
+  --data-table-checkbox-border:        var(--lifesg-border-stronger);
+  --data-table-checkbox-checked-bg:    var(--lifesg-bg-primary);
+  --data-table-checkbox-tick:          var(--lifesg-text-inverse);
+}
+
+/* ═══════════ fullscreen-image-carousel ═══════════ */
+/* Layer 3 — Component tokens for FullscreenImageCarousel.
+ * Populated in the carousel port step.
+ */
+
+:root {
+  --fic-backdrop:           color-mix(in srgb, var(--lifesg-neutral-10) 90%, transparent);
+  --fic-toolbar-bg:         transparent;
+  --fic-text:               #FFFFFF;
+  --fic-icon:               #FFFFFF;
+  --fic-button-bg:          color-mix(in srgb, #FFFFFF 12%, transparent);
+  --fic-button-bg-hover:    color-mix(in srgb, #FFFFFF 24%, transparent);
+  --fic-thumb-border:       color-mix(in srgb, #FFFFFF 40%, transparent);
+  --fic-thumb-border-active:#FFFFFF;
+}
+

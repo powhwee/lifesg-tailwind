@@ -1,9 +1,0 @@
-/* Layer 3 — Component tokens for Modal. */
-
-:root {
-  --modal-backdrop:     color-mix(in srgb, var(--lifesg-neutral-10) 60%, transparent);
-  --modal-box-bg:       var(--lifesg-bg);
-  --modal-box-radius:   0.5rem;
-  --modal-box-shadow:   0 20px 25px -5px color-mix(in srgb, var(--lifesg-neutral-10) 20%, transparent), 0 8px 10px -6px color-mix(in srgb, var(--lifesg-neutral-10) 10%, transparent);
-  --modal-box-padding:  2rem;
-}

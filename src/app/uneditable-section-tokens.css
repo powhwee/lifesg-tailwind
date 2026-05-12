@@ -1,7 +1,0 @@
-/* Layer 3 — Component tokens for UneditableSection. */
-
-:root {
-  --uneditable-section-bg:      var(--lifesg-bg-strong);
-  --uneditable-section-radius:  0.5rem;
-  --uneditable-section-padding: 1.5rem;
-}

@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { comparisons } from "@/components/compare/registry";
 import { tree as foundationsTree } from "@/components/foundations/registry";
 import { tree as coreTree } from "@/components/core/registry";
 import { tree as contentTree } from "@/components/content/registry";
 import { tree as overlaysTree } from "@/components/overlays/registry";
 import { tree as navigationTree } from "@/components/navigation/registry";
 import { tree as selectionAndInputTree } from "@/components/selection-and-input/registry";
+import { tree as formTree } from "@/components/form/registry";
 
 const linkCx = "underline underline-offset-4 hover:text-primary text-sm";
 
@@ -20,21 +20,6 @@ export default function Home() {
         <code className="font-mono text-sm">@lifesg/react-design-system</code> on visual,
         a11y, and interaction parity.
       </p>
-
-      <section className="mb-10">
-        <h2 className="text-lg font-semibold mb-3">Component comparisons</h2>
-        <p className="text-sm text-muted-foreground mb-3">
-          Shadcn build (left) vs LifeSG (right), sharing the same theme tokens.{" "}
-          <Link href="/compare" className={linkCx}>Index →</Link>
-        </p>
-        <ul className="flex flex-col gap-2 pl-1">
-          {comparisons.map((c) => (
-            <li key={c.slug}>
-              <Link href={`/compare/${c.slug}`} className={linkCx}>{c.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       <section className="mb-10">
         <h2 className="text-lg font-semibold mb-3">Foundations</h2>
@@ -227,6 +212,47 @@ export default function Home() {
                     <li key={child.slug}>
                       <Link
                         href={`/selection-and-input/${node.slug}/${child.slug}`}
+                        className={linkCx}
+                      >
+                        {child.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="text-lg font-semibold mb-3">Form</h2>
+        <p className="text-sm text-muted-foreground mb-3">
+          Mirrors LifeSG&rsquo;s Storybook <em>Form</em> taxonomy. 12 components on a headless{" "}
+          <code>&lt;Field&gt;</code> wrapper (Base UI) + thin <code>Form.X</code> convenience shapes.{" "}
+          <Link href="/form/introduction" className={linkCx}>Start →</Link>
+        </p>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-5">
+          {formTree.map((node) => {
+            if (node.kind === "leaf") {
+              return (
+                <div key={node.slug} className="col-span-2">
+                  <Link href={`/form/${node.slug}`} className={linkCx}>
+                    {node.title}
+                  </Link>
+                </div>
+              );
+            }
+            return (
+              <div key={node.slug}>
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
+                  {node.title}
+                </div>
+                <ul className="flex flex-col gap-1">
+                  {node.children.map((child) => (
+                    <li key={child.slug}>
+                      <Link
+                        href={`/form/${node.slug}/${child.slug}`}
                         className={linkCx}
                       >
                         {child.title}

@@ -1,0 +1,126 @@
+/* Layer 3 — navigation component tokens (consolidated). */
+
+/* ═══════════ avatar ═══════════ */
+/* Layer 3 — Component tokens for Avatar. */
+
+:root {
+  --avatar-bg:                 var(--lifesg-primary-95);
+  --avatar-text:               var(--lifesg-text-primary);
+
+  --avatar-size-default:       2.5rem;   /* 40px */
+  --avatar-size-small:         1.5rem;   /* 24px */
+
+  --avatar-font-default:       1rem;     /* 16px */
+  --avatar-font-small:         1rem;     /* 16px */
+}
+
+/* ═══════════ breadcrumb ═══════════ */
+/* Layer 3 — Component tokens for Breadcrumb. */
+
+:root {
+  --breadcrumb-text:           var(--lifesg-text-primary);
+  --breadcrumb-text-current:   var(--lifesg-text);
+  --breadcrumb-separator:      var(--lifesg-icon-subtle);
+
+  --breadcrumb-font-size:      1rem;     /* 16px */
+  --breadcrumb-line-height:    1.5rem;
+  --breadcrumb-letter-spacing: 0.009em;  /* matches BodyMD */
+}
+
+/* ═══════════ link-list ═══════════ */
+/* Layer 3 — Component tokens for LinkList. */
+
+:root {
+  --link-list-link:                 var(--lifesg-text-primary);
+  --link-list-border:               var(--lifesg-border-subtle);
+
+  /* default size */
+  --link-list-title-default-size:   1.375rem; /* 22px — HeadingSM */
+  --link-list-title-default-line:   1.75rem;
+  --link-list-desc-default-size:    1.125rem; /* 18px — BodyBL */
+  --link-list-desc-default-line:    1.625rem;
+
+  /* small size */
+  --link-list-title-small-size:     1.125rem; /* 18px */
+  --link-list-title-small-line:     1.625rem;
+  --link-list-desc-small-size:      1rem;     /* 16px */
+  --link-list-desc-small-line:      1.5rem;
+}
+
+/* ═══════════ masthead ═══════════ */
+/* Layer 3 — Component tokens for Masthead. */
+
+:root {
+  --masthead-bg:               var(--lifesg-bg-stronger);
+  --masthead-text:             var(--lifesg-text);
+  --masthead-link:             var(--lifesg-text-primary);
+  --masthead-icon:             var(--lifesg-icon-primary);
+  --masthead-crest:            #EE2536;
+
+  --masthead-font-size:        0.75rem;   /* 12px */
+  --masthead-line-height:      1.125rem;  /* 18px */
+}
+
+/* ═══════════ pagination ═══════════ */
+/* Layer 3 — Component tokens for Pagination. */
+
+:root {
+  --pagination-text:           var(--lifesg-text);
+  --pagination-text-active:    var(--lifesg-text-inverse);
+  --pagination-bg:             var(--lifesg-bg);
+  --pagination-bg-hover:       var(--lifesg-bg-hover);
+  --pagination-bg-active:      var(--lifesg-bg-primary);
+  --pagination-border:         var(--lifesg-border);
+  --pagination-chevron:        var(--lifesg-text-primary);
+}
+
+/* ═══════════ local-nav ═══════════ */
+/* Layer 3 — Component tokens for LocalNav. */
+
+:root {
+  --local-nav-bg:               var(--lifesg-bg);
+  --local-nav-bg-hover:         var(--lifesg-bg-hover);
+  --local-nav-bg-selected:      var(--lifesg-bg-selected);
+  --local-nav-text:             var(--lifesg-text);
+  --local-nav-text-selected:    var(--lifesg-text-selected);
+  --local-nav-border:           var(--lifesg-border-subtle);
+  --local-nav-rail:             var(--lifesg-border-subtle);
+  --local-nav-rail-selected:    var(--lifesg-bg-primary);
+}
+
+/* ═══════════ sidenav ═══════════ */
+/* Layer 3 — Component tokens for Sidenav. */
+
+:root {
+  --sidenav-bg:                var(--lifesg-bg);
+  --sidenav-bg-hover:          var(--lifesg-bg-hover);
+  --sidenav-bg-selected:       var(--lifesg-bg-selected);
+  --sidenav-drawer-bg:         var(--lifesg-bg);
+  --sidenav-border:            var(--lifesg-border-subtle);
+  --sidenav-icon:              var(--lifesg-icon-primary);
+  --sidenav-icon-selected:     var(--lifesg-icon-primary);
+  --sidenav-text:              var(--lifesg-text-primary);
+  --sidenav-text-subtle:       var(--lifesg-text-subtle);
+}
+
+/* ═══════════ navbar ═══════════ */
+/* Layer 3 — Component tokens for Navbar. */
+
+:root {
+  --navbar-bg:               var(--lifesg-bg);
+  --navbar-bg-hover:         var(--lifesg-bg-hover);
+  --navbar-text:             var(--lifesg-text);
+  --navbar-border:           var(--lifesg-border-subtle);
+  --navbar-indicator:        var(--lifesg-bg-primary);
+}
+
+/* ═══════════ footer ═══════════ */
+/* Layer 3 — Component tokens for Footer. */
+
+:root {
+  --footer-bg:               var(--lifesg-bg-strong);
+  --footer-text:             var(--lifesg-text);
+  --footer-link:             var(--lifesg-text);
+  --footer-border:           var(--lifesg-border-subtle);
+}
+

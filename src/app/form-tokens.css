@@ -1,0 +1,43 @@
+/* Layer 3 — form component tokens (consolidated). */
+
+/* ═══════════ field + label ═══════════ */
+:root {
+  --field-text-label:        var(--lifesg-text);
+  --field-text-description:  var(--lifesg-text-subtle);
+  --field-text-subtitle:     var(--lifesg-text-subtle);
+  --field-text-error:        var(--lifesg-text-error);
+  --field-text-disabled:     var(--lifesg-text-disabled);
+  --field-label-font-size:   1.125rem;   /* 18px — matches LifeSG HeadingXS */
+  --field-label-line-height: 1.625rem;   /* 26px */
+}
+
+/* ═══════════ input + textarea + masked-input + input-group ═══════════ */
+:root {
+  --input-bg:                  var(--lifesg-bg);
+  --input-bg-disabled:         var(--lifesg-bg-disabled);
+  --input-bg-readonly:         var(--lifesg-bg-strong);
+  --input-border:              var(--lifesg-border);
+  --input-border-hover:        var(--lifesg-border-hover);
+  --input-border-focus:        var(--lifesg-border-focus);
+  --input-border-disabled:     var(--lifesg-border-disabled);
+  --input-border-error:        var(--lifesg-bg-error-strong);
+  --input-text:                var(--lifesg-text);
+  --input-text-disabled:       var(--lifesg-text-disabled);
+  --input-text-placeholder:    var(--lifesg-text-subtler);
+  --input-ring-focus:          color-mix(in srgb, var(--lifesg-border-focus) 30%, transparent);
+  --input-ring-error:          color-mix(in srgb, var(--lifesg-bg-error-strong) 20%, transparent);
+  --input-icon:                var(--lifesg-icon-primary);
+  --input-icon-disabled:       var(--lifesg-text-disabled);
+  --input-icon-hover-bg:       var(--lifesg-bg-hover);
+  --input-counter-text:        var(--lifesg-text-subtle);
+  --input-radius:              0.25rem;
+  --input-padding-x:           0.75rem;
+  --input-height:              3rem;       /* 48px */
+  --input-font-size:           1rem;       /* 16px — LifeSG BodyMD */
+  --input-line-height:         1.5rem;     /* 24px */
+
+  /* input-group addon */
+  --input-group-addon-bg:      var(--lifesg-bg-strong);
+  --input-group-addon-text:    var(--lifesg-text);
+  --input-group-addon-border:  var(--lifesg-border);
+}

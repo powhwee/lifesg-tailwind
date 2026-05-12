@@ -1,0 +1,249 @@
+/* Layer 3 — core component tokens (consolidated). */
+
+/* ═══════════ typography ═══════════ */
+/* Layer 3 — Component tokens for Typography. */
+
+:root {
+  --typography-font-family:          var(--lifesg-font-body-font-family);
+
+  --typography-weight-light:         var(--lifesg-font-weight-light);
+  --typography-weight-regular:       var(--lifesg-font-weight-regular);
+  --typography-weight-semibold:      var(--lifesg-font-weight-semibold);
+  --typography-weight-bold:          var(--lifesg-font-weight-bold);
+
+  --typography-heading-xxl-size:     var(--lifesg-font-heading-size-xxl);
+  --typography-heading-xxl-lh:       var(--lifesg-font-heading-lh-xxl);
+  --typography-heading-xxl-ls:       var(--lifesg-font-heading-ls-xxl);
+  --typography-heading-xl-size:      var(--lifesg-font-heading-size-xl);
+  --typography-heading-xl-lh:        var(--lifesg-font-heading-lh-xl);
+  --typography-heading-xl-ls:        var(--lifesg-font-heading-ls-xl);
+  --typography-heading-lg-size:      var(--lifesg-font-heading-size-lg);
+  --typography-heading-lg-lh:        var(--lifesg-font-heading-lh-lg);
+  --typography-heading-lg-ls:        var(--lifesg-font-heading-ls-lg);
+  --typography-heading-md-size:      var(--lifesg-font-heading-size-md);
+  --typography-heading-md-lh:        var(--lifesg-font-heading-lh-md);
+  --typography-heading-md-ls:        var(--lifesg-font-heading-ls-md);
+  --typography-heading-sm-size:      var(--lifesg-font-heading-size-sm);
+  --typography-heading-sm-lh:        var(--lifesg-font-heading-lh-sm);
+  --typography-heading-sm-ls:        var(--lifesg-font-heading-ls-sm);
+  --typography-heading-xs-size:      var(--lifesg-font-heading-size-xs);
+  --typography-heading-xs-lh:        var(--lifesg-font-heading-lh-xs);
+  --typography-heading-xs-ls:        var(--lifesg-font-heading-ls-xs);
+
+  --typography-body-bl-size:         var(--lifesg-font-body-size-baseline);
+  --typography-body-bl-lh:           var(--lifesg-font-body-lh-baseline);
+  --typography-body-bl-ls:           var(--lifesg-font-body-ls-baseline);
+  --typography-body-md-size:         var(--lifesg-font-body-size-md);
+  --typography-body-md-lh:           var(--lifesg-font-body-lh-md);
+  --typography-body-md-ls:           var(--lifesg-font-body-ls-md);
+  --typography-body-sm-size:         var(--lifesg-font-body-size-sm);
+  --typography-body-sm-lh:           var(--lifesg-font-body-lh-sm);
+  --typography-body-sm-ls:           var(--lifesg-font-body-ls-sm);
+  --typography-body-xs-size:         var(--lifesg-font-body-size-xs);
+  --typography-body-xs-lh:           var(--lifesg-font-body-lh-xs);
+  --typography-body-xs-ls:           var(--lifesg-font-body-ls-xs);
+}
+
+/* ═══════════ divider ═══════════ */
+/* Layer 3 — Component tokens for Divider.
+ *
+ * Divider here is *layout-agnostic*. Unlike LifeSG's Divider — which extends
+ * ColProps and accepts xxsCols/xsCols/.../desktopCols + layoutType="flex|grid"
+ * — ours is just a styled <hr>. Span responsive columns by placing the
+ * <Divider> inside a grid cell and using Tailwind grid utilities. Rationale
+ * lives in working-logs/pilot-findings.md.
+ */
+
+:root {
+  --divider-thickness:      var(--lifesg-border-width-010);
+  --divider-color:          var(--lifesg-border);
+  --divider-style:          var(--lifesg-border-solid);
+}
+
+/* ═══════════ icon ═══════════ */
+/* Layer 3 — Component tokens for Icon. */
+
+:root {
+  --icon-color-default:    var(--lifesg-icon);
+  --icon-color-subtle:     var(--lifesg-icon-subtle);
+  --icon-color-strong:     var(--lifesg-icon-strongest);
+  --icon-color-primary:    var(--lifesg-icon-primary);
+  --icon-color-success:    var(--lifesg-icon-success);
+  --icon-color-warning:    var(--lifesg-icon-warning);
+  --icon-color-error:      var(--lifesg-icon-error);
+  --icon-color-info:       var(--lifesg-icon-info);
+  --icon-color-inverse:    var(--lifesg-icon-inverse);
+}
+
+/* ═══════════ markup ═══════════ */
+/* Layer 3 — Component tokens for Markup.
+ *
+ * Markup styles arbitrary CMS HTML using the design-system body text. It
+ * deliberately flattens visual hierarchy: <h1>..<h6> render at the base body
+ * size, block-level elements have no inter-block spacing, and only inline
+ * semantics (<strong>, <em>, <a>, <code>) get styled. This matches LifeSG's
+ * <Markup> behaviour — see /core/markup/introduction for the reasoning. The
+ * baseline + colour come from --_markup-* private vars set by the React
+ * component from props.
+ *
+ * If a consumer wants heading visual hierarchy, they should compose
+ * <Typography variant="heading-..."> at the call site, not inside Markup.
+ */
+
+.markup-root {
+  font-family:     var(--typography-font-family);
+  font-size:       var(--_markup-text-size,  inherit);
+  line-height:     var(--_markup-text-lh,    inherit);
+  letter-spacing:  var(--_markup-text-ls,    inherit);
+  color:           var(--_markup-text-color, inherit);
+}
+
+.markup-root h1,
+.markup-root h2,
+.markup-root h3,
+.markup-root h4,
+.markup-root h5,
+.markup-root h6,
+.markup-root p,
+.markup-root ul,
+.markup-root ol {
+  font-size:       inherit;
+  line-height:     inherit;
+  font-weight:     var(--typography-weight-regular);
+  margin:          0;
+}
+
+.markup-root ul,
+.markup-root ol {
+  padding-inline-start: 2.5rem;
+}
+.markup-root ul { list-style: disc; }
+.markup-root ol { list-style: decimal; }
+
+.markup-root a {
+  color:           var(--lifesg-hyperlink);
+  font-weight:     var(--typography-weight-semibold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.markup-root a:hover { color: var(--lifesg-hyperlink-hover); }
+.markup-root a:visited { color: var(--lifesg-hyperlink-visited); }
+
+.markup-root strong { font-weight: var(--typography-weight-semibold); }
+.markup-root em { font-style: italic; }
+
+.markup-root code {
+  font-family:     var(--font-mono, ui-monospace, monospace);
+  /* size + colour inherit from root — same as LifeSG */
+}
+
+/* ═══════════ layout ═══════════ */
+/* Layer 3 — Component tokens for Layout (Container, Section, Content, ColDiv).
+ *
+ * LifeSG's grid contract is "8 columns up to md, 12 columns at lg+, with
+ * paired gutter/margin values per breakpoint". We mirror it at this layer so
+ * that a migration from LifeSG's `<Layout.Container>` / `<Layout.ColDiv>` is
+ * mechanical at the call site. Rationale lives in working-logs/pilot-findings.md.
+ *
+ * Breakpoint values are duplicated from --lifesg-breakpoint-*-min. CSS variables
+ * cannot be used inside @media query conditions, so the literals are unavoidable.
+ * If LifeSG's breakpoint scale moves, update both this file and lifesg-tokens.css.
+ */
+
+:root {
+  /* Container max-width and outer margin (LifeSG: --layout-margin per breakpoint). */
+  --layout-container-max:   1440px;
+  --layout-container-pad:   24px;
+
+  /* Grid column count and gutter (LifeSG: 8/16 below md, 12/32 at lg+). */
+  --layout-grid-columns:    8;
+  --layout-grid-gutter:     16px;
+}
+
+/* xxs–md identical to defaults above. Bump at lg-min (769px). */
+@media (min-width: 769px) {
+  :root {
+    --layout-container-pad: 48px;
+    --layout-grid-columns:  12;
+    --layout-grid-gutter:   32px;
+  }
+}
+
+/* ColDiv responsive column-span cascade.
+ *
+ * Each prop sets its own custom property; later media queries fall back to
+ * the next-smallest defined breakpoint via nested var() defaults. Mirrors
+ * LifeSG's mobile-first overrides. */
+[data-slot="layout-coldiv"] {
+  grid-column: var(--coldiv-xxs, 1 / -1);
+}
+@media (min-width: 321px) {
+  [data-slot="layout-coldiv"] {
+    grid-column: var(--coldiv-xs, var(--coldiv-xxs, 1 / -1));
+  }
+}
+@media (min-width: 376px) {
+  [data-slot="layout-coldiv"] {
+    grid-column: var(--coldiv-sm, var(--coldiv-xs, var(--coldiv-xxs, 1 / -1)));
+  }
+}
+@media (min-width: 481px) {
+  [data-slot="layout-coldiv"] {
+    grid-column: var(--coldiv-md, var(--coldiv-sm, var(--coldiv-xs, var(--coldiv-xxs, 1 / -1))));
+  }
+}
+@media (min-width: 769px) {
+  [data-slot="layout-coldiv"] {
+    grid-column: var(--coldiv-lg, var(--coldiv-md, var(--coldiv-sm, var(--coldiv-xs, var(--coldiv-xxs, 1 / -1)))));
+  }
+}
+@media (min-width: 1201px) {
+  [data-slot="layout-coldiv"] {
+    grid-column: var(--coldiv-xl, var(--coldiv-lg, var(--coldiv-md, var(--coldiv-sm, var(--coldiv-xs, var(--coldiv-xxs, 1 / -1))))));
+  }
+}
+@media (min-width: 1441px) {
+  [data-slot="layout-coldiv"] {
+    grid-column: var(--coldiv-xxl, var(--coldiv-xl, var(--coldiv-lg, var(--coldiv-md, var(--coldiv-sm, var(--coldiv-xs, var(--coldiv-xxs, 1 / -1)))))));
+  }
+}
+
+/* ═══════════ error-display ═══════════ */
+/* Layer 3 — Component tokens for ErrorDisplay.
+ *
+ * Visual contract mirrors LifeSG: centered column with an illustration on top,
+ * heading, body text, then a button row. Padding follows LifeSG's layout tokens
+ * so the dialog/panel rhythm aligns when ErrorDisplay is dropped into a Section.
+ *
+ * Illustration divergence note (working-logs/pilot-findings.md): LifeSG ships
+ * brand-specific PNGs from assets.life.gov.sg. We render Lucide icons by default
+ * — they're a stand-in until the agency's illustration set lands. Consumers
+ * override via the `img` prop just like LifeSG.
+ */
+
+:root {
+  /* Gap between illustration / title / description / button. LifeSG uses
+   * sequential `margin-top: spacing-16` (16px); we collapse to a flex gap. */
+  --error-display-gap:           var(--lifesg-spacing-16);
+  /* LifeSG's section has no outer padding — surrounding layout owns it. */
+  --error-display-pad-y:         0px;
+  --error-display-illus-size:    160px;
+  --error-display-title-color:   var(--lifesg-text);
+  --error-display-desc-color:    var(--lifesg-text-subtle);
+  --error-display-max-width:     32rem; /* 512px — matches LifeSG's text column */
+
+  /* Per-tone disc colours. Soft tinted bg + strong fg per LifeSG semantic token. */
+  --error-display-tone-default-bg:  var(--lifesg-bg-strong);
+  --error-display-tone-default-fg:  var(--lifesg-icon-strongest);
+  --error-display-tone-strong-bg:   var(--lifesg-bg-strong);
+  --error-display-tone-strong-fg:   var(--lifesg-icon-strongest);
+  --error-display-tone-error-bg:    var(--lifesg-bg-error);
+  --error-display-tone-error-fg:    var(--lifesg-icon-error-strong);
+  --error-display-tone-warning-bg:  var(--lifesg-bg-warning);
+  --error-display-tone-warning-fg:  var(--lifesg-bg-warning-strong);
+  --error-display-tone-success-bg:  var(--lifesg-bg-success);
+  --error-display-tone-success-fg:  var(--lifesg-bg-success-strong);
+  --error-display-tone-info-bg:     var(--lifesg-bg-info);
+  --error-display-tone-info-fg:     var(--lifesg-bg-info-strong);
+}
+

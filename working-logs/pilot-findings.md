@@ -459,3 +459,139 @@ Worth listing in one place so the next batch knows what's load-bearing for "prod
 - `src/app/selection-and-input/[...slug]/page.tsx` + `layout.tsx`, `src/components/selection-and-input/registry.tsx`, `src/components/selection-and-input/sections/prose.tsx` + 11 default sections.
 - New runtime dependencies in `package.json`: `react-day-picker@10`, `date-fns@4`.
 - Linked from the home page (`src/app/page.tsx`).
+
+## 2026-05-12 — Port LifeSG Form (CustomField, Input, Textarea, MaskedInput, InputGroup, PhoneNumberInput, UnitNumberInput, DateInput, DateRangeInput, Select, MultiSelect, Label) + L3 token consolidation
+
+### Scope
+
+12 of ~25 entries from LifeSG's Storybook **Form** taxonomy ported in one batch:
+
+- **Field foundation (2)**: Field (Base UI-backed wrapper), Label (standalone).
+- **Pre-composed wrapper (1)**: CustomField (= our `FormField`, the props-driven shape that maps 1:1 to LifeSG's `Form.CustomField`).
+- **Text inputs (4)**: Input, Textarea, MaskedInput, InputGroup.
+- **Specialty inputs (2)**: PhoneNumberInput, UnitNumberInput.
+- **Date pair (2)**: DateInput, DateRangeInput.
+- **Dropdowns (2)**: Select, MultiSelect.
+
+Plus a one-off structural refactor: 35 per-component `*-tokens.css` files consolidated into 6 per-folder bundles.
+
+Excluded from this batch (deferred to follow-up): E-Signature, HistogramSlider, NestedMultiSelect, NestedSelect, OtpVerification, PredictiveTextInput, RangeSelect, RangeSlider, SelectHistogram, Slider, TimeRangePicker, Timepicker.
+
+### The architectural call: Hybrid Field + thin Form.X
+
+**This batch's premise.** LifeSG ships every form component pre-composed: `<Form.Input label="..." errorMessage="...">` is one component baking in label + error display + a 12-column responsive grid. The raw `<Input>` exists but is rarely used directly. shadcn ships the opposite shape: tiny inputs you compose into a Field shell yourself.
+
+We picked **hybrid** — both shapes ship:
+
+1. **Headless `<Field>`** — Base UI-backed (`@base-ui/react/field`). Owns label/error wiring, `htmlFor`/`aria-describedby`, validity state, disabled propagation. Exposes `Field`, `FieldLabel`, `FieldDescription`, `FieldError`, `FieldControl`, `FieldValidity`.
+2. **Thin `Form.X` convenience wrappers** — one-line composition over Field for the common shape. `<FormInput label="..." errorMessage="..." />` is `<Field><FieldLabel/><Input/><FieldError/></Field>`. Available on every input component (`FormInput`, `FormTextarea`, `FormSelect`, etc.). The migration target — call sites match LifeSG's JSX shape character-for-character minus the `Form.` namespace prefix.
+
+**Why hybrid, not just one or the other.** Two audiences exist with different needs. Engineers porting a LifeSG screen want the one-line `Form.X` shape — anything more verbose looks like make-work. Engineers building new screens want the headless composition — they need the flexibility to interleave conditional `FieldDescription`s, custom layouts, validity-bound visibility, etc. The thin-wrapper layer is so small (~10 lines per Form.X file) that the maintenance cost is dominated by the underlying Input itself.
+
+**What the headless Field gives us for free.** Base UI's Field handles: auto-generated `id` + `htmlFor` wiring across Label/Input/Description; `aria-describedby` chaining; native validity-state plumbing (`validationMode="onSubmit|onBlur|onChange"`); `disabled` propagation through Field context to children. Everything our Form.X wrappers expose props-wise is just "where in the Field do these slot in".
+
+**What the headless Field deliberately drops** vs LifeSG's FormWrapper:
+
+- **Responsive grid columns** (`xxsCols` / .../ `xxlCols` + `layoutType="grid"`). Layout responsibility moves to our existing `<Layout.ColDiv>`. Field is just "what goes inside one cell"; placing it across the grid is the page's job.
+- **Built-in `subtitle`** on Label. Compose with `<FieldDescription>` instead.
+- **Label addons** (tooltip / popover icon adjacent to the label text). Niche flourish; compose with `<Tooltip>` if needed.
+
+### L3 token-file consolidation (35 → 7)
+
+This batch added 12 new components, which would have brought the per-component token-file count from 30 to 42. The previous Selection-and-Input findings flagged this as overdue. We addressed it now rather than punting again.
+
+**The change.** Consolidated by taxonomy folder — same content, fewer files, fewer `@import` lines in `globals.css`:
+
+| Before                                                                  | After                                  |
+| ----------------------------------------------------------------------- | -------------------------------------- |
+| `core/typography-, divider-, icon-, markup-, layout-, error-display-`   | `core-tokens.css`                      |
+| 8 `content/*` files                                                     | `content-tokens.css`                   |
+| `modal-tokens.css`                                                      | `overlays-tokens.css`                  |
+| 9 `navigation/*` files                                                  | `navigation-tokens.css`                |
+| 11 `selection-and-input/*` files (incl. button)                          | `selection-and-input-tokens.css`       |
+| (new) 12 `form/*` files                                                  | `form-tokens.css`                      |
+| **35 files**                                                             | **6 bundles + foundations** (7 total)  |
+
+**Mechanics.** Pure rename. No content changes — `cat`'d in folder order with section-divider comments between components. `globals.css` import block dropped from 35 lines to 7. Every existing page still serves 200 (5-page smoke check).
+
+**Cost.** When editing one component's tokens, you now scroll through a longer file. Mitigated by the divider comments (`/* ═══ component-name ═══ */`) — file search still jumps to the right block.
+
+**Worth the trouble?** Yes — we'd have hit 42 files this batch. Anything past ~30 starts to drag on `globals.css` review and search. The taxonomy-bundle granularity matches the page route structure, so finding tokens follows the same mental model as finding components.
+
+### Component-level findings, briefest form
+
+**CustomField — wasn't a separate component.** LifeSG's `Form.CustomField` is the field-wrapper-with-no-baked-in-input. In our world, `<FormField>` (the convenience wrapper) IS that component — every other `Form.X` (`FormInput`, `FormSelect`, etc.) is built on top of it. So CustomField is documented as a folder with introduction + comparison page, but ships zero new code beyond `FormField` itself.
+
+**Input — `@base-ui/react/input` carried it.** Field-context awareness (auto-id, validity-state propagation) flows through automatically when the input is inside a Field. `allowClear` + `onClear` add an X-button overlay; everything else is class strings on `inputCx`. Defer LifeSG's `spacing` (tel-only digit-spacing) and `styleType="no-border"` — the former is exotic, the latter is `className="border-0"`.
+
+**Textarea — no Base UI primitive.** Just a styled `<textarea>` with the same input tokens. `showCounter` + `maxLength` renders the live `n / max` counter natively. `transformValue` and `renderCustomCounter` from LifeSG deferred — composable at call sites.
+
+**MaskedInput — eye-toggle on top of Input.** Mask logic supports `maskRange` (chars in [a, b) hidden), `unmaskRange` (only chars in [a, b) shown), `maskRegex` (chars matching are hidden), or full mask (default). When masked, the input is `readOnly` so typing is blocked until unmask. `loadState` / `onTryAgain` deferred — the loading-then-revealed pattern needs a real consumer to design against.
+
+**InputGroup — composition, not addon prop.** LifeSG's `<InputGroup addon={{ type: "label", attributes: {value: "$"} }}>` becomes our `<InputGroup><InputGroupAddon>$</InputGroupAddon><InputGroupInput/></InputGroup>`. More verbose, but supports multiple addons (left + right), accepts any JSX, and the input slot can be anything that looks like an input. The `list` addon (dropdown-on-the-side variant) deferred — compose with our `<Select>` if needed.
+
+**PhoneNumberInput — country dropdown via `@base-ui/react/popover`.** Composite `value: { countryCode, number }` matching LifeSG exactly. Country list is a **pilot-only minimal set of ~20 SE Asian + common entries**, exposed via `countries` prop for override; production should source from `libphonenumber-js`. No country flags (Lucide doesn't ship them, we haven't bundled flag SVGs). No search inside the dropdown — defer until the country list grows past ~30.
+
+**UnitNumberInput — two inputs, dual onChange.** Floor + unit, separated by a visual `-`. Output is the formatted string (`"12-345"`) AND `onChangeRaw([floor, unit])` fires in parallel. No auto-advance from floor to unit (LifeSG also doesn't — the dash is purely decorative). Pure string output keeps timezone-style gotchas off the table.
+
+**DateInput — Calendar + Popover.** Reuses our existing `<Calendar>` from the Selection-and-Input batch inside a Base UI Popover. Trigger looks like an Input, displays the date as `D MMM YYYY`, value flows in `YYYY-MM-DD` to match LifeSG. `withButton` mode buffers the selection in pending state and only commits on Done click.
+
+**DateRangeInput — `react-day-picker` mode="range" directly.** Not built on our Calendar (which is single/multi only). Trigger shows `start → end` with an arrow. Range middle styled with the calendar hover token. `variant="fixed-range"` + `numberOfDays` deferred until a real consumer needs fixed-length ranges.
+
+**Select / MultiSelect — same primitive, different `multiple` prop.** Both built on `@base-ui/react/select`. Select uses single mode with a check icon indicator; MultiSelect uses `multiple={true}` with custom checkbox-styled indicators (border + filled square + check). Generic `<T, V>` option shapes via `valueExtractor` / `listExtractor` — defaults assume `{ value, label }` shape. **Search deferred for both** — Base UI Select doesn't ship a built-in search input; for searchable selects, swap to `@base-ui/react/combobox` later. `optionsLoadState` / `onRetry` / `dropdownZIndex` / `customLabels` etc. all deferred.
+
+### Surprises worth flagging
+
+- **LifeSG's package layout still doesn't match Storybook taxonomy.** `Input` lives in `input/`, `Form.Input` in `form/`, `MultiSelect` in `input-multi-select/`, `Select` in `input-select/`, `Textarea` in `input-textarea/`. Reading the Storybook sidebar before scoping (per the Selection-and-Input findings) saved us from listing the wrong components again — but mapping the imports across two namespaces (`@lifesg/.../form` vs `@lifesg/.../<component>`) for the comparison panes added small friction.
+- **`Form.X` and `<X>` aren't quite the same component.** LifeSG's `Form.Select` is a wrapper around the raw `InputSelect`; the props are mostly the same but a few (`label`, `errorMessage`, the responsive cols) only exist on the Form-wrapped version. Comparison pages had to import from `@lifesg/.../form` for the Form.X variant and from `@lifesg/.../input-select` for the raw variant. Worth keeping in mind when writing migration codemods.
+- **Base UI Select supports `multiple` natively.** Initially considered using `@base-ui/react/combobox` for MultiSelect (since it has chips + multi-select built in), then realized Select with `multiple={true}` was simpler and matched LifeSG's "click-trigger, popup-with-checkboxes" shape better. Combobox's input-as-trigger is the wrong visual for non-search multi-select.
+- **Base UI Field gives us `disabled` propagation for free.** Set `disabled` on the Field root and every child (label, description, input, error) gets the dimmed treatment via `data-[disabled]` attribute. Saved us writing per-component disabled forwarding.
+- **`react-day-picker` range mode requires its own classNames map.** Couldn't reuse our Calendar's `dayPickerClassNames` directly because range-specific keys (`range_start`, `range_end`, `range_middle`) only exist for range mode. Inlined a separate map in `date-range-input.tsx` — small duplication, but cleaner than parameterizing Calendar to expose its internal map.
+- **Token consolidation didn't break anything.** Surprise in the boring sense — the `cat`-and-rename pass shipped without a single visual regression (verified by 5-page smoke check + manual spot checks). CSS `@import` order matters for cascade, and we preserved the original order within bundles. If we'd reordered, some `:root` redefinitions could have flipped.
+- **Bash `rm` was aliased to `rm -i`.** First attempt to delete the 35 originals silently no-op'd because the prompts had no stdin. Caught it on the next `ls`, redid with `\rm -f`. Worth knowing for future bulk deletes — the alias-bypass `\rm` is the safe form.
+
+### Deliberate divergences
+
+| Component         | Divergence                                                                                       | Reason                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Field             | Drops `subtitle` baked into Label; use `FieldDescription` instead                                | Composition over multi-purpose props                                                         |
+| Field             | No responsive grid columns built in                                                              | Layout belongs to `<Layout.ColDiv>`, not every form field                                    |
+| Input             | Drops `spacing` (tel-only digit-spacing) and `styleType="no-border"`                              | Use Tailwind `letter-spacing` / `border-0` if needed                                         |
+| Textarea          | Drops `transformValue`, `renderCustomCounter`, `prefix`                                          | Compose at call site or use `InputGroup`                                                     |
+| MaskedInput       | Drops `loadState` + `onTryAgain` (loading state for readOnly mode with retry)                    | Niche; needs real consumer to design against                                                 |
+| MaskedInput       | Drops `transformInput` (uppercase/lowercase) and `maskTransformer`                                | Apply in `onChange`                                                                          |
+| InputGroup        | Composition primitives instead of nested `addon` prop                                            | Multiple addons, any JSX, simpler API                                                        |
+| InputGroup        | Drops list-addon variant (dropdown-on-the-side)                                                  | Compose with our `Select` when needed                                                        |
+| PhoneNumberInput  | Pilot-only ~20-country list; no flags; no search                                                 | Production should use `libphonenumber-js`                                                    |
+| UnitNumberInput   | No auto-advance from floor to unit                                                               | Matches LifeSG behaviour (the dash is decorative)                                            |
+| DateInput         | Drops `hideInputKeyboard`, `dropdownRootNode`, `zIndex`, `onYearMonthDisplayChange`              | Surface when a real consumer needs them                                                      |
+| DateRangeInput    | Drops `variant="fixed-range"` + `numberOfDays`; same defers as DateInput                         | Real consumer needed                                                                         |
+| Select            | Drops `enableSearch`, `renderListItem`, `renderCustomSelectedOption`, `optionsLoadState`, etc.   | Searchable variant → swap to `@base-ui/react/combobox` later                                  |
+| MultiSelect       | Same as Select, plus `hideNoResultsDisplay` / `noResultsDescription` (only meaningful with search) | Coupled to search deferral                                                                   |
+
+### Findings
+
+1. **The hybrid Form.X-on-Field decision earned its keep immediately.** Every component shipped with both shapes from day one. The thin convenience wrappers added ~10 lines each and zero ongoing maintenance — they'll always reflect changes to Field or to the underlying input. The headless Field shape is what we'd reach for in the unit tests we'll write next batch.
+2. **Token consolidation should happen at folder boundaries, not on a global cadence.** We tried "consolidate when N is too high"; a better trigger is "when adding a new folder of components, consolidate the existing one in passing." Ports to a new taxonomy folder almost always touch `globals.css` anyway — adding the rename to the same diff is cheap and avoids a separate refactor PR.
+3. **`<Field>` (Base UI) is the load-bearing primitive of this batch.** Six of twelve components delegate label/error/disabled wiring to it. Without it, every Form.X wrapper would need to hand-roll `htmlFor` propagation, validity state plumbing, and `aria-describedby` chains. The wrapper-of-a-primitive pattern that's been working since Button continues to dominate the cost-of-ownership math vs LifeSG-as-dep.
+4. **Pre-composed shapes are still the better migration target.** When we re-read this batch's comparison pages, the LifeSG pane (one-line `<Form.Input label=... />`) is consistently shorter and easier to scan than our Field-headless equivalent. The hybrid approach lets the JSX shape survive the migration even though the underlying composition flips inside-out. **The lesson for future batches: ship the migration target alongside the headless primitive, not just the primitive.**
+5. **Defer search aggressively.** `enableSearch` on Select / MultiSelect / PhoneNumberInput / InputGroup-list-addon all touch the same primitive (Combobox vs Select). Doing one well + adding search later when needed beats doing four mediocre searches now. The next time a search-on-dropdown requirement surfaces, the right move is Combobox-as-substrate for that specific component, not a global refactor.
+
+### Things still to verify
+
+- **Click-through behaviour.** Pages render and 200; we haven't manually click-tested every dropdown / popover with a browser. Worth a Playwright sweep before any of these ship to a real screen — Select keyboard nav, MultiSelect cap enforcement, DateInput `withButton` Cancel/Done flow, PhoneNumberInput country selection-and-close, MaskedInput eye-toggle while focused.
+- **Form-submission integration.** None of the components have been exercised in a real `<form>` with submit handler + native validation. `<Field>`'s `validate` callback and `validationMode` props haven't been touched. The next batch (or first real screen) will surface whether the Base UI Field validity plumbing actually wires up to native form submission the way we want.
+- **MultiSelect summary truncation.** The "N selected" trigger summary works but doesn't yet show the comma-joined labels (only count when >1). LifeSG truncates with ellipsis when labels overflow. Add `formatSummary` is exposed for users to override; default may need refinement after dogfooding.
+- **DateRangeInput same-day click.** When the user clicks one day, then clicks the same day again, behaviour is `react-day-picker`'s default (deselects). Match against LifeSG before any consumer use.
+- **PhoneNumberInput country list.** 20 entries is enough for a SG-focused agency to demo with, but the production list will need to be wired via the `countries` prop with a proper data source. Document the swap point in the migration guide.
+- **Calendar dark mode interaction.** `<Calendar>` references `--calendar-*` tokens that may not have a `.dark` re-bind. The dark-mode-no-op issue documented in the Content/Overlays/Navigation batch is still open — DateInput inherits it.
+- **L3 token consolidation in `core-tokens.css`.** Adding a new core component now means picking the right slot in the bundled file. Mostly intuitive (alphabetical-ish by component) but no enforced order — could drift over time. Worth a brief style note in the docs.
+- **Field `name` propagation to Form.X children.** `<FormField name="foo">` sets the Field-root name, but our wrapped inputs (Input, Select, etc.) also accept `name` directly. When both are set, behaviour is component-specific. Worth a Field-level decision: should the Field root's `name` always win, or should we drop the duplicate?
+
+### Artifacts
+
+- **15 new component files** in `src/components/ui/`: `field.tsx`, `label.tsx`, `form-field.tsx`, `input.tsx`, `textarea.tsx`, `masked-input.tsx`, `input-group.tsx`, `phone-number-input.tsx`, `unit-number-input.tsx`, `date-input.tsx`, `date-range-input.tsx`, `select.tsx`, `multi-select.tsx`. Each input file co-locates its `Form.X` convenience wrapper.
+- **12 new L3 token blocks** in `src/app/form-tokens.css` (single bundle file).
+- **Token consolidation**: 35 `*-tokens.css` files merged into 6 per-folder bundles (`core-`, `content-`, `overlays-`, `navigation-`, `selection-and-input-`, `form-tokens.css`). `globals.css` `@import` block: 35 lines → 7.
+- `src/app/form/[...slug]/page.tsx` + `layout.tsx`, `src/components/form/registry.tsx`, `src/components/form/sections/prose.tsx` + 11 default sections.
+- Linked from the home page (`src/app/page.tsx`).
