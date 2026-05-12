@@ -1,12 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { Popover } from "@base-ui/react/popover";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { format, parse } from "date-fns";
 
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 export interface DateInputProps {
@@ -65,14 +65,14 @@ function DateInput({
   };
 
   return (
-    <Popover.Root
+    <Popover
       open={open}
       onOpenChange={(o) => {
         if (disabled || readOnly) return;
         setOpen(o);
       }}
     >
-      <Popover.Trigger
+      <PopoverTrigger
         render={(triggerProps) => (
           <button
             type="button"
@@ -97,45 +97,41 @@ function DateInput({
         )}
       />
       {name ? <input type="hidden" name={name} value={value ?? ""} /> : null}
-      <Popover.Portal>
-        <Popover.Positioner sideOffset={4}>
-          <Popover.Popup className="z-50 rounded-md border border-border bg-popover shadow-lg">
-            <Calendar
-              value={withButton ? pending : value}
-              onChange={(v) => {
-                if (withButton) setPending(v);
-                else apply(v);
+      <PopoverContent>
+        <Calendar
+          value={withButton ? pending : value}
+          onChange={(v) => {
+            if (withButton) setPending(v);
+            else apply(v);
+          }}
+          minDate={minDate}
+          maxDate={maxDate}
+          disabledDates={disabledDates}
+          styleType="no-border"
+        />
+        {withButton ? (
+          <div className="flex justify-end gap-2 border-t border-border p-2">
+            <button
+              type="button"
+              onClick={() => {
+                setPending(value);
+                setOpen(false);
               }}
-              minDate={minDate}
-              maxDate={maxDate}
-              disabledDates={disabledDates}
-              styleType="no-border"
-            />
-            {withButton ? (
-              <div className="flex justify-end gap-2 border-t border-border p-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPending(value);
-                    setOpen(false);
-                  }}
-                  className="px-3 py-1.5 text-sm rounded hover:bg-[var(--lifesg-bg-hover)]"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={() => apply(pending ?? "")}
-                  className="px-3 py-1.5 text-sm font-semibold rounded bg-[var(--lifesg-bg-primary)] text-[var(--lifesg-text-inverse)] hover:bg-[var(--lifesg-bg-primary-hover)]"
-                >
-                  Done
-                </button>
-              </div>
-            ) : null}
-          </Popover.Popup>
-        </Popover.Positioner>
-      </Popover.Portal>
-    </Popover.Root>
+              className="px-3 py-1.5 text-sm rounded hover:bg-[var(--lifesg-bg-hover)]"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => apply(pending ?? "")}
+              className="px-3 py-1.5 text-sm font-semibold rounded bg-[var(--lifesg-bg-primary)] text-[var(--lifesg-text-inverse)] hover:bg-[var(--lifesg-bg-primary-hover)]"
+            >
+              Done
+            </button>
+          </div>
+        ) : null}
+      </PopoverContent>
+    </Popover>
   );
 }
 

@@ -1,10 +1,18 @@
 "use client";
 
 import * as React from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Masthead } from "@/components/ui/masthead";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerBody,
+  DrawerFooter,
+} from "@/components/ui/drawer";
 
 export interface NavbarItem {
   id: string;
@@ -110,63 +118,56 @@ function Navbar({
           </div>
         )}
 
-        <button
-          type="button"
-          aria-label="Open menu"
-          aria-expanded={drawerOpen}
-          onClick={() => setDrawerOpen(true)}
-          className="md:hidden ml-auto size-10 inline-flex items-center justify-center rounded text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)]"
-        >
-          <Menu size={22} />
-        </button>
-      </div>
-
-      {drawerOpen && (
-        <div className="md:hidden fixed inset-0 z-50 flex">
-          <div
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setDrawerOpen(false)}
-            aria-hidden="true"
-          />
-          <aside className="relative ml-auto w-80 max-w-full h-full bg-[var(--navbar-bg)] flex flex-col">
-            <header className="h-16 px-4 flex items-center justify-between border-b border-[var(--navbar-border)]">
-              <span className="font-semibold text-[var(--navbar-text)]">{brand.brandName}</span>
-              <button
-                type="button"
-                aria-label="Close menu"
-                onClick={() => setDrawerOpen(false)}
-                className="size-10 inline-flex items-center justify-center rounded hover:bg-[var(--navbar-bg-hover)]"
-              >
-                <X size={20} />
-              </button>
-            </header>
-            <nav aria-label="Primary mobile" className="flex-1 overflow-y-auto py-2">
-              {items.map((item) => {
-                const selected = item.id === selectedId;
-                return (
-                  <a
-                    key={item.id}
-                    href={item.href ?? "#"}
-                    onClick={(e) => { item.onClick?.(e); setDrawerOpen(false); }}
-                    aria-current={selected ? "page" : undefined}
-                    className={cn(
-                      "block px-4 h-12 leading-[3rem] text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)]",
-                      selected && "bg-[var(--lifesg-bg-selected)] font-semibold"
-                    )}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
-            </nav>
+        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={drawerOpen}
+            onClick={() => setDrawerOpen(true)}
+            className="md:hidden ml-auto size-10 inline-flex items-center justify-center rounded text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)]"
+          >
+            <Menu size={22} />
+          </button>
+          <DrawerContent side="right" className="md:hidden bg-[var(--navbar-bg)]">
+            <DrawerHeader>
+              <DrawerTitle className="font-semibold text-[var(--navbar-text)]">
+                {brand.brandName}
+              </DrawerTitle>
+            </DrawerHeader>
+            <DrawerBody>
+              <nav aria-label="Primary mobile" className="py-2">
+                {items.map((item) => {
+                  const selected = item.id === selectedId;
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.href ?? "#"}
+                      onClick={(e) => {
+                        item.onClick?.(e);
+                        setDrawerOpen(false);
+                      }}
+                      aria-current={selected ? "page" : undefined}
+                      className={cn(
+                        "block px-4 h-12 leading-[3rem] text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)]",
+                        selected && "bg-[var(--lifesg-bg-selected)] font-semibold"
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
+              </nav>
+            </DrawerBody>
             {actions.length > 0 && (
-              <div className="border-t border-[var(--navbar-border)] p-4 flex flex-col gap-2">
-                {actions.map((a) => <ActionButton key={a.id} action={a} />)}
-              </div>
+              <DrawerFooter>
+                {actions.map((a) => (
+                  <ActionButton key={a.id} action={a} />
+                ))}
+              </DrawerFooter>
             )}
-          </aside>
-        </div>
-      )}
+          </DrawerContent>
+        </Drawer>
+      </div>
     </div>
   );
 }

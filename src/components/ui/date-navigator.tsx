@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Popover } from "@base-ui/react/popover";
 import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
 export interface DateNavigatorProps {
@@ -114,29 +114,25 @@ function DateNavigator({
       </button>
 
       {onCalendarDateSelect ? (
-        <Popover.Root>
-          <Popover.Trigger
+        <Popover>
+          <PopoverTrigger
             className="inline-flex items-center gap-2 px-3 h-10 rounded-md text-sm font-semibold hover:bg-[var(--date-navigator-bg-hover)] cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-[var(--date-navigator-ring-focus)]"
             disabled={loading}
           >
             <CalendarDays className="size-4" aria-hidden="true" />
             <span className="min-w-[12rem] text-center">{display}</span>
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Positioner sideOffset={6} align="center">
-              <Popover.Popup className="rounded-md border border-[var(--date-navigator-border)] bg-[var(--lifesg-bg)] shadow-lg outline-none">
-                <Calendar
-                  variant="single"
-                  styleType="no-border"
-                  value={selectedDate}
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  onChange={(v) => v && onCalendarDateSelect(v)}
-                />
-              </Popover.Popup>
-            </Popover.Positioner>
-          </Popover.Portal>
-        </Popover.Root>
+          </PopoverTrigger>
+          <PopoverContent sideOffset={6} align="center">
+            <Calendar
+              variant="single"
+              styleType="no-border"
+              value={selectedDate}
+              minDate={minDate}
+              maxDate={maxDate}
+              onChange={(v) => v && onCalendarDateSelect(v)}
+            />
+          </PopoverContent>
+        </Popover>
       ) : (
         <span className="px-3 h-10 inline-flex items-center text-sm font-semibold min-w-[12rem] justify-center">
           {display}

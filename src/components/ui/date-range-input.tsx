@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Popover } from "@base-ui/react/popover";
 import {
   Calendar as CalendarIcon,
   ArrowRight,
@@ -12,6 +11,7 @@ import { format, parse } from "date-fns";
 import { DayPicker, type DateRange, type Matcher } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 export interface DateRangeInputProps {
@@ -119,14 +119,14 @@ function DateRangeInput({
   }, [minDate, maxDate]);
 
   return (
-    <Popover.Root
+    <Popover
       open={open}
       onOpenChange={(o) => {
         if (disabled || readOnly) return;
         setOpen(o);
       }}
     >
-      <Popover.Trigger
+      <PopoverTrigger
         render={(triggerProps) => (
           <button
             type="button"
@@ -160,31 +160,27 @@ function DateRangeInput({
           <input type="hidden" name={`${name}-end`} value={valueEnd ?? ""} />
         </>
       ) : null}
-      <Popover.Portal>
-        <Popover.Positioner sideOffset={4}>
-          <Popover.Popup className="z-50 rounded-md border border-border bg-popover shadow-lg p-3">
-            <DayPicker
-              mode="range"
-              selected={selected}
-              onSelect={(range) => {
-                onChange?.(toIso(range?.from), toIso(range?.to));
-                if (range?.from && range?.to) setOpen(false);
-              }}
-              disabled={disabledDates}
-              classNames={dpClassNames}
-              components={{
-                Chevron: ({ orientation }) =>
-                  orientation === "left" ? (
-                    <ChevronLeft className="size-4" />
-                  ) : (
-                    <ChevronRight className="size-4" />
-                  ),
-              }}
-            />
-          </Popover.Popup>
-        </Popover.Positioner>
-      </Popover.Portal>
-    </Popover.Root>
+      <PopoverContent className="p-3">
+        <DayPicker
+          mode="range"
+          selected={selected}
+          onSelect={(range) => {
+            onChange?.(toIso(range?.from), toIso(range?.to));
+            if (range?.from && range?.to) setOpen(false);
+          }}
+          disabled={disabledDates}
+          classNames={dpClassNames}
+          components={{
+            Chevron: ({ orientation }) =>
+              orientation === "left" ? (
+                <ChevronLeft className="size-4" />
+              ) : (
+                <ChevronRight className="size-4" />
+              ),
+          }}
+        />
+      </PopoverContent>
+    </Popover>
   );
 }
 

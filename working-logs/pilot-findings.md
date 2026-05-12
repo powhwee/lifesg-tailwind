@@ -595,3 +595,87 @@ This batch added 12 new components, which would have brought the per-component t
 - **Token consolidation**: 35 `*-tokens.css` files merged into 6 per-folder bundles (`core-`, `content-`, `overlays-`, `navigation-`, `selection-and-input-`, `form-tokens.css`). `globals.css` `@import` block: 35 lines → 7.
 - `src/app/form/[...slug]/page.tsx` + `layout.tsx`, `src/components/form/registry.tsx`, `src/components/form/sections/prose.tsx` + 11 default sections.
 - Linked from the home page (`src/app/page.tsx`).
+
+## 2026-05-12 — Port LifeSG Overlays follow-up (Popover, Drawer, Menu) + extract-from-inline pattern
+
+### Scope
+
+Three new Overlays components + two intentional-skip introductions, plus refactoring of 5 existing inline consumers to use the new primitives:
+
+- **Popover** &mdash; new wrapper on `@base-ui/react/popover`. **Refactored 4 consumers** that were reaching into the Base UI primitive directly: DateInput, DateRangeInput, PhoneNumberInput, DateNavigator.
+- **Drawer** &mdash; new wrapper on `@base-ui/react/dialog` styled as a side-anchored sheet. **Refactored 1 consumer** that was hand-rolling backdrop + slide panel without focus trap or scroll lock: Navbar mobile menu.
+- **Menu** &mdash; new wrapper on `@base-ui/react/menu`. No existing consumers; built forward-looking for action menus, overflow buttons, formatting toolbars.
+- **Overlay** &mdash; intentional skip. LifeSG's primitive backdrop is encapsulated inside our Modal/Drawer/Popover internally; no consumer pattern needs it standalone.
+- **ModalV2** &mdash; deferred. v1 covers current needs; v2 audit-vs-port decision is non-trivial and no consumer is asking.
+
+The Overlays folder went from **1 component (Modal)** to **6 entries (4 shipped + 2 documented skips)** in one batch.
+
+### The extract-from-inline-usage trigger
+
+This is the second time we've extracted a primitive from existing inline usage (first was the L3-tokens-per-component pattern in the Selection-and-Input batch). The pattern that triggered both:
+
+1. A Base UI primitive gets used inline (copy-paste) in 2-3 places during a component port.
+2. Each inline usage repeats ~10-20 lines of `<Primitive.Portal><Primitive.Positioner><Primitive.Popup className="z-50 rounded-md border ...">`.
+3. After 3+ inline uses, the duplication becomes load-bearing &mdash; if you change the popup chrome (border, shadow, z-index, padding) you have to edit N places.
+4. **The right time to extract is when the third consumer appears, not the first or fifth.** First is YAGNI; fifth means you've shipped 5 visual divergence opportunities.
+
+For Popover this batch: 4 consumers was 1 over the trigger threshold. For Drawer: 1 consumer (Navbar) was below the threshold but the *quality gap* (no focus trap, no scroll lock, no Esc) made the extraction worth it independently.
+
+**For the next batch, watch for the same pattern with Tooltip.** If the next 2-3 components reach for `@base-ui/react/tooltip` directly, that's the extraction trigger.
+
+### Component-level findings
+
+**Popover** &mdash; Base UI's `Popover.Portal` is *required*. There is no "render inline (no portal)" mode in Base UI like LifeSG's `PopoverInline`. We exposed a `container` prop on `PopoverContent` that maps to LifeSG's `rootNode` &mdash; the closest functional equivalent (custom portal target instead of body), but not bit-exact for inline rendering. Documented the divergence in the Introduction page.
+
+The 4-consumer refactor was nearly mechanical: replace `<Popover.Root>` → `<Popover>`, `<Popover.Trigger>` → `<PopoverTrigger>`, and the entire `<Popover.Portal><Popover.Positioner><Popover.Popup className="z-50 rounded-md border bg-popover shadow-lg">` block → `<PopoverContent>`. Each refactor dropped 6-8 lines of duplicated chrome class strings. Visual output identical (verified by 4-page 200 smoke check + spot check that dropdowns still open and dismiss).
+
+**Drawer** &mdash; built on `@base-ui/react/dialog` (the same primitive as Modal). The differences from Modal are entirely positioning + transform-based animation. Four sides supported (`left`, `right`, `top`, `bottom`) with sensible defaults: 320px wide for left/right, 60vh tall for top/bottom, both overridable via L3 tokens.
+
+**Did NOT refactor Sidenav's `DrawerPanel`**, despite the name. Sidenav's "DrawerPanel" is a *persistent side column* &mdash; no overlay, no portal, no focus trap, just a styled `<div>` that conditionally renders next to the main nav. The naming is misleading but the shape doesn't fit the Drawer primitive (which is modal-style). Called out explicitly in the Drawer prose so future engineers don't try to "fix" the inconsistency.
+
+**Menu** &mdash; forward-looking port. No consumers in our DS today. Reuses Popover's L3 tokens (`--popover-bg`, `--popover-border`, `--popover-radius`, `--popover-shadow`) since the popup chrome is identical. Exposes Item / LinkItem / CheckboxItem / RadioItem / Group / GroupLabel / Separator + Submenu primitives. The CheckboxItem and RadioItem use Base UI's indicator components; styled the indicator container ourselves (4×4px box + check / 2×2px dot).
+
+### Surprises worth flagging
+
+- **Base UI Popover requires the Portal sub-component.** Not optional. There's no `inline` mode &mdash; we have to portal somewhere, even if it's to a custom container. LifeSG's `PopoverInline` doesn't have a true equivalent. Spent ~5 minutes implementing `portal={false}` before it threw `Base UI: <Popover.Portal> is missing.` at runtime.
+- **`hideClose` prop on Drawer is too rigid.** The X button on the Drawer is positioned `absolute top-3 right-3` &mdash; works for `side="right"` and `side="bottom"`, looks awkward for `side="left"` (close button on the wrong edge). For now, all four sides put it on the right; consumers needing edge-correct close buttons can pass `hideClose` and add their own `<DrawerClose>` inside the header. Documented.
+- **`--drawer-shadow` direction is hardcoded.** The shadow assumes `side="right"` (shadow extends to the *left* of the panel). For `side="left"` the shadow would visually look better extending to the right; for top/bottom it should be vertical. Not yet generalised &mdash; current shadow looks fine in all four positions but isn't optimal.
+- **`Menu.Item` doesn't accept a generic `value` for read-back.** If you need "which item was chosen" out of an action menu, you wire it via individual `onClick` handlers. RadioItem + RadioGroup is the answer for selection state. Worth flagging for future consumers expecting a Select-like API.
+- **Overlay folder went from 1 → 6 entries with under 800 lines of new code.** The Popover wrapper is ~70 lines, Drawer ~120, Menu ~150. Most of the new file count comes from registry/prose/default-section glue, not the primitive code. **Per-folder cost flattens once the registry pattern is in place.**
+
+### Deliberate divergences
+
+| Component | Divergence | Reason |
+|-----------|------------|--------|
+| Popover   | No true inline (non-portal) mode | Base UI requires Portal; expose `container` prop for custom portal target instead |
+| Popover   | No `trigger="hover"` variant | Hover popovers are tooltips; use `@base-ui/react/tooltip` directly until we port one |
+| Drawer    | No `side`-aware close button positioning | Always top-right; consumers can pass `hideClose` and place their own |
+| Drawer    | Sidenav `DrawerPanel` *not* refactored to use Drawer | Different shape — persistent side column, not modal sheet |
+| Menu      | No `value`-based item selection on `MenuItem` | Use `onClick` per item, or RadioGroup for selection state |
+| Overlay   | Not ported as standalone | Encapsulated inside Modal/Drawer/Popover internally |
+| ModalV2   | Deferred | v1 sufficient for current consumers; audit-vs-port decision needs design input |
+
+### Findings
+
+1. **Extraction-from-inline-usage is a recurring batch shape.** First was tokens (Selection-and-Input batch); now it's primitives (this batch). Both followed the same playbook: spot the duplication during a routine port, extract when N≥3 consumers exist, refactor inline usage in the same diff. Future batches: watch for the same pattern with Tooltip and (less likely) Toast.
+2. **The wrapper-of-a-primitive cost is amortised across consumers, not concentrated.** Popover wrapper is ~70 lines; the 4-consumer refactor *removed* ~24 lines (6 per consumer). Net code count was nearly flat after extraction, but the visual chrome became single-source.
+3. **Naming is load-bearing for "should we refactor".** Sidenav's `DrawerPanel` shares a name with our Drawer but not a shape; refactoring would have been a regression. Always check the *behavioural contract* before refactoring on name match.
+4. **Intentional-skip Introduction pages are a useful pattern.** Both Overlay and ModalV2 ship as URL-resolvable folders with prose explaining the skip. Future engineers reading the Storybook taxonomy don't have to wonder "why isn't this here?" The convention costs ~30 min per skip and prevents "let me port that real quick" thrash.
+5. **Behavioural parity bug surfaced and fixed in passing.** Navbar's mobile drawer was hand-rolled with no focus trap, no scroll lock, no Escape support. After Drawer refactor, all four are free. **The drawer extraction wasn't justified by code-savings alone &mdash; the a11y upgrade for the existing consumer was the real win.**
+
+### Things still to verify
+
+- **Drawer animations.** The `data-[starting-style]` and `data-[ending-style]` Tailwind selectors should drive the slide-in transform, but I haven't verified frame-perfect animation in a browser. Pages 200; visual smoothness is unverified.
+- **Menu submenu support.** `MenuSubmenuTrigger` + `MenuSubmenu` are re-exported from Base UI but not exercised in the Default page. Add a nested-menu example when a real consumer needs it.
+- **Popover `container` prop.** Not exercised by any of the 4 refactored consumers. The escape-hatch exists but is untested in a real "z-index conflict" scenario.
+- **Drawer mobile UX.** Same issue as before &mdash; no touch-device testing. Outside-tap dismissal, swipe-to-close gestures, iOS Safari scroll-locked behaviour are all unverified.
+- **Tooltip.** Not in scope for this batch. Several components use inline Tooltip-like patterns (e.g. small popups on hover for help icons). When 3 inline tooltips appear, that's the next extraction trigger.
+
+### Artifacts
+
+- **3 new component files**: `src/components/ui/{popover,drawer,menu}.tsx` (~340 lines combined).
+- **2 new L3 token blocks** in `src/app/overlays-tokens.css` (popover, drawer; menu reuses popover tokens).
+- **5 inline-consumer refactors**: `src/components/ui/{date-input,date-range-input,phone-number-input,date-navigator}.tsx` (popover refactor) + `src/components/ui/navbar.tsx` (drawer refactor).
+- **6 new Overlays registry entries** (4 with Default, 2 introduction-only): popover, drawer, menu, overlay, modal-v2 + updated overlays/introduction inventory.
+- **3 new Default sections + 5 new prose entries** in `src/components/overlays/sections/`.
+- No new runtime dependencies.

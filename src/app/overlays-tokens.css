@@ -1,5 +1,22 @@
 /* Layer 3 — overlays component tokens (consolidated). */
 
+/* ═══════════ popover ═══════════ */
+:root {
+  --popover-bg:        var(--lifesg-bg);
+  --popover-border:    var(--lifesg-border);
+  --popover-radius:    0.375rem;
+  --popover-shadow:    0 10px 15px -3px color-mix(in srgb, var(--lifesg-neutral-10) 15%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--lifesg-neutral-10) 10%, transparent);
+}
+
+/* ═══════════ drawer ═══════════ */
+:root {
+  --drawer-bg:           var(--lifesg-bg);
+  --drawer-overlay:      color-mix(in srgb, var(--lifesg-neutral-10) 40%, transparent);
+  --drawer-shadow:       -8px 0 24px color-mix(in srgb, var(--lifesg-neutral-10) 12%, transparent);
+  --drawer-width-side:   20rem;   /* 320px for side="left|right" */
+  --drawer-height-side:  60vh;    /* for side="top|bottom" */
+}
+
 /* ═══════════ modal ═══════════ */
 /* Layer 3 — Component tokens for Modal. */
 

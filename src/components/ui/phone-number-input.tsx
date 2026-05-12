@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { Popover } from "@base-ui/react/popover";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 export interface PhoneNumberInputValue {
@@ -82,8 +82,8 @@ function PhoneNumberInput({
         className
       )}
     >
-      <Popover.Root open={open} onOpenChange={setOpen}>
-        <Popover.Trigger
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger
           render={(triggerProps) => (
             <button
               type="button"
@@ -102,36 +102,32 @@ function PhoneNumberInput({
             </button>
           )}
         />
-        <Popover.Portal>
-          <Popover.Positioner sideOffset={4}>
-            <Popover.Popup className="z-50 max-h-72 w-64 overflow-auto rounded-md border border-border bg-popover shadow-lg">
-              <ul role="listbox" className="py-1">
-                {countries.map((c) => (
-                  <li key={c.iso2}>
-                    <button
-                      type="button"
-                      role="option"
-                      aria-selected={c.countryCode === country.countryCode}
-                      onClick={() => {
-                        onChange?.({ ...value, countryCode: c.countryCode });
-                        setOpen(false);
-                      }}
-                      className={cn(
-                        "w-full px-3 py-2 text-left text-sm flex items-center justify-between hover:bg-[var(--lifesg-bg-hover)]",
-                        c.countryCode === country.countryCode &&
-                          "bg-[var(--lifesg-bg-selected)] text-[var(--lifesg-text-selected)]"
-                      )}
-                    >
-                      <span>{c.name}</span>
-                      <span className="text-muted-foreground">{c.countryCode}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </Popover.Popup>
-          </Popover.Positioner>
-        </Popover.Portal>
-      </Popover.Root>
+        <PopoverContent className="max-h-72 w-64 overflow-auto">
+          <ul role="listbox" className="py-1">
+            {countries.map((c) => (
+              <li key={c.iso2}>
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={c.countryCode === country.countryCode}
+                  onClick={() => {
+                    onChange?.({ ...value, countryCode: c.countryCode });
+                    setOpen(false);
+                  }}
+                  className={cn(
+                    "w-full px-3 py-2 text-left text-sm flex items-center justify-between hover:bg-[var(--lifesg-bg-hover)]",
+                    c.countryCode === country.countryCode &&
+                      "bg-[var(--lifesg-bg-selected)] text-[var(--lifesg-text-selected)]"
+                  )}
+                >
+                  <span>{c.name}</span>
+                  <span className="text-muted-foreground">{c.countryCode}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </PopoverContent>
+      </Popover>
       <input
         type="tel"
         inputMode="tel"

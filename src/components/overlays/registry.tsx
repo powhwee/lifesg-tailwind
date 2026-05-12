@@ -1,6 +1,9 @@
 import type { ComponentType } from "react";
 import * as prose from "./sections/prose";
 import * as modalDefault from "./sections/modal-default";
+import * as popoverDefault from "./sections/popover-default";
+import * as drawerDefault from "./sections/drawer-default";
+import * as menuDefault from "./sections/menu-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -34,6 +37,24 @@ export const tree: Node[] = [
   folder("modal", "Modal", [
     leaf("introduction", "Introduction", { Prose: prose.ModalIntro }),
     leaf("default",      "Default",      { Ours: modalDefault.OursPane, LifeSG: modalDefault.LifeSGPane }),
+  ]),
+  folder("popover", "Popover", [
+    leaf("introduction", "Introduction", { Prose: prose.PopoverIntro }),
+    leaf("default",      "Default",      { Ours: popoverDefault.OursPane, LifeSG: popoverDefault.LifeSGPane }),
+  ]),
+  folder("drawer", "Drawer", [
+    leaf("introduction", "Introduction", { Prose: prose.DrawerIntro }),
+    leaf("default",      "Default",      { Ours: drawerDefault.OursPane, LifeSG: drawerDefault.LifeSGPane }),
+  ]),
+  folder("menu", "Menu", [
+    leaf("introduction", "Introduction", { Prose: prose.MenuIntro }),
+    leaf("default",      "Default",      { Ours: menuDefault.OursPane, LifeSG: menuDefault.LifeSGPane }),
+  ]),
+  folder("modal-v2", "ModalV2", [
+    leaf("introduction", "Introduction", { Prose: prose.ModalV2Intro }),
+  ]),
+  folder("overlay", "Overlay", [
+    leaf("introduction", "Introduction", { Prose: prose.OverlayIntro }),
   ]),
 ];
 
