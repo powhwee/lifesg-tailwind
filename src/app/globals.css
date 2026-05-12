@@ -36,6 +36,7 @@
 @import "./feedback-rating-tokens.css";
 @import "./calendar-tokens.css";
 @import "./date-navigator-tokens.css";
+@import "./filter-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 

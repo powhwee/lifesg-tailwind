@@ -10,6 +10,7 @@ import * as otpInputDefault from "./sections/otp-input-default";
 import * as feedbackRatingDefault from "./sections/feedback-rating-default";
 import * as dateNavigatorDefault from "./sections/date-navigator-default";
 import * as calendarDefault from "./sections/calendar-default";
+import * as filterDefault from "./sections/filter-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -90,6 +91,10 @@ export const tree: Node[] = [
   folder("calendar", "Calendar", [
     leaf("introduction", "Introduction", { Prose: prose.CalendarIntro }),
     leaf("default",      "Default",      { Ours: calendarDefault.OursPane, LifeSG: calendarDefault.LifeSGPane }),
+  ]),
+  folder("filter", "Filter", [
+    leaf("introduction", "Introduction", { Prose: prose.FilterIntro }),
+    leaf("default",      "Default",      { Ours: filterDefault.OursPane, LifeSG: filterDefault.LifeSGPane }),
   ]),
 ];
 

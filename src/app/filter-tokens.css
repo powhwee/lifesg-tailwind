@@ -1,0 +1,11 @@
+/* Layer 3 — Component tokens for Filter. */
+
+:root {
+  --filter-bg:                        var(--lifesg-bg);
+  --filter-bg-hover:                  var(--lifesg-bg-hover);
+
+  --filter-border:                    var(--lifesg-border);
+
+  --filter-text:                      var(--lifesg-text);
+  --filter-text-link:                 var(--lifesg-text-primary);
+}

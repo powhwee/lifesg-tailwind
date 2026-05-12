@@ -346,7 +346,43 @@ export function CalendarIntro() {
 export function FilterIntro() {
   return (
     <Page title="Filter">
-      <p>Coming next sub-batch.</p>
+      <p>
+        Faceted filter sidebar with collapsible sections. Compound API mirrors LifeSG&rsquo;s:{" "}
+        <code>Filter</code> + <code>Filter.Item</code> + <code>Filter.Checkbox</code>. Each item
+        is collapsible by default; checkbox items support a &ldquo;View more&rdquo; toggle when
+        options exceed a threshold (<code>minimisableOptions</code>).
+      </p>
+      <p>
+        Built on Base UI <code>@base-ui/react/accordion</code> for the per-item collapse machinery
+        and our ported <code>Checkbox</code> for the selection cells. The L3 tokens in{" "}
+        <code>filter-tokens.css</code> are minimal &mdash; most visual properties cascade from
+        the underlying primitives.
+      </p>
+      <h2 className="text-base font-semibold pt-2">What we deferred</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <strong>Mobile / modal mode</strong> &mdash; LifeSG&rsquo;s Filter switches between a
+          sidebar (default) and a full-screen modal (mobile) via <code>Filter.Modal</code>. Ours
+          is sidebar-only. Add when the agency&rsquo;s mobile UX is decided; the modal mode shares
+          ~80% of the surface and can wrap the same Filter.Item children.
+        </li>
+        <li>
+          <strong>Other item types</strong> &mdash; LifeSG ships <code>Filter.Radio</code>,{" "}
+          <code>Filter.Toggle</code>, <code>Filter.Search</code>, plus the date / range
+          variants. Same shape as <code>Filter.Checkbox</code>, ~30 lines each. Defer until
+          first real consumer.
+        </li>
+        <li>
+          <strong>Nested options</strong> (parent+children) &mdash; supported by LifeSG&rsquo;s
+          <code>FilterItemCheckboxOptionProps.options</code> recursive shape. Not yet
+          implemented; would need a tree-render in <code>Filter.Checkbox</code>.
+        </li>
+        <li>
+          <strong>Custom <code>labelExtractor</code> / <code>valueExtractor</code></strong> for
+          arbitrary <code>T</code> shapes &mdash; supported in our types, exercised in tests
+          when we add them.
+        </li>
+      </ul>
     </Page>
   );
 }
