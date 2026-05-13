@@ -27,11 +27,7 @@ function StateIcon({ state }: { state: BoxContainerDisplayState }) {
   return null;
 }
 
-function stateClass(state: BoxContainerDisplayState) {
-  if (state === "error")
-    return "border-[var(--box-container-border-error)] bg-[var(--box-container-bg)]";
-  if (state === "warning")
-    return "border-[var(--box-container-border-warning)] bg-[var(--box-container-bg)]";
+function stateClass(_state: BoxContainerDisplayState) {
   return "border-[var(--box-container-border)] bg-[var(--box-container-bg)]";
 }
 
@@ -43,9 +39,9 @@ const bodyCx = "border-t border-[var(--box-container-border)] px-[var(--box-cont
 export function BoxContainer({
   children,
   title,
-  collapsible = false,
+  collapsible = true,
   expanded,
-  defaultExpanded = true,
+  defaultExpanded = false,
   onExpandedChange,
   callToActionComponent,
   displayState = "default",
