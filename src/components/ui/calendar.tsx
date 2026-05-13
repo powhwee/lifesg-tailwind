@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { DayPicker, type Matcher, type DateLibOptions } from "react-day-picker";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function fromIso(s: string | undefined): Date | undefined {
@@ -67,32 +67,36 @@ function Calendar(props: CalendarProps) {
   }, [minDate, maxDate, disabledDates]);
 
   const baseClasses = cn(
-    "p-3 bg-[var(--calendar-bg)] text-[var(--calendar-text)]",
+    "relative p-3 bg-[var(--calendar-bg)] text-[var(--calendar-text)] min-w-[336px]",
     styleType === "bordered" && "border border-[var(--calendar-border)] rounded-md",
     className
   );
 
   const dayPickerClassNames = {
-    root: "rdp-root",
+    root: "rdp-root relative",
     months: "flex flex-col",
     month: "space-y-3",
-    month_caption: "flex items-center justify-center px-2 pt-1 text-sm font-semibold",
-    caption_label: "text-base font-semibold",
-    nav: "flex items-center justify-between absolute left-3 right-3 top-3",
-    button_previous: "size-8 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer",
-    button_next: "size-8 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer",
+    month_caption: "relative flex items-center gap-2 px-1 pt-1",
+    caption_label: "inline-flex items-center gap-0.5 font-semibold text-sm pl-1.5 pr-1 py-0.5 rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer",
+    dropdowns: "flex items-center gap-2",
+    dropdown_root: "relative inline-flex items-center",
+    dropdown: "absolute inset-0 opacity-0 cursor-pointer appearance-none",
+    chevron: "size-3 pointer-events-none",
+    nav: "flex items-center gap-1 absolute right-1 top-1",
+    button_previous: "size-7 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer text-[var(--calendar-text)]",
+    button_next: "size-7 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer text-[var(--calendar-text)]",
     month_grid: "w-full border-collapse",
     weekdays: "flex",
-    weekday: "size-10 text-xs text-[var(--calendar-text-subtle)] font-normal flex items-center justify-center",
+    weekday: "flex-1 h-9 text-xs text-[var(--calendar-text-subtle)] font-normal flex items-center justify-center",
     week: "flex",
-    day: "size-10 p-0 text-sm",
+    day: "flex-1 p-0.5 text-sm relative",
     day_button: cn(
-      "size-10 inline-flex items-center justify-center rounded-full cursor-pointer text-sm",
+      "w-full h-9 inline-flex items-center justify-center rounded-md cursor-pointer text-sm",
       "hover:bg-[var(--calendar-bg-hover)]",
       "focus-visible:ring-3 focus-visible:ring-[var(--calendar-ring-focus)] focus-visible:outline-none"
     ),
-    today: "font-semibold text-[var(--calendar-text-today)]",
-    selected: "[&>button]:ring-2 [&>button]:ring-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)] [&>button:hover]:bg-[var(--calendar-bg-hover)]",
+    today: "font-semibold text-[var(--calendar-text-today)] after:content-[''] after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-[var(--calendar-text-today)]",
+    selected: "[&>button]:bg-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)] [&>button:hover]:bg-[var(--calendar-bg-selected-hover)]",
     outside: "text-[var(--calendar-text-disabled)]",
     disabled: "text-[var(--calendar-text-disabled)] cursor-not-allowed [&>button]:cursor-not-allowed [&>button:hover]:bg-transparent",
     hidden: "invisible",
@@ -115,6 +119,7 @@ function Calendar(props: CalendarProps) {
         <DayPicker
           mode="multiple"
           captionLayout="dropdown"
+          showOutsideDays
           selected={selected}
           onSelect={(dates) => {
             const next = (dates ?? []).map(toIso);
@@ -129,8 +134,11 @@ function Calendar(props: CalendarProps) {
           classNames={dayPickerClassNames}
           formatters={{ formatWeekdayName }}
           components={{
-            Chevron: ({ orientation }) =>
-              orientation === "left" ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />,
+            Chevron: ({ orientation, className: chevronClass }) => {
+              if (orientation === "left") return <ChevronLeft className={cn("size-4", chevronClass)} />;
+              if (orientation === "right") return <ChevronRight className={cn("size-4", chevronClass)} />;
+              return <ChevronDown className={cn("size-4", chevronClass)} />;
+            },
           }}
         />
       </div>
@@ -143,6 +151,7 @@ function Calendar(props: CalendarProps) {
       <DayPicker
         mode="single"
         captionLayout="dropdown"
+        showOutsideDays
         selected={selected}
         onSelect={(d) => {
           const v = toIso(d);
@@ -155,8 +164,11 @@ function Calendar(props: CalendarProps) {
         classNames={dayPickerClassNames}
         formatters={{ formatWeekdayName }}
         components={{
-          Chevron: ({ orientation }) =>
-            orientation === "left" ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />,
+          Chevron: ({ orientation, className: chevronClass }) => {
+            if (orientation === "left") return <ChevronLeft className={cn("size-4", chevronClass)} />;
+            if (orientation === "right") return <ChevronRight className={cn("size-4", chevronClass)} />;
+            return <ChevronDown className={cn("size-4", chevronClass)} />;
+          },
         }}
       />
     </div>
