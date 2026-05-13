@@ -51,9 +51,9 @@ function normalize(h: HeaderProps): HeaderItemProps {
 }
 
 function SortIcon({ state }: { state: SortIndicatorType | undefined }) {
-  if (state === "asc") return <ChevronUp aria-hidden className="size-4 text-[var(--data-table-icon-strong)]" />;
-  if (state === "desc") return <ChevronDown aria-hidden className="size-4 text-[var(--data-table-icon-strong)]" />;
-  return <ChevronsUpDown aria-hidden className="size-4 text-[var(--data-table-icon-subtle)]" />;
+  if (state === "asc") return <ChevronUp aria-hidden className="size-4 text-data-table-icon-strong" />;
+  if (state === "desc") return <ChevronDown aria-hidden className="size-4 text-data-table-icon-strong" />;
+  return <ChevronsUpDown aria-hidden className="size-4 text-data-table-icon-subtle" />;
 }
 
 function RowCheckbox({
@@ -78,14 +78,14 @@ function RowCheckbox({
       aria-label={ariaLabel}
       className={cn(
         "size-5 inline-flex items-center justify-center rounded border outline-none transition-colors",
-        "border-[var(--data-table-checkbox-border)] bg-[var(--data-table-checkbox-bg)]",
-        "data-[checked]:bg-[var(--data-table-checkbox-checked-bg)] data-[checked]:border-[var(--data-table-checkbox-checked-bg)]",
-        "data-[indeterminate]:bg-[var(--data-table-checkbox-checked-bg)] data-[indeterminate]:border-[var(--data-table-checkbox-checked-bg)]",
-        "focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)] focus-visible:ring-offset-1",
+        "border-data-table-checkbox-border bg-data-table-checkbox-bg",
+        "data-[checked]:bg-data-table-checkbox-checked-bg data-[checked]:border-data-table-checkbox-checked-bg",
+        "data-[indeterminate]:bg-data-table-checkbox-checked-bg data-[indeterminate]:border-data-table-checkbox-checked-bg",
+        "focus-visible:ring-2 focus-visible:ring-lifesg-border-focus focus-visible:ring-offset-1",
         "disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
       )}
     >
-      <Checkbox.Indicator className="text-[var(--data-table-checkbox-tick)]">
+      <Checkbox.Indicator className="text-data-table-checkbox-tick">
         {indeterminate ? (
           <span className="block w-2.5 h-0.5 bg-current rounded" />
         ) : (
@@ -132,13 +132,13 @@ export function DataTable({
       id={id}
       data-slot="data-table"
       className={cn(
-        "rounded-[var(--data-table-radius)] overflow-hidden",
+        "rounded-data-table overflow-hidden",
         className
       )}
     >
       {showActionBar && (
-        <div className="flex items-center justify-between gap-3 px-[var(--data-table-cell-x)] py-3 bg-[var(--data-table-action-bar-bg)] border-b border-[var(--data-table-border)]">
-          <div className="text-sm font-semibold text-[var(--lifesg-text)]">
+        <div className="flex items-center justify-between gap-3 px-data-table-cell-x py-3 bg-data-table-action-bar-bg border-b border-data-table-border">
+          <div className="text-sm font-semibold text-lifesg-text">
             {selectedSet.size} selected
           </div>
           <div className="flex items-center gap-3">
@@ -147,7 +147,7 @@ export function DataTable({
               <button
                 type="button"
                 onClick={onClearSelectionClick}
-                className="text-sm font-semibold text-[var(--lifesg-text-primary)] hover:underline cursor-pointer"
+                className="text-sm font-semibold text-lifesg-text-primary hover:underline cursor-pointer"
               >
                 Clear selection
               </button>
@@ -158,12 +158,12 @@ export function DataTable({
 
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-base">
-          <thead className="bg-[var(--data-table-head-bg)]">
+          <thead className="bg-data-table-head-bg">
             <tr>
               {enableMultiSelect && (
                 <th
                   scope="col"
-                  className="w-12 px-[var(--data-table-cell-x)] first:pl-[var(--data-table-cell-x-first)] py-[var(--data-table-head-y)] text-left"
+                  className="w-12 px-data-table-cell-x first:pl-data-table-cell-x-first py-data-table-head-y text-left"
                 >
                   {enableSelectAll && (
                     <RowCheckbox
@@ -190,8 +190,8 @@ export function DataTable({
                     scope="col"
                     style={h.style}
                     className={cn(
-                      "text-left font-bold px-[var(--data-table-cell-x)] first:pl-[var(--data-table-cell-x-first)] py-[var(--data-table-head-y)] text-[var(--lifesg-text)]",
-                      clickable && "cursor-pointer select-none hover:bg-[var(--lifesg-bg-hover)]"
+                      "text-left font-bold px-data-table-cell-x first:pl-data-table-cell-x-first py-data-table-head-y text-lifesg-text",
+                      clickable && "cursor-pointer select-none hover:bg-lifesg-bg-hover"
                     )}
                     onClick={clickable ? () => onHeaderClick?.(h.fieldKey) : undefined}
                     aria-sort={indicator === "asc" ? "ascending" : indicator === "desc" ? "descending" : undefined}
@@ -210,7 +210,7 @@ export function DataTable({
                     {[0, 1, 2, 3].map((i) => (
                       <span
                         key={i}
-                        className="size-2.5 rounded-full bg-[var(--lifesg-bg-primary)] animate-bounce"
+                        className="size-2.5 rounded-full bg-lifesg-bg-primary animate-bounce"
                         style={{ animationDelay: `${i * 0.15}s`, animationDuration: "0.6s" }}
                       />
                     ))}
@@ -233,13 +233,13 @@ export function DataTable({
                 <tr
                   key={rowId}
                   className={cn(
-                    "border-b border-[var(--data-table-row-border)] last:border-0 hover:bg-[var(--data-table-row-bg-hover)]",
-                    isSelected && "bg-[var(--data-table-row-bg-selected)]",
-                    alternatingRows && i % 2 === 1 && !isSelected && "bg-[var(--data-table-row-bg-alt)]"
+                    "border-b border-data-table-row-border last:border-0 hover:bg-data-table-row-bg-hover",
+                    isSelected && "bg-data-table-row-bg-selected",
+                    alternatingRows && i % 2 === 1 && !isSelected && "bg-data-table-row-bg-alt"
                   )}
                 >
                   {enableMultiSelect && (
-                    <td className="px-[var(--data-table-cell-x)] first:pl-[var(--data-table-cell-x-first)] py-[var(--data-table-cell-y)]">
+                    <td className="px-data-table-cell-x first:pl-data-table-cell-x-first py-data-table-cell-y">
                       <RowCheckbox
                         checked={isSelected}
                         disabled={isDisabled}
@@ -265,7 +265,7 @@ export function DataTable({
                     return (
                       <td
                         key={h.fieldKey}
-                        className="px-[var(--data-table-cell-x)] first:pl-[var(--data-table-cell-x-first)] py-[var(--data-table-cell-y)] align-top"
+                        className="px-data-table-cell-x first:pl-data-table-cell-x-first py-data-table-cell-y align-top"
                       >
                         {cellContent}
                       </td>

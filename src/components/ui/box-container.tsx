@@ -22,19 +22,21 @@ export interface BoxContainerProps {
 }
 
 function StateIcon({ state }: { state: BoxContainerDisplayState }) {
-  if (state === "error") return <CircleAlert className="size-4 text-[var(--box-container-icon-error)]" aria-hidden />;
-  if (state === "warning") return <TriangleAlert className="size-4 text-[var(--box-container-icon-warning)]" aria-hidden />;
+  if (state === "error") return <CircleAlert className="size-4 text-box-container-icon-error" aria-hidden />;
+  if (state === "warning") return <TriangleAlert className="size-4 text-box-container-icon-warning" aria-hidden />;
   return null;
 }
 
 function stateClass(_state: BoxContainerDisplayState) {
-  return "border-[var(--box-container-border)] bg-[var(--box-container-bg)]";
+  return "border-box-container-border bg-box-container-bg";
 }
 
 const panelCx =
+  // h-[var(--collapsible-panel-height)] reads a runtime CSS variable set by
+  // @base-ui Collapsible — not a design token, so it stays as an arbitrary value.
   "data-[ending-style]:h-0 data-[starting-style]:h-0 h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] duration-200";
 
-const bodyCx = "border-t border-[var(--box-container-border)] px-[var(--box-container-padding-x)] py-[var(--box-container-body-y)]";
+const bodyCx = "border-t border-box-container-border px-box-container-padding-x py-box-container-body-y";
 
 export function BoxContainer({
   children,
@@ -50,7 +52,7 @@ export function BoxContainer({
   id,
 }: BoxContainerProps) {
   const rootClass = cn(
-    "border rounded-[var(--box-container-radius)] overflow-hidden",
+    "border rounded-box-container overflow-hidden",
     stateClass(displayState),
     className
   );
@@ -58,9 +60,9 @@ export function BoxContainer({
   if (!collapsible) {
     return (
       <section id={id} data-slot="box-container" className={rootClass}>
-        <div className="flex items-center gap-3 px-[var(--box-container-padding-x)] py-[var(--box-container-header-y)]">
+        <div className="flex items-center gap-3 px-box-container-padding-x py-box-container-header-y">
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <div className="text-base font-semibold text-[var(--lifesg-text)] truncate">{title}</div>
+            <div className="text-base font-semibold text-lifesg-text truncate">{title}</div>
           </div>
           <div className="flex items-center gap-2">
             {callToActionComponent}
@@ -84,12 +86,12 @@ export function BoxContainer({
           render={
             <button
               type="button"
-              className="group/trigger w-full flex items-center gap-3 px-[var(--box-container-padding-x)] py-[var(--box-container-header-y)] text-left cursor-pointer hover:bg-[var(--lifesg-bg-hover)] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--lifesg-border-focus)]"
+              className="group/trigger w-full flex items-center gap-3 px-box-container-padding-x py-box-container-header-y text-left cursor-pointer hover:bg-lifesg-bg-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lifesg-border-focus"
             />
           }
         >
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <div className="text-base font-semibold text-[var(--lifesg-text)] truncate">{title}</div>
+            <div className="text-base font-semibold text-lifesg-text truncate">{title}</div>
           </div>
           <div className="flex items-center gap-3">
             {callToActionComponent && (
@@ -104,15 +106,15 @@ export function BoxContainer({
             <StateIcon state={displayState} />
             <ChevronDown
               aria-hidden
-              className="size-5 text-[var(--lifesg-icon)] transition-transform group-aria-expanded/trigger:rotate-180"
+              className="size-5 text-lifesg-icon transition-transform group-aria-expanded/trigger:rotate-180"
             />
           </div>
         </Collapsible.Trigger>
       ) : (
-        <div className="flex items-center gap-3 px-[var(--box-container-padding-x)] py-[var(--box-container-header-y)]">
+        <div className="flex items-center gap-3 px-box-container-padding-x py-box-container-header-y">
           <div className="flex items-center gap-2 min-w-0 flex-1">
             <StateIcon state={displayState} />
-            <div className="text-base font-semibold text-[var(--lifesg-text)] truncate">{title}</div>
+            <div className="text-base font-semibold text-lifesg-text truncate">{title}</div>
           </div>
           <div className="flex items-center gap-3">
             {callToActionComponent}
@@ -121,13 +123,13 @@ export function BoxContainer({
                 <button
                   type="button"
                   aria-label="Toggle"
-                  className="group/trigger size-8 inline-flex items-center justify-center rounded hover:bg-[var(--lifesg-bg-hover)] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--lifesg-border-focus)] cursor-pointer"
+                  className="group/trigger size-8 inline-flex items-center justify-center rounded hover:bg-lifesg-bg-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lifesg-border-focus cursor-pointer"
                 />
               }
             >
               <ChevronDown
                 aria-hidden
-                className="size-5 text-[var(--lifesg-icon)] transition-transform group-aria-expanded/trigger:rotate-180"
+                className="size-5 text-lifesg-icon transition-transform group-aria-expanded/trigger:rotate-180"
               />
             </Collapsible.Trigger>
           </div>

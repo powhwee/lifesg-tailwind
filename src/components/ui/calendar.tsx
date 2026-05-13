@@ -67,8 +67,8 @@ function Calendar(props: CalendarProps) {
   }, [minDate, maxDate, disabledDates]);
 
   const baseClasses = cn(
-    "relative p-3 bg-[var(--calendar-bg)] text-[var(--calendar-text)] min-w-[336px]",
-    styleType === "bordered" && "border border-[var(--calendar-border)] rounded-md",
+    "relative p-3 bg-calendar-bg text-calendar-text min-w-[336px]",
+    styleType === "bordered" && "border border-calendar-border rounded-md",
     className
   );
 
@@ -77,28 +77,28 @@ function Calendar(props: CalendarProps) {
     months: "flex flex-col",
     month: "space-y-3",
     month_caption: "relative flex items-center gap-2 px-1 pt-1",
-    caption_label: "inline-flex items-center gap-0.5 font-semibold text-sm pl-1.5 pr-1 py-0.5 rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer",
+    caption_label: "inline-flex items-center gap-0.5 font-semibold text-sm pl-1.5 pr-1 py-0.5 rounded-md hover:bg-calendar-bg-hover cursor-pointer",
     dropdowns: "flex items-center gap-2",
     dropdown_root: "relative inline-flex items-center",
     dropdown: "absolute inset-0 opacity-0 cursor-pointer appearance-none",
     chevron: "size-3 pointer-events-none",
     nav: "flex items-center gap-1 absolute right-1 top-1",
-    button_previous: "size-7 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer text-[var(--calendar-text)]",
-    button_next: "size-7 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer text-[var(--calendar-text)]",
+    button_previous: "size-7 inline-flex items-center justify-center rounded-md hover:bg-calendar-bg-hover cursor-pointer text-calendar-text",
+    button_next: "size-7 inline-flex items-center justify-center rounded-md hover:bg-calendar-bg-hover cursor-pointer text-calendar-text",
     month_grid: "w-full border-collapse",
     weekdays: "flex",
-    weekday: "flex-1 h-9 text-xs text-[var(--calendar-text-subtle)] font-normal flex items-center justify-center",
+    weekday: "flex-1 h-9 text-xs text-calendar-text-subtle font-normal flex items-center justify-center",
     week: "flex",
     day: "flex-1 p-0.5 text-sm relative",
     day_button: cn(
       "w-full h-9 inline-flex items-center justify-center rounded-md cursor-pointer text-sm",
-      "hover:bg-[var(--calendar-bg-hover)]",
-      "focus-visible:ring-3 focus-visible:ring-[var(--calendar-ring-focus)] focus-visible:outline-none"
+      "hover:bg-calendar-bg-hover",
+      "focus-visible:ring-3 focus-visible:ring-calendar-ring-focus focus-visible:outline-none"
     ),
-    today: "font-semibold text-[var(--calendar-text-today)] after:content-[''] after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-[var(--calendar-text-today)]",
-    selected: "[&>button]:bg-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)] [&>button:hover]:bg-[var(--calendar-bg-selected-hover)]",
-    outside: "text-[var(--calendar-text-disabled)]",
-    disabled: "text-[var(--calendar-text-disabled)] cursor-not-allowed [&>button]:cursor-not-allowed [&>button:hover]:bg-transparent",
+    today: "font-semibold text-calendar-text-today after:content-[''] after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-calendar-text-today",
+    selected: "[&>button]:bg-calendar-bg-selected [&>button]:text-calendar-text-selected [&>button:hover]:bg-calendar-bg-selected-hover",
+    outside: "text-calendar-text-disabled",
+    disabled: "text-calendar-text-disabled cursor-not-allowed [&>button]:cursor-not-allowed [&>button:hover]:bg-transparent",
     hidden: "invisible",
   };
 

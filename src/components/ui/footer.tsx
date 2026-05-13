@@ -28,7 +28,7 @@ const defaultDisclaimerLinks: Required<{ [K in keyof FooterDisclaimerLinks]: Omi
 };
 
 const linkCx =
-  "text-[var(--footer-link)] hover:underline underline-offset-4 outline-none focus-visible:underline";
+  "text-footer-link hover:underline underline-offset-4 outline-none focus-visible:underline";
 
 function Footer({
   links,
@@ -41,7 +41,7 @@ function Footer({
 }: FooterProps) {
   const disclaimer = { ...defaultDisclaimerLinks, ...disclaimerLinks };
   return (
-    <footer className={cn("w-full bg-[var(--footer-bg)] text-[var(--footer-text)]", className)}>
+    <footer className={cn("w-full bg-footer-bg text-footer-text", className)}>
       <div className="max-w-screen-xl mx-auto px-6 pt-10 pb-6">
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-12 gap-y-8 mb-8">
           {!hideLogo && (
@@ -50,7 +50,7 @@ function Footer({
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={logoSrc} alt="" className="h-16 w-auto" />
               ) : (
-                <div aria-hidden="true" className="h-16 w-16 rounded-md bg-[var(--lifesg-bg-primary)]" />
+                <div aria-hidden="true" className="h-16 w-16 rounded-md bg-lifesg-bg-primary" />
               )}
             </div>
           )}
@@ -75,7 +75,7 @@ function Footer({
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-4 text-sm text-[var(--lifesg-text)]">
+        <div className="flex items-center justify-between gap-4 text-sm text-lifesg-text">
           <ul className="flex items-center gap-x-8 list-none m-0 p-0">
             <li><a className={linkCx} {...disclaimer.privacy}>Privacy Statement</a></li>
             <li><a className={linkCx} {...disclaimer.termsOfUse}>Terms of Use</a></li>
@@ -86,7 +86,7 @@ function Footer({
               </a>
             </li>
           </ul>
-          <div className="flex items-center gap-4 text-[var(--lifesg-text-subtle)] shrink-0">
+          <div className="flex items-center gap-4 text-lifesg-text-subtle shrink-0">
             {copyrightInfo && <span>{copyrightInfo}</span>}
           </div>
         </div>

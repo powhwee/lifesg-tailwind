@@ -40,7 +40,7 @@ function FeedbackRating({
       )}
 
       {description && (
-        <p className="text-center text-lg font-semibold text-[var(--feedback-rating-text)]">{description}</p>
+        <p className="text-center text-lg font-semibold text-feedback-rating-text">{description}</p>
       )}
 
       <div role="radiogroup" aria-label="Rating" className="flex items-center gap-2">
@@ -55,10 +55,10 @@ function FeedbackRating({
               onClick={() => onRatingChange(value)}
               className={cn(
                 "rounded-full p-1 transition-colors outline-none cursor-pointer",
-                "text-[var(--feedback-rating-star)]",
-                isActive && "text-[var(--feedback-rating-star-active)]",
-                "hover:text-[var(--feedback-rating-star-hover)]",
-                "focus-visible:ring-3 focus-visible:ring-[var(--feedback-rating-ring-focus)]"
+                "text-feedback-rating-star",
+                isActive && "text-feedback-rating-star-active",
+                "hover:text-feedback-rating-star-hover",
+                "focus-visible:ring-3 focus-visible:ring-feedback-rating-ring-focus"
               )}
               aria-label={`${value} star${value === 1 ? "" : "s"}`}
             >

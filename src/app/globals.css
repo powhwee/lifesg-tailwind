@@ -1,5 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+/* Tailwind 4 auto-detects sources; exclude scripts/ and working-logs/ so
+   audit/documentation files with literal `text-[var(--...)]` placeholders
+   don't get parsed as class candidates. */
+@source not "../../scripts";
+@source not "../../working-logs";
 @import "shadcn/tailwind.css";
 @import "./lifesg-tokens.css";
 @import "./core-tokens.css";
@@ -53,6 +59,89 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* ──────── LifeSG semantic tokens — exposed as Tailwind utilities ────────
+     L1 (--lifesg-*) and L3 (component-*) tokens are mirrored here so they
+     generate first-class utilities (e.g. `text-lifesg-text`, `bg-calendar-bg`,
+     `rounded-table`) instead of arbitrary-value workarounds like
+     `text-[var(--lifesg-text)]`. The arbitrary-value form still works as
+     an escape hatch for one-off cases.
+     Add a mapping here whenever a token starts being used as a utility class. */
+
+  /* L1 — LifeSG semantic */
+  --color-lifesg-text:                       var(--lifesg-text);
+  --color-lifesg-text-primary:               var(--lifesg-text-primary);
+  --color-lifesg-text-subtle:                var(--lifesg-text-subtle);
+  --color-lifesg-icon:                       var(--lifesg-icon);
+  --color-lifesg-bg-hover:                   var(--lifesg-bg-hover);
+  --color-lifesg-bg-primary:                 var(--lifesg-bg-primary);
+  --color-lifesg-border-focus:               var(--lifesg-border-focus);
+
+  /* L3 — box-container */
+  --color-box-container-bg:                  var(--box-container-bg);
+  --color-box-container-border:              var(--box-container-border);
+  --color-box-container-icon-error:          var(--box-container-icon-error);
+  --color-box-container-icon-warning:        var(--box-container-icon-warning);
+  --spacing-box-container-padding-x:         var(--box-container-padding-x);
+  --spacing-box-container-header-y:          var(--box-container-header-y);
+  --spacing-box-container-body-y:            var(--box-container-body-y);
+  --radius-box-container:                    var(--box-container-radius);
+
+  /* L3 — calendar */
+  --color-calendar-bg:                       var(--calendar-bg);
+  --color-calendar-bg-hover:                 var(--calendar-bg-hover);
+  --color-calendar-bg-selected:              var(--calendar-bg-selected);
+  --color-calendar-bg-selected-hover:        var(--calendar-bg-selected-hover);
+  --color-calendar-border:                   var(--calendar-border);
+  --color-calendar-ring-focus:               var(--calendar-ring-focus);
+  --color-calendar-text:                     var(--calendar-text);
+  --color-calendar-text-disabled:            var(--calendar-text-disabled);
+  --color-calendar-text-selected:            var(--calendar-text-selected);
+  --color-calendar-text-subtle:              var(--calendar-text-subtle);
+  --color-calendar-text-today:               var(--calendar-text-today);
+
+  /* L3 — data-table */
+  --color-data-table-action-bar-bg:          var(--data-table-action-bar-bg);
+  --color-data-table-border:                 var(--data-table-border);
+  --color-data-table-checkbox-bg:            var(--data-table-checkbox-bg);
+  --color-data-table-checkbox-border:        var(--data-table-checkbox-border);
+  --color-data-table-checkbox-checked-bg:    var(--data-table-checkbox-checked-bg);
+  --color-data-table-checkbox-tick:          var(--data-table-checkbox-tick);
+  --color-data-table-head-bg:                var(--data-table-head-bg);
+  --color-data-table-icon-strong:            var(--data-table-icon-strong);
+  --color-data-table-icon-subtle:            var(--data-table-icon-subtle);
+  --color-data-table-row-bg-alt:             var(--data-table-row-bg-alt);
+  --color-data-table-row-bg-hover:           var(--data-table-row-bg-hover);
+  --color-data-table-row-bg-selected:        var(--data-table-row-bg-selected);
+  --color-data-table-row-border:             var(--data-table-row-border);
+  --spacing-data-table-cell-x:               var(--data-table-cell-x);
+  --spacing-data-table-cell-x-first:         var(--data-table-cell-x-first);
+  --spacing-data-table-cell-y:               var(--data-table-cell-y);
+  --spacing-data-table-head-y:               var(--data-table-head-y);
+  --radius-data-table:                       var(--data-table-radius);
+
+  /* L3 — feedback-rating */
+  --color-feedback-rating-ring-focus:        var(--feedback-rating-ring-focus);
+  --color-feedback-rating-star:              var(--feedback-rating-star);
+  --color-feedback-rating-star-active:       var(--feedback-rating-star-active);
+  --color-feedback-rating-star-hover:        var(--feedback-rating-star-hover);
+  --color-feedback-rating-text:              var(--feedback-rating-text);
+
+  /* L3 — footer */
+  --color-footer-bg:                         var(--footer-bg);
+  --color-footer-link:                       var(--footer-link);
+  --color-footer-text:                       var(--footer-text);
+
+  /* L3 — table */
+  --color-table-head-bg:                     var(--table-head-bg);
+  --color-table-head-text:                   var(--table-head-text);
+  --color-table-row-bg-hover:                var(--table-row-bg-hover);
+  --color-table-row-border:                  var(--table-row-border);
+  --spacing-table-cell-x:                    var(--table-cell-x);
+  --spacing-table-cell-x-first:              var(--table-cell-x-first);
+  --spacing-table-cell-y:                    var(--table-cell-y);
+  --spacing-table-head-y:                    var(--table-head-y);
+  --radius-table:                            var(--table-radius);
 }
 
 /* LifeSG semantic mapping — sourced from src/app/lifesg-tokens.css */

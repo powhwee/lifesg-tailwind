@@ -6,7 +6,7 @@ function TableContainer({ className, ...props }: React.HTMLAttributes<HTMLDivEle
     <div
       data-slot="table-container"
       className={cn(
-        "rounded-[var(--table-radius)] overflow-hidden",
+        "rounded-table overflow-hidden",
         className
       )}
       {...props}
@@ -28,7 +28,7 @@ function TableHead({ className, ...props }: React.HTMLAttributes<HTMLTableSectio
   return (
     <thead
       data-slot="table-head"
-      className={cn("bg-[var(--table-head-bg)]", className)}
+      className={cn("bg-table-head-bg", className)}
       {...props}
     />
   );
@@ -43,7 +43,7 @@ function TableRow({ className, ...props }: React.HTMLAttributes<HTMLTableRowElem
     <tr
       data-slot="table-row"
       className={cn(
-        "border-b border-[var(--table-row-border)] last:border-0 hover:bg-[var(--table-row-bg-hover)]",
+        "border-b border-table-row-border last:border-0 hover:bg-table-row-bg-hover",
         className
       )}
       {...props}
@@ -57,7 +57,7 @@ function TableHeaderCell({ className, ...props }: React.ThHTMLAttributes<HTMLTab
       data-slot="table-header-cell"
       scope={props.scope ?? "col"}
       className={cn(
-        "text-left font-bold px-[var(--table-cell-x)] first:pl-[var(--table-cell-x-first)] py-[var(--table-head-y)] text-[var(--table-head-text)]",
+        "text-left font-bold px-table-cell-x first:pl-table-cell-x-first py-table-head-y text-table-head-text",
         className
       )}
       {...props}
@@ -70,7 +70,7 @@ function TableCell({ className, ...props }: React.TdHTMLAttributes<HTMLTableCell
     <td
       data-slot="table-cell"
       className={cn(
-        "px-[var(--table-cell-x)] first:pl-[var(--table-cell-x-first)] py-[var(--table-cell-y)] align-top",
+        "px-table-cell-x first:pl-table-cell-x-first py-table-cell-y align-top",
         className
       )}
       {...props}
