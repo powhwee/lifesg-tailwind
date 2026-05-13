@@ -84,6 +84,9 @@ export function BoxContainer({
       {clickableHeader ? (
         <Collapsible.Trigger
           render={
+            // outline-offset-[-2px] keeps the 2px focus ring inset within the
+            // rounded container border. Micro-pixel adjustment for a UI line —
+            // intentional arbitrary value, not on the spacing grid.
             <button
               type="button"
               className="group/trigger w-full flex items-center gap-3 px-box-container-padding-x py-box-container-header-y text-left cursor-pointer hover:bg-lifesg-bg-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lifesg-border-focus"

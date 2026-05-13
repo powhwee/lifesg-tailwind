@@ -99,6 +99,7 @@
   --color-calendar-text-selected:            var(--calendar-text-selected);
   --color-calendar-text-subtle:              var(--calendar-text-subtle);
   --color-calendar-text-today:               var(--calendar-text-today);
+  --spacing-calendar-min-width:              var(--calendar-min-width);
 
   /* L3 — data-table */
   --color-data-table-action-bar-bg:          var(--data-table-action-bar-bg);

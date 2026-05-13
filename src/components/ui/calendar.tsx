@@ -67,7 +67,7 @@ function Calendar(props: CalendarProps) {
   }, [minDate, maxDate, disabledDates]);
 
   const baseClasses = cn(
-    "relative p-3 bg-calendar-bg text-calendar-text min-w-[336px]",
+    "relative p-3 bg-calendar-bg text-calendar-text min-w-calendar-min-width",
     styleType === "bordered" && "border border-calendar-border rounded-md",
     className
   );

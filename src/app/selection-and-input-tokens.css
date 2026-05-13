@@ -215,6 +215,9 @@
   --calendar-text-today:              var(--lifesg-text-primary);
 
   --calendar-ring-focus:              color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+
+  /* Structural constraint — 7 day-cells × 48px each. Recompute if cell width changes. */
+  --calendar-min-width:               336px;
 }
 
 /* ═══════════ date-navigator ═══════════ */
