@@ -741,3 +741,37 @@ Cases where the screenshot says "diff" but classification reveals no diff:
 ### Open question
 
 Should the comparison pages assert prop equivalence at build time? A small lint rule that flags when `OursPane` and `LifeSGPane` pass materially different props would prevent demo-side divergence from ever being mistaken for a component bug. Out of scope for the pilot — note for later.
+
+## 2026-05-13 — Sustainable Tailwind token convention
+
+### Why
+
+A second-opinion review flagged that `text-[var(--lifesg-text)]` arbitrary-value syntax across the codebase is non-standard for a mature Tailwind 4 setup. It works, but every fix that uses this form adds to architectural debt — `text-[var(--…)]` doesn't refactor cleanly when a token is renamed, and the syntax bypasses the type-checked utility layer.
+
+### Convention
+
+Every LifeSG semantic token (L1 `--lifesg-*` and L3 `--{component}-*`) gets a `@theme inline` mapping in `src/app/globals.css` before being used as a utility class. The mirror is verbatim — `--lifesg-text` becomes `--color-lifesg-text`, used as `text-lifesg-text`. Same for `--calendar-bg` → `bg-calendar-bg`, `--table-radius` → `rounded-table`, `--box-container-padding-x` → `px-box-container-padding-x`.
+
+```css
+@theme inline {
+  --color-lifesg-text:        var(--lifesg-text);
+  --color-calendar-bg:        var(--calendar-bg);
+  --radius-box-container:     var(--box-container-radius);
+  --spacing-table-cell-x:     var(--table-cell-x);
+  /* ...add the token before the first utility class uses it */
+}
+```
+
+### When the arbitrary-value form is still right
+
+For **runtime CSS variables that aren't design tokens** — e.g. `h-[var(--collapsible-panel-height)]` reads a value `@base-ui` sets dynamically during a collapse animation. There's no token to mirror, and exposing it via `@theme` would be misleading. Mark these inline with a one-line comment explaining why.
+
+### Boundary
+
+When you touch a file, refactor any arbitrary-value tokens *in that file* (the boy-scout rule). Don't accept "I'll clean it up later" — the pilot proved that's exactly how the 321-occurrence backlog accumulated. Each PR should leave the touched files debt-free.
+
+The 50+ unique tokens still in arbitrary-value form across the other ~40 UI components are inherited debt. Sweep them as a single dedicated PR when there's time; until then they don't block parity work, but they don't get extended either.
+
+### Build gotcha
+
+Tailwind 4 source-scans all files matching `*.tsx`/`*.ts`/`*.js`/`*.md`/`*.html` etc. by default. Audit scripts or documentation that contain literal `text-[var(--...)]` placeholder strings (e.g. `scripts/detect-tweaks.sh`, `working-logs/*.md`) get parsed as class candidates and crash the build. `globals.css` has explicit `@source not "../../scripts"` and `@source not "../../working-logs"` directives to exclude them. Add to that list if other documentation paths get added.
