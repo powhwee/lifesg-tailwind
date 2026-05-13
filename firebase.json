@@ -1,1 +1,7 @@
-{}
+{
+  "apphosting": {
+    "backendId": "phapp",
+    "rootDir": "./",
+    "ignore": ["**/.git/**", "node_modules/**", ".next/**", "working-logs/**", "screenshots/**", "scripts/**"]
+  }
+}
