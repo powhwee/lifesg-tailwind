@@ -190,9 +190,9 @@
   --feedback-rating-border:           var(--lifesg-border);
   --feedback-rating-text:             var(--lifesg-text);
 
-  --feedback-rating-star:             var(--lifesg-border);
-  --feedback-rating-star-active:      var(--lifesg-warning-50);
-  --feedback-rating-star-hover:       var(--lifesg-warning-60);
+  --feedback-rating-star:             var(--lifesg-text-primary);
+  --feedback-rating-star-active:      var(--lifesg-text-primary);
+  --feedback-rating-star-hover:       var(--lifesg-bg-primary-hover);
 
   --feedback-rating-ring-focus:       color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
 }

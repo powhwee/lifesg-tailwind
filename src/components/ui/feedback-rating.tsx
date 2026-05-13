@@ -30,7 +30,7 @@ function FeedbackRating({
     <div
       id={id}
       className={cn(
-        "flex flex-col items-center gap-4 rounded-md border border-[var(--feedback-rating-border)] bg-[var(--feedback-rating-bg)] p-6",
+        "flex flex-col items-center gap-4 py-4",
         className
       )}
     >
