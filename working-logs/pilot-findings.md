@@ -679,3 +679,65 @@ The 4-consumer refactor was nearly mechanical: replace `<Popover.Root>` → `<Po
 - **6 new Overlays registry entries** (4 with Default, 2 introduction-only): popover, drawer, menu, overlay, modal-v2 + updated overlays/introduction inventory.
 - **3 new Default sections + 5 new prose entries** in `src/components/overlays/sections/`.
 - No new runtime dependencies.
+
+## 2026-05-13 — Visual-parity diff classification procedure
+
+### Why this exists
+
+Visual screenshot comparison (OURS vs LIFESG side-by-side) is good for *spotting* differences but unreliable for *attributing* them. A previous AI-assisted review (Gemini) produced a list of fixes that conflated three different kinds of error, and a few "fixes" were applied to the wrong file. We need a repeatable procedure to classify each diff before fixing it.
+
+### The three sources
+
+Every visible diff between OursPane and LifeSGPane comes from one of:
+
+1. **DEMO** — the section file's `OursPane()` and `LifeSGPane()` pass non-equivalent props, render different variants, or include different wrapping markup. The underlying component is fine. Fix the section file in `src/components/{category}/sections/{component}-default.tsx`.
+2. **COMPONENT** — both panes pass equivalent props/markup, but `src/components/ui/{component}.tsx` renders differently from the `@lifesg/react-design-system` import. Fix the ui component.
+3. **BOTH** — demo divergence is genuine (e.g. our component's API shape differs from LifeSG's, forcing different prop shapes in the demo) *and* the component also has rendering deltas.
+
+Most diffs are COMPONENT. DEMO-only is rarer than it looks; BOTH is rarer still and usually a signal that we ported the API wrong.
+
+### Classification workflow
+
+For each visible diff:
+
+1. **Open the section file** (`{category}/sections/{name}-default.tsx`).
+2. **Diff `OursPane()` against `LifeSGPane()` line-by-line.** Look at:
+   - Props passed (names, values, defaults relied on)
+   - Variant strings (`size`, `styleType`, `displaySize`, etc.)
+   - Wrapping markup (cards, padding wrappers, helper text)
+   - Number of states/examples shown
+3. **If props/markup match → COMPONENT.** Fix `src/components/ui/{name}.tsx`.
+4. **If props/markup differ → DEMO** (unless step 5 applies).
+5. **If APIs intrinsically differ** (e.g. Navbar — ours flat, LifeSG nested): mark BOTH. The demo needs to be aligned to the LifeSG API so we're comparing apples-to-apples, and the underlying component likely also needs work.
+
+### When screenshots alone mislead
+
+Cases where the screenshot says "diff" but classification reveals no diff:
+
+- **Label wrap.** LifeSG's labels may wrap onto two lines at narrower available widths, making a 5-state row look like a 4-state row. The demo source is the source of truth, not the rendered pixel.
+- **Component defaults that match LifeSG's defaults but render differently** because of token overrides. Use `scripts/measure.mjs` for computed-style verification — see 2026-05-10 entry on Button line-height.
+- **Transient render states.** Calendar's "broken dropdowns" in the 2026-05-13 screenshots could be a real bug or could be a popover mid-mount artifact. Open the route in the browser before assuming.
+
+### Tools to use, in order of confidence
+
+1. **`scripts/measure.mjs`** — computed style + bounding-box diff. Gold standard for size/spacing/colour/typography deltas. Extend the `cases` array for the component in question.
+2. **Source diff** of `OursPane` vs `LifeSGPane` — the only way to classify DEMO vs COMPONENT.
+3. **Live browser inspection** at `http://localhost:3000/compare/{component}` — for transient render bugs and interaction states.
+4. **`scripts/screenshot-all.mjs`** — fastest survey, but visual inspection alone is *spotting*, not *diagnosing*. Don't ship fixes off screenshots without step 1, 2, or 3 backing them up.
+
+### Checklist before opening any fix PR
+
+- [ ] Classified the diff as DEMO / COMPONENT / BOTH using the section file.
+- [ ] Confirmed the diff with `measure.mjs` or live inspection (not just a screenshot).
+- [ ] Verified ours-vs-LifeSG behaviour intent: are we porting LifeSG's choice, or is LifeSG's choice itself the bug? (Rare but happens — e.g. if LifeSG renders something inaccessibly, we don't have to copy it.)
+- [ ] Touched only the file the classification points to. If the fix needs both, the PR description names both.
+
+### Anti-patterns observed
+
+- **Fixing the demo to hide a component bug** (e.g. removing a state from `OursPane` because our component handles it wrong). The comparison then "passes" but the component is still wrong. Always fix the lower layer.
+- **Bulk-applying screenshot review notes** without source-checking. The 2026-05-12 visual-parity commit fixed many real issues but also touched a few demos where the underlying component was the culprit; those will resurface.
+- **Trusting label/title text from screenshots.** OCR-ish reading of pixel text is unreliable. Read the prop in the source.
+
+### Open question
+
+Should the comparison pages assert prop equivalence at build time? A small lint rule that flags when `OursPane` and `LifeSGPane` pass materially different props would prevent demo-side divergence from ever being mistaken for a component bug. Out of scope for the pilot — note for later.

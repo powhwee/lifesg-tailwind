@@ -12,11 +12,10 @@ import { InputGroup as LifeSGInputGroup } from "@lifesg/react-design-system/inpu
 
 export function OursPane() {
   const [amount, setAmount] = useState("");
-  const [search, setSearch] = useState("");
   return (
     <div className="flex flex-col gap-10 max-w-md" data-token="default">
       <section>
-        <code className="text-xs text-muted-foreground">FormInputGroup — currency (prefix + suffix)</code>
+        <code className="text-xs text-muted-foreground">FormInputGroup — currency</code>
         <div className="mt-3">
           <FormInputGroup label="Amount" description="In Singapore dollars">
             <InputGroupAddon>$</InputGroupAddon>
@@ -26,7 +25,6 @@ export function OursPane() {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
-            <InputGroupAddon>SGD</InputGroupAddon>
           </FormInputGroup>
         </div>
       </section>
@@ -40,17 +38,11 @@ export function OursPane() {
         </div>
       </section>
       <section>
-        <code className="text-xs text-muted-foreground">action addon (right) + error</code>
+        <code className="text-xs text-muted-foreground">label addon (right)</code>
         <div className="mt-3">
-          <InputGroup error={search === "fail"}>
-            <InputGroupInput
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <InputGroupAddon className="cursor-pointer hover:bg-[var(--lifesg-bg-hover)]">
-              Go
-            </InputGroupAddon>
+          <InputGroup>
+            <InputGroupInput placeholder="Search..." />
+            <InputGroupAddon>Go</InputGroupAddon>
           </InputGroup>
         </div>
       </section>

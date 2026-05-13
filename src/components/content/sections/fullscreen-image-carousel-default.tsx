@@ -44,7 +44,7 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-4" data-token="default">
       <p className="text-xs text-muted-foreground">
-        Click to open. <kbd>ArrowLeft</kbd>/<kbd>ArrowRight</kbd> navigate, <kbd>Esc</kbd> dismisses.
+        Click to open.
       </p>
       <OursDemo />
     </div>

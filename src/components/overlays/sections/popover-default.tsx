@@ -2,8 +2,17 @@
 
 import { Info } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
 import { PopoverTrigger as LifeSGPopoverTrigger } from "@lifesg/react-design-system/popover-v2";
+
+const plainTriggerStyle = {
+  height: 40,
+  padding: "0 12px",
+  background: "transparent",
+  border: "1px solid #C7CACA",
+  borderRadius: 4,
+  cursor: "pointer",
+  fontWeight: 600,
+} as const;
 
 export function OursPane() {
   return (
@@ -14,9 +23,9 @@ export function OursPane() {
           <Popover>
             <PopoverTrigger
               render={(triggerProps) => (
-                <Button {...triggerProps} variant="outline" size="sm">
+                <button {...triggerProps} type="button" style={plainTriggerStyle}>
                   Open popover
-                </Button>
+                </button>
               )}
             />
             <PopoverContent className="p-3 w-64">
@@ -40,7 +49,7 @@ export function OursPane() {
                   aria-label="More info"
                   className="grid place-items-center size-8 rounded-md hover:bg-[var(--lifesg-bg-hover)]"
                 >
-                  <Info className="size-5 text-[var(--lifesg-icon-primary)]" />
+                  <Info className="size-5" />
                 </button>
               )}
             />
@@ -60,9 +69,9 @@ export function OursPane() {
           <Popover>
             <PopoverTrigger
               render={(triggerProps) => (
-                <Button {...triggerProps} variant="outline" size="sm">
+                <button {...triggerProps} type="button" style={plainTriggerStyle}>
                   Above + end
-                </Button>
+                </button>
               )}
             />
             <PopoverContent side="top" align="end" className="p-3 w-64">
