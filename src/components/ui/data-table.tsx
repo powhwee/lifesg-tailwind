@@ -132,7 +132,7 @@ export function DataTable({
       id={id}
       data-slot="data-table"
       className={cn(
-        "border border-[var(--data-table-border)] rounded-[var(--data-table-radius)] overflow-hidden",
+        "rounded-[var(--data-table-radius)] overflow-hidden",
         className
       )}
     >

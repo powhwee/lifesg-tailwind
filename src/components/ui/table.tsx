@@ -6,7 +6,7 @@ function TableContainer({ className, ...props }: React.HTMLAttributes<HTMLDivEle
     <div
       data-slot="table-container"
       className={cn(
-        "border border-[var(--table-border)] rounded-[var(--table-radius)] overflow-x-auto",
+        "rounded-[var(--table-radius)] overflow-hidden",
         className
       )}
       {...props}

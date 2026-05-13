@@ -26,7 +26,7 @@
   --input-text-placeholder:    var(--lifesg-text-subtler);
   --input-ring-focus:          color-mix(in srgb, var(--lifesg-border-focus) 30%, transparent);
   --input-ring-error:          color-mix(in srgb, var(--lifesg-bg-error-strong) 20%, transparent);
-  --input-icon:                var(--lifesg-icon-primary);
+  --input-icon:                var(--lifesg-icon);
   --input-icon-disabled:       var(--lifesg-text-disabled);
   --input-icon-hover-bg:       var(--lifesg-bg-hover);
   --input-counter-text:        var(--lifesg-text-subtle);
