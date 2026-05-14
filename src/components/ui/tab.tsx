@@ -60,7 +60,7 @@ function TabRoot({
       <div
         className={cn(
           "relative",
-          fullWidthIndicatorLine && "border-b border-[var(--tab-track-color)]"
+          fullWidthIndicatorLine && "border-b border-tab-track"
         )}
       >
         <Tabs.List activateOnFocus className="flex relative overflow-x-auto -mb-px">
@@ -69,7 +69,7 @@ function TabRoot({
               key={item.props.id ?? `${item.props.title}-${i}`}
               value={i}
               className={cn(
-                "shrink-0 px-[var(--tab-x)] py-[var(--tab-y)] text-base font-semibold whitespace-nowrap outline-none cursor-pointer text-[var(--tab-text)] hover:text-[var(--tab-text-hover)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--lifesg-border-focus)] aria-selected:text-[var(--tab-text-selected)] border-b-[3px] border-transparent aria-selected:border-[var(--tab-indicator-color)]"
+                "shrink-0 px-tab-x py-tab-y text-lg whitespace-nowrap outline-none cursor-pointer text-tab-text hover:text-tab-text-hover focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-lifesg-border-focus aria-selected:text-tab-text-selected aria-selected:font-semibold border-b-[3px] border-transparent aria-selected:border-tab-indicator"
               )}
               style={item.props.width ? { width: item.props.width } : undefined}
             >
@@ -83,7 +83,7 @@ function TabRoot({
         <Tabs.Panel
           key={item.props.id ?? `${item.props.title}-${i}-panel`}
           value={i}
-          className={cn("pt-[var(--tab-panel-pt)] outline-none", item.props.className)}
+          className={cn("pt-tab-panel-pt outline-none", item.props.className)}
         >
           {item.props.children}
         </Tabs.Panel>

@@ -265,6 +265,16 @@
   --color-otp-ring-focus:                    var(--otp-ring-focus);
   --color-otp-ring-error:                    var(--otp-ring-error);
 
+  /* L3 — tab */
+  --color-tab-text:                          var(--tab-text);
+  --color-tab-text-hover:                    var(--tab-text-hover);
+  --color-tab-text-selected:                 var(--tab-text-selected);
+  --color-tab-indicator:                     var(--tab-indicator-color);
+  --color-tab-track:                         var(--tab-track-color);
+  --spacing-tab-x:                           var(--tab-x);
+  --spacing-tab-y:                           var(--tab-y);
+  --spacing-tab-panel-pt:                    var(--tab-panel-pt);
+
   /* L3 — link-list */
   --color-link-list-link:                    var(--link-list-link);
   --color-link-list-border:                  var(--link-list-border);

@@ -63,7 +63,7 @@
 /* Layer 3 — Component tokens for Tab. */
 
 :root {
-  --tab-text:               var(--lifesg-text-subtle);
+  --tab-text:               var(--lifesg-text-subtler);
   --tab-text-hover:         var(--lifesg-text);
   --tab-text-selected:      var(--lifesg-text-primary);
   --tab-indicator-color:    var(--lifesg-bg-primary);
