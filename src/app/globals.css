@@ -134,6 +134,84 @@
   --color-filter-border:                     var(--filter-border);
   --color-filter-text-link:                  var(--filter-text-link);
 
+  /* L3 — button */
+  --color-button-bg-default:                 var(--button-bg-default);
+  --color-button-bg-default-hover:           var(--button-bg-default-hover);
+  --color-button-bg-outline:                 var(--button-bg-outline);
+  --color-button-bg-outline-hover:           var(--button-bg-outline-hover);
+  --color-button-bg-secondary:               var(--button-bg-secondary);
+  --color-button-bg-secondary-hover:         var(--button-bg-secondary-hover);
+  --color-button-bg-ghost:                   var(--button-bg-ghost);
+  --color-button-bg-ghost-hover:             var(--button-bg-ghost-hover);
+  --color-button-bg-destructive:             var(--button-bg-destructive);
+  --color-button-bg-destructive-hover:       var(--button-bg-destructive-hover);
+  --color-button-bg-disabled:                var(--button-bg-disabled);
+  --color-button-text-default:               var(--button-text-default);
+  --color-button-text-outline:               var(--button-text-outline);
+  --color-button-text-outline-hover:         var(--button-text-outline-hover);
+  --color-button-text-secondary:             var(--button-text-secondary);
+  --color-button-text-ghost:                 var(--button-text-ghost);
+  --color-button-text-destructive:           var(--button-text-destructive);
+  --color-button-text-disabled:              var(--button-text-disabled);
+  --color-button-text-link:                  var(--button-text-link);
+  --color-button-border-outline:             var(--button-border-outline);
+  --color-button-border-secondary:           var(--button-border-secondary);
+  --color-button-border-ghost:               var(--button-border-ghost);
+  --color-button-border-focus:               var(--button-border-focus);
+  --color-button-border-destructive-focus:   var(--button-border-destructive-focus);
+  --color-button-border-disabled:            var(--button-border-disabled);
+  --color-button-border-invalid:             var(--button-border-invalid);
+  --color-button-ring-focus:                 var(--button-ring-focus);
+  --color-button-ring-destructive-focus:     var(--button-ring-destructive-focus);
+  --color-button-ring-invalid:               var(--button-ring-invalid);
+  --leading-button:                          1.625rem;
+
+  /* L3 — icon-button */
+  --color-icon-button-bg-primary:            var(--icon-button-bg-primary);
+  --color-icon-button-bg-primary-hover:      var(--icon-button-bg-primary-hover);
+  --color-icon-button-bg-secondary:          var(--icon-button-bg-secondary);
+  --color-icon-button-bg-secondary-hover:    var(--icon-button-bg-secondary-hover);
+  --color-icon-button-bg-light:              var(--icon-button-bg-light);
+  --color-icon-button-bg-light-hover:        var(--icon-button-bg-light-hover);
+  --color-icon-button-bg-disabled:           var(--icon-button-bg-disabled);
+  --color-icon-button-text-primary:          var(--icon-button-text-primary);
+  --color-icon-button-text-secondary:        var(--icon-button-text-secondary);
+  --color-icon-button-text-light:            var(--icon-button-text-light);
+  --color-icon-button-text-disabled:         var(--icon-button-text-disabled);
+  --color-icon-button-border-secondary:      var(--icon-button-border-secondary);
+  --color-icon-button-ring-focus:            var(--icon-button-ring-focus);
+
+  /* L3 — input (shared by input, textarea, masked-input, input-group, select, multi-select, phone-number-input, unit-number-input, date-input, date-range-input, otp-input) */
+  --color-input-bg:                          var(--input-bg);
+  --color-input-bg-disabled:                 var(--input-bg-disabled);
+  --color-input-bg-readonly:                 var(--input-bg-readonly);
+  --color-input-border:                      var(--input-border);
+  --color-input-border-hover:                var(--input-border-hover);
+  --color-input-border-focus:                var(--input-border-focus);
+  --color-input-border-disabled:             var(--input-border-disabled);
+  --color-input-border-error:                var(--input-border-error);
+  --color-input-text:                        var(--input-text);
+  --color-input-text-disabled:               var(--input-text-disabled);
+  --color-input-text-placeholder:            var(--input-text-placeholder);
+  --color-input-ring-focus:                  var(--input-ring-focus);
+  --color-input-ring-error:                  var(--input-ring-error);
+  --color-input-icon:                        var(--input-icon);
+  --color-input-icon-disabled:               var(--input-icon-disabled);
+  --color-input-icon-hover-bg:               var(--input-icon-hover-bg);
+  --color-input-counter-text:                var(--input-counter-text);
+  --color-input-group-addon-bg:              var(--input-group-addon-bg);
+  --color-input-group-addon-text:            var(--input-group-addon-text);
+  --color-input-group-addon-border:          var(--input-group-addon-border);
+  --spacing-input-height:                    var(--input-height);
+  --spacing-input-padding-x:                 var(--input-padding-x);
+  --radius-input:                            var(--input-radius);
+  --text-input:                              var(--input-font-size);
+  --text-input--line-height:                 var(--input-line-height);
+
+  /* L1 — extra LifeSG semantic colors used as utilities */
+  --color-lifesg-border:                     var(--lifesg-border);
+  --color-lifesg-text-inverse:               var(--lifesg-text-inverse);
+
   /* L3 — feedback-rating */
   --color-feedback-rating-ring-focus:        var(--feedback-rating-ring-focus);
   --color-feedback-rating-star:              var(--feedback-rating-star);

@@ -11,23 +11,23 @@ export type IconButtonSizeType = "large" | "default" | "small";
 const iconButtonVariants = cva(
   cn(
     "inline-flex shrink-0 items-center justify-center rounded-md transition-colors outline-none cursor-pointer",
-    "focus-visible:ring-3 focus-visible:ring-[var(--icon-button-ring-focus)]",
-    "disabled:pointer-events-none disabled:bg-[var(--icon-button-bg-disabled)] disabled:text-[var(--icon-button-text-disabled)]",
+    "focus-visible:ring-3 focus-visible:ring-icon-button-ring-focus",
+    "disabled:pointer-events-none disabled:bg-icon-button-bg-disabled disabled:text-icon-button-text-disabled",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0"
   ),
   {
     variants: {
       styleType: {
         primary:
-          "bg-[var(--icon-button-bg-primary)] text-[var(--icon-button-text-primary)] hover:bg-[var(--icon-button-bg-primary-hover)]",
+          "bg-icon-button-bg-primary text-icon-button-text-primary hover:bg-icon-button-bg-primary-hover",
         secondary:
-          "bg-[var(--icon-button-bg-secondary)] text-[var(--icon-button-text-secondary)] border border-[var(--icon-button-border-secondary)] hover:bg-[var(--icon-button-bg-secondary-hover)]",
+          "bg-icon-button-bg-secondary text-icon-button-text-secondary border border-icon-button-border-secondary hover:bg-icon-button-bg-secondary-hover",
         light:
-          "bg-[var(--icon-button-bg-light)] text-[var(--icon-button-text-light)] hover:bg-[var(--icon-button-bg-light-hover)]",
+          "bg-icon-button-bg-light text-icon-button-text-light hover:bg-icon-button-bg-light-hover",
       },
       sizeType: {
-        large:   "size-14 [&_svg:not([class*='size-'])]:size-6",
-        default: "size-12 [&_svg:not([class*='size-'])]:size-5",
+        large:   "size-20 [&_svg:not([class*='size-'])]:size-8",
+        default: "size-14 [&_svg:not([class*='size-'])]:size-6",
         small:   "size-10 [&_svg:not([class*='size-'])]:size-4",
       },
     },
