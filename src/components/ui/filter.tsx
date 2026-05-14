@@ -26,25 +26,25 @@ function FilterRoot({
   customLabels,
   headerTitle,
 }: FilterRootProps) {
-  const title = customLabels?.headerTitle ?? headerTitle ?? "Filter";
+  const title = customLabels?.headerTitle ?? headerTitle ?? "Filters";
   const clearLabel = customLabels?.clearButtonLabel ?? "Clear";
   return (
     <aside
       id={id}
       data-slot="filter"
       className={cn(
-        "flex w-72 shrink-0 flex-col rounded-md border border-[var(--filter-border)] bg-[var(--filter-bg)]",
+        "flex w-72 shrink-0 flex-col rounded-md border border-filter-border bg-filter-bg",
         className
       )}
     >
-      <header className="flex items-center justify-between border-b border-[var(--filter-border)] px-4 py-3">
+      <header className="flex items-center justify-between border-b border-filter-border px-4 py-3">
         <h2 className="text-base font-semibold">{title}</h2>
         <button
           type="button"
           onClick={onClear}
           disabled={clearButtonDisabled}
           className={cn(
-            "text-sm font-semibold cursor-pointer text-[var(--filter-text-link)]",
+            "text-sm font-semibold cursor-pointer text-filter-text-link",
             "hover:underline disabled:opacity-50 disabled:cursor-not-allowed disabled:no-underline outline-none"
           )}
         >
@@ -89,12 +89,12 @@ function FilterItem({
     <Accordion.Item
       value={value}
       data-slot="filter-item"
-      className={cn(showDivider && "border-b border-[var(--filter-border)] last:border-b-0", className)}
+      className={cn(showDivider && "border-b border-filter-border last:border-b-0", className)}
       {...(expanded !== undefined ? { open: expanded, onOpenChange: onExpandChange } : { onOpenChange: onExpandChange })}
     >
       {collapsible ? (
         <Accordion.Header>
-          <Accordion.Trigger className="group/filter-item flex w-full items-center justify-between gap-2 px-4 py-3 text-left cursor-pointer outline-none focus-visible:bg-[var(--filter-bg-hover)]">
+          <Accordion.Trigger className="group/filter-item flex w-full items-center justify-between gap-2 px-4 py-3 text-left cursor-pointer outline-none focus-visible:bg-filter-bg-hover">
             <span className="text-sm font-semibold">{title}</span>
             <ChevronDown className="size-4 transition-transform group-data-[panel-open]/filter-item:rotate-180" />
           </Accordion.Trigger>
@@ -181,7 +181,7 @@ function FilterCheckbox<T extends FilterCheckboxOption>({
           <button
             type="button"
             onClick={() => setShowAll((s) => !s)}
-            className="self-start text-sm font-semibold text-[var(--filter-text-link)] hover:underline cursor-pointer outline-none"
+            className="self-start text-sm font-semibold text-filter-text-link hover:underline cursor-pointer outline-none"
           >
             {showAll ? "View less" : `View ${options.length - minimisedCount} more`}
           </button>

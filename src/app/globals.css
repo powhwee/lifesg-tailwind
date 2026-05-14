@@ -121,6 +121,19 @@
   --spacing-data-table-head-y:               var(--data-table-head-y);
   --radius-data-table:                       var(--data-table-radius);
 
+  /* L3 — date-navigator */
+  --color-date-navigator-bg:                 var(--date-navigator-bg);
+  --color-date-navigator-bg-hover:           var(--date-navigator-bg-hover);
+  --color-date-navigator-border:             var(--date-navigator-border);
+  --color-date-navigator-text-date:          var(--date-navigator-text-date);
+  --color-date-navigator-ring-focus:         var(--date-navigator-ring-focus);
+
+  /* L3 — filter */
+  --color-filter-bg:                         var(--filter-bg);
+  --color-filter-bg-hover:                   var(--filter-bg-hover);
+  --color-filter-border:                     var(--filter-border);
+  --color-filter-text-link:                  var(--filter-text-link);
+
   /* L3 — feedback-rating */
   --color-feedback-rating-ring-focus:        var(--feedback-rating-ring-focus);
   --color-feedback-rating-star:              var(--feedback-rating-star);

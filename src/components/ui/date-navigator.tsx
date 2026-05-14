@@ -24,6 +24,7 @@ export interface DateNavigatorProps {
 const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const MONTHS_LONG = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const DAYS_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const DAYS_LONG = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function parseIso(s: string): Date {
   const [y, m, d] = s.split("-").map(Number);
@@ -56,7 +57,7 @@ function formatDate(iso: string, opts: { short: boolean; today: boolean; view: "
   const month = (opts.short ? MONTHS_SHORT : MONTHS_LONG)[d.getMonth()];
   const dateStr = `${d.getDate()} ${month} ${d.getFullYear()}`;
   if (opts.today && isToday(d)) return `${dateStr}, Today`;
-  const dayName = DAYS_SHORT[d.getDay()];
+  const dayName = (opts.short ? DAYS_SHORT : DAYS_LONG)[d.getDay()];
   return `${dateStr}, ${dayName}`;
 }
 
@@ -100,7 +101,7 @@ function DateNavigator({
     <div
       id={id}
       className={cn(
-        "inline-flex items-center gap-2 rounded-md border border-[var(--date-navigator-border)] bg-[var(--date-navigator-bg)] p-1",
+        "inline-flex items-center gap-2 rounded-md border border-date-navigator-border bg-date-navigator-bg p-1",
         className
       )}
     >
@@ -109,7 +110,7 @@ function DateNavigator({
         aria-label="Previous"
         disabled={!canGoBack}
         onClick={() => onLeftArrowClick(shiftIso(selectedDate, -step))}
-        className="size-10 inline-flex items-center justify-center rounded-md hover:bg-[var(--date-navigator-bg-hover)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-[var(--date-navigator-ring-focus)]"
+        className="size-10 inline-flex items-center justify-center rounded-md hover:bg-date-navigator-bg-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
       >
         <ChevronLeft className="size-5" />
       </button>
@@ -117,10 +118,10 @@ function DateNavigator({
       {onCalendarDateSelect ? (
         <Popover>
           <PopoverTrigger
-            className="inline-flex items-center gap-2 px-3 h-10 rounded-md text-sm font-semibold hover:bg-[var(--date-navigator-bg-hover)] cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-[var(--date-navigator-ring-focus)]"
+            className="inline-flex items-center gap-2 px-3 h-10 rounded-md text-sm font-semibold hover:bg-date-navigator-bg-hover cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
             disabled={loading}
           >
-            <span className="min-w-[12rem] text-center">{display}</span>
+            <span className="min-w-[12rem] text-center text-date-navigator-text-date font-bold">{display}</span>
           </PopoverTrigger>
           <PopoverContent sideOffset={6} align="center">
             <Calendar
@@ -134,7 +135,7 @@ function DateNavigator({
           </PopoverContent>
         </Popover>
       ) : (
-        <span className="px-3 h-10 inline-flex items-center text-sm font-semibold min-w-[12rem] justify-center">
+        <span className="px-3 h-10 inline-flex items-center text-sm font-bold min-w-[12rem] justify-center">
           {display}
         </span>
       )}
@@ -144,7 +145,7 @@ function DateNavigator({
         aria-label="Next"
         disabled={!canGoForward}
         onClick={() => onRightArrowClick(shiftIso(selectedDate, step))}
-        className="size-10 inline-flex items-center justify-center rounded-md hover:bg-[var(--date-navigator-bg-hover)] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-[var(--date-navigator-ring-focus)]"
+        className="size-10 inline-flex items-center justify-center rounded-md hover:bg-date-navigator-bg-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
       >
         <ChevronRight className="size-5" />
       </button>

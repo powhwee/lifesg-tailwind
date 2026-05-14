@@ -229,6 +229,8 @@
 
   --date-navigator-border:            var(--lifesg-border);
 
+  --date-navigator-text-date:         var(--lifesg-text-primary);
+
   --date-navigator-ring-focus:        color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
 }
 
