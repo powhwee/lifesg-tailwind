@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 const checkboxVariants = cva(
   cn(
     "peer inline-flex shrink-0 items-center justify-center rounded-sm border bg-clip-padding outline-none transition-colors cursor-pointer",
-    "border-[var(--checkbox-border)] bg-[var(--checkbox-bg)] text-[var(--checkbox-text)]",
-    "hover:border-[var(--checkbox-border-hover)] hover:bg-[var(--checkbox-bg-hover)]",
-    "focus-visible:ring-3 focus-visible:ring-[var(--checkbox-ring-focus)]",
-    "data-[checked]:bg-[var(--checkbox-bg-checked)] data-[checked]:border-[var(--checkbox-border-checked)] data-[checked]:text-[var(--checkbox-text-checked)]",
-    "data-[indeterminate]:bg-[var(--checkbox-bg-checked)] data-[indeterminate]:border-[var(--checkbox-border-checked)] data-[indeterminate]:text-[var(--checkbox-text-checked)]",
-    "data-[disabled]:bg-[var(--checkbox-bg-disabled)] data-[disabled]:border-[var(--checkbox-border-disabled)] data-[disabled]:text-[var(--checkbox-text-disabled)] data-[disabled]:cursor-not-allowed",
-    "aria-invalid:border-[var(--checkbox-border-error)] aria-invalid:ring-3 aria-invalid:ring-[var(--checkbox-ring-error)]"
+    "border-checkbox-border bg-checkbox-bg text-checkbox-text",
+    "hover:border-checkbox-border-hover hover:bg-checkbox-bg-hover",
+    "focus-visible:ring-3 focus-visible:ring-checkbox-ring-focus",
+    "data-[checked]:bg-checkbox-bg-checked data-[checked]:border-checkbox-border-checked data-[checked]:text-checkbox-text-checked",
+    "data-[indeterminate]:bg-checkbox-bg-checked data-[indeterminate]:border-checkbox-border-checked data-[indeterminate]:text-checkbox-text-checked",
+    "data-[disabled]:bg-checkbox-bg-disabled data-[disabled]:border-checkbox-border-disabled data-[disabled]:text-checkbox-text-disabled data-[disabled]:cursor-not-allowed",
+    "aria-invalid:border-checkbox-border-error aria-invalid:ring-3 aria-invalid:ring-checkbox-ring-error"
   ),
   {
     variants: {

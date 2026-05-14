@@ -135,6 +135,22 @@
   --color-breadcrumb-text-current:           var(--breadcrumb-text-current);
   --color-breadcrumb-separator:              var(--breadcrumb-separator);
 
+  /* L3 — checkbox */
+  --color-checkbox-bg:                       var(--checkbox-bg);
+  --color-checkbox-bg-hover:                 var(--checkbox-bg-hover);
+  --color-checkbox-bg-checked:               var(--checkbox-bg-checked);
+  --color-checkbox-bg-disabled:              var(--checkbox-bg-disabled);
+  --color-checkbox-border:                   var(--checkbox-border);
+  --color-checkbox-border-hover:             var(--checkbox-border-hover);
+  --color-checkbox-border-checked:           var(--checkbox-border-checked);
+  --color-checkbox-border-disabled:          var(--checkbox-border-disabled);
+  --color-checkbox-border-error:             var(--checkbox-border-error);
+  --color-checkbox-text:                     var(--checkbox-text);
+  --color-checkbox-text-checked:             var(--checkbox-text-checked);
+  --color-checkbox-text-disabled:            var(--checkbox-text-disabled);
+  --color-checkbox-ring-focus:               var(--checkbox-ring-focus);
+  --color-checkbox-ring-error:               var(--checkbox-ring-error);
+
   /* L3 — date-navigator */
   --color-date-navigator-bg:                 var(--date-navigator-bg);
   --color-date-navigator-bg-hover:           var(--date-navigator-bg-hover);
