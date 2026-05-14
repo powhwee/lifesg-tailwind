@@ -41,18 +41,16 @@ function LinkListItemView({
         {...rest}
         onClick={handle}
         className={cn(
-          "group flex items-start gap-4 py-4 border-b border-[var(--link-list-border)] last:border-b-0",
-          "outline-none focus-visible:bg-[var(--lifesg-bg-hover)]",
+          "group flex items-start gap-4 py-4 border-b border-link-list-border last:border-b-0",
+          "outline-none focus-visible:bg-lifesg-bg-hover",
           className
         )}
       >
         <div className="flex-1 min-w-0">
           <div
             className={cn(
-              "text-[var(--link-list-link)] underline-offset-4 group-hover:underline font-semibold",
-              size === "default"
-                ? "[font-size:var(--link-list-title-default-size)] [line-height:var(--link-list-title-default-line)]"
-                : "[font-size:var(--link-list-title-small-size)] [line-height:var(--link-list-title-small-line)]"
+              "text-link-list-link underline-offset-4 group-hover:underline font-semibold",
+              size === "default" ? "text-link-list-title-default" : "text-link-list-title-small"
             )}
           >
             {title}
@@ -60,17 +58,15 @@ function LinkListItemView({
           {description && (
             <div
               className={cn(
-                "mt-1 text-[var(--lifesg-text)]",
-                size === "default"
-                  ? "[font-size:var(--link-list-desc-default-size)] [line-height:var(--link-list-desc-default-line)]"
-                  : "[font-size:var(--link-list-desc-small-size)] [line-height:var(--link-list-desc-small-line)]"
+                "mt-1 text-lifesg-text",
+                size === "default" ? "text-link-list-desc-default" : "text-link-list-desc-small"
               )}
             >
               {description}
             </div>
           )}
           {secondaryDescription && (
-            <div className="mt-1 text-sm text-[var(--lifesg-text-subtle)]">
+            <div className="mt-1 text-sm text-lifesg-text-subtle">
               {secondaryDescription}
             </div>
           )}
@@ -78,7 +74,7 @@ function LinkListItemView({
         <ChevronRight
           aria-hidden="true"
           size={20}
-          className="shrink-0 mt-1 text-[var(--link-list-link)]"
+          className="shrink-0 mt-1 text-link-list-link"
         />
       </a>
     </li>
@@ -98,7 +94,7 @@ function LinkList({
   const visible = !canCollapse || expanded ? items : items.slice(0, maxShown);
   const hiddenCount = items.length - (maxShown ?? items.length);
   return (
-    <div className={cn("text-[var(--lifesg-text)]", className)}>
+    <div className={cn("text-lifesg-text", className)}>
       <ul className="list-none m-0 p-0">
         {visible.map((item, i) => (
           <LinkListItemView key={i} item={item} size={style} onItemClick={onItemClick} />
@@ -108,7 +104,7 @@ function LinkList({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-4 inline-flex items-center gap-2 text-[var(--link-list-link)] font-semibold hover:underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)] rounded"
+          className="w-full flex items-center justify-center gap-2 py-4 border-t border-link-list-border text-link-list-link font-semibold hover:underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-lifesg-border-focus"
         >
           {expanded
             ? (customLabels?.viewLess ?? "View less")

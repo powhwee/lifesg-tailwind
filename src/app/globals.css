@@ -265,6 +265,18 @@
   --color-otp-ring-focus:                    var(--otp-ring-focus);
   --color-otp-ring-error:                    var(--otp-ring-error);
 
+  /* L3 — link-list */
+  --color-link-list-link:                    var(--link-list-link);
+  --color-link-list-border:                  var(--link-list-border);
+  --text-link-list-title-default:            var(--link-list-title-default-size);
+  --text-link-list-title-default--line-height: var(--link-list-title-default-line);
+  --text-link-list-title-small:              var(--link-list-title-small-size);
+  --text-link-list-title-small--line-height: var(--link-list-title-small-line);
+  --text-link-list-desc-default:             var(--link-list-desc-default-size);
+  --text-link-list-desc-default--line-height: var(--link-list-desc-default-line);
+  --text-link-list-desc-small:               var(--link-list-desc-small-size);
+  --text-link-list-desc-small--line-height:  var(--link-list-desc-small-line);
+
   /* L3 — local-nav */
   --color-local-nav-bg:                      var(--local-nav-bg);
   --color-local-nav-bg-hover:                var(--local-nav-bg-hover);
