@@ -32,7 +32,7 @@
 
 :root {
   --link-list-link:                 var(--lifesg-text-primary);
-  --link-list-border:               var(--lifesg-border-subtle);
+  --link-list-border:               var(--lifesg-border);
 
   /* default size */
   --link-list-title-default-size:   1.375rem; /* 22px — HeadingSM */
@@ -83,8 +83,8 @@
   --local-nav-bg-selected:      var(--lifesg-bg-selected);
   --local-nav-text:             var(--lifesg-text);
   --local-nav-text-selected:    var(--lifesg-text-selected);
-  --local-nav-border:           var(--lifesg-border-subtle);
-  --local-nav-rail:             var(--lifesg-border-subtle);
+  --local-nav-border:           var(--lifesg-border);
+  --local-nav-rail:             var(--lifesg-border);
   --local-nav-rail-selected:    var(--lifesg-bg-primary);
 }
 
@@ -96,7 +96,7 @@
   --sidenav-bg-hover:          var(--lifesg-bg-hover);
   --sidenav-bg-selected:       var(--lifesg-bg-selected);
   --sidenav-drawer-bg:         var(--lifesg-bg);
-  --sidenav-border:            var(--lifesg-border-subtle);
+  --sidenav-border:            var(--lifesg-border);
   --sidenav-icon:              var(--lifesg-icon);
   --sidenav-icon-selected:     var(--lifesg-icon-primary);
   --sidenav-text:              var(--lifesg-text);
@@ -110,7 +110,7 @@
   --navbar-bg:               var(--lifesg-bg);
   --navbar-bg-hover:         var(--lifesg-bg-hover);
   --navbar-text:             var(--lifesg-text);
-  --navbar-border:           var(--lifesg-border-subtle);
+  --navbar-border:           var(--lifesg-border);
   --navbar-indicator:        var(--lifesg-bg-primary);
 }
 
@@ -121,6 +121,6 @@
   --footer-bg:               var(--lifesg-bg-strong);
   --footer-text:             var(--lifesg-text);
   --footer-link:             var(--lifesg-text);
-  --footer-border:           var(--lifesg-border-subtle);
+  --footer-border:           var(--lifesg-border);
 }
 

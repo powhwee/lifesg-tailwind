@@ -36,7 +36,7 @@ function Menu({ items, selectedItemIndex, onNavItemSelect, renderItem, className
     <nav
       id={id}
       aria-label="Local navigation"
-      className={cn("w-full bg-[var(--local-nav-bg)]", className)}
+      className={cn("w-full bg-local-nav-bg", className)}
     >
       <ul className="flex flex-col list-none m-0 p-0">
         {items.map((item, i) => {
@@ -48,8 +48,8 @@ function Menu({ items, selectedItemIndex, onNavItemSelect, renderItem, className
                 aria-current={selected ? "true" : undefined}
                 onClick={(e) => onNavItemSelect(e, item, i)}
                 className={cn(
-                  "w-full text-left flex items-center pl-6 pr-4 py-3 text-[1.125rem] leading-snug text-[var(--local-nav-text)] hover:bg-[var(--local-nav-bg-hover)] outline-none focus-visible:bg-[var(--local-nav-bg-hover)] border-l-[3px] border-[var(--local-nav-rail)]",
-                  selected && "border-[var(--local-nav-rail-selected)] font-semibold"
+                  "w-full text-left flex items-center pl-5 pr-4 py-4 text-base leading-6 text-local-nav-text hover:bg-local-nav-bg-hover outline-none focus-visible:bg-local-nav-bg-hover border-l-[3px] border-local-nav-rail",
+                  selected && "border-local-nav-rail-selected font-semibold"
                 )}
               >
                 {renderItem ? renderItem(item, { selected }) : item.title}
@@ -96,7 +96,7 @@ function Dropdown({
     <div
       ref={ref}
       id={id}
-      className={cn("sticky z-30 w-full bg-[var(--local-nav-bg)]", className)}
+      className={cn("sticky z-30 w-full bg-local-nav-bg", className)}
       style={{ top: stickyOffset }}
     >
       <button
@@ -104,7 +104,7 @@ function Dropdown({
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "w-full flex items-center justify-between gap-2 px-4 h-14 text-left text-[var(--local-nav-text)] font-semibold border border-[var(--local-nav-border)] rounded-md bg-[var(--local-nav-bg)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)]",
+          "w-full flex items-center justify-between gap-2 px-4 h-14 text-left text-local-nav-text font-semibold border border-local-nav-border rounded-md bg-local-nav-bg outline-none focus-visible:ring-2 focus-visible:ring-lifesg-border-focus",
           stickied && "shadow-sm"
         )}
       >
@@ -112,7 +112,7 @@ function Dropdown({
         <ChevronDown size={18} className={cn("transition-transform shrink-0", open && "rotate-180")} />
       </button>
       {open && (
-        <ul className="list-none m-0 px-0 py-1 mt-1 border border-[var(--local-nav-border)] rounded-md bg-[var(--local-nav-bg)] shadow-md">
+        <ul className="list-none m-0 px-0 py-1 mt-1 border border-local-nav-border rounded-md bg-local-nav-bg shadow-md">
           {items.map((item, i) => {
             const isSelected = i === selectedItemIndex;
             return (
@@ -122,8 +122,8 @@ function Dropdown({
                   aria-current={isSelected ? "true" : undefined}
                   onClick={(e) => { onNavItemSelect(e, item, i); setOpen(false); }}
                   className={cn(
-                    "w-full text-left px-4 h-10 text-[var(--local-nav-text)] hover:bg-[var(--local-nav-bg-hover)] outline-none focus-visible:bg-[var(--local-nav-bg-hover)]",
-                    isSelected && "bg-[var(--local-nav-bg-selected)] text-[var(--local-nav-text-selected)] font-semibold"
+                    "w-full text-left px-4 h-10 text-local-nav-text hover:bg-local-nav-bg-hover outline-none focus-visible:bg-local-nav-bg-hover",
+                    isSelected && "bg-local-nav-bg-selected text-local-nav-text-selected font-semibold"
                   )}
                 >
                   {renderItem ? renderItem(item, { selected: isSelected, stickied }) : item.title}

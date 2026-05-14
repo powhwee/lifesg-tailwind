@@ -265,6 +265,16 @@
   --color-otp-ring-focus:                    var(--otp-ring-focus);
   --color-otp-ring-error:                    var(--otp-ring-error);
 
+  /* L3 — local-nav */
+  --color-local-nav-bg:                      var(--local-nav-bg);
+  --color-local-nav-bg-hover:                var(--local-nav-bg-hover);
+  --color-local-nav-bg-selected:             var(--local-nav-bg-selected);
+  --color-local-nav-text:                    var(--local-nav-text);
+  --color-local-nav-text-selected:           var(--local-nav-text-selected);
+  --color-local-nav-border:                  var(--local-nav-border);
+  --color-local-nav-rail:                    var(--local-nav-rail);
+  --color-local-nav-rail-selected:           var(--local-nav-rail-selected);
+
   /* L3 — table */
   --color-table-head-bg:                     var(--table-head-bg);
   --color-table-head-text:                   var(--table-head-text);
