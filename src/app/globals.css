@@ -77,6 +77,15 @@
   --color-lifesg-bg-primary:                 var(--lifesg-bg-primary);
   --color-lifesg-border-focus:               var(--lifesg-border-focus);
 
+  /* L3 — accordion */
+  --color-accordion-border:                  var(--accordion-border);
+  --color-accordion-divider:                 var(--accordion-divider);
+  --spacing-accordion-x:                     var(--accordion-x);
+  --radius-accordion:                        var(--accordion-radius);
+
+  /* L1 — extra LifeSG colors */
+  --color-lifesg-bg:                         var(--lifesg-bg);
+
   /* L3 — box-container */
   --color-box-container-bg:                  var(--box-container-bg);
   --color-box-container-border:              var(--box-container-border);
@@ -120,6 +129,11 @@
   --spacing-data-table-cell-y:               var(--data-table-cell-y);
   --spacing-data-table-head-y:               var(--data-table-head-y);
   --radius-data-table:                       var(--data-table-radius);
+
+  /* L3 — breadcrumb */
+  --color-breadcrumb-text:                   var(--breadcrumb-text);
+  --color-breadcrumb-text-current:           var(--breadcrumb-text-current);
+  --color-breadcrumb-separator:              var(--breadcrumb-separator);
 
   /* L3 — date-navigator */
   --color-date-navigator-bg:                 var(--date-navigator-bg);

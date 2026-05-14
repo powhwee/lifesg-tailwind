@@ -105,7 +105,7 @@
 :root {
   --toggle-bg:                    var(--lifesg-bg);
   --toggle-bg-hover:              var(--lifesg-bg-hover);
-  --toggle-bg-checked:            color-mix(in srgb, var(--lifesg-bg-primary) 5%, var(--lifesg-bg));
+  --toggle-bg-checked:            color-mix(in srgb, var(--lifesg-bg-primary) 12%, var(--lifesg-bg));
   --toggle-bg-disabled:           var(--lifesg-bg-disabled);
   --toggle-bg-error:              color-mix(in srgb, var(--lifesg-bg-error-strong) 5%, var(--lifesg-bg));
 

@@ -12,7 +12,7 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
 function Separator({ kind }: { kind: "chevron" | "slash" }) {
   if (kind === "slash") {
     return (
-      <span aria-hidden="true" className="text-[var(--breadcrumb-separator)] select-none px-1">
+      <span aria-hidden="true" className="text-breadcrumb-separator select-none px-1">
         /
       </span>
     );
@@ -20,9 +20,9 @@ function Separator({ kind }: { kind: "chevron" | "slash" }) {
   return (
     <ChevronRight
       aria-hidden="true"
-      className="text-[var(--breadcrumb-separator)] shrink-0"
-      size={16}
-      strokeWidth={2}
+      className="text-breadcrumb-separator shrink-0"
+      size={14}
+      strokeWidth={1.75}
     />
   );
 }
@@ -37,7 +37,7 @@ function Breadcrumb({
     <nav
       aria-label="Breadcrumb"
       className={cn(
-        "text-[var(--breadcrumb-text)] [font-size:var(--breadcrumb-font-size)] [line-height:var(--breadcrumb-line-height)] [letter-spacing:var(--breadcrumb-letter-spacing)]",
+        "text-breadcrumb-text text-base leading-6",
         className
       )}
       {...props}
@@ -52,10 +52,10 @@ function Breadcrumb({
                 <a
                   aria-current={isLast ? "page" : undefined}
                   className={cn(
-                    "underline-offset-4 hover:underline truncate font-semibold",
+                    "underline-offset-4 hover:underline truncate",
                     isLast
-                      ? "text-[var(--breadcrumb-text-current)] pointer-events-none"
-                      : "text-[var(--breadcrumb-text)]",
+                      ? "text-breadcrumb-text-current pointer-events-none font-semibold"
+                      : "text-breadcrumb-text",
                     linkClassName
                   )}
                   {...rest}
