@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { OTPFieldPreview as OTPField } from "@base-ui/react/otp-field";
+import { CircleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -87,8 +88,8 @@ function OtpInput({
       >
         {prefix && (
           <>
-            <span className="text-base font-semibold text-[var(--otp-prefix)]">{prefix.value}</span>
-            <span aria-hidden="true" className="text-base text-[var(--otp-prefix)]">{prefix.separator}</span>
+            <span className="text-base font-semibold text-otp-prefix">{prefix.value}</span>
+            <span aria-hidden="true" className="text-base text-otp-prefix">{prefix.separator}</span>
           </>
         )}
         {Array.from({ length: numOfInput }).map((_, i) => (
@@ -96,32 +97,34 @@ function OtpInput({
             key={i}
             aria-invalid={isError || undefined}
             className={cn(
-              "size-14 rounded-lg border bg-[var(--otp-bg)] text-center text-lg font-semibold outline-none transition-colors",
-              "border-[var(--otp-border)] text-[var(--otp-text)]",
-              "focus:border-[var(--otp-border-focus)] focus:ring-3 focus:ring-[var(--otp-ring-focus)]",
-              "aria-invalid:border-[var(--otp-border-error)] aria-invalid:ring-3 aria-invalid:ring-[var(--otp-ring-error)]"
+              "size-14 rounded-lg border bg-otp-bg text-center text-lg font-semibold outline-none transition-colors",
+              "border-otp-border text-otp-text",
+              "focus:border-otp-border-focus focus:ring-3 focus:ring-otp-ring-focus",
+              "aria-invalid:border-otp-border-error aria-invalid:ring-3 aria-invalid:ring-otp-ring-error"
             )}
           />
         ))}
       </OTPField.Root>
 
       {errorMessage && (
-        <p className="text-sm text-[var(--otp-text-error)]">{errorMessage}</p>
+        <p className="flex items-center gap-2 text-sm text-otp-text-error">
+          <CircleAlert aria-hidden className="size-4 shrink-0" fill="currentColor" stroke="white" strokeWidth={2} />
+          <span>{errorMessage}</span>
+        </p>
       )}
 
       {!otpOnly && (
         <div className="flex flex-col gap-3">
           <Button
-            variant="outline"
             className="w-full"
             {...actionButtonProps}
             onClick={handleClick}
-            disabled={(actionButtonProps?.disabled ?? false) || remaining > 0}
+            disabled={(actionButtonProps?.disabled ?? false) || remaining > 0 || otpString.length < numOfInput}
           >
             {actionButtonProps?.children ?? "Verify"}
           </Button>
           {remaining > 0 && (
-            <span className="text-sm text-[var(--lifesg-text-subtle)] text-center">Resend in {remaining}s</span>
+            <span className="text-sm text-lifesg-text-subtle text-center">Resend in {remaining}s</span>
           )}
         </div>
       )}

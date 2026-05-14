@@ -238,6 +238,17 @@
   --color-footer-link:                       var(--footer-link);
   --color-footer-text:                       var(--footer-text);
 
+  /* L3 — otp-input */
+  --color-otp-bg:                            var(--otp-bg);
+  --color-otp-border:                        var(--otp-border);
+  --color-otp-border-focus:                  var(--otp-border-focus);
+  --color-otp-border-error:                  var(--otp-border-error);
+  --color-otp-text:                          var(--otp-text);
+  --color-otp-text-error:                    var(--otp-text-error);
+  --color-otp-prefix:                        var(--otp-prefix);
+  --color-otp-ring-focus:                    var(--otp-ring-focus);
+  --color-otp-ring-error:                    var(--otp-ring-error);
+
   /* L3 — table */
   --color-table-head-bg:                     var(--table-head-bg);
   --color-table-head-text:                   var(--table-head-text);
