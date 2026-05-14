@@ -265,6 +265,20 @@
   --color-otp-ring-focus:                    var(--otp-ring-focus);
   --color-otp-ring-error:                    var(--otp-ring-error);
 
+  /* L3 — radio */
+  --color-radio-bg:                          var(--radio-bg);
+  --color-radio-bg-hover:                    var(--radio-bg-hover);
+  --color-radio-bg-disabled:                 var(--radio-bg-disabled);
+  --color-radio-border:                      var(--radio-border);
+  --color-radio-border-hover:                var(--radio-border-hover);
+  --color-radio-border-checked:              var(--radio-border-checked);
+  --color-radio-border-disabled:             var(--radio-border-disabled);
+  --color-radio-border-error:                var(--radio-border-error);
+  --color-radio-dot:                         var(--radio-dot);
+  --color-radio-dot-disabled:                var(--radio-dot-disabled);
+  --color-radio-ring-focus:                  var(--radio-ring-focus);
+  --color-radio-ring-error:                  var(--radio-ring-error);
+
   /* L3 — tab */
   --color-tab-text:                          var(--tab-text);
   --color-tab-text-hover:                    var(--tab-text-hover);

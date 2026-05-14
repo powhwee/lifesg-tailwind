@@ -84,7 +84,7 @@
 :root {
   --radio-bg:                     var(--lifesg-bg);
   --radio-bg-hover:               var(--lifesg-bg-hover);
-  --radio-bg-disabled:            var(--lifesg-bg-disabled);
+  --radio-bg-disabled:            var(--lifesg-bg);
 
   --radio-border:                 var(--lifesg-border);
   --radio-border-hover:           var(--lifesg-border-hover);
