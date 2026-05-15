@@ -2,10 +2,11 @@
 @import "tw-animate-css";
 
 /* Tailwind 4 auto-detects sources; exclude scripts/ and working-logs/ so
-   audit/documentation files with literal `text-[var(--...)]` placeholders
+   audit/documentation files containing arbitrary-value placeholder strings
    don't get parsed as class candidates. */
 @source not "../../scripts";
 @source not "../../working-logs";
+@source not "../../README.md";
 @import "shadcn/tailwind.css";
 @import "./lifesg-tokens.css";
 @import "./core-tokens.css";
