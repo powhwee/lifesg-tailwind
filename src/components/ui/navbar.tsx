@@ -78,7 +78,7 @@ function Navbar({
   return (
     <div className={cn(fixed && "fixed top-0 left-0 right-0 z-40", "bg-[var(--navbar-bg)] border-b border-[var(--navbar-border)]", className)}>
       {masthead && <Masthead />}
-      <div className="@container max-w-screen-xl mx-auto h-16 px-4 flex items-center gap-6">
+      <div className="@container max-w-screen-xl mx-auto h-24 px-4 flex items-center gap-6">
         <a
           href={brand.href ?? "#"}
           aria-label={brand.brandName}
@@ -102,8 +102,8 @@ function Navbar({
                 onClick={item.onClick}
                 aria-current={selected ? "page" : undefined}
                 className={cn(
-                  "relative inline-flex items-center h-16 px-4 text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)] outline-none focus-visible:bg-[var(--navbar-bg-hover)]",
-                  selected && "after:content-[''] after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:bg-[var(--navbar-indicator)] font-semibold"
+                  "relative inline-flex items-center h-24 px-4 text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)] outline-none focus-visible:bg-[var(--navbar-bg-hover)]",
+                  selected && "after:content-[''] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-[var(--navbar-indicator)] font-semibold"
                 )}
               >
                 {item.label}
