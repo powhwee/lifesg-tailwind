@@ -42,5 +42,3 @@ await page.waitForTimeout(400);
 dialog = await page.locator('[role="dialog"]').count();
 console.log("Backdrop click attempt:", clicked, "dialog count =", dialog);
 await browser.close();
-
-await browser.close();

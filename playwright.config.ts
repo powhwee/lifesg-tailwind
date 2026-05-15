@@ -1,6 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 3100;
+// Single dev server: Next 16 blocks a second `next dev` instance even on a
+// different port, so the test runner reuses whatever is already on PORT.
+const PORT = 3000;
 const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
@@ -20,7 +22,7 @@ export default defineConfig({
   webServer: {
     command: `npx next dev --port ${PORT}`,
     url: BASE_URL,
-    reuseExistingServer: false,
+    reuseExistingServer: true,
     timeout: 120_000,
   },
   expect: {

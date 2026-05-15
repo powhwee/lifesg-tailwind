@@ -47,8 +47,19 @@ page.on("console", (msg) => {
 let failed = 0;
 for (const route of routes) {
   allErrors.length = 0;
+  const isIntro = route.endsWith("/introduction");
   const resp = await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
-  await page.waitForTimeout(500);
+  if (!isIntro) {
+    await page
+      .locator('[data-testid="navigation-ours"]')
+      .waitFor({ state: "visible", timeout: 10_000 })
+      .catch(() => {});
+    await page
+      .locator('[data-testid="navigation-lifesg"]')
+      .waitFor({ state: "visible", timeout: 10_000 })
+      .catch(() => {});
+  }
+  await page.waitForTimeout(200);
   const status = resp?.status() ?? 0;
   const hasOurs = (await page.locator('[data-testid="navigation-ours"]').count()) > 0;
   const hasLifesg = (await page.locator('[data-testid="navigation-lifesg"]').count()) > 0;
