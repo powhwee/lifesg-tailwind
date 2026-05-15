@@ -32,11 +32,11 @@ function Sidenav({ children, fixed = true, className, id, "aria-label": ariaLabe
         aria-label={ariaLabel}
         className={cn(
           "flex bg-[var(--sidenav-bg)] text-[var(--sidenav-text)] border-r border-[var(--sidenav-border)]",
-          fixed && "fixed left-0 top-0 bottom-0 z-30",
+          fixed ? "fixed left-0 top-0 bottom-0 z-30" : "h-full",
           className
         )}
       >
-        <nav className="w-[5.5rem] flex flex-col items-stretch py-4">
+        <nav className="w-[8.5rem] flex flex-col items-stretch py-4">
           {children}
         </nav>
         <DrawerPanel>{children}</DrawerPanel>
