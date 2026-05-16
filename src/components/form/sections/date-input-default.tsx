@@ -25,7 +25,7 @@ export function OursPane() {
       <section>
         <code className="text-xs text-muted-foreground">withButton — calendar shows Cancel/Done</code>
         <div className="mt-3">
-          <DateInput value={b} onChange={setB} withButton placeholder="Pick a date" />
+          <DateInput value={b} onChange={setB} withButton />
         </div>
       </section>
       <section>

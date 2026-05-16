@@ -25,6 +25,8 @@ interface PopoverContentProps extends React.ComponentProps<typeof PopoverPrimiti
   positionerClassName?: string;
   /** Portal container; defaults to document.body. Pass a ref for the LifeSG `rootNode` equivalent. */
   container?: React.ComponentProps<typeof PopoverPrimitive.Portal>["container"];
+  /** Explicit anchor element; defaults to the Popover.Trigger. */
+  anchor?: PopoverPrimitive.Positioner.Props["anchor"];
 }
 
 function PopoverContent({
@@ -34,6 +36,7 @@ function PopoverContent({
   align,
   side,
   container,
+  anchor,
   children,
   ...popupProps
 }: PopoverContentProps) {
@@ -43,6 +46,7 @@ function PopoverContent({
         sideOffset={sideOffset}
         align={align}
         side={side}
+        anchor={anchor}
         className={positionerClassName}
       >
         <PopoverPrimitive.Popup
