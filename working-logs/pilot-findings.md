@@ -815,3 +815,51 @@ Added `@source not "../../README.md"` to the exclusion list. Anything new at the
 | **Pagination** | First/last jumpers are `ChevronFirst`/`ChevronLast` icons (`|<` / `>|`), not `ChevronsLeft`/`ChevronsRight` (`<<` / `>>`). The page-size selector is a Base UI Select with compact labels ("10" not "10 / page"), not a native `<select>`. |
 
 These supplement, not replace, the per-component probes — anyone touching these components in a re-theme should re-probe before assuming the values still hold.
+
+---
+
+## 2026-05-17 — "Parity test" vs "regression test": a terminology trap
+
+### What happened
+
+Late in the pilot, a tech-lead spot-check on `screenshots/content_table_default.png` exposed obvious divergence between ours and LifeSG (row height ~20px taller per row, missing outer border + radius, full-width vs inset row dividers). I had previously reported "all parity tests pass," which was misleading on two counts:
+
+1. **`tests/parity.spec.ts`'s visual snapshot is a regression test, not a parity test.** It compares the current render against a baseline PNG in `tests/parity.spec.ts-snapshots/`. The baseline was captured *with* the divergences, so passing means "render hasn't changed since baseline", not "matches LifeSG". The README and file naming both use the word "parity", which is the trap.
+2. **`measure-content.mjs` detected the divergence but didn't propagate failure.** The script counted `mismatches: 1` for the table (h: 451 ≠ 551) but ended with no `process.exit(mismatches > 0 ? 1 : 0)`. `verify-all` runs each suite via `execSync` and trusts the exit code — so a silent script becomes a silent suite, and the dashboard reads green.
+
+### Why this matters
+
+Pillar 3's whole proposition (README §Pillar 3) is "mechanical regression catching — not a screenshot folder that someone eyeballs before release." A measure script that finds a 100px mismatch and exits 0 silently is a meta-bug in exactly that pillar. The cost isn't just one missed defect; it's that future engineers trusting `verify-all` to gate their work get false confidence.
+
+The same trap exists in any layer where:
+- The script counts mismatches but exits 0 (the bug I fixed)
+- The script compares the current render to its own baseline rather than to LifeSG (parity.spec.ts's visual snapshot, by design — but the naming hides it)
+- The script's heuristics produce false negatives (smoke's `lifesgBody=false` on portaled modals)
+
+### What I changed
+
+- Added `process.exit(mismatches > 0 ? 1 : 0)` to `scripts/measure-content.mjs` and `scripts/measure-typography.mjs`. Audited the other suites; smoke + behavioural-content already propagate.
+- After the fix, `verify-all` now flips `measure-content` to FAIL on a clean run, surfacing the table row-height divergence (already documented in README §Remaining work as "Known, unaddressed"). Net new defects surfaced: zero — the bug had been hiding one known issue, not many.
+
+### Rule
+
+**Distinguish "regression" from "parity" in language, in test names, and in failure semantics.**
+
+- A *parity* test compares ours to LifeSG directly. Its baseline is LifeSG. Failure means divergence from LifeSG.
+- A *regression* test compares ours to a past snapshot of itself. Its baseline is yesterday's ours. Failure means a change has happened — possibly intentional.
+
+Both are valuable; they catch different things. But conflating them lets known divergences hide under a passing regression suite. When writing or reviewing a test, ask: "what is the baseline, and what does failure mean?" If the answer involves the word "ours" on both sides, it's a regression test — name it that way.
+
+### Build-gate suggestion (carried into next session)
+
+`measure-content.mjs` currently fails verify-all by design now, because of the table row height. That's correct signalling — but it means `verify-all` no longer exits 0 on main. Options for the team:
+
+1. Leave it failing. The dashboard tells the truth; the divergence is known.
+2. Mark the table mismatch as an expected divergence in the script (allowlist by `route,token` pair), so the script reports "1 expected mismatch, 0 unexpected" and exits 0.
+3. Actually fix the row height (multi-hour debug into LifeSG's `<Card>` chrome).
+
+I left it at option 1 to avoid silencing the signal again. Option 2 is a one-line addition once the team decides the divergence is acceptable indefinitely.
+
+### Pilot-level implication
+
+This is one of the more important findings of the pilot for the "should we adopt LifeSG-as-dep / fork / shadcn-port" decision: **the verification system catches what it measures, and the measure scripts don't yet cover most categories.** Only `measure-content` (6 routes) and `measure-typography` (one route) exist; the README claims extension to form and selection-and-input but `scripts/measure-form.mjs` and `scripts/measure-selection-and-input.mjs` do not exist. That's a real coverage gap. A team taking this port forward should either build out measure scripts per category, or be explicit that visual parity for forms/overlays/selection-and-input is asserted only by L1 (mount) + L4 (own-baseline regression), not by computed-style comparison.

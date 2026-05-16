@@ -211,10 +211,11 @@ The system didn't ship complete on day one. Each gap below was identified during
 | Gap | Status |
 |-----|--------|
 | **Dark mode is a no-op outside Foundations.** No `.dark` block rebinds L2 tokens system-wide. Fix path documented. | Known, unaddressed |
-| **Table row height 24px taller on LifeSG.** Same content and padding; source unidentified. | Known, unaddressed |
-| **8 components remain on the polish punch list** (DateInput, DateRangeInput, PhoneNumberInput, UnitNumberInput, Sidenav, Navbar, Pagination, ImageButton). All medium or large effort. | In progress |
-| **Arbitrary-value debt.** ~50 tokens still in `text-[var(--...)]` form across ~40 untouched files. Not growing (boy-scout rule), but not swept. | Tracked, not blocking |
+| **Table row height ~100px taller on LifeSG** (measured as h: 451 vs 551 at default content). Same content and padding; LifeSG `<Card>` chrome adds ~20px per row. Source not yet bisected. | Known, unaddressed — now surfaced by `measure-content` after exit-code fix. |
+| **`measure-content` is the only mechanical parity gate today.** `measure-typography` covers one route; no `measure-form` / `measure-overlays` / `measure-selection-and-input` despite the "evolved" table claiming otherwise. L2 coverage outside `/content/*` is effectively absent. | Coverage gap, deliberate at pilot scope |
+| **Polish punch list and arbitrary-value debt are both fully resolved** (Sidenav, Navbar, ImageButton, Pagination, UnitNumberInput, PhoneNumberInput, DateInput, DateRangeInput all landed; 506 arbitrary-value usages swept). | Completed |
 | **No form-submission integration.** Base UI Field's `validate` and `validationMode` props untested in a real `<form>` with submit handler. | Deferred to first real screen |
+| **Two pre-existing verify-all `smoke` failures** (`phone-number-input` console warning from LifeSG library; modal `lifesgBody=false` portal heuristic) are noise, not real defects. Left as-is to avoid masking unrelated future regressions. | Documented, not blocking |
 
 ---
 

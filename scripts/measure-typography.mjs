@@ -22,14 +22,19 @@ const measure = async (testid, label) => {
 };
 
 const rows = [];
+let mismatches = 0;
 for (const t of tokens) {
   const ours = await measure("core-ours", t);
   const lifesg = await measure("core-lifesg", t);
-  const match = ours.fs === lifesg.fs && ours.lh === lifesg.lh ? "✓" : "✗";
+  const isMatch = ours.fs === lifesg.fs && ours.lh === lifesg.lh;
+  if (!isMatch) mismatches++;
+  const match = isMatch ? "✓" : "✗";
   rows.push({ token: t, side: "ours", ...ours });
   rows.push({ token: t, side: "lifesg", ...lifesg });
   rows.push({ token: `${t} match`, side: match, fs: "", lh: "", ls: "", fw: "" });
 }
 console.table(rows);
+console.log(`mismatches: ${mismatches} / ${tokens.length}`);
 
 await browser.close();
+process.exit(mismatches > 0 ? 1 : 0);

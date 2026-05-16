@@ -84,3 +84,4 @@ for (const r of allRows) {
 }
 console.log("-".repeat(140));
 console.log(`paired: ${total}, mismatches: ${mismatches}`);
+process.exit(mismatches > 0 ? 1 : 0);
