@@ -34,6 +34,7 @@ export function OursPane() {
         <code className="text-xs text-muted-foreground">prefilled (Banana)</code>
         <div className="mt-3">
           <Select
+            aria-label="Favourite fruit"
             options={FRUITS}
             selectedOption={b}
             onSelectOption={(opt) => setB(opt)}
@@ -43,7 +44,7 @@ export function OursPane() {
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
         <div className="mt-3">
-          <Select options={FRUITS} selectedOption={FRUITS[2]} disabled />
+          <Select aria-label="Disabled fruit" options={FRUITS} selectedOption={FRUITS[2]} disabled />
         </div>
       </section>
     </div>

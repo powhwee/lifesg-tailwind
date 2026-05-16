@@ -29,6 +29,7 @@ export function OursPane() {
         <div className="mt-3">
           <Input
             type="text"
+            aria-label="Email with clear button"
             value={b}
             allowClear
             onClear={() => setB("")}
@@ -39,13 +40,13 @@ export function OursPane() {
       <section>
         <code className="text-xs text-muted-foreground">readOnly</code>
         <div className="mt-3">
-          <Input type="text" readOnly defaultValue="locked@example.com" />
+          <Input type="text" aria-label="Read-only email" readOnly defaultValue="locked@example.com" />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
         <div className="mt-3">
-          <Input type="text" disabled defaultValue="user@example.com" />
+          <Input type="text" aria-label="Disabled email" disabled defaultValue="user@example.com" />
         </div>
       </section>
     </div>
