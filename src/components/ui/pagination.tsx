@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Select } from "@/components/ui/select";
 
 export interface PageSizeOption {
   value: number;
@@ -47,7 +48,7 @@ function Pagination({
   totalItems,
   activePage,
   pageSize = 10,
-  pageSizeOptions = [{ value: 10, label: "10 / page" }, { value: 20, label: "20 / page" }, { value: 50, label: "50 / page" }],
+  pageSizeOptions = [{ value: 10, label: "10" }, { value: 20, label: "20" }, { value: 50, label: "50" }],
   showFirstAndLastNav,
   showPageSizeChanger,
   onPageChange,
@@ -71,7 +72,7 @@ function Pagination({
           onClick={() => go(1)}
           className={navButtonCx}
         >
-          <ChevronsLeft size={18} />
+          <ChevronFirst size={18} />
         </button>
       )}
       <button
@@ -117,22 +118,22 @@ function Pagination({
           onClick={() => go(totalPages)}
           className={navButtonCx}
         >
-          <ChevronsRight size={18} />
+          <ChevronLast size={18} />
         </button>
       )}
       {showPageSizeChanger && (
-        <label className="ml-auto inline-flex items-center gap-2 text-sm text-[var(--lifesg-text)] shrink-0">
+        <div className="ml-auto shrink-0">
           <span className="sr-only">Page size</span>
-          <select
-            value={pageSize}
-            onChange={(e) => onPageSizeChange?.(1, Number(e.target.value))}
-            className="h-10 rounded-md border border-[var(--lifesg-border)] bg-[var(--lifesg-bg)] px-3 text-sm outline-none focus-visible:border-[var(--lifesg-border-focus)] focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)]"
-          >
-            {pageSizeOptions.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
-        </label>
+          <Select
+            options={pageSizeOptions.map((o) => ({ value: String(o.value), label: o.label }))}
+            selectedOption={(() => {
+              const match = pageSizeOptions.find((o) => o.value === pageSize);
+              return match ? { value: String(match.value), label: match.label } : null;
+            })()}
+            onSelectOption={(_, v) => onPageSizeChange?.(1, Number(v))}
+            className="h-10 w-20"
+          />
+        </div>
       )}
     </nav>
   );
