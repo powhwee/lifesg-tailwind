@@ -29,11 +29,11 @@ function ImageButton({
       aria-invalid={error || undefined}
       className={cn(
         "group/image-button relative aspect-square overflow-hidden rounded-lg cursor-pointer outline-none transition-all",
-        "border border-[var(--image-button-border)]",
-        "hover:border-[var(--image-button-border-hover)]",
-        "focus-visible:ring-3 focus-visible:ring-[var(--image-button-ring-focus)]",
-        "data-[selected]:border-[var(--image-button-border-selected)]",
-        "aria-invalid:border-[var(--image-button-border-error)]",
+        "border border-image-button-border",
+        "hover:border-image-button-border-hover",
+        "focus-visible:ring-3 focus-visible:ring-image-button-ring-focus",
+        "data-[selected]:border-image-button-border-selected",
+        "aria-invalid:border-image-button-border-error",
         "disabled:opacity-50 disabled:cursor-not-allowed",
         className
       )}

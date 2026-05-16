@@ -78,7 +78,7 @@ export function IconIntro() {
         <code>ComponentType&lt;SVGProps&gt;</code>) with tone + size variants. Pass the icon as the{" "}
         <code>as</code> prop:
       </p>
-      <pre className="bg-[var(--lifesg-bg-strong)] p-3 rounded text-xs overflow-x-auto">{`import { Check } from "lucide-react"\nimport { Icon } from "@/components/ui/icon"\n\n<Icon as={Check} tone="success" size="lg" />`}</pre>
+      <pre className="bg-lifesg-bg-strong p-3 rounded text-xs overflow-x-auto">{`import { Check } from "lucide-react"\nimport { Icon } from "@/components/ui/icon"\n\n<Icon as={Check} tone="success" size="lg" />`}</pre>
       <h2 className="text-base font-semibold pt-2">Library choice</h2>
       <p>
         We use <strong>lucide-react</strong> (~1300 icons) instead of LifeSG&rsquo;s{" "}

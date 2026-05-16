@@ -16,7 +16,7 @@ function Card({ name, value }: { name: string; value: string }) {
   return (
     <div className="flex flex-col items-start gap-2">
       <div
-        className="size-24 rounded-md bg-[var(--lifesg-bg)] border border-border"
+        className="size-24 rounded-md bg-lifesg-bg border border-border"
         style={{ boxShadow: value }}
         data-token={name}
       />

@@ -83,11 +83,11 @@ function PhoneNumberInput({
   return (
     <div
       className={cn(
-        "flex items-stretch w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)]",
+        "flex items-stretch w-full rounded-input border border-input-border bg-input-bg hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
         error &&
-          "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
+          "border-input-border-error ring-3 ring-input-ring-error",
         disabled &&
-          "bg-[var(--input-bg-disabled)] border-[var(--input-border-disabled)] cursor-not-allowed",
+          "bg-input-bg-disabled border-input-border-disabled cursor-not-allowed",
         className
       )}
     >
@@ -100,13 +100,13 @@ function PhoneNumberInput({
               aria-label={`Country code: ${country.name}`}
               {...triggerProps}
               className={cn(
-                "flex items-center gap-1 px-3 text-[var(--input-text)] hover:bg-[var(--lifesg-bg-hover)] disabled:cursor-not-allowed disabled:bg-[var(--input-bg-disabled)] disabled:text-[var(--input-text-disabled)]",
+                "flex items-center gap-1 px-3 text-input-text hover:bg-lifesg-bg-hover disabled:cursor-not-allowed disabled:bg-input-bg-disabled disabled:text-input-text-disabled",
                 triggerProps.className
               )}
             >
               <span className="font-medium">{country.countryCode}</span>
               {!fixedCountry ? (
-                <ChevronDown className="size-4 text-[var(--input-icon)]" />
+                <ChevronDown className="size-4 text-input-icon" />
               ) : null}
             </button>
           )}
@@ -124,9 +124,9 @@ function PhoneNumberInput({
                     setOpen(false);
                   }}
                   className={cn(
-                    "w-full px-3 py-2 text-left text-sm flex items-center justify-between hover:bg-[var(--lifesg-bg-hover)]",
+                    "w-full px-3 py-2 text-left text-sm flex items-center justify-between hover:bg-lifesg-bg-hover",
                     c.countryCode === country.countryCode &&
-                      "bg-[var(--lifesg-bg-selected)] text-[var(--lifesg-text-selected)]"
+                      "bg-lifesg-bg-selected text-lifesg-text-selected"
                   )}
                 >
                   <span>{c.name}</span>
@@ -148,7 +148,7 @@ function PhoneNumberInput({
         readOnly={readOnly}
         placeholder={placeholder}
         autoComplete="tel"
-        className="h-[var(--input-height)] flex-1 min-w-0 bg-transparent border-0 outline-none px-3 text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]"
+        className="h-input-height flex-1 min-w-0 bg-transparent border-0 outline-none px-3 text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled"
         {...props}
       />
     </div>

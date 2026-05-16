@@ -23,6 +23,8 @@ interface SelectBaseProps<T> {
   className?: string;
   id?: string;
   name?: string;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
 }
 
 export interface SelectProps<T = OptionShape> extends SelectBaseProps<T> {
@@ -38,13 +40,13 @@ function defaultListExtractor<T>(item: T): string {
 }
 
 const triggerCx =
-  "h-[var(--input-height)] w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] px-[var(--input-padding-x)] text-left text-[length:var(--input-font-size)] leading-[var(--input-line-height)] flex items-center justify-between gap-2 hover:border-[var(--input-border-hover)] focus-visible:border-[var(--input-border-focus)] focus-visible:ring-3 focus-visible:ring-[var(--input-ring-focus)] focus-visible:outline-none data-[disabled]:cursor-not-allowed data-[disabled]:bg-[var(--input-bg-disabled)] data-[disabled]:border-[var(--input-border-disabled)] data-[disabled]:text-[var(--input-text-disabled)]";
+  "h-input-height w-full rounded-input border border-input-border bg-input-bg px-input-padding-x text-left text-input leading-input flex items-center justify-between gap-2 hover:border-input-border-hover focus-visible:border-input-border-focus focus-visible:ring-3 focus-visible:ring-input-ring-focus focus-visible:outline-none data-[disabled]:cursor-not-allowed data-[disabled]:bg-input-bg-disabled data-[disabled]:border-input-border-disabled data-[disabled]:text-input-text-disabled";
 
 const popupCx =
-  "max-h-72 w-[var(--anchor-width)] min-w-[10rem] overflow-auto rounded-md border border-border bg-popover shadow-lg py-1";
+  "max-h-72 w-anchor-width min-w-[10rem] overflow-auto rounded-md border border-border bg-popover shadow-lg py-1";
 
 const itemCx =
-  "flex items-center justify-between gap-2 px-3 py-2 text-sm cursor-pointer outline-none data-[highlighted]:bg-[var(--lifesg-bg-hover)] data-[selected]:bg-[var(--lifesg-bg-selected)] data-[selected]:text-[var(--lifesg-text-selected)]";
+  "flex items-center justify-between gap-2 px-3 py-2 text-sm cursor-pointer outline-none data-[highlighted]:bg-lifesg-bg-hover data-[selected]:bg-lifesg-bg-selected data-[selected]:text-lifesg-text-selected";
 
 function Select<T = OptionShape>({
   options,
@@ -59,6 +61,8 @@ function Select<T = OptionShape>({
   className,
   id,
   name,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
 }: SelectProps<T>) {
   const selected = selectedOption ? valueExtractor(selectedOption) : null;
   const lookup = React.useMemo(() => {
@@ -81,9 +85,11 @@ function Select<T = OptionShape>({
       id={id}
     >
       <SelectPrimitive.Trigger
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         className={cn(
           triggerCx,
-          error && "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
+          error && "border-input-border-error ring-3 ring-input-ring-error",
           className
         )}
       >
@@ -91,13 +97,13 @@ function Select<T = OptionShape>({
           className={cn(
             "truncate",
             selectedOption
-              ? "text-[var(--input-text)]"
-              : "text-[var(--input-text-placeholder)]"
+              ? "text-input-text"
+              : "text-input-text-placeholder"
           )}
         >
           {selectedOption ? listExtractor(selectedOption) : placeholder}
         </span>
-        <ChevronDown className="size-4 text-[var(--input-icon)] shrink-0" />
+        <ChevronDown className="size-4 text-input-icon shrink-0" />
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
         <SelectPrimitive.Positioner sideOffset={4} className="z-50">

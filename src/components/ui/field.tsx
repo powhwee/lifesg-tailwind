@@ -21,8 +21,8 @@ function FieldLabel({ className, ...props }: FieldPrimitive.Label.Props) {
     <FieldPrimitive.Label
       data-slot="field-label"
       className={cn(
-        "text-[length:var(--field-label-font-size)] leading-[var(--field-label-line-height)] font-semibold text-[var(--field-text-label)]",
-        "data-[disabled]:text-[var(--field-text-disabled)]",
+        "text-field-label leading-field-label font-semibold text-field-text-label",
+        "data-[disabled]:text-field-text-disabled",
         className
       )}
       {...props}
@@ -35,8 +35,8 @@ function FieldDescription({ className, ...props }: FieldPrimitive.Description.Pr
     <FieldPrimitive.Description
       data-slot="field-description"
       className={cn(
-        "text-sm text-[var(--field-text-description)]",
-        "data-[disabled]:text-[var(--field-text-disabled)]",
+        "text-sm text-field-text-description",
+        "data-[disabled]:text-field-text-disabled",
         className
       )}
       {...props}
@@ -56,7 +56,7 @@ function FieldError({
       data-slot="field-error"
       match={match ?? true}
       className={cn(
-        "flex items-start gap-1.5 text-sm text-[var(--field-text-error)]",
+        "flex items-start gap-1.5 text-sm text-field-text-error",
         className
       )}
       {...props}

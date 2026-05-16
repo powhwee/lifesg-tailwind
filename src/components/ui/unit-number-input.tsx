@@ -71,20 +71,20 @@ function UnitNumberInput({
   };
 
   const inputCx =
-    "h-[var(--input-height)] bg-transparent border-0 outline-none px-1 text-center text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]";
+    "h-input-height bg-transparent border-0 outline-none px-1 text-center text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
   return (
     <div
       className={cn(
-        "inline-flex items-stretch w-fit rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)]",
-        error && "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
-        disabled && "bg-[var(--input-bg-disabled)] border-[var(--input-border-disabled)] cursor-not-allowed",
+        "inline-flex items-stretch w-fit rounded-input border border-input-border bg-input-bg hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
+        error && "border-input-border-error ring-3 ring-input-ring-error",
+        disabled && "bg-input-bg-disabled border-input-border-disabled cursor-not-allowed",
         className
       )}
     >
       <span
         aria-hidden="true"
-        className="grid place-items-center pl-3 text-[var(--input-text)] select-none text-[length:var(--input-font-size)]"
+        className="grid place-items-center pl-3 text-input-text select-none text-input"
       >
         #
       </span>
@@ -105,7 +105,7 @@ function UnitNumberInput({
       />
       <span
         aria-hidden="true"
-        className="grid place-items-center px-1 text-[var(--input-text-placeholder)] select-none"
+        className="grid place-items-center px-1 text-input-text-placeholder select-none"
       >
         -
       </span>

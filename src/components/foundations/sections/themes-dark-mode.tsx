@@ -8,21 +8,21 @@ import { useState, useEffect } from "react";
 
 function Card({ title, source }: { title: string; source: "ours" | "lifesg" }) {
   return (
-    <div className="rounded-md border border-border p-4 bg-[var(--lifesg-bg)] text-[var(--lifesg-text)]">
-      <div className="text-xs uppercase tracking-wide text-[var(--lifesg-text-subtle)] mb-2">{title}</div>
+    <div className="rounded-md border border-border p-4 bg-lifesg-bg text-lifesg-text">
+      <div className="text-xs uppercase tracking-wide text-lifesg-text-subtle mb-2">{title}</div>
       <div className="space-y-2 text-sm">
         <div>Background: <code className="text-xs">{source === "ours" ? "var(--lifesg-bg)" : "Colour.bg"}</code></div>
         <div>Text: <code className="text-xs">{source === "ours" ? "var(--lifesg-text)" : "Colour.text"}</code></div>
         <div>
           <button
-            className="rounded px-3 py-1.5 text-xs bg-[var(--lifesg-bg-primary)] text-[var(--lifesg-text-inverse)]"
+            className="rounded px-3 py-1.5 text-xs bg-lifesg-bg-primary text-lifesg-text-inverse"
             type="button"
           >
             Primary
           </button>
         </div>
         <div>
-          <span className="rounded border border-[var(--lifesg-border)] px-2 py-1 text-xs">
+          <span className="rounded border border-lifesg-border px-2 py-1 text-xs">
             Bordered
           </span>
         </div>
@@ -42,7 +42,7 @@ export function Toggle() {
       <button
         type="button"
         onClick={() => setIsDark((d) => !d)}
-        className="rounded border border-border px-3 py-1.5 text-xs bg-[var(--lifesg-bg)] hover:bg-[var(--lifesg-bg-hover)]"
+        className="rounded border border-border px-3 py-1.5 text-xs bg-lifesg-bg hover:bg-lifesg-bg-hover"
       >
         Toggle {isDark ? "light" : "dark"}
       </button>

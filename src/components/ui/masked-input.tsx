@@ -89,7 +89,7 @@ function MaskedInput({
         onClick={toggle}
         aria-label={masked ? "Reveal" : "Hide"}
         aria-pressed={!masked}
-        className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center size-8 rounded text-[var(--input-icon)] hover:bg-[var(--input-icon-hover-bg)]"
+        className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center size-8 rounded text-input-icon hover:bg-input-icon-hover-bg"
       >
         {masked
           ? iconUnmask ?? <Eye className="size-4" />

@@ -11,7 +11,7 @@ function Box({ label, value, display }: { label: string; value: string; display:
   return (
     <div className="flex flex-col items-start gap-2">
       <div
-        className="size-20 bg-[var(--lifesg-bg-primary)]"
+        className="size-20 bg-lifesg-bg-primary"
         style={{ borderRadius: value }}
         data-token={label}
       />

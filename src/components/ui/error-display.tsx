@@ -206,13 +206,13 @@ function ErrorDisplay({
           style={{ maxWidth: "var(--error-display-max-width)", gap: "var(--error-display-gap)" }}
         >
           <h1
-            className="text-[length:var(--lifesg-font-heading-size-md)] leading-[var(--lifesg-font-heading-lh-md)] [letter-spacing:var(--lifesg-font-heading-ls-md)] [font-weight:var(--lifesg-font-weight-semibold)]"
+            className="text-lifesg-font-heading-size-md leading-lifesg-font-heading-lh-md [letter-spacing:var(--lifesg-font-heading-ls-md)] [font-weight:var(--lifesg-font-weight-semibold)]"
             style={{ color: "var(--error-display-title-color)" }}
           >
             {resolvedTitle}
           </h1>
           <div
-            className="text-[length:var(--lifesg-font-body-size-baseline)] leading-[var(--lifesg-font-body-lh-baseline)] whitespace-pre-wrap"
+            className="text-lifesg-font-body-size-baseline leading-lifesg-font-body-lh-baseline whitespace-pre-wrap"
             style={{ color: "var(--error-display-desc-color)" }}
           >
             {resolvedDescription}

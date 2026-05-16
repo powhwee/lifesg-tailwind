@@ -47,7 +47,7 @@ export function OursPane() {
                   {...triggerProps}
                   type="button"
                   aria-label="More info"
-                  className="grid place-items-center size-8 rounded-md hover:bg-[var(--lifesg-bg-hover)]"
+                  className="grid place-items-center size-8 rounded-md hover:bg-lifesg-bg-hover"
                 >
                   <Info className="size-5" />
                 </button>

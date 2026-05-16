@@ -38,7 +38,7 @@ export function OursPane() {
               <MenuItem onClick={() => alert("Edit")}>Edit</MenuItem>
               <MenuItem onClick={() => alert("Duplicate")}>Duplicate</MenuItem>
               <MenuSeparator />
-              <MenuItem onClick={() => alert("Delete")} className="text-[var(--lifesg-text-error)]">
+              <MenuItem onClick={() => alert("Delete")} className="text-lifesg-text-error">
                 Delete
               </MenuItem>
             </MenuContent>
@@ -56,7 +56,7 @@ export function OursPane() {
                   {...triggerProps}
                   type="button"
                   aria-label="More actions"
-                  className="grid place-items-center size-8 rounded-md hover:bg-[var(--lifesg-bg-hover)]"
+                  className="grid place-items-center size-8 rounded-md hover:bg-lifesg-bg-hover"
                 >
                   <MoreHorizontal className="size-5" />
                 </button>
@@ -94,7 +94,7 @@ export function LifeSGPane() {
     <div className="flex flex-col gap-10 max-w-md" data-token="default">
       <section>
         <code className="text-xs text-muted-foreground">LifeSG ships no public Menu component</code>
-        <div className="mt-3 rounded-md border border-[var(--lifesg-border)] p-4 bg-[var(--lifesg-bg-strong)] text-sm space-y-2">
+        <div className="mt-3 rounded-md border border-lifesg-border p-4 bg-lifesg-bg-strong text-sm space-y-2">
           <p>
             LifeSG&rsquo;s Storybook lists Menu under Overlays but the underlying export is an
             internal used by the Sidenav and a few other components. There&rsquo;s no public{" "}

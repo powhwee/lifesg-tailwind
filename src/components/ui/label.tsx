@@ -12,8 +12,8 @@ function Label({
       data-slot="label"
       data-disabled={disabled || undefined}
       className={cn(
-        "inline-flex items-center gap-2 text-[length:var(--field-label-font-size)] leading-[var(--field-label-line-height)] font-semibold text-[var(--field-text-label)]",
-        "data-[disabled]:text-[var(--field-text-disabled)] data-[disabled]:cursor-not-allowed",
+        "inline-flex items-center gap-2 text-field-label leading-field-label font-semibold text-field-text-label",
+        "data-[disabled]:text-field-text-disabled data-[disabled]:cursor-not-allowed",
         className
       )}
       {...props}

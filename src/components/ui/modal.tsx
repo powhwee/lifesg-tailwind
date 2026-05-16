@@ -57,7 +57,7 @@ function ModalRoot({
         <Dialog.Backdrop
           onClick={enableOverlayClick ? () => onOverlayClick?.() : undefined}
           className={cn(
-            "fixed inset-0 bg-[var(--modal-backdrop)] transition-opacity duration-200",
+            "fixed inset-0 bg-modal-backdrop transition-opacity duration-200",
             "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
             enableOverlayClick && "cursor-pointer"
           )}
@@ -102,7 +102,7 @@ function ModalBox({
     <div
       data-slot="modal-box"
       className={cn(
-        "relative bg-[var(--modal-box-bg)] text-[var(--lifesg-text)] rounded-[var(--modal-box-radius)] shadow-[var(--modal-box-shadow)] max-w-full max-h-[90vh] overflow-auto p-[var(--modal-box-padding)]",
+        "relative bg-modal-box-bg text-lifesg-text rounded-modal-box shadow-modal-box-shadow max-w-full max-h-[90vh] overflow-auto p-modal-box-padding",
         className
       )}
       {...props}
@@ -112,9 +112,9 @@ function ModalBox({
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-3 right-3 size-9 inline-flex items-center justify-center rounded hover:bg-[var(--lifesg-bg-hover)] focus-visible:outline-2 focus-visible:outline-[var(--lifesg-border-focus)] cursor-pointer"
+          className="absolute top-3 right-3 size-9 inline-flex items-center justify-center rounded hover:bg-lifesg-bg-hover focus-visible:outline-2 focus-visible:outline-lifesg-border-focus cursor-pointer"
         >
-          <X aria-hidden className="size-5 text-[var(--lifesg-icon)]" />
+          <X aria-hidden className="size-5 text-lifesg-icon" />
         </button>
       )}
       {children}

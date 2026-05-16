@@ -19,7 +19,7 @@ function Bar({ label, value, display }: { label: string; value: string; display:
   return (
     <div className="flex items-center gap-4">
       <code className="text-xs text-muted-foreground w-44 shrink-0 whitespace-nowrap">{label}</code>
-      <div className="h-4 bg-[var(--lifesg-bg-primary)]" style={{ width: value }} data-token={label} />
+      <div className="h-4 bg-lifesg-bg-primary" style={{ width: value }} data-token={label} />
       <span className="text-xs text-muted-foreground tabular-nums">{display}</span>
     </div>
   );

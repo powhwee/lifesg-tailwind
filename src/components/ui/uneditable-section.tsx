@@ -30,10 +30,10 @@ function Item({ item }: { item: UneditableSectionItem }) {
         item.displayWidth === "half" ? "sm:col-span-1" : "sm:col-span-2"
       )}
     >
-      <div className="text-xs font-semibold text-[var(--lifesg-text-subtle)]">
+      <div className="text-xs font-semibold text-lifesg-text-subtle">
         {item.label}
       </div>
-      <div className="text-sm text-[var(--lifesg-text)]">{item.value}</div>
+      <div className="text-sm text-lifesg-text">{item.value}</div>
       {item.alert && <div className="mt-1">{item.alert}</div>}
     </li>
   );
@@ -56,9 +56,9 @@ export function UneditableSection({
     <section
       data-slot="uneditable-section"
       className={cn(
-        "rounded-[var(--uneditable-section-radius)] p-[var(--uneditable-section-padding)]",
+        "rounded-uneditable-section p-uneditable-section-padding",
         background
-          ? "bg-[var(--uneditable-section-bg)]"
+          ? "bg-uneditable-section-bg"
           : "bg-transparent",
         fullWidth ? "w-full" : "",
         className
@@ -68,10 +68,10 @@ export function UneditableSection({
       {(title || description) && (
         <header className="mb-4">
           {title && (
-            <h3 className="text-lg font-semibold text-[var(--lifesg-text)]">{title}</h3>
+            <h3 className="text-lg font-semibold text-lifesg-text">{title}</h3>
           )}
           {description && (
-            <p className="text-sm text-[var(--lifesg-text-subtle)] mt-1">{description}</p>
+            <p className="text-sm text-lifesg-text-subtle mt-1">{description}</p>
           )}
         </header>
       )}

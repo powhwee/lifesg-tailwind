@@ -21,7 +21,7 @@ export function OursPane() {
               type="text"
               value={v}
               onChange={(e) => setV(e.target.value)}
-              className="h-12 w-full rounded-md border border-[var(--lifesg-border)] px-3 text-base outline-none focus:border-[var(--lifesg-border-focus)]"
+              className="h-12 w-full rounded-md border border-lifesg-border px-3 text-base outline-none focus:border-lifesg-border-focus"
               placeholder="e.g. 123 Sample Street #01-23"
             />
           </FormField>
@@ -36,7 +36,7 @@ export function OursPane() {
             <FieldDescription>Unit number or building name</FieldDescription>
             <input
               type="text"
-              className="h-12 w-full rounded-md border border-[var(--lifesg-border)] px-3 text-base outline-none focus:border-[var(--lifesg-border-focus)]"
+              className="h-12 w-full rounded-md border border-lifesg-border px-3 text-base outline-none focus:border-lifesg-border-focus"
               placeholder="Optional"
             />
           </Field>
@@ -51,7 +51,7 @@ export function OursPane() {
               type="email"
               disabled
               defaultValue="user@example.com"
-              className="h-12 w-full rounded-md border border-[var(--lifesg-border-disabled)] bg-[var(--lifesg-bg-disabled)] px-3 text-base text-[var(--lifesg-text-disabled)]"
+              className="h-12 w-full rounded-md border border-lifesg-border-disabled bg-lifesg-bg-disabled px-3 text-base text-lifesg-text-disabled"
             />
           </FormField>
         </div>

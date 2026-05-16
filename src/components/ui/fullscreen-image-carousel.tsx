@@ -53,7 +53,7 @@ const IconBtn = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<H
         ref={ref}
         type="button"
         className={cn(
-          "inline-flex items-center justify-center size-10 rounded-full text-[var(--fic-icon)] bg-[var(--fic-button-bg)] hover:bg-[var(--fic-button-bg-hover)] outline-none cursor-pointer focus-visible:ring-2 focus-visible:ring-white/60 disabled:opacity-40 disabled:cursor-not-allowed",
+          "inline-flex items-center justify-center size-10 rounded-full text-fic-icon bg-fic-button-bg hover:bg-fic-button-bg-hover outline-none cursor-pointer focus-visible:ring-2 focus-visible:ring-white/60 disabled:opacity-40 disabled:cursor-not-allowed",
           className
         )}
         {...props}
@@ -138,7 +138,7 @@ export const FullscreenImageCarousel = React.forwardRef<
         style={{ background: "var(--fic-backdrop)" }}
       >
         {/* Toolbar */}
-        <div className="flex items-center justify-between px-4 py-3 text-[var(--fic-text)]">
+        <div className="flex items-center justify-between px-4 py-3 text-fic-text">
           <div className="text-sm">
             {!hideCounter && (
               <span className="opacity-90">{index + 1} / {items.length}</span>
@@ -221,8 +221,8 @@ export const FullscreenImageCarousel = React.forwardRef<
                   className={cn(
                     "shrink-0 size-16 rounded overflow-hidden border-2 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/70",
                     i === index
-                      ? "border-[var(--fic-thumb-border-active)]"
-                      : "border-[var(--fic-thumb-border)] opacity-70 hover:opacity-100"
+                      ? "border-fic-thumb-border-active"
+                      : "border-fic-thumb-border opacity-70 hover:opacity-100"
                   )}
                 >
                   {it.thumbnailSrc || (!it.type || it.type === "image") ? (

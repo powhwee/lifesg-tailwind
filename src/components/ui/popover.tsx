@@ -12,7 +12,7 @@ const PopoverArrow = PopoverPrimitive.Arrow;
 const PopoverBackdrop = PopoverPrimitive.Backdrop;
 
 const popupCx =
-  "z-50 rounded-[var(--popover-radius)] border border-[var(--popover-border)] bg-[var(--popover-bg)] shadow-[var(--popover-shadow)] outline-none";
+  "z-50 rounded-popover border border-popover-border bg-popover-bg shadow-popover-shadow outline-none";
 
 interface PopoverContentProps extends React.ComponentProps<typeof PopoverPrimitive.Popup> {
   /** Side offset from the trigger. @default 4 */

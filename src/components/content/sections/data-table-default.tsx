@@ -63,7 +63,7 @@ function OursMultiSelect() {
       onSelectAll={(allSel) => setSelected(allSel ? baseRows.map((r) => String(r.id)) : [])}
       onClearSelectionClick={() => setSelected([])}
       actionBarContent={
-        <button type="button" className="text-sm font-semibold text-[var(--lifesg-text-primary)] hover:underline cursor-pointer">
+        <button type="button" className="text-sm font-semibold text-lifesg-text-primary hover:underline cursor-pointer">
           Export
         </button>
       }

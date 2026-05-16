@@ -76,19 +76,19 @@ function Navbar({
 }: NavbarProps) {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   return (
-    <div className={cn(fixed && "fixed top-0 left-0 right-0 z-40", "bg-[var(--navbar-bg)] border-b border-[var(--navbar-border)]", className)}>
+    <div className={cn(fixed && "fixed top-0 left-0 right-0 z-40", "bg-navbar-bg border-b border-navbar-border", className)}>
       {masthead && <Masthead />}
       <div className="@container max-w-screen-xl mx-auto h-24 px-4 flex items-center gap-6">
         <a
           href={brand.href ?? "#"}
           aria-label={brand.brandName}
-          className="flex items-center gap-3 shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)] rounded"
+          className="flex items-center gap-3 shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-lifesg-border-focus rounded"
         >
           {brand.logoSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={brand.logoSrc} alt={brand.brandName} className="h-9 w-auto" />
           ) : (
-            <div aria-hidden="true" className="size-9 rounded-md bg-[var(--lifesg-bg-primary)]" />
+            <div aria-hidden="true" className="size-9 rounded-md bg-lifesg-bg-primary" />
           )}
         </a>
 
@@ -102,8 +102,8 @@ function Navbar({
                 onClick={item.onClick}
                 aria-current={selected ? "page" : undefined}
                 className={cn(
-                  "relative inline-flex items-center h-24 px-4 text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)] outline-none focus-visible:bg-[var(--navbar-bg-hover)]",
-                  selected && "after:content-[''] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-[var(--navbar-indicator)] font-semibold"
+                  "relative inline-flex items-center h-24 px-4 text-navbar-text hover:bg-navbar-bg-hover outline-none focus-visible:bg-navbar-bg-hover",
+                  selected && "after:content-[''] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-navbar-indicator font-semibold"
                 )}
               >
                 {item.label}
@@ -124,13 +124,13 @@ function Navbar({
             aria-label="Open menu"
             aria-expanded={drawerOpen}
             onClick={() => setDrawerOpen(true)}
-            className="md:hidden ml-auto size-10 inline-flex items-center justify-center rounded text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)]"
+            className="md:hidden ml-auto size-10 inline-flex items-center justify-center rounded text-navbar-text hover:bg-navbar-bg-hover outline-none focus-visible:ring-2 focus-visible:ring-lifesg-border-focus"
           >
             <Menu size={22} />
           </button>
-          <DrawerContent side="right" className="md:hidden bg-[var(--navbar-bg)]">
+          <DrawerContent side="right" className="md:hidden bg-navbar-bg">
             <DrawerHeader>
-              <DrawerTitle className="font-semibold text-[var(--navbar-text)]">
+              <DrawerTitle className="font-semibold text-navbar-text">
                 {brand.brandName}
               </DrawerTitle>
             </DrawerHeader>
@@ -148,8 +148,8 @@ function Navbar({
                       }}
                       aria-current={selected ? "page" : undefined}
                       className={cn(
-                        "block px-4 h-12 leading-[3rem] text-[var(--navbar-text)] hover:bg-[var(--navbar-bg-hover)]",
-                        selected && "bg-[var(--lifesg-bg-selected)] font-semibold"
+                        "block px-4 h-12 leading-[3rem] text-navbar-text hover:bg-navbar-bg-hover",
+                        selected && "bg-lifesg-bg-selected font-semibold"
                       )}
                     >
                       {item.label}

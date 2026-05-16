@@ -39,10 +39,10 @@ function pageWindow(active: number, total: number): (number | null)[] {
 }
 
 const navButtonCx =
-  "inline-flex items-center justify-center size-10 rounded-md border border-[var(--pagination-border)] bg-[var(--pagination-bg)] text-[var(--pagination-chevron)] hover:bg-[var(--pagination-bg-hover)] disabled:pointer-events-none disabled:opacity-40 outline-none focus-visible:border-[var(--lifesg-border-focus)] focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)]";
+  "inline-flex items-center justify-center size-10 rounded-md border border-pagination-border bg-pagination-bg text-pagination-chevron hover:bg-pagination-bg-hover disabled:pointer-events-none disabled:opacity-40 outline-none focus-visible:border-lifesg-border-focus focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)]";
 
 const pageButtonCx =
-  "inline-flex items-center justify-center min-w-10 h-10 px-2 rounded-md border border-[var(--pagination-border)] bg-[var(--pagination-bg)] tabular-nums text-[var(--pagination-text)] hover:bg-[var(--pagination-bg-hover)] outline-none focus-visible:border-[var(--lifesg-border-focus)] focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)] aria-[current=page]:bg-[var(--pagination-bg-active)] aria-[current=page]:text-[var(--pagination-text-active)] aria-[current=page]:border-[var(--pagination-bg-active)] aria-[current=page]:font-semibold";
+  "inline-flex items-center justify-center min-w-10 h-10 px-2 rounded-md border border-pagination-border bg-pagination-bg tabular-nums text-pagination-text hover:bg-pagination-bg-hover outline-none focus-visible:border-lifesg-border-focus focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)] aria-[current=page]:bg-pagination-bg-active aria-[current=page]:text-pagination-text-active aria-[current=page]:border-pagination-bg-active aria-[current=page]:font-semibold";
 
 function Pagination({
   totalItems,
@@ -86,7 +86,7 @@ function Pagination({
       </button>
       {pages.map((p, i) =>
         p === null ? (
-          <span key={`gap-${i}`} className="inline-flex items-center justify-center size-10 text-[var(--lifesg-text-subtle)] select-none">
+          <span key={`gap-${i}`} className="inline-flex items-center justify-center size-10 text-lifesg-text-subtle select-none">
             ⋯
           </span>
         ) : (

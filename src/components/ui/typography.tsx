@@ -7,25 +7,25 @@ const typographyVariants = cva("[font-family:var(--typography-font-family)]", {
   variants: {
     variant: {
       "heading-xxl":
-        "text-[length:var(--typography-heading-xxl-size)] leading-[var(--typography-heading-xxl-lh)] tracking-[var(--typography-heading-xxl-ls)]",
+        "text-typography-heading-xxl leading-typography-heading-xxl tracking-typography-heading-xxl",
       "heading-xl":
-        "text-[length:var(--typography-heading-xl-size)] leading-[var(--typography-heading-xl-lh)] tracking-[var(--typography-heading-xl-ls)]",
+        "text-typography-heading-xl leading-typography-heading-xl tracking-typography-heading-xl",
       "heading-lg":
-        "text-[length:var(--typography-heading-lg-size)] leading-[var(--typography-heading-lg-lh)] tracking-[var(--typography-heading-lg-ls)]",
+        "text-typography-heading-lg leading-typography-heading-lg tracking-typography-heading-lg",
       "heading-md":
-        "text-[length:var(--typography-heading-md-size)] leading-[var(--typography-heading-md-lh)] tracking-[var(--typography-heading-md-ls)]",
+        "text-typography-heading-md leading-typography-heading-md tracking-typography-heading-md",
       "heading-sm":
-        "text-[length:var(--typography-heading-sm-size)] leading-[var(--typography-heading-sm-lh)] tracking-[var(--typography-heading-sm-ls)]",
+        "text-typography-heading-sm leading-typography-heading-sm tracking-typography-heading-sm",
       "heading-xs":
-        "text-[length:var(--typography-heading-xs-size)] leading-[var(--typography-heading-xs-lh)] tracking-[var(--typography-heading-xs-ls)]",
+        "text-typography-heading-xs leading-typography-heading-xs tracking-typography-heading-xs",
       "body-bl":
-        "text-[length:var(--typography-body-bl-size)] leading-[var(--typography-body-bl-lh)] tracking-[var(--typography-body-bl-ls)]",
+        "text-typography-body-bl leading-typography-body-bl tracking-typography-body-bl",
       "body-md":
-        "text-[length:var(--typography-body-md-size)] leading-[var(--typography-body-md-lh)] tracking-[var(--typography-body-md-ls)]",
+        "text-typography-body-md leading-typography-body-md tracking-typography-body-md",
       "body-sm":
-        "text-[length:var(--typography-body-sm-size)] leading-[var(--typography-body-sm-lh)] tracking-[var(--typography-body-sm-ls)]",
+        "text-typography-body-sm leading-typography-body-sm tracking-typography-body-sm",
       "body-xs":
-        "text-[length:var(--typography-body-xs-size)] leading-[var(--typography-body-xs-lh)] tracking-[var(--typography-body-xs-ls)]",
+        "text-typography-body-xs leading-typography-body-xs tracking-typography-body-xs",
     },
     weight: {
       light:    "[font-weight:var(--typography-weight-light)]",

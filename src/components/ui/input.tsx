@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 const inputCx =
-  "h-[var(--input-height)] w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] px-[var(--input-padding-x)] text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] outline-none transition-colors hover:border-[var(--input-border-hover)] focus-visible:border-[var(--input-border-focus)] focus-visible:ring-3 focus-visible:ring-[var(--input-ring-focus)] disabled:cursor-not-allowed disabled:bg-[var(--input-bg-disabled)] disabled:text-[var(--input-text-disabled)] disabled:border-[var(--input-border-disabled)] aria-invalid:border-[var(--input-border-error)] aria-invalid:ring-3 aria-invalid:ring-[var(--input-ring-error)] read-only:bg-transparent read-only:border-transparent read-only:px-0";
+  "h-input-height w-full rounded-input border border-input-border bg-input-bg px-input-padding-x text-input leading-input text-input-text placeholder:text-input-text-placeholder outline-none transition-colors hover:border-input-border-hover focus-visible:border-input-border-focus focus-visible:ring-3 focus-visible:ring-input-ring-focus disabled:cursor-not-allowed disabled:bg-input-bg-disabled disabled:text-input-text-disabled disabled:border-input-border-disabled aria-invalid:border-input-border-error aria-invalid:ring-3 aria-invalid:ring-input-ring-error read-only:bg-transparent read-only:border-transparent read-only:px-0";
 
 interface InputOwnProps {
   allowClear?: boolean;
@@ -35,7 +35,7 @@ function Input({ className, allowClear, onClear, value, ...props }: InputProps) 
             type="button"
             onClick={onClear}
             aria-label="Clear input"
-            className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center size-8 rounded text-[var(--input-icon)] hover:bg-[var(--input-icon-hover-bg)]"
+            className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center size-8 rounded text-input-icon hover:bg-input-icon-hover-bg"
           >
             <X className="size-4" />
           </button>

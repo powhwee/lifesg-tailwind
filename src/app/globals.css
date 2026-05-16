@@ -322,6 +322,203 @@
   --spacing-table-cell-y:                    var(--table-cell-y);
   --spacing-table-head-y:                    var(--table-head-y);
   --radius-table:                            var(--table-radius);
+
+  /* ──────── Scope #3 sweep: previously-arbitrary tokens ──────── */
+
+  /* L3 — accordion */
+  --spacing-accordion-panel-height: var(--accordion-panel-height);
+
+  /* L3 — anchor */
+  --spacing-anchor-width: var(--anchor-width);
+
+  /* L3 — avatar */
+  --color-avatar-bg: var(--avatar-bg);
+  --color-avatar-font-default: var(--avatar-font-default);
+  --color-avatar-font-small: var(--avatar-font-small);
+  --color-avatar-text: var(--avatar-text);
+  --spacing-avatar-size-default: var(--avatar-size-default);
+  --spacing-avatar-size-small: var(--avatar-size-small);
+
+  /* L3 — card */
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-card-shadow: var(--card-shadow);
+  --color-card-text: var(--card-text);
+  --radius-card: var(--card-radius);
+  --spacing-card-padding-x: var(--card-padding-x);
+  --spacing-card-padding-y: var(--card-padding-y);
+
+  /* L3 — collapsible */
+  --spacing-collapsible-panel-height: var(--collapsible-panel-height);
+
+  /* L3 — drawer */
+  --color-drawer-bg: var(--drawer-bg);
+  --color-drawer-overlay: var(--drawer-overlay);
+  --color-drawer-shadow: var(--drawer-shadow);
+  --spacing-drawer-height-side: var(--drawer-height-side);
+  --spacing-drawer-width-side: var(--drawer-width-side);
+
+  /* L3 — fic */
+  --color-fic-button-bg-hover: var(--fic-button-bg-hover);
+  --color-fic-button-bg: var(--fic-button-bg);
+  --color-fic-icon: var(--fic-icon);
+  --color-fic-text: var(--fic-text);
+  --color-fic-thumb-border-active: var(--fic-thumb-border-active);
+  --color-fic-thumb-border: var(--fic-thumb-border);
+
+  /* L3 — field */
+  --color-field-text-description: var(--field-text-description);
+  --color-field-text-disabled: var(--field-text-disabled);
+  --color-field-text-error: var(--field-text-error);
+  --color-field-text-label: var(--field-text-label);
+  --leading-field-label: var(--field-label-line-height);
+  --text-field-label: var(--field-label-font-size);
+
+  /* L3 — icon */
+  --color-icon-color-default: var(--icon-color-default);
+  --color-icon-color-error: var(--icon-color-error);
+  --color-icon-color-info: var(--icon-color-info);
+  --color-icon-color-inverse: var(--icon-color-inverse);
+  --color-icon-color-primary: var(--icon-color-primary);
+  --color-icon-color-strong: var(--icon-color-strong);
+  --color-icon-color-subtle: var(--icon-color-subtle);
+  --color-icon-color-success: var(--icon-color-success);
+  --color-icon-color-warning: var(--icon-color-warning);
+
+  /* L3 — image */
+  --color-image-button-border-error: var(--image-button-border-error);
+  --color-image-button-border-hover: var(--image-button-border-hover);
+  --color-image-button-border-selected: var(--image-button-border-selected);
+  --color-image-button-border: var(--image-button-border);
+  --color-image-button-ring-focus: var(--image-button-ring-focus);
+
+  /* L3 — input (leading paired with existing --text-input) */
+  --leading-input: var(--input-line-height);
+
+  /* L3 — layout */
+  --spacing-layout-container-max: var(--layout-container-max);
+
+  /* L1 — extra LifeSG semantic colors */
+  --color-lifesg-bg-disabled: var(--lifesg-bg-disabled);
+  --color-lifesg-bg-primary-hover: var(--lifesg-bg-primary-hover);
+  --color-lifesg-bg-selected: var(--lifesg-bg-selected);
+  --color-lifesg-bg-strong: var(--lifesg-bg-strong);
+  --color-lifesg-bg-stronger: var(--lifesg-bg-stronger);
+  --color-lifesg-border-disabled: var(--lifesg-border-disabled);
+  --color-lifesg-border-primary: var(--lifesg-border-primary);
+  --color-lifesg-error-50: var(--lifesg-error-50);
+  --color-lifesg-icon-primary: var(--lifesg-icon-primary);
+  --color-lifesg-icon-success: var(--lifesg-icon-success);
+  --color-lifesg-success-50: var(--lifesg-success-50);
+  --color-lifesg-text-disabled: var(--lifesg-text-disabled);
+  --color-lifesg-text-error: var(--lifesg-text-error);
+  --color-lifesg-text-hover: var(--lifesg-text-hover);
+  --color-lifesg-text-selected: var(--lifesg-text-selected);
+  --color-lifesg-text-success: var(--lifesg-text-success);
+  --color-lifesg-warning-60: var(--lifesg-warning-60);
+  --leading-lifesg-font-body-lh-baseline: var(--lifesg-font-body-lh-baseline);
+  --leading-lifesg-font-heading-lh-md: var(--lifesg-font-heading-lh-md);
+  --text-lifesg-font-body-size-baseline: var(--lifesg-font-body-size-baseline);
+  --text-lifesg-font-heading-size-md: var(--lifesg-font-heading-size-md);
+
+  /* L3 — masthead */
+  --color-masthead-bg: var(--masthead-bg);
+  --color-masthead-crest: var(--masthead-crest);
+  --color-masthead-icon: var(--masthead-icon);
+  --color-masthead-link: var(--masthead-link);
+  --color-masthead-text: var(--masthead-text);
+
+  /* L3 — modal */
+  --color-modal-backdrop: var(--modal-backdrop);
+  --color-modal-box-bg: var(--modal-box-bg);
+  --color-modal-box-shadow: var(--modal-box-shadow);
+  --radius-modal-box: var(--modal-box-radius);
+  --spacing-modal-box-padding: var(--modal-box-padding);
+
+  /* L3 — navbar */
+  --color-navbar-bg-hover: var(--navbar-bg-hover);
+  --color-navbar-bg: var(--navbar-bg);
+  --color-navbar-border: var(--navbar-border);
+  --color-navbar-indicator: var(--navbar-indicator);
+  --color-navbar-text: var(--navbar-text);
+
+  /* L3 — pagination */
+  --color-pagination-bg-active: var(--pagination-bg-active);
+  --color-pagination-bg-hover: var(--pagination-bg-hover);
+  --color-pagination-bg: var(--pagination-bg);
+  --color-pagination-border: var(--pagination-border);
+  --color-pagination-chevron: var(--pagination-chevron);
+  --color-pagination-text-active: var(--pagination-text-active);
+  --color-pagination-text: var(--pagination-text);
+
+  /* L3 — popover */
+  --color-popover-bg: var(--popover-bg);
+  --color-popover-border: var(--popover-border);
+  --color-popover-shadow: var(--popover-shadow);
+  --radius-popover: var(--popover-radius);
+
+  /* L3 — sidenav */
+  --color-sidenav-bg-hover: var(--sidenav-bg-hover);
+  --color-sidenav-bg-selected: var(--sidenav-bg-selected);
+  --color-sidenav-bg: var(--sidenav-bg);
+  --color-sidenav-border: var(--sidenav-border);
+  --color-sidenav-drawer-bg: var(--sidenav-drawer-bg);
+  --color-sidenav-icon-selected: var(--sidenav-icon-selected);
+  --color-sidenav-icon: var(--sidenav-icon);
+  --color-sidenav-text-subtle: var(--sidenav-text-subtle);
+  --color-sidenav-text: var(--sidenav-text);
+
+  /* L3 — toggle */
+  --color-toggle-bg-checked: var(--toggle-bg-checked);
+  --color-toggle-bg-disabled: var(--toggle-bg-disabled);
+  --color-toggle-bg-error: var(--toggle-bg-error);
+  --color-toggle-bg-hover: var(--toggle-bg-hover);
+  --color-toggle-bg: var(--toggle-bg);
+  --color-toggle-border-checked: var(--toggle-border-checked);
+  --color-toggle-border-disabled: var(--toggle-border-disabled);
+  --color-toggle-border-error: var(--toggle-border-error);
+  --color-toggle-border-hover: var(--toggle-border-hover);
+  --color-toggle-border: var(--toggle-border);
+  --color-toggle-ring-focus: var(--toggle-ring-focus);
+  --color-toggle-text-disabled: var(--toggle-text-disabled);
+  --color-toggle-text: var(--toggle-text);
+
+  /* L3 — typography */
+  --leading-typography-body-bl: var(--typography-body-bl-lh);
+  --leading-typography-body-md: var(--typography-body-md-lh);
+  --leading-typography-body-sm: var(--typography-body-sm-lh);
+  --leading-typography-body-xs: var(--typography-body-xs-lh);
+  --leading-typography-heading-lg: var(--typography-heading-lg-lh);
+  --leading-typography-heading-md: var(--typography-heading-md-lh);
+  --leading-typography-heading-sm: var(--typography-heading-sm-lh);
+  --leading-typography-heading-xl: var(--typography-heading-xl-lh);
+  --leading-typography-heading-xs: var(--typography-heading-xs-lh);
+  --leading-typography-heading-xxl: var(--typography-heading-xxl-lh);
+  --text-typography-body-bl: var(--typography-body-bl-size);
+  --text-typography-body-md: var(--typography-body-md-size);
+  --text-typography-body-sm: var(--typography-body-sm-size);
+  --text-typography-body-xs: var(--typography-body-xs-size);
+  --text-typography-heading-lg: var(--typography-heading-lg-size);
+  --text-typography-heading-md: var(--typography-heading-md-size);
+  --text-typography-heading-sm: var(--typography-heading-sm-size);
+  --text-typography-heading-xl: var(--typography-heading-xl-size);
+  --text-typography-heading-xs: var(--typography-heading-xs-size);
+  --text-typography-heading-xxl: var(--typography-heading-xxl-size);
+  --tracking-typography-body-bl: var(--typography-body-bl-ls);
+  --tracking-typography-body-md: var(--typography-body-md-ls);
+  --tracking-typography-body-sm: var(--typography-body-sm-ls);
+  --tracking-typography-body-xs: var(--typography-body-xs-ls);
+  --tracking-typography-heading-lg: var(--typography-heading-lg-ls);
+  --tracking-typography-heading-md: var(--typography-heading-md-ls);
+  --tracking-typography-heading-sm: var(--typography-heading-sm-ls);
+  --tracking-typography-heading-xl: var(--typography-heading-xl-ls);
+  --tracking-typography-heading-xs: var(--typography-heading-xs-ls);
+  --tracking-typography-heading-xxl: var(--typography-heading-xxl-ls);
+
+  /* L3 — uneditable */
+  --color-uneditable-section-bg: var(--uneditable-section-bg);
+  --radius-uneditable-section: var(--uneditable-section-radius);
+  --spacing-uneditable-section-padding: var(--uneditable-section-padding);
 }
 
 /* LifeSG semantic mapping — sourced from src/app/lifesg-tokens.css */

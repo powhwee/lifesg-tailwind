@@ -58,9 +58,9 @@ export function OursPane() {
               </DrawerHeader>
               <DrawerBody className="p-4">
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="block px-2 py-1 rounded hover:bg-[var(--lifesg-bg-hover)]">Home</a></li>
-                  <li><a href="#" className="block px-2 py-1 rounded hover:bg-[var(--lifesg-bg-hover)]">Profile</a></li>
-                  <li><a href="#" className="block px-2 py-1 rounded hover:bg-[var(--lifesg-bg-hover)]">Settings</a></li>
+                  <li><a href="#" className="block px-2 py-1 rounded hover:bg-lifesg-bg-hover">Home</a></li>
+                  <li><a href="#" className="block px-2 py-1 rounded hover:bg-lifesg-bg-hover">Profile</a></li>
+                  <li><a href="#" className="block px-2 py-1 rounded hover:bg-lifesg-bg-hover">Settings</a></li>
                 </ul>
               </DrawerBody>
             </DrawerContent>
@@ -97,7 +97,7 @@ export function LifeSGPane() {
     <div className="flex flex-col gap-10 max-w-md" data-token="default">
       <section>
         <code className="text-xs text-muted-foreground">LifeSG ships no standalone Drawer</code>
-        <div className="mt-3 rounded-md border border-[var(--lifesg-border)] p-4 bg-[var(--lifesg-bg-strong)] text-sm space-y-2">
+        <div className="mt-3 rounded-md border border-lifesg-border p-4 bg-lifesg-bg-strong text-sm space-y-2">
           <p>
             LifeSG <code>Drawer</code> is a <strong>private internal</strong> used by Sidenav and
             Navbar — not a public component. There&rsquo;s nothing to render here as the LifeSG

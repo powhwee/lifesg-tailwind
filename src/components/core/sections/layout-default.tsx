@@ -13,13 +13,13 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-const cellCx = "rounded bg-[var(--lifesg-bg-strong)] p-2 text-xs text-center text-[var(--lifesg-text-subtle)]";
+const cellCx = "rounded bg-lifesg-bg-strong p-2 text-xs text-center text-lifesg-text-subtle";
 
 export function OursPane() {
   return (
     <div className="flex flex-col">
       <Row label='Container type="grid" (8/12 cols)'>
-        <Container type="grid" className="bg-[var(--lifesg-bg-stronger)]/40 py-3">
+        <Container type="grid" className="bg-lifesg-bg-stronger/40 py-3">
           <ColDiv xxsCols={[1, -1]}><div className={cellCx}>span all (xxs)</div></ColDiv>
           <ColDiv xxsCols={4} lgCols={6}><div className={cellCx}>4/8 · 6/12</div></ColDiv>
           <ColDiv xxsCols={4} lgCols={6}><div className={cellCx}>4/8 · 6/12</div></ColDiv>
@@ -28,7 +28,7 @@ export function OursPane() {
         </Container>
       </Row>
       <Row label='Container type="flex" (default)'>
-        <Container className="bg-[var(--lifesg-bg-stronger)]/40 py-3">
+        <Container className="bg-lifesg-bg-stronger/40 py-3">
           <div className={cellCx + " grow"}>flex child A</div>
           <div className={cellCx + " grow"}>flex child B</div>
           <div className={cellCx + " grow"}>flex child C</div>
@@ -36,13 +36,13 @@ export function OursPane() {
       </Row>
       <Row label="Section + Content (nested)">
         <Section>
-          <Content type="grid" className="bg-[var(--lifesg-bg-stronger)]/40 py-3">
+          <Content type="grid" className="bg-lifesg-bg-stronger/40 py-3">
             <ColDiv xxsCols={[1, -1]}><div className={cellCx}>Content inside Section</div></ColDiv>
           </Content>
         </Section>
       </Row>
       <Row label="stretch (no max-width)">
-        <Container type="grid" stretch className="bg-[var(--lifesg-bg-stronger)]/40 py-3">
+        <Container type="grid" stretch className="bg-lifesg-bg-stronger/40 py-3">
           <ColDiv xxsCols={[1, -1]}><div className={cellCx}>stretches edge to edge</div></ColDiv>
         </Container>
       </Row>

@@ -16,13 +16,13 @@ type DrawerSide = "left" | "right" | "top" | "bottom";
 
 const sideCx: Record<DrawerSide, string> = {
   left:
-    "left-0 top-0 h-full w-[var(--drawer-width-side)] max-w-full data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full",
+    "left-0 top-0 h-full w-drawer-width-side max-w-full data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full",
   right:
-    "right-0 top-0 h-full w-[var(--drawer-width-side)] max-w-full data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full",
+    "right-0 top-0 h-full w-drawer-width-side max-w-full data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full",
   top:
-    "top-0 left-0 w-full h-[var(--drawer-height-side)] max-h-full data-[starting-style]:-translate-y-full data-[ending-style]:-translate-y-full",
+    "top-0 left-0 w-full h-drawer-height-side max-h-full data-[starting-style]:-translate-y-full data-[ending-style]:-translate-y-full",
   bottom:
-    "bottom-0 left-0 w-full h-[var(--drawer-height-side)] max-h-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full",
+    "bottom-0 left-0 w-full h-drawer-height-side max-h-full data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full",
 };
 
 interface DrawerContentProps
@@ -50,7 +50,7 @@ function DrawerContent({
     <DialogPrimitive.Portal container={container}>
       <DialogPrimitive.Backdrop
         className={cn(
-          "fixed inset-0 z-50 bg-[var(--drawer-overlay)] transition-opacity duration-200",
+          "fixed inset-0 z-50 bg-drawer-overlay transition-opacity duration-200",
           "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
           backdropClassName
         )}
@@ -58,7 +58,7 @@ function DrawerContent({
       <DialogPrimitive.Popup
         data-slot="drawer-content"
         className={cn(
-          "fixed z-50 flex flex-col bg-[var(--drawer-bg)] shadow-[var(--drawer-shadow)] outline-none transition-transform duration-200 ease-out",
+          "fixed z-50 flex flex-col bg-drawer-bg shadow-drawer-shadow outline-none transition-transform duration-200 ease-out",
           sideCx[side],
           className
         )}
@@ -69,7 +69,7 @@ function DrawerContent({
           <DialogPrimitive.Close
             aria-label="Close"
             className={cn(
-              "absolute top-3 size-8 inline-flex items-center justify-center rounded hover:bg-[var(--lifesg-bg-hover)] outline-none focus-visible:ring-3 focus-visible:ring-[var(--lifesg-border-focus)]",
+              "absolute top-3 size-8 inline-flex items-center justify-center rounded hover:bg-lifesg-bg-hover outline-none focus-visible:ring-3 focus-visible:ring-lifesg-border-focus",
               side === "left" ? "right-3" : "right-3"
             )}
           >
@@ -89,7 +89,7 @@ function DrawerHeader({
     <div
       data-slot="drawer-header"
       className={cn(
-        "flex items-center px-4 h-14 border-b border-[var(--lifesg-border)] shrink-0",
+        "flex items-center px-4 h-14 border-b border-lifesg-border shrink-0",
         className
       )}
       {...props}
@@ -105,7 +105,7 @@ function DrawerFooter({
     <div
       data-slot="drawer-footer"
       className={cn(
-        "border-t border-[var(--lifesg-border)] p-4 flex flex-col gap-2 shrink-0",
+        "border-t border-lifesg-border p-4 flex flex-col gap-2 shrink-0",
         className
       )}
       {...props}

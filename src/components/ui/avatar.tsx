@@ -3,12 +3,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const avatarVariants = cva(
-  "inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full bg-[var(--avatar-bg)] text-[var(--avatar-text)] select-none",
+  "inline-flex items-center justify-center shrink-0 overflow-hidden rounded-full bg-avatar-bg text-avatar-text select-none",
   {
     variants: {
       sizeType: {
-        default: "size-[var(--avatar-size-default)] text-[var(--avatar-font-default)]",
-        small:   "size-[var(--avatar-size-small)] text-[var(--avatar-font-small)]",
+        default: "size-avatar-size-default text-avatar-font-default",
+        small:   "size-avatar-size-small text-avatar-font-small",
       },
     },
     defaultVariants: { sizeType: "default" },

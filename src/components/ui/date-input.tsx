@@ -109,19 +109,19 @@ function DateInput({
   };
 
   const segmentCx =
-    "bg-transparent border-0 outline-none p-0 text-center text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]";
+    "bg-transparent border-0 outline-none p-0 text-center text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
   const separatorCx =
-    "select-none text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text-placeholder)]";
+    "select-none text-input leading-input text-input-text-placeholder";
 
   return (
     <Popover open={open} onOpenChange={(o) => { if (!disabled && !readOnly) setOpen(o); }}>
       <div
         ref={containerRef}
         className={cn(
-          "h-[var(--input-height)] w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] px-[var(--input-padding-x)] flex items-center gap-1 hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)]",
-          error && "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
-          disabled && "bg-[var(--input-bg-disabled)] border-[var(--input-border-disabled)] cursor-not-allowed",
+          "h-input-height w-full rounded-input border border-input-border bg-input-bg px-input-padding-x flex items-center gap-1 hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
+          error && "border-input-border-error ring-3 ring-input-ring-error",
+          disabled && "bg-input-bg-disabled border-input-border-disabled cursor-not-allowed",
           className
         )}
       >
@@ -202,7 +202,7 @@ function DateInput({
                 setPending(value);
                 setOpen(false);
               }}
-              className="px-3 py-1.5 text-sm rounded hover:bg-[var(--lifesg-bg-hover)]"
+              className="px-3 py-1.5 text-sm rounded hover:bg-lifesg-bg-hover"
             >
               Cancel
             </button>
@@ -214,7 +214,7 @@ function DateInput({
                 onChange?.(next);
                 setOpen(false);
               }}
-              className="px-3 py-1.5 text-sm font-semibold rounded bg-[var(--lifesg-bg-primary)] text-[var(--lifesg-text-inverse)] hover:bg-[var(--lifesg-bg-primary-hover)]"
+              className="px-3 py-1.5 text-sm font-semibold rounded bg-lifesg-bg-primary text-lifesg-text-inverse hover:bg-lifesg-bg-primary-hover"
             >
               Done
             </button>

@@ -28,7 +28,7 @@ function Specimen({
       <code className="text-[10px] text-muted-foreground">{label}</code>
       <div
         style={{ fontSize, lineHeight, fontWeight, fontFamily: family }}
-        className="text-[var(--lifesg-text)]"
+        className="text-lifesg-text"
       >
         {sample}
       </div>

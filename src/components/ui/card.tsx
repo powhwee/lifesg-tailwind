@@ -6,7 +6,7 @@ function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     <div
       data-slot="card"
       className={cn(
-        "bg-[var(--card-bg)] text-[var(--card-text)] border border-[var(--card-border)] rounded-[var(--card-radius)] shadow-[var(--card-shadow)] py-[var(--card-padding-y)] px-[var(--card-padding-x)]",
+        "bg-card-bg text-card-text border border-card-border rounded-card shadow-card-shadow py-card-padding-y px-card-padding-x",
         className
       )}
       {...props}
@@ -38,7 +38,7 @@ function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParag
   return (
     <p
       data-slot="card-description"
-      className={cn("text-sm text-[var(--lifesg-text-subtle)]", className)}
+      className={cn("text-sm text-lifesg-text-subtle", className)}
       {...props}
     />
   );
@@ -52,7 +52,7 @@ function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center gap-2 mt-4 pt-3 border-t border-[var(--card-border)]", className)}
+      className={cn("flex items-center gap-2 mt-4 pt-3 border-t border-card-border", className)}
       {...props}
     />
   );

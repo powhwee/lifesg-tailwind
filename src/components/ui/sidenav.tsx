@@ -31,7 +31,7 @@ function Sidenav({ children, fixed = true, className, id, "aria-label": ariaLabe
         id={id}
         aria-label={ariaLabel}
         className={cn(
-          "flex bg-[var(--sidenav-bg)] text-[var(--sidenav-text)] border-r border-[var(--sidenav-border)]",
+          "flex bg-sidenav-bg text-sidenav-text border-r border-sidenav-border",
           fixed ? "fixed left-0 top-0 bottom-0 z-30" : "h-full",
           className
         )}
@@ -55,7 +55,7 @@ export interface SidenavGroupProps {
 
 function Group({ children, separator, className, id, "aria-label": ariaLabel }: SidenavGroupProps) {
   return (
-    <div id={id} aria-label={ariaLabel} className={cn("flex flex-col gap-1", separator && "pb-3 mb-3 relative after:content-[''] after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:bg-[var(--sidenav-border)]", className)}>
+    <div id={id} aria-label={ariaLabel} className={cn("flex flex-col gap-1", separator && "pb-3 mb-3 relative after:content-[''] after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:bg-sidenav-border", className)}>
       {children}
     </div>
   );
@@ -91,15 +91,15 @@ function Item({ title, icon, selected, onClick, children, id, className }: Siden
       aria-pressed={hasChildren ? isOpen : undefined}
       aria-current={selected ? "page" : undefined}
       className={cn(
-        "relative mx-2 py-2 inline-flex flex-col items-center justify-center gap-1 rounded-md text-[var(--sidenav-icon)] hover:bg-[var(--sidenav-bg-hover)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--lifesg-border-focus)]",
-        (selected || isOpen) && "bg-[var(--sidenav-bg-selected)] text-[var(--sidenav-icon-selected)]",
+        "relative mx-2 py-2 inline-flex flex-col items-center justify-center gap-1 rounded-md text-sidenav-icon hover:bg-sidenav-bg-hover outline-none focus-visible:ring-2 focus-visible:ring-lifesg-border-focus",
+        (selected || isOpen) && "bg-sidenav-bg-selected text-sidenav-icon-selected",
         className
       )}
     >
       <span aria-hidden="true" className="[&_svg]:size-6">
         {icon}
       </span>
-      <span className={cn("text-[0.6875rem] leading-tight text-[var(--sidenav-text)]", (selected || isOpen) && "text-[var(--sidenav-icon-selected)] font-semibold")}>
+      <span className={cn("text-[0.6875rem] leading-tight text-sidenav-text", (selected || isOpen) && "text-sidenav-icon-selected font-semibold")}>
         {title}
       </span>
     </button>
@@ -125,14 +125,14 @@ function DrawerPanel({ children }: { children: React.ReactNode }) {
   if (!open || !activeItem) return null;
   const ai = activeItem as ItemElement;
   return (
-    <div className="w-72 border-l border-[var(--sidenav-border)] bg-[var(--sidenav-drawer-bg)] flex flex-col">
-      <header className="flex items-center justify-between px-4 h-14 border-b border-[var(--sidenav-border)]">
+    <div className="w-72 border-l border-sidenav-border bg-sidenav-drawer-bg flex flex-col">
+      <header className="flex items-center justify-between px-4 h-14 border-b border-sidenav-border">
         <h2 className="text-base font-semibold">{ai.props.title}</h2>
         <button
           type="button"
           aria-label="Close"
           onClick={() => ctx?.setOpenId(null)}
-          className="size-8 inline-flex items-center justify-center rounded hover:bg-[var(--sidenav-bg-hover)]"
+          className="size-8 inline-flex items-center justify-center rounded hover:bg-sidenav-bg-hover"
         >
           <X size={18} />
         </button>
@@ -161,7 +161,7 @@ function DrawerItem({ title, onClick, children, id, className }: SidenavDrawerIt
         type="button"
         onClick={() => onClick?.(id)}
         className={cn(
-          "text-left px-3 h-10 rounded text-[var(--sidenav-text)] hover:bg-[var(--sidenav-bg-hover)] outline-none focus-visible:bg-[var(--sidenav-bg-hover)]",
+          "text-left px-3 h-10 rounded text-sidenav-text hover:bg-sidenav-bg-hover outline-none focus-visible:bg-sidenav-bg-hover",
           className
         )}
       >
@@ -175,7 +175,7 @@ function DrawerItem({ title, onClick, children, id, className }: SidenavDrawerIt
         type="button"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between gap-2 px-3 h-10 rounded text-left text-[var(--sidenav-text)] font-semibold hover:bg-[var(--sidenav-bg-hover)] outline-none focus-visible:bg-[var(--sidenav-bg-hover)]"
+        className="w-full flex items-center justify-between gap-2 px-3 h-10 rounded text-left text-sidenav-text font-semibold hover:bg-sidenav-bg-hover outline-none focus-visible:bg-sidenav-bg-hover"
       >
         <span>{title}</span>
         <ChevronDown size={16} className={cn("transition-transform", !open && "-rotate-90")} />
@@ -200,7 +200,7 @@ function DrawerSubitem({ title, onClick, id, className }: SidenavDrawerSubitemPr
       type="button"
       onClick={() => onClick?.(id)}
       className={cn(
-        "text-left px-3 h-9 rounded text-sm text-[var(--sidenav-text-subtle)] hover:bg-[var(--sidenav-bg-hover)] hover:text-[var(--sidenav-text)] outline-none focus-visible:bg-[var(--sidenav-bg-hover)]",
+        "text-left px-3 h-9 rounded text-sm text-sidenav-text-subtle hover:bg-sidenav-bg-hover hover:text-sidenav-text outline-none focus-visible:bg-sidenav-bg-hover",
         className
       )}
     >

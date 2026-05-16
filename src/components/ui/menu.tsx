@@ -15,7 +15,7 @@ const MenuSubmenu = MenuPrimitive.SubmenuRoot;
 const MenuSubmenuTrigger = MenuPrimitive.SubmenuTrigger;
 
 const popupCx =
-  "z-50 min-w-[10rem] rounded-[var(--popover-radius)] border border-[var(--popover-border)] bg-[var(--popover-bg)] shadow-[var(--popover-shadow)] outline-none py-1";
+  "z-50 min-w-[10rem] rounded-popover border border-popover-border bg-popover-bg shadow-popover-shadow outline-none py-1";
 
 interface MenuContentProps
   extends React.ComponentProps<typeof MenuPrimitive.Popup> {
@@ -50,7 +50,7 @@ function MenuContent({
 }
 
 const itemCx =
-  "flex items-center justify-between gap-2 px-3 py-2 text-sm cursor-pointer outline-none data-[highlighted]:bg-[var(--lifesg-bg-hover)] data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed";
+  "flex items-center justify-between gap-2 px-3 py-2 text-sm cursor-pointer outline-none data-[highlighted]:bg-lifesg-bg-hover data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed";
 
 function MenuItem({
   className,
@@ -115,7 +115,7 @@ function MenuRadioItem({
       <span className="flex items-center gap-2">
         <span className="grid size-4 place-items-center">
           <MenuPrimitive.RadioItemIndicator>
-            <span className="size-2 rounded-full bg-[var(--lifesg-text)]" />
+            <span className="size-2 rounded-full bg-lifesg-text" />
           </MenuPrimitive.RadioItemIndicator>
         </span>
         {children}
@@ -131,7 +131,7 @@ function MenuGroupLabel({
   return (
     <MenuPrimitive.GroupLabel
       data-slot="menu-group-label"
-      className={cn("px-3 py-1.5 text-xs font-semibold text-[var(--lifesg-text-subtle)]", className)}
+      className={cn("px-3 py-1.5 text-xs font-semibold text-lifesg-text-subtle", className)}
       {...props}
     />
   );
@@ -144,7 +144,7 @@ function MenuSeparatorStyled({
   return (
     <MenuPrimitive.Separator
       data-slot="menu-separator"
-      className={cn("my-1 h-px bg-[var(--lifesg-border)]", className)}
+      className={cn("my-1 h-px bg-lifesg-border", className)}
       {...props}
     />
   );

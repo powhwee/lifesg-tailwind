@@ -25,7 +25,7 @@ export function OursPane() {
           ]}
           masthead
         />
-        <div className="h-32 bg-[var(--lifesg-bg-strong)]" />
+        <div className="h-32 bg-lifesg-bg-strong" />
       </div>
     </div>
   );
@@ -56,7 +56,7 @@ export function LifeSGPane() {
           selectedId="services"
           masthead
         />
-        <div className="h-32 bg-[var(--lifesg-bg-strong)]" />
+        <div className="h-32 bg-lifesg-bg-strong" />
       </div>
     </div>
   );

@@ -32,9 +32,9 @@ function stateClass(_state: BoxContainerDisplayState) {
 }
 
 const panelCx =
-  // h-[var(--collapsible-panel-height)] reads a runtime CSS variable set by
+  // h-collapsible-panel-height reads a runtime CSS variable set by
   // @base-ui Collapsible — not a design token, so it stays as an arbitrary value.
-  "data-[ending-style]:h-0 data-[starting-style]:h-0 h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] duration-200";
+  "data-[ending-style]:h-0 data-[starting-style]:h-0 h-collapsible-panel-height overflow-hidden transition-[height] duration-200";
 
 const bodyCx = "border-t border-box-container-border px-box-container-padding-x py-box-container-body-y";
 

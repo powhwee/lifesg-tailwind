@@ -23,7 +23,7 @@ export function OursPane() {
             onSubmit={() => setSubmitted(true)}
           />
           {submitted && (
-            <p className="mt-3 text-sm text-[var(--lifesg-text-success)]">
+            <p className="mt-3 text-sm text-lifesg-text-success">
               Thanks for your {rating}-star rating.
             </p>
           )}

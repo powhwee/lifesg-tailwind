@@ -132,9 +132,9 @@ function AccordionRoot({
             </Accordion.Header>
             <Accordion.Panel
               keepMounted
-              // h-[var(--accordion-panel-height)] is a runtime CSS variable set by
+              // h-accordion-panel-height is a runtime CSS variable set by
               // @base-ui Accordion — not a design token, stays as arbitrary value.
-              className="data-[ending-style]:h-0 data-[starting-style]:h-0 h-[var(--accordion-panel-height)] overflow-hidden transition-[height] duration-200"
+              className="data-[ending-style]:h-0 data-[starting-style]:h-0 h-accordion-panel-height overflow-hidden transition-[height] duration-200"
             >
               <div className={cn("px-accordion-x", small ? "pb-3 text-sm" : "pb-4 text-sm")}>
                 {item.props.children}

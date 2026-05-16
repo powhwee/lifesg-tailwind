@@ -33,7 +33,7 @@ export function OursPane() {
         </OurUL>
       </Sec>
       <Sec title='UnorderedList — bulletType={<Check />} (custom node)' label="ul-custom">
-        <OurUL bulletType={<Check className="size-4 text-[var(--lifesg-icon-success)]" />}>
+        <OurUL bulletType={<Check className="size-4 text-lifesg-icon-success" />}>
           {itemsArr.map((s) => <span key={s}>{s}</span>)}
         </OurUL>
       </Sec>

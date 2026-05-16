@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 const groupCx =
-  "flex w-full overflow-hidden rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] transition-colors hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)] data-[error=true]:border-[var(--input-border-error)] data-[error=true]:ring-3 data-[error=true]:ring-[var(--input-ring-error)] data-[disabled=true]:bg-[var(--input-bg-disabled)] data-[disabled=true]:border-[var(--input-border-disabled)] data-[disabled=true]:cursor-not-allowed";
+  "flex w-full overflow-hidden rounded-input border border-input-border bg-input-bg transition-colors hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus data-[error=true]:border-input-border-error data-[error=true]:ring-3 data-[error=true]:ring-input-ring-error data-[disabled=true]:bg-input-bg-disabled data-[disabled=true]:border-input-border-disabled data-[disabled=true]:cursor-not-allowed";
 
 function InputGroup({
   className,
@@ -24,7 +24,7 @@ function InputGroup({
 }
 
 const addonCx =
-  "flex shrink-0 items-center px-3 text-[var(--input-group-addon-text)] text-[length:var(--input-font-size)] leading-[var(--input-line-height)]";
+  "flex shrink-0 items-center px-3 text-input-group-addon-text text-input leading-input";
 
 function InputGroupAddon({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
@@ -33,7 +33,7 @@ function InputGroupAddon({ className, ...props }: React.HTMLAttributes<HTMLDivEl
 }
 
 const groupInputCx =
-  "h-[var(--input-height)] w-full bg-transparent border-0 outline-none px-3 text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]";
+  "h-input-height w-full bg-transparent border-0 outline-none px-3 text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
 function InputGroupInput({
   className,

@@ -11,7 +11,7 @@ function ChevronRight() {
 
 function FolderIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" className="shrink-0 text-[var(--lifesg-icon-primary)]">
+    <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" className="shrink-0 text-lifesg-icon-primary">
       <path d="M1.5 3.5h4.5l1.5 1.5h7v7.5h-13z" fill="currentColor" opacity="0.85" />
     </svg>
   );
@@ -19,22 +19,22 @@ function FolderIcon() {
 
 function FileIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" className="shrink-0 text-[var(--lifesg-warning-60)]">
+    <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" className="shrink-0 text-lifesg-warning-60">
       <path d="M3.5 1.5h6.5l3 3v10h-9.5z" fill="currentColor" opacity="0.85" />
     </svg>
   );
 }
 
 const linkCx =
-  "flex items-center gap-2 rounded px-2 py-1.5 hover:bg-[var(--lifesg-bg-hover)] hover:text-[var(--lifesg-text-hover)] aria-[current=page]:bg-[var(--lifesg-bg-selected)] aria-[current=page]:text-[var(--lifesg-text-selected)]";
+  "flex items-center gap-2 rounded px-2 py-1.5 hover:bg-lifesg-bg-hover hover:text-lifesg-text-hover aria-[current=page]:bg-lifesg-bg-selected aria-[current=page]:text-lifesg-text-selected";
 
 export default function NavigationLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
-      <aside className="w-72 shrink-0 border-r border-border bg-[var(--lifesg-bg-strong)] p-6">
+      <aside className="w-72 shrink-0 border-r border-border bg-lifesg-bg-strong p-6">
         <Link
           href="/"
-          className="block text-xs text-muted-foreground hover:text-[var(--lifesg-text-hover)] mb-3"
+          className="block text-xs text-muted-foreground hover:text-lifesg-text-hover mb-3"
         >
           ← Pilot home
         </Link>
@@ -53,7 +53,7 @@ export default function NavigationLayout({ children }: { children: React.ReactNo
             }
             return (
               <details key={node.slug} className="group">
-                <summary className="flex items-center gap-2 rounded px-2 py-1.5 cursor-pointer hover:bg-[var(--lifesg-bg-hover)] list-none [&::-webkit-details-marker]:hidden">
+                <summary className="flex items-center gap-2 rounded px-2 py-1.5 cursor-pointer hover:bg-lifesg-bg-hover list-none [&::-webkit-details-marker]:hidden">
                   <ChevronRight />
                   <FolderIcon />
                   <span>{node.title}</span>

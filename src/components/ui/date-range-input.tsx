@@ -76,32 +76,32 @@ const dpClassNames = {
   caption_label: "text-base font-semibold",
   nav: "flex items-center justify-between absolute left-3 right-3 top-3",
   button_previous:
-    "size-8 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer",
+    "size-8 inline-flex items-center justify-center rounded-md hover:bg-calendar-bg-hover cursor-pointer",
   button_next:
-    "size-8 inline-flex items-center justify-center rounded-md hover:bg-[var(--calendar-bg-hover)] cursor-pointer",
+    "size-8 inline-flex items-center justify-center rounded-md hover:bg-calendar-bg-hover cursor-pointer",
   month_grid: "w-full border-collapse",
   weekdays: "flex",
   weekday:
-    "size-9 text-xs text-[var(--calendar-text-subtle)] font-normal flex items-center justify-center",
+    "size-9 text-xs text-calendar-text-subtle font-normal flex items-center justify-center",
   week: "flex",
   day: "size-9 p-0 text-sm",
   day_button: cn(
     "size-9 inline-flex items-center justify-center rounded-md cursor-pointer text-sm",
-    "hover:bg-[var(--calendar-bg-hover)]",
-    "focus-visible:ring-3 focus-visible:ring-[var(--calendar-ring-focus)] focus-visible:outline-none"
+    "hover:bg-calendar-bg-hover",
+    "focus-visible:ring-3 focus-visible:ring-calendar-ring-focus focus-visible:outline-none"
   ),
-  today: "font-semibold text-[var(--calendar-text-today)]",
+  today: "font-semibold text-calendar-text-today",
   selected:
-    "[&>button]:bg-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)]",
+    "[&>button]:bg-calendar-bg-selected [&>button]:text-calendar-text-selected",
   range_start:
-    "[&>button]:bg-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)]",
+    "[&>button]:bg-calendar-bg-selected [&>button]:text-calendar-text-selected",
   range_end:
-    "[&>button]:bg-[var(--calendar-bg-selected)] [&>button]:text-[var(--calendar-text-selected)]",
+    "[&>button]:bg-calendar-bg-selected [&>button]:text-calendar-text-selected",
   range_middle:
-    "[&>button]:bg-[var(--calendar-bg-hover)] [&>button]:text-[var(--calendar-text)]",
-  outside: "text-[var(--calendar-text-disabled)]",
+    "[&>button]:bg-calendar-bg-hover [&>button]:text-calendar-text",
+  outside: "text-calendar-text-disabled",
   disabled:
-    "text-[var(--calendar-text-disabled)] cursor-not-allowed [&>button]:cursor-not-allowed [&>button:hover]:bg-transparent",
+    "text-calendar-text-disabled cursor-not-allowed [&>button]:cursor-not-allowed [&>button:hover]:bg-transparent",
   hidden: "invisible",
 };
 
@@ -119,10 +119,10 @@ interface SegmentedGroupProps {
 }
 
 const segmentCx =
-  "bg-transparent border-0 outline-none p-0 text-center text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]";
+  "bg-transparent border-0 outline-none p-0 text-center text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
 const separatorCx =
-  "select-none text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text-placeholder)]";
+  "select-none text-input leading-input text-input-text-placeholder";
 
 function SegmentedGroup({
   segments,
@@ -280,9 +280,9 @@ function DateRangeInput({
         ref={containerRef}
         id={id}
         className={cn(
-          "h-[var(--input-height)] w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] px-[var(--input-padding-x)] flex items-center gap-3 hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)]",
-          error && "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
-          disabled && "bg-[var(--input-bg-disabled)] border-[var(--input-border-disabled)] cursor-not-allowed",
+          "h-input-height w-full rounded-input border border-input-border bg-input-bg px-input-padding-x flex items-center gap-3 hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
+          error && "border-input-border-error ring-3 ring-input-ring-error",
+          disabled && "bg-input-bg-disabled border-input-border-disabled cursor-not-allowed",
           className
         )}
       >
@@ -295,7 +295,7 @@ function DateRangeInput({
               openIfAllowed();
             }}
             className={cn(
-              "flex-1 text-left text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text-placeholder)] disabled:cursor-not-allowed"
+              "flex-1 text-left text-input leading-input text-input-text-placeholder disabled:cursor-not-allowed"
             )}
           >
             From
@@ -313,7 +313,7 @@ function DateRangeInput({
             yearRef={startYearRef}
           />
         )}
-        <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-[var(--input-text-placeholder)]" />
+        <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-input-text-placeholder" />
         {endEmpty ? (
           <button
             type="button"
@@ -323,7 +323,7 @@ function DateRangeInput({
               openIfAllowed();
             }}
             className={cn(
-              "flex-1 text-left text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text-placeholder)] disabled:cursor-not-allowed"
+              "flex-1 text-left text-input leading-input text-input-text-placeholder disabled:cursor-not-allowed"
             )}
           >
             To

@@ -42,7 +42,7 @@ function Section({ stretch, className, style, children, ...props }: SectionProps
       data-slot="layout-section"
       className={cn(
         "w-full",
-        !stretch && "mx-auto max-w-[var(--layout-container-max)]",
+        !stretch && "mx-auto max-w-layout-container-max",
         className
       )}
       style={style}
@@ -72,7 +72,7 @@ function Container({ type = "flex", stretch, className, style, children, ...prop
       data-type={type}
       className={cn(
         "w-full mx-auto [padding-inline:var(--layout-container-pad)]",
-        !stretch && "max-w-[var(--layout-container-max)]",
+        !stretch && "max-w-layout-container-max",
         containerLayoutClasses(type),
         className
       )}
@@ -95,7 +95,7 @@ function Content({ type = "flex", stretch, className, style, children, ...props 
       data-type={type}
       className={cn(
         "w-full",
-        !stretch && "max-w-[var(--layout-container-max)]",
+        !stretch && "max-w-layout-container-max",
         containerLayoutClasses(type),
         className
       )}

@@ -13,11 +13,11 @@ export type ToggleStyleType = "default" | "no-border";
 const toggleVariants = cva(
   cn(
     "group/toggle relative flex w-full cursor-pointer items-start gap-4 rounded-md p-4 transition-colors",
-    "border bg-[var(--toggle-bg)] border-[var(--toggle-border)] text-[var(--toggle-text)]",
-    "hover:bg-[var(--toggle-bg-hover)] hover:border-[var(--toggle-border-hover)]",
-    "has-[input:focus-visible]:ring-3 has-[input:focus-visible]:ring-[var(--toggle-ring-focus)]",
-    "has-[[data-checked]]:bg-[var(--toggle-bg-checked)] has-[[data-checked]]:border-[var(--toggle-border-checked)] has-[[data-checked]]:border-l-[3px] has-[[data-checked]]:border-l-[var(--lifesg-border-primary)]",
-    "[&:has([data-disabled])]:bg-[var(--toggle-bg-disabled)] [&:has([data-disabled])]:border-[var(--toggle-border-disabled)] [&:has([data-disabled])]:text-[var(--toggle-text-disabled)] [&:has([data-disabled])]:cursor-not-allowed"
+    "border bg-toggle-bg border-toggle-border text-toggle-text",
+    "hover:bg-toggle-bg-hover hover:border-toggle-border-hover",
+    "has-[input:focus-visible]:ring-3 has-[input:focus-visible]:ring-toggle-ring-focus",
+    "has-[[data-checked]]:bg-toggle-bg-checked has-[[data-checked]]:border-toggle-border-checked has-[[data-checked]]:border-l-[3px] has-[[data-checked]]:border-l-lifesg-border-primary",
+    "[&:has([data-disabled])]:bg-toggle-bg-disabled [&:has([data-disabled])]:border-toggle-border-disabled [&:has([data-disabled])]:text-toggle-text-disabled [&:has([data-disabled])]:cursor-not-allowed"
   ),
   {
     variants: {
@@ -26,7 +26,7 @@ const toggleVariants = cva(
         "no-border": "border-transparent bg-transparent",
       },
       error: {
-        true: "border-[var(--toggle-border-error)] bg-[var(--toggle-bg-error)]",
+        true: "border-toggle-border-error bg-toggle-bg-error",
         false: "",
       },
     },
@@ -59,7 +59,7 @@ function Indicator({ type, displaySize }: { type: ToggleType; displaySize: "defa
   if (type === "checkbox") return <Checkbox displaySize={displaySize} />;
   // "yes" / "no" — visual disc with icon, behaves like a checkbox
   const Icon = type === "yes" ? Check : X;
-  const tone = type === "yes" ? "bg-[var(--lifesg-success-50)]" : "bg-[var(--lifesg-error-50)]";
+  const tone = type === "yes" ? "bg-lifesg-success-50" : "bg-lifesg-error-50";
   return (
     <span
       aria-hidden="true"
@@ -125,10 +125,10 @@ function Toggle({
         aria-invalid={error || undefined}
       />
       <span className="flex flex-col gap-1 min-w-0 flex-1">
-        <span className={cn("text-base font-semibold", isChecked && "text-[var(--lifesg-text-primary)]")}>{children}</span>
-        {subLabel && <span className="text-sm text-[var(--lifesg-text-subtle)]">{subLabel}</span>}
+        <span className={cn("text-base font-semibold", isChecked && "text-lifesg-text-primary")}>{children}</span>
+        {subLabel && <span className="text-sm text-lifesg-text-subtle">{subLabel}</span>}
         {isChecked && compositeSection && (
-          <span className="mt-3 block border-t border-[var(--toggle-border)] pt-3 text-sm">
+          <span className="mt-3 block border-t border-toggle-border pt-3 text-sm">
             {compositeSection}
           </span>
         )}

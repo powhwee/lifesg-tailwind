@@ -13,7 +13,7 @@ function DurationRow({ label, value, display }: { label: string; value: string; 
     <div className="flex items-center gap-4">
       <code className="text-xs text-muted-foreground w-52 shrink-0 whitespace-nowrap">{label}</code>
       <div
-        className="h-3 w-3 rounded-full bg-[var(--lifesg-bg-primary)] motion-slide"
+        className="h-3 w-3 rounded-full bg-lifesg-bg-primary motion-slide"
         style={{ animationDuration: value }}
         data-token={label}
       />
@@ -27,7 +27,7 @@ function EaseRow({ label, value, display }: { label: string; value: string; disp
     <div className="flex items-center gap-4">
       <code className="text-xs text-muted-foreground w-52 shrink-0 whitespace-nowrap">{label}</code>
       <div
-        className="h-3 w-3 rounded-full bg-[var(--lifesg-bg-primary)] motion-slide"
+        className="h-3 w-3 rounded-full bg-lifesg-bg-primary motion-slide"
         style={{ animationDuration: "1500ms", animationTimingFunction: value }}
         data-token={label}
       />
