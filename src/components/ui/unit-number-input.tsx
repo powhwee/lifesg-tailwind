@@ -71,12 +71,12 @@ function UnitNumberInput({
   };
 
   const inputCx =
-    "h-[var(--input-height)] w-1/2 bg-transparent border-0 outline-none px-3 text-center text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]";
+    "h-[var(--input-height)] bg-transparent border-0 outline-none px-1 text-center text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]";
 
   return (
     <div
       className={cn(
-        "flex items-stretch w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)]",
+        "inline-flex items-stretch w-fit rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)]",
         error && "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
         disabled && "bg-[var(--input-bg-disabled)] border-[var(--input-border-disabled)] cursor-not-allowed",
         className
@@ -96,12 +96,12 @@ function UnitNumberInput({
         onBlur={handleBlur}
         disabled={disabled}
         readOnly={readOnly}
-        placeholder={placeholder ? placeholder.split("-")[0] : "12"}
-        maxLength={4}
+        placeholder={placeholder ? placeholder.split("-")[0] : "00"}
+        maxLength={3}
         name={name ? `${name}-floor` : undefined}
         id={id ? `${id}-floor` : undefined}
         aria-label="Floor"
-        className={inputCx}
+        className={cn(inputCx, "w-10")}
       />
       <span
         aria-hidden="true"
@@ -117,12 +117,12 @@ function UnitNumberInput({
         onBlur={handleBlur}
         disabled={disabled}
         readOnly={readOnly}
-        placeholder={placeholder ? placeholder.split("-")[1] : "345"}
+        placeholder={placeholder ? placeholder.split("-")[1] : "8888"}
         maxLength={5}
         name={name ? `${name}-unit` : undefined}
         id={id ? `${id}-unit` : undefined}
         aria-label="Unit"
-        className={inputCx}
+        className={cn(inputCx, "w-24 pr-3")}
       />
     </div>
   );
