@@ -775,3 +775,43 @@ The 50+ unique tokens still in arbitrary-value form across the other ~40 UI comp
 ### Build gotcha
 
 Tailwind 4 source-scans all files matching `*.tsx`/`*.ts`/`*.js`/`*.md`/`*.html` etc. by default. Audit scripts or documentation that contain literal `text-[var(--...)]` placeholder strings (e.g. `scripts/detect-tweaks.sh`, `working-logs/*.md`) get parsed as class candidates and crash the build. `globals.css` has explicit `@source not "../../scripts"` and `@source not "../../working-logs"` directives to exclude them. Add to that list if other documentation paths get added.
+
+## 2026-05-16 — Probe before trusting handover notes
+
+### Why
+
+Two punch-list items inherited from the 2026-05-15 handover turned out to be wrong when verified against the live LifeSG component:
+
+- **Navbar "missing baseline hairline"** — probing the inactive `<a>`, its `<li>` parent, the `<ul>` container, and the surrounding `<nav>` returned `border-bottom: 0px` on every level. LifeSG has no baseline hairline. The observation likely confused the navbar's outer `border-b` for a per-tab hairline.
+- **PhoneNumberInput "fixedCountry shows chevron next to +65"** — probing every element containing `+65` showed the fixedCountry row renders a `<div>` with text-only "+65" and no SVG sibling. LifeSG has no chevron in fixedCountry either; ours already matched.
+
+Both notes would have produced 30–60 min of misdirected work each. The fix that "looks done" against a wrong target is worse than no fix — it ships a divergence under a checkmark.
+
+### Rule
+
+A handover note that names a specific behaviour (icon, weight, hairline, spacing, layout) is a snapshot of what the previous session observed. It can be stale, misobserved, or based on a different LifeSG version. **Probe the live LifeSG element before applying the fix** — `getComputedStyle` and the rendered DOM are authoritative, the handover is reference.
+
+This sits one level above the existing "classify DEMO/COMPONENT/BOTH" check: classify first, then verify the *target state itself* is what the handover claimed.
+
+### Reusable artifacts
+
+- Short ad-hoc probe scripts (Playwright + `page.evaluate` reading `getComputedStyle`, `getBoundingClientRect`, `:before`/`:after` pseudo-elements, DOM sibling structure). Keep them temporary — name with leading dot (`scripts/.probe-*.mjs`) and delete after the session. The standing `measure-content.mjs` covers tabular cases; the ad-hoc probes are for one-off "is this element X" questions.
+
+### Build gotcha extension
+
+The earlier `@source not` exclusions covered `scripts/` and `working-logs/` but not root-level `.md` files. README.md was rewritten this session with an "arbitrary-value debt" line containing a literal `text-[var(--...)]`. Tailwind 4 scanned it, generated `.text-\[var\(--\.\.\.\)\] { color: var(--...); }`, and the parse error crashed every page that imports `globals.css`.
+
+Added `@source not "../../README.md"` to the exclusion list. Anything new at the repo root that documents class shapes by example (CLAUDE.md, AGENTS.md, future docs) needs the same treatment — or write the example inside a fenced code block tagged with a non-detected language, or escape the candidate so it doesn't match Tailwind's extraction regex.
+
+### Token discoveries worth remembering
+
+| Component | Probe surprise |
+|---|---|
+| **Sidenav** | `--sidenav-bg` mapped to `--lifesg-bg` (white). LifeSG renders the panel with `--lifesg-bg-hover-subtle` (#F7F9FF) — the "subtle hover bg" semantic doubles as a panel-fill colour in LifeSG. Mirror the choice; don't rename the token. |
+| **Navbar** | Tab `<a>` is **96px tall** (`h-24`), not the 64px assumption. Text vertically centred in the tab; the 4px underline sits at `bottom-0` with `inset-x-0` (full tab width, not inset). |
+| **UnitNumberInput** | LifeSG uses **asymmetric input widths** (floor 40px / unit 96px), not the 50/50 split. The container is content-sized, not stretching to its parent. |
+| **PhoneNumberInput** | LifeSG formats stored +65 numbers as `"1234 5678"` (4+4 split) in the displayed input value; underlying `value.number` stays digits-only. Other country codes appear unformatted in LifeSG's demos. |
+| **ImageButton** | LifeSG's selected affordance is a **1px border alone** — no overlay, no checkmark. Border radius is 8px (`rounded-lg`), not 6px. Internal padding makes the image visibly inset; ours is fullbleed (known divergence, not blocking). |
+| **Pagination** | First/last jumpers are `ChevronFirst`/`ChevronLast` icons (`|<` / `>|`), not `ChevronsLeft`/`ChevronsRight` (`<<` / `>>`). The page-size selector is a Base UI Select with compact labels ("10" not "10 / page"), not a native `<select>`. |
+
+These supplement, not replace, the per-component probes — anyone touching these components in a re-theme should re-probe before assuming the values still hold.
