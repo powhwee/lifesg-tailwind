@@ -41,6 +41,15 @@ const COUNTRIES: CountryOption[] = [
   { iso2: "US", name: "United States",   countryCode: "+1"   },
 ];
 
+function formatNumber(raw: string | undefined, countryCode: string): string {
+  if (!raw) return "";
+  const digits = raw.replace(/\D/g, "");
+  if (countryCode === "+65" && digits.length > 4) {
+    return `${digits.slice(0, 4)} ${digits.slice(4)}`;
+  }
+  return digits;
+}
+
 interface PhoneNumberInputProps {
   value?: PhoneNumberInputValue;
   onChange?: (value: PhoneNumberInputValue) => void;
@@ -131,8 +140,10 @@ function PhoneNumberInput({
       <input
         type="tel"
         inputMode="tel"
-        value={value.number ?? ""}
-        onChange={(e) => onChange?.({ ...value, number: e.target.value })}
+        value={formatNumber(value.number, country.countryCode)}
+        onChange={(e) =>
+          onChange?.({ ...value, number: e.target.value.replace(/\s+/g, "") })
+        }
         disabled={disabled}
         readOnly={readOnly}
         placeholder={placeholder}
