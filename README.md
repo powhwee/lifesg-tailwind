@@ -175,7 +175,7 @@ Each layer catches what the layer above cannot. All automated layers propagate e
 
 ### Unified runner
 
-`verify-all.mjs` runs smoke → measure → behavioural in sequence with a pass/fail summary and proper exit codes:
+`verify-all.mjs` runs smoke → measure → behavioural → visual survey in sequence with a pass/fail summary and proper exit codes. Set `SKIP_VISUAL=1` to skip the slow L5 visual survey (~60–90s) during quick iteration; L4 (`tests/parity.spec.ts`) is invoked separately via `npx playwright test parity.spec.ts`.
 
 ```
 VERIFY-ALL: Running all verification suites
@@ -187,7 +187,8 @@ VERIFY-ALL: Running all verification suites
   measure-content                ✓ PASS
   measure-typography             ✓ PASS
   behavioral-content             ✓ PASS
-  RESULTS: 8 passed, 0 failed, 8 total
+  screenshot-all                 ✓ PASS
+  RESULTS: 9 passed, 0 failed, 9 total
 ```
 
 ### How the verification system evolved
