@@ -1,17 +1,11 @@
 "use client";
 
 import * as React from "react";
-import {
-  Calendar as CalendarIcon,
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-import { format, parse } from "date-fns";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker, type DateRange, type Matcher } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { Popover, PopoverContent } from "@/components/ui/popover";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 export interface DateRangeInputProps {
@@ -30,24 +24,47 @@ export interface DateRangeInputProps {
   name?: string;
 }
 
-function fromIso(s: string | undefined): Date | undefined {
+interface Segments {
+  day: string;
+  month: string;
+  year: string;
+}
+
+const EMPTY: Segments = { day: "", month: "", year: "" };
+
+function parseValue(value: string | undefined): Segments {
+  if (!value) return EMPTY;
+  const [y, m, d] = value.split("-");
+  if (!y || !m || !d) return EMPTY;
+  return { day: d, month: m, year: y };
+}
+
+function isComplete(s: Segments): boolean {
+  return s.day.length > 0 && s.month.length > 0 && s.year.length === 4;
+}
+
+function isEmpty(s: Segments): boolean {
+  return !s.day && !s.month && !s.year;
+}
+
+function toIso(s: Segments): string {
+  if (!isComplete(s)) return "";
+  return `${s.year.padStart(4, "0")}-${s.month.padStart(2, "0")}-${s.day.padStart(2, "0")}`;
+}
+
+function fromIsoDate(s: string | undefined): Date | undefined {
   if (!s) return undefined;
-  try {
-    return parse(s, "yyyy-MM-dd", new Date());
-  } catch {
-    return undefined;
-  }
+  const [y, m, d] = s.split("-").map(Number);
+  if (!y || !m || !d) return undefined;
+  return new Date(y, m - 1, d);
 }
 
-function toIso(d: Date | undefined): string {
+function toIsoDate(d: Date | undefined): string {
   if (!d) return "";
-  return format(d, "yyyy-MM-dd");
-}
-
-function formatDisplay(s: string | undefined): string {
-  const d = fromIso(s);
-  if (!d) return "";
-  return format(d, "d MMM yyyy");
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
 }
 
 const dpClassNames = {
@@ -88,6 +105,113 @@ const dpClassNames = {
   hidden: "invisible",
 };
 
+interface SegmentedGroupProps {
+  segments: Segments;
+  prefix: "Start" | "End";
+  disabled?: boolean;
+  readOnly?: boolean;
+  onChange: (next: Segments) => void;
+  onFocus: () => void;
+  dayRef: React.RefObject<HTMLInputElement | null>;
+  monthRef: React.RefObject<HTMLInputElement | null>;
+  yearRef: React.RefObject<HTMLInputElement | null>;
+  prevYearRef?: React.RefObject<HTMLInputElement | null>;
+}
+
+const segmentCx =
+  "bg-transparent border-0 outline-none p-0 text-center text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text)] placeholder:text-[var(--input-text-placeholder)] disabled:cursor-not-allowed disabled:text-[var(--input-text-disabled)]";
+
+const separatorCx =
+  "select-none text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text-placeholder)]";
+
+function SegmentedGroup({
+  segments,
+  prefix,
+  disabled,
+  readOnly,
+  onChange,
+  onFocus,
+  dayRef,
+  monthRef,
+  yearRef,
+}: SegmentedGroupProps) {
+  const handle = (
+    key: keyof Segments,
+    raw: string,
+    maxLen: number,
+    nextRef: React.RefObject<HTMLInputElement | null> | null
+  ) => {
+    const digits = raw.replace(/\D/g, "").slice(0, maxLen);
+    onChange({ ...segments, [key]: digits });
+    if (digits.length === maxLen && nextRef?.current) nextRef.current.focus();
+  };
+  const backspace = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    prevRef: React.RefObject<HTMLInputElement | null> | null
+  ) => {
+    if (e.key === "Backspace" && e.currentTarget.value === "" && prevRef?.current) {
+      prevRef.current.focus();
+      prevRef.current.setSelectionRange(prevRef.current.value.length, prevRef.current.value.length);
+    }
+  };
+  const labelDay = `${prefix} Day`;
+  const labelMonth = `${prefix} Month`;
+  const labelYear = `${prefix} Year`;
+  return (
+    <div className="flex items-center gap-1">
+      <input
+        ref={dayRef}
+        type="text"
+        inputMode="numeric"
+        autoComplete="off"
+        aria-label={labelDay}
+        placeholder="DD"
+        maxLength={2}
+        disabled={disabled}
+        readOnly={readOnly}
+        value={segments.day}
+        onChange={(e) => handle("day", e.target.value, 2, monthRef)}
+        onFocus={onFocus}
+        className={cn(segmentCx, "w-7")}
+      />
+      <span aria-hidden="true" className={separatorCx}>/</span>
+      <input
+        ref={monthRef}
+        type="text"
+        inputMode="numeric"
+        autoComplete="off"
+        aria-label={labelMonth}
+        placeholder="MM"
+        maxLength={2}
+        disabled={disabled}
+        readOnly={readOnly}
+        value={segments.month}
+        onChange={(e) => handle("month", e.target.value, 2, yearRef)}
+        onKeyDown={(e) => backspace(e, dayRef)}
+        onFocus={onFocus}
+        className={cn(segmentCx, "w-8")}
+      />
+      <span aria-hidden="true" className={separatorCx}>/</span>
+      <input
+        ref={yearRef}
+        type="text"
+        inputMode="numeric"
+        autoComplete="off"
+        aria-label={labelYear}
+        placeholder="YYYY"
+        maxLength={4}
+        disabled={disabled}
+        readOnly={readOnly}
+        value={segments.year}
+        onChange={(e) => handle("year", e.target.value, 4, null)}
+        onKeyDown={(e) => backspace(e, monthRef)}
+        onFocus={onFocus}
+        className={cn(segmentCx, "w-12")}
+      />
+    </div>
+  );
+}
+
 function DateRangeInput({
   value,
   valueEnd,
@@ -101,71 +225,139 @@ function DateRangeInput({
   id,
   name,
 }: DateRangeInputProps) {
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const startDayRef = React.useRef<HTMLInputElement | null>(null);
+  const startMonthRef = React.useRef<HTMLInputElement | null>(null);
+  const startYearRef = React.useRef<HTMLInputElement | null>(null);
+  const endDayRef = React.useRef<HTMLInputElement | null>(null);
+  const endMonthRef = React.useRef<HTMLInputElement | null>(null);
+  const endYearRef = React.useRef<HTMLInputElement | null>(null);
+
+  const [start, setStart] = React.useState<Segments>(parseValue(value));
+  const [end, setEnd] = React.useState<Segments>(parseValue(valueEnd));
   const [open, setOpen] = React.useState(false);
 
-  const selected: DateRange = {
-    from: fromIso(value),
-    to: fromIso(valueEnd),
+  React.useEffect(() => {
+    setStart(parseValue(value));
+    setEnd(parseValue(valueEnd));
+  }, [value, valueEnd]);
+
+  const fireChange = (s: Segments, e: Segments) => {
+    onChange?.(isComplete(s) ? toIso(s) : "", isComplete(e) ? toIso(e) : "");
   };
 
-  const startDisplay = formatDisplay(value);
-  const endDisplay = formatDisplay(valueEnd);
+  const onStartChange = (next: Segments) => {
+    setStart(next);
+    fireChange(next, end);
+  };
+  const onEndChange = (next: Segments) => {
+    setEnd(next);
+    fireChange(start, next);
+  };
+
+  const openIfAllowed = () => {
+    if (!disabled && !readOnly) setOpen(true);
+  };
+
+  const selected: DateRange = {
+    from: fromIsoDate(value),
+    to: fromIsoDate(valueEnd),
+  };
 
   const disabledDates = React.useMemo<Matcher | Matcher[] | undefined>(() => {
     const items: Matcher[] = [];
-    if (minDate) items.push({ before: fromIso(minDate)! });
-    if (maxDate) items.push({ after: fromIso(maxDate)! });
+    if (minDate) items.push({ before: fromIsoDate(minDate)! });
+    if (maxDate) items.push({ after: fromIsoDate(maxDate)! });
     return items.length === 0 ? undefined : items;
   }, [minDate, maxDate]);
 
+  const startEmpty = isEmpty(start);
+  const endEmpty = isEmpty(end);
+
   return (
-    <Popover
-      open={open}
-      onOpenChange={(o) => {
-        if (disabled || readOnly) return;
-        setOpen(o);
-      }}
-    >
-      <PopoverTrigger
-        render={(triggerProps) => (
+    <Popover open={open} onOpenChange={(o) => { if (!disabled && !readOnly) setOpen(o); }}>
+      <div
+        ref={containerRef}
+        id={id}
+        className={cn(
+          "h-[var(--input-height)] w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] px-[var(--input-padding-x)] flex items-center gap-3 hover:border-[var(--input-border-hover)] focus-within:border-[var(--input-border-focus)] focus-within:ring-3 focus-within:ring-[var(--input-ring-focus)]",
+          error && "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
+          disabled && "bg-[var(--input-bg-disabled)] border-[var(--input-border-disabled)] cursor-not-allowed",
+          className
+        )}
+      >
+        {startEmpty ? (
           <button
             type="button"
-            id={id}
-            disabled={disabled}
-            {...triggerProps}
+            disabled={disabled || readOnly}
+            onClick={() => {
+              startDayRef.current?.focus();
+              openIfAllowed();
+            }}
             className={cn(
-              "h-[var(--input-height)] w-full rounded-[var(--input-radius)] border border-[var(--input-border)] bg-[var(--input-bg)] px-[var(--input-padding-x)] text-left text-[length:var(--input-font-size)] leading-[var(--input-line-height)] flex items-center gap-2 hover:border-[var(--input-border-hover)] focus-visible:border-[var(--input-border-focus)] focus-visible:ring-3 focus-visible:ring-[var(--input-ring-focus)] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-[var(--input-bg-disabled)] disabled:border-[var(--input-border-disabled)] disabled:text-[var(--input-text-disabled)]",
-              error && "border-[var(--input-border-error)] ring-3 ring-[var(--input-ring-error)]",
-              className
+              "flex-1 text-left text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text-placeholder)] disabled:cursor-not-allowed"
             )}
           >
-            {startDisplay || endDisplay ? (
-              <span className="flex items-center gap-2 flex-1 min-w-0">
-                <span className="text-[var(--input-text)]">{startDisplay || "—"}</span>
-                <ArrowRight className="size-3.5 text-[var(--input-icon)] shrink-0" />
-                <span className="text-[var(--input-text)]">{endDisplay || "—"}</span>
-              </span>
-            ) : (
-              <span className="flex-1 text-[var(--input-text-placeholder)]">
-                Select date range
-              </span>
-            )}
-            <CalendarIcon className="size-4 text-[var(--input-icon)] shrink-0" />
+            From
           </button>
+        ) : (
+          <SegmentedGroup
+            segments={start}
+            prefix="Start"
+            disabled={disabled}
+            readOnly={readOnly}
+            onChange={onStartChange}
+            onFocus={openIfAllowed}
+            dayRef={startDayRef}
+            monthRef={startMonthRef}
+            yearRef={startYearRef}
+          />
         )}
-      />
+        <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-[var(--input-text-placeholder)]" />
+        {endEmpty ? (
+          <button
+            type="button"
+            disabled={disabled || readOnly}
+            onClick={() => {
+              endDayRef.current?.focus();
+              openIfAllowed();
+            }}
+            className={cn(
+              "flex-1 text-left text-[length:var(--input-font-size)] leading-[var(--input-line-height)] text-[var(--input-text-placeholder)] disabled:cursor-not-allowed"
+            )}
+          >
+            To
+          </button>
+        ) : (
+          <SegmentedGroup
+            segments={end}
+            prefix="End"
+            disabled={disabled}
+            readOnly={readOnly}
+            onChange={onEndChange}
+            onFocus={openIfAllowed}
+            dayRef={endDayRef}
+            monthRef={endMonthRef}
+            yearRef={endYearRef}
+          />
+        )}
+      </div>
       {name ? (
         <>
           <input type="hidden" name={`${name}-start`} value={value ?? ""} />
           <input type="hidden" name={`${name}-end`} value={valueEnd ?? ""} />
         </>
       ) : null}
-      <PopoverContent className="p-3">
+      <PopoverContent anchor={containerRef} className="p-3">
         <DayPicker
           mode="range"
           selected={selected}
           onSelect={(range) => {
-            onChange?.(toIso(range?.from), toIso(range?.to));
+            const s = toIsoDate(range?.from);
+            const e = toIsoDate(range?.to);
+            setStart(parseValue(s));
+            setEnd(parseValue(e));
+            onChange?.(s, e);
             if (range?.from && range?.to) setOpen(false);
           }}
           disabled={disabledDates}
