@@ -27,7 +27,6 @@ const VIEWPORT = { width: 1500, height: 1100 };
 const PAINT_WAIT_MS = 800; // styled-components inject delay
 
 function fileToRoute(file) {
-  if (file === "compare_button.png") return null; // legacy comparison page, no route
   const name = file.replace(/\.png$/, "");
   const parts = name.split("_");
   if (parts.length !== 3) return null;
