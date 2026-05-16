@@ -519,6 +519,11 @@
   --color-uneditable-section-bg: var(--uneditable-section-bg);
   --radius-uneditable-section: var(--uneditable-section-radius);
   --spacing-uneditable-section-padding: var(--uneditable-section-padding);
+
+  /* LifeSG breakpoints (mirror --lifesg-breakpoint-*-min from lifesg-tokens.css)
+     Used as Tailwind variants, e.g. `lifesg-xl:grid-cols-2`. Tailwind's
+     default sm/md/lg/xl breakpoints are kept for general utility. */
+  --breakpoint-lifesg-xl: 1201px;
 }
 
 /* LifeSG semantic mapping — sourced from src/app/lifesg-tokens.css */

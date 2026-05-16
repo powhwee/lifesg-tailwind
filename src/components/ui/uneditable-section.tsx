@@ -27,7 +27,7 @@ function Item({ item }: { item: UneditableSectionItem }) {
     <li
       className={cn(
         "flex flex-col gap-1",
-        item.displayWidth === "half" ? "sm:col-span-1" : "sm:col-span-2"
+        item.displayWidth === "half" ? "lifesg-xl:col-span-1" : "lifesg-xl:col-span-2"
       )}
     >
       <div className="text-xs font-semibold text-lifesg-text-subtle">
@@ -79,7 +79,7 @@ export function UneditableSection({
       {items && items.length > 0 && (
         <ul
           className={cn(
-            "grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4",
+            "grid grid-cols-1 lifesg-xl:grid-cols-2 gap-x-6 gap-y-4",
             stretch ? "[&>li]:col-span-2" : ""
           )}
         >
