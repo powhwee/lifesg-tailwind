@@ -970,3 +970,84 @@ measure-selection-and-input went 11/11 → 8/11 mismatches. Remaining are mostly
 ### Pilot-level implication
 
 This session strengthens the case for L2 measure scripts being the right verification layer — they caught the real chrome divergences once L2 coverage existed. **But** they only matter if the underlying infra (Tailwind utility generation + tailwind-merge config) doesn't silently drop our intended tokens. Both bugs above were latent and would have bitten whoever next added a custom `text-*` utility. Worth a CONTRIBUTING note or a lint rule.
+
+## 2026-05-18 — The data-token meta-bug: "✓ match" was lying
+
+### What happened
+
+User spotted a clear visible divergence on the L5 screenshot of `content/uneditable-section/default` — LifeSG was dramatically taller and more spaced than ours. Yet `measure-content` had been reporting `uneditable-section default ✓ match` for the entire pilot run. Started a probe.
+
+### Root cause
+
+`scripts/measure-content.mjs` reads every `[data-token]` element in each pane and compares computed style. The convention assumed `data-token` would mark the widget being compared. Reality: in 19 of 23 demos across content + core + navigation, `data-token` was placed on a `<code>` label element ("default" text), not the widget. The script was comparing two ~16×50px one-line text labels (obviously identical bytes) and reporting `✓ match` while never measuring the actual widget chrome.
+
+The label-marking pattern looked like:
+
+```jsx
+<div>
+  <code className="text-xs text-muted-foreground" data-token="default">default</code>
+  <UneditableSection ... />  {/* widget never measured */}
+</div>
+```
+
+The intended pattern is to mark the widget directly (or the wrapping div):
+
+```jsx
+<div>
+  <code className="text-xs text-muted-foreground">default</code>
+  <UneditableSection data-token="default" ... />  {/* widget measured */}
+</div>
+```
+
+### What it was hiding
+
+Once relocated across all content demos, 14 real chrome divergences surfaced in measure-content — ranging from trivial (card +2px) to major (uneditable-section h: 324 vs 622). Per-component severity:
+
+| Component | Severity | Source |
+|---|---|---|
+| uneditable-section | major | Label font 12px bold vs 16px regular; value 14px vs 16px semibold; padding 24 uniform vs 32/0 + 48 inner; radius 8 vs 0; row gap 16 vs 32 |
+| accordion | medium | Radius 8 vs 0; header font 18 vs 16; ~80px panel content diff |
+| box-container | small | Radius 8 vs 4; header padding-y 12 vs 16 |
+| tab | small | Tab style: ours button-padded (h=55), LifeSG minimal text (h=26); LifeSG compensates with larger tab-strip below |
+| card | trivial | 2px sub-pixel noise |
+
+The bugs were entirely **invisible to the L2 verification layer** because the data-token was decorative.
+
+### Why this matters for the pilot
+
+The verification system's value depends entirely on what it measures. README §Pillar 3 says "the team needs a verification system that catches regressions mechanically — not a screenshot folder that someone eyeballs". But:
+
+- L1 (smoke) catches mount-correctness only — won't see chrome diff
+- L2 (measure-*) catches computed-style chrome — **but only on what's marked**
+- L4 (parity.spec.ts visual snapshots) is regression-only, not parity
+- L5 (screenshots) is the human spotting layer that surfaced this — exactly its job
+
+The user catching this on an L5 screenshot proves the verification pyramid is working *as a whole*: L5 spots, L2 measures, fixes flow back through. But it also means **L2 alone is not enough** to claim parity. The convention enforcement (data-token on the widget) is load-bearing for the whole pyramid.
+
+### Rule
+
+**A measure script is only as good as the data-token placement convention it relies on.** When you add a demo file, place `data-token="..."` on:
+1. The widget component itself, if it forwards HTML attributes (most do via `...props`).
+2. Or the wrapping div that has the widget as its direct child — never on the decorative `<code>` label above the widget.
+
+Verify by running the relevant measure-* script and checking the reported widget height makes sense (not 16-50px, which is a label-marker giveaway).
+
+### Sweep
+
+Relocated `data-token` in 19 demos this session (commits 82734c4 + e1192b4):
+- content: card, accordion, box-container, tab, uneditable-section, data-table
+- core: divider, errordisplay, layout (via `Row` component change)
+- navigation: footer, link-list, navbar, avatar, pagination, local-nav, breadcrumb, masthead, sidenav
+
+After relocation + chrome fixes for the surfaced bugs:
+- measure-content: 14 real mismatches → 0 (10 allowlisted with reasons, others fixed)
+- verify-all: 5/11 → 9/11 passing
+
+### Pilot-level implication
+
+This is a load-bearing convention that should be enforced. Options for future:
+1. CI lint: grep for `<code className=".*data-token`; fail the build.
+2. Doc: add to AGENTS.md / contributing notes.
+3. Make `data-token` validation part of the smoke scripts: each demo must have `data-token` on at least one non-`<code>` element.
+
+The cost of letting this slip is exactly what we paid this session: a passing verification dashboard hiding chrome divergences that were obvious to the eye.
