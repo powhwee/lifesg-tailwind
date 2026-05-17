@@ -17,24 +17,24 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-6 max-w-md">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2" data-token="default">
           <BoxContainer title="Appointment policy">
             <Body />
           </BoxContainer>
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="collapsible">collapsible</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">collapsible</code>
+        <div className="mt-2" data-token="collapsible">
           <BoxContainer title="Appointment policy" collapsible>
             <Body />
           </BoxContainer>
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="with-cta">with callToActionComponent</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">with callToActionComponent</code>
+        <div className="mt-2" data-token="with-cta">
           <BoxContainer
             title="Appointment policy"
             collapsible
@@ -46,16 +46,16 @@ export function OursPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="error">displayState=&quot;error&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">displayState=&quot;error&quot;</code>
+        <div className="mt-2" data-token="error">
           <BoxContainer title="Verification failed" displayState="error">
             <p className="text-sm">We couldn&rsquo;t verify your identity. Try again in 10 minutes.</p>
           </BoxContainer>
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="warning">displayState=&quot;warning&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">displayState=&quot;warning&quot;</code>
+        <div className="mt-2" data-token="warning">
           <BoxContainer title="Expiring soon" displayState="warning">
             <p className="text-sm">Your appointment is in less than 24 hours.</p>
           </BoxContainer>
@@ -69,24 +69,24 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-6 max-w-md">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2" data-token="default">
           <LifeSGBoxContainer title="Appointment policy">
             <Body />
           </LifeSGBoxContainer>
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="collapsible">collapsible</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">collapsible</code>
+        <div className="mt-2" data-token="collapsible">
           <LifeSGBoxContainer title="Appointment policy" collapsible>
             <Body />
           </LifeSGBoxContainer>
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="with-cta">with callToActionComponent</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">with callToActionComponent</code>
+        <div className="mt-2" data-token="with-cta">
           <LifeSGBoxContainer
             title="Appointment policy"
             collapsible
@@ -109,8 +109,8 @@ export function LifeSGPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="error">displayState=&quot;error&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">displayState=&quot;error&quot;</code>
+        <div className="mt-2" data-token="error">
           <LifeSGBoxContainer title="Verification failed" displayState="error">
             <p style={{ fontSize: "0.875rem", margin: 0 }}>
               We couldn&rsquo;t verify your identity. Try again in 10 minutes.
@@ -119,8 +119,8 @@ export function LifeSGPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="warning">displayState=&quot;warning&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">displayState=&quot;warning&quot;</code>
+        <div className="mt-2" data-token="warning">
           <LifeSGBoxContainer title="Expiring soon" displayState="warning">
             <p style={{ fontSize: "0.875rem", margin: 0 }}>
               Your appointment is in less than 24 hours.

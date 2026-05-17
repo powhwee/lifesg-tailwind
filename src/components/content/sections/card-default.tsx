@@ -14,8 +14,8 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <Card className="mt-2 max-w-md">
+        <code className="text-xs text-muted-foreground">default</code>
+        <Card className="mt-2 max-w-md" data-token="default">
           <Card.Header>
             <Card.Title>Appointment confirmed</Card.Title>
             <Card.Description>2:30 pm — Tampines branch</Card.Description>
@@ -25,10 +25,8 @@ export function OursPane() {
       </div>
 
       <div>
-        <code className="text-xs text-muted-foreground" data-token="passthrough">
-          passthrough children
-        </code>
-        <Card className="mt-2 max-w-md text-sm">
+        <code className="text-xs text-muted-foreground">passthrough children</code>
+        <Card className="mt-2 max-w-md text-sm" data-token="passthrough">
           <p>
             Cards accept any children directly. Sub-components are an optional convenience.
           </p>
@@ -42,8 +40,8 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <LifeSGCard style={{ marginTop: 8, maxWidth: "28rem" }}>
+        <code className="text-xs text-muted-foreground">default</code>
+        <LifeSGCard style={{ marginTop: 8, maxWidth: "28rem" }} data-token="default">
           <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 12 }}>
             <h3 style={{ fontSize: "1.125rem", fontWeight: 600, margin: 0 }}>Appointment confirmed</h3>
             <p style={{ fontSize: "0.875rem", color: "var(--lifesg-text-subtle)", margin: 0 }}>
@@ -55,10 +53,8 @@ export function LifeSGPane() {
       </div>
 
       <div>
-        <code className="text-xs text-muted-foreground" data-token="passthrough">
-          passthrough children
-        </code>
-        <LifeSGCard style={{ marginTop: 8, maxWidth: "28rem", fontSize: "0.875rem" }}>
+        <code className="text-xs text-muted-foreground">passthrough children</code>
+        <LifeSGCard style={{ marginTop: 8, maxWidth: "28rem", fontSize: "0.875rem" }} data-token="passthrough">
           <p>
             Cards accept any children directly. LifeSG ships only the outer styled div.
           </p>

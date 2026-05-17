@@ -25,8 +25,8 @@ const cBody = (
 export function OursPane() {
   return (
     <div className="max-w-xl">
-      <code className="text-xs text-muted-foreground" data-token="default">default</code>
-      <div className="mt-2">
+      <code className="text-xs text-muted-foreground">default</code>
+      <div className="mt-2" data-token="default">
         <Tab>
           <Tab.Item title="Opening hours">{aBody}</Tab.Item>
           <Tab.Item title="Fees">{bBody}</Tab.Item>
@@ -34,8 +34,8 @@ export function OursPane() {
         </Tab>
       </div>
       <div className="mt-8">
-        <code className="text-xs text-muted-foreground" data-token="full-width-line">fullWidthIndicatorLine</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">fullWidthIndicatorLine</code>
+        <div className="mt-2" data-token="full-width-line">
           <Tab fullWidthIndicatorLine>
             <Tab.Item title="Opening hours">{aBody}</Tab.Item>
             <Tab.Item title="Fees">{bBody}</Tab.Item>
@@ -53,8 +53,8 @@ export function LifeSGPane() {
   const c = <>{cBody}</>;
   return (
     <div className="max-w-xl">
-      <code className="text-xs text-muted-foreground" data-token="default">default</code>
-      <div className="mt-2">
+      <code className="text-xs text-muted-foreground">default</code>
+      <div className="mt-2" data-token="default">
         <LifeSGTab>
           <LifeSGTab.Item title="Opening hours">{a}</LifeSGTab.Item>
           <LifeSGTab.Item title="Fees">{b}</LifeSGTab.Item>
@@ -62,8 +62,8 @@ export function LifeSGPane() {
         </LifeSGTab>
       </div>
       <div className="mt-8">
-        <code className="text-xs text-muted-foreground" data-token="full-width-line">fullWidthIndicatorLine</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">fullWidthIndicatorLine</code>
+        <div className="mt-2" data-token="full-width-line">
           <LifeSGTab fullWidthIndicatorLine>
             <LifeSGTab.Item title="Opening hours">{a}</LifeSGTab.Item>
             <LifeSGTab.Item title="Fees">{b}</LifeSGTab.Item>

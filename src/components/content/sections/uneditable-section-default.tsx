@@ -17,18 +17,20 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-8 max-w-2xl">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
+        <code className="text-xs text-muted-foreground">default</code>
         <UneditableSection
           className="mt-2"
+          data-token="default"
           title="Personal details"
           description="Last verified 8 March 2026 via Singpass."
           items={items}
         />
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="background-false">background=&#123;false&#125;</code>
+        <code className="text-xs text-muted-foreground">background=&#123;false&#125;</code>
         <UneditableSection
           className="mt-2"
+          data-token="background-false"
           background={false}
           title="Personal details"
           items={items.slice(0, 4)}
@@ -42,9 +44,10 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-8 max-w-2xl">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
+        <code className="text-xs text-muted-foreground">default</code>
         <div className="mt-2">
           <LifeSGUneditableSection
+            data-token="default"
             title="Personal details"
             description="Last verified 8 March 2026 via Singpass."
             items={items}
@@ -52,9 +55,10 @@ export function LifeSGPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="background-false">background=&#123;false&#125;</code>
+        <code className="text-xs text-muted-foreground">background=&#123;false&#125;</code>
         <div className="mt-2">
           <LifeSGUneditableSection
+            data-token="background-false"
             background={false}
             title="Personal details"
             items={items.slice(0, 4)}

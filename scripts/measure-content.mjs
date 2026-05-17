@@ -80,7 +80,11 @@ for (const [name, route] of routes) {
     for (const p of props) {
       if (o[p] !== l[p]) diffs.push(`${p}: ${o[p]} ≠ ${l[p]}`);
     }
-    if (o.w !== l.w) diffs.push(`w: ${o.w} ≠ ${l.w}`);
+    // 1px width delta is the test-harness border-r artifact (left pane has
+    // `border-r border-border` in the slug page), not a real chrome
+    // divergence. Mirrors the same filter in measure-overlays/measure-form.
+    const isBorderArtifact = Math.abs(o.w - l.w) === 1;
+    if (o.w !== l.w && !isBorderArtifact) diffs.push(`w: ${o.w} ≠ ${l.w}`);
     if (o.h !== l.h) diffs.push(`h: ${o.h} ≠ ${l.h}`);
     if (diffs.length > 0) {
       const expected = isExpected(name, t);

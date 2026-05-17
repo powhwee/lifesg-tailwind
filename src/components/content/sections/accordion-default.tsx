@@ -26,8 +26,8 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-8 max-w-xl">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2" data-token="default">
           <Accordion>
             <Accordion.Item title="Can I reschedule my appointment?">{itemA}</Accordion.Item>
             <Accordion.Item title="How are refunds processed?">{itemB}</Accordion.Item>
@@ -36,8 +36,8 @@ export function OursPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="expand-all">title + enableExpandAll, initialDisplay=&quot;expand-all&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">title + enableExpandAll, initialDisplay=&quot;expand-all&quot;</code>
+        <div className="mt-2" data-token="expand-all">
           <Accordion title="Frequently asked questions" enableExpandAll initialDisplay="expand-all">
             <Accordion.Item title="Can I reschedule my appointment?">{itemA}</Accordion.Item>
             <Accordion.Item title="How are refunds processed?">{itemB}</Accordion.Item>
@@ -46,8 +46,8 @@ export function OursPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="small">type=&quot;small&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">type=&quot;small&quot;</code>
+        <div className="mt-2" data-token="small">
           <Accordion>
             <Accordion.Item title="Can I reschedule?" type="small">{itemA}</Accordion.Item>
             <Accordion.Item title="How are refunds processed?" type="small">{itemB}</Accordion.Item>
@@ -62,8 +62,8 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-8 max-w-xl">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2" data-token="default">
           <LifeSGAccordion>
             <LifeSGAccordion.Item title="Can I reschedule my appointment?">{itemA}</LifeSGAccordion.Item>
             <LifeSGAccordion.Item title="How are refunds processed?">{itemB}</LifeSGAccordion.Item>
@@ -72,8 +72,8 @@ export function LifeSGPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="expand-all">title + enableExpandAll, initialDisplay=&quot;expand-all&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">title + enableExpandAll, initialDisplay=&quot;expand-all&quot;</code>
+        <div className="mt-2" data-token="expand-all">
           <LifeSGAccordion title="Frequently asked questions" enableExpandAll initialDisplay="expand-all">
             <LifeSGAccordion.Item title="Can I reschedule my appointment?">{itemA}</LifeSGAccordion.Item>
             <LifeSGAccordion.Item title="How are refunds processed?">{itemB}</LifeSGAccordion.Item>
@@ -82,8 +82,8 @@ export function LifeSGPane() {
         </div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="small">type=&quot;small&quot;</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">type=&quot;small&quot;</code>
+        <div className="mt-2" data-token="small">
           <LifeSGAccordion>
             <LifeSGAccordion.Item title="Can I reschedule?" type="small">{itemA}</LifeSGAccordion.Item>
             <LifeSGAccordion.Item title="How are refunds processed?" type="small">{itemB}</LifeSGAccordion.Item>
