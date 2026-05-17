@@ -525,7 +525,8 @@
   /* L3 — uneditable */
   --color-uneditable-section-bg: var(--uneditable-section-bg);
   --radius-uneditable-section: var(--uneditable-section-radius);
-  --spacing-uneditable-section-padding: var(--uneditable-section-padding);
+  --spacing-uneditable-section-py: var(--uneditable-section-py);
+  --spacing-uneditable-section-px: var(--uneditable-section-px);
 
   /* LifeSG breakpoints (mirror --lifesg-breakpoint-*-min from lifesg-tokens.css)
      Used as Tailwind variants, e.g. `lifesg-xl:grid-cols-2`. Tailwind's

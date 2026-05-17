@@ -12,18 +12,18 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="initials-default">
+        <code className="text-xs text-muted-foreground">
           initials &mdash; default
         </code>
-        <div className="mt-2 flex items-end gap-4">
+        <div className="mt-2 flex items-end gap-4" data-token="initials-default">
           <Avatar>HC</Avatar>
           <Avatar sizeType="small">HC</Avatar>
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="icon">icon</code>
-        <div className="mt-2 flex items-end gap-4">
+        <code className="text-xs text-muted-foreground">icon</code>
+        <div className="mt-2 flex items-end gap-4" data-token="icon">
           <Avatar>
             <House size={20} strokeWidth={1.6} />
           </Avatar>
@@ -34,8 +34,8 @@ export function OursPane() {
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="image">image</code>
-        <div className="mt-2 flex items-end gap-4">
+        <code className="text-xs text-muted-foreground">image</code>
+        <div className="mt-2 flex items-end gap-4" data-token="image">
           <Avatar>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={PROFILE_URL} alt="" className="size-full object-cover" />
@@ -54,26 +54,26 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="initials-default">
+        <code className="text-xs text-muted-foreground">
           initials &mdash; default
         </code>
-        <div className="mt-2 flex items-end gap-4">
+        <div className="mt-2 flex items-end gap-4" data-token="initials-default">
           <LifeSGAvatar>HC</LifeSGAvatar>
           <LifeSGAvatar sizeType="small">HC</LifeSGAvatar>
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="icon">icon</code>
-        <div className="mt-2 flex items-end gap-4">
+        <code className="text-xs text-muted-foreground">icon</code>
+        <div className="mt-2 flex items-end gap-4" data-token="icon">
           <LifeSGAvatar><HouseIcon /></LifeSGAvatar>
           <LifeSGAvatar sizeType="small"><HouseIcon /></LifeSGAvatar>
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="image">image</code>
-        <div className="mt-2 flex items-end gap-4">
+        <code className="text-xs text-muted-foreground">image</code>
+        <div className="mt-2 flex items-end gap-4" data-token="image">
           <LifeSGAvatar>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={PROFILE_URL} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />

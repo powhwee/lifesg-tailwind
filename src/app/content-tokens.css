@@ -35,8 +35,9 @@
 
 :root {
   --uneditable-section-bg:      var(--lifesg-bg-strong);
-  --uneditable-section-radius:  0.5rem;
-  --uneditable-section-padding: 1.5rem;
+  --uneditable-section-radius:  0;
+  --uneditable-section-py:      2rem;
+  --uneditable-section-px:      3rem;
 }
 
 /* ═══════════ box-container ═══════════ */
@@ -54,9 +55,9 @@
   --box-container-border-warning:   var(--lifesg-border-warning);
   --box-container-icon-warning:     var(--lifesg-icon-warning);
 
-  --box-container-radius:           0.5rem;
+  --box-container-radius:           0.25rem;
   --box-container-padding-x:        1rem;
-  --box-container-header-y:         0.75rem;
+  --box-container-header-y:         1rem;
   --box-container-body-y:           1rem;
 }
 
@@ -80,7 +81,7 @@
 :root {
   --accordion-border:    var(--lifesg-border);
   --accordion-divider:   var(--lifesg-border);
-  --accordion-radius:    0.5rem;
+  --accordion-radius:    0;
   --accordion-x:         1rem;
 }
 

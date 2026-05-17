@@ -16,8 +16,8 @@ function PaneDemo({ flavour }: { flavour: "ours" | "lifesg" }) {
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="menu">menu (horizontal pills)</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">menu (horizontal pills)</code>
+        <div className="mt-2" data-token="menu">
           {flavour === "ours" ? (
             <LocalNav.Menu items={items} selectedItemIndex={active} onNavItemSelect={(_, __, i) => setActive(i)} />
           ) : (
@@ -27,8 +27,8 @@ function PaneDemo({ flavour }: { flavour: "ours" | "lifesg" }) {
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="dropdown">dropdown (mobile / narrow viewport)</code>
-        <div className="mt-2 max-w-sm">
+        <code className="text-xs text-muted-foreground">dropdown (mobile / narrow viewport)</code>
+        <div className="mt-2 max-w-sm" data-token="dropdown">
           {flavour === "ours" ? (
             <LocalNav.Dropdown
               items={items}

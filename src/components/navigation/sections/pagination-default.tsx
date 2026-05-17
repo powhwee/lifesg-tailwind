@@ -12,15 +12,15 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="default">default — active = 5</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default — active = 5</code>
+        <div className="mt-2" data-token="default">
           <Pagination totalItems={100} pageSize={10} activePage={page} onPageChange={setPage} />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="ellipsis">long range with ellipsis</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">long range with ellipsis</code>
+        <div className="mt-2" data-token="ellipsis">
           <Pagination
             totalItems={300}
             pageSize={10}
@@ -32,8 +32,8 @@ export function OursPane() {
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="size-changer">with page-size changer</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">with page-size changer</code>
+        <div className="mt-2" data-token="size-changer">
           <Pagination
             totalItems={100}
             pageSize={pageSize}
@@ -56,15 +56,15 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="default">default — active = 5</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default — active = 5</code>
+        <div className="mt-2" data-token="default">
           <LifeSGPagination totalItems={100} pageSize={10} activePage={page} onPageChange={setPage} />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="ellipsis">long range with ellipsis</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">long range with ellipsis</code>
+        <div className="mt-2" data-token="ellipsis">
           <LifeSGPagination
             totalItems={300}
             pageSize={10}
@@ -76,8 +76,8 @@ export function LifeSGPane() {
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="size-changer">with page-size changer</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">with page-size changer</code>
+        <div className="mt-2" data-token="size-changer">
           <LifeSGPagination
             totalItems={100}
             pageSize={pageSize}

@@ -117,7 +117,7 @@ function AccordionRoot({
               <Accordion.Trigger
                 className={cn(
                   "group w-full flex items-center gap-3 px-accordion-x text-left cursor-pointer hover:bg-lifesg-bg-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lifesg-border-focus",
-                  small ? "py-3 text-sm" : "py-4 text-lg",
+                  small ? "py-3 text-sm" : "py-4 text-base",
                   "font-semibold text-lifesg-text"
                 )}
               >

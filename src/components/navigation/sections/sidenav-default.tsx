@@ -11,8 +11,8 @@ import { Sidenav as LifeSGSidenav } from "@lifesg/react-design-system/sidenav";
 export function OursPane() {
   return (
     <div>
-      <code className="text-xs text-muted-foreground" data-token="default">default</code>
-      <div className="mt-2 relative h-[28rem] border border-border overflow-hidden">
+      <code className="text-xs text-muted-foreground">default</code>
+      <div className="mt-2 relative h-[28rem] border border-border overflow-hidden" data-token="default">
         <Sidenav fixed={false} aria-label="Main">
           <Sidenav.Group>
             <Sidenav.Item id="home" title="Home" icon={<Home />} selected />
@@ -46,8 +46,8 @@ export function OursPane() {
 export function LifeSGPane() {
   return (
     <div>
-      <code className="text-xs text-muted-foreground" data-token="default">default</code>
-      <div className="mt-2 relative h-[28rem] border border-border overflow-hidden">
+      <code className="text-xs text-muted-foreground">default</code>
+      <div className="mt-2 relative h-[28rem] border border-border overflow-hidden" data-token="default">
         <LifeSGSidenav fixed={false} aria-label="Main">
           <LifeSGSidenav.Group>
             <LifeSGSidenav.Item title="Home" icon={<HouseIcon />} selected />

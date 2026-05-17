@@ -30,10 +30,8 @@ function Item({ item }: { item: UneditableSectionItem }) {
         item.displayWidth === "half" ? "lifesg-xl:col-span-1" : "lifesg-xl:col-span-2"
       )}
     >
-      <div className="text-xs font-semibold text-lifesg-text-subtle">
-        {item.label}
-      </div>
-      <div className="text-sm text-lifesg-text">{item.value}</div>
+      <div className="text-base text-lifesg-text">{item.label}</div>
+      <div className="text-base text-lifesg-text font-semibold">{item.value}</div>
       {item.alert && <div className="mt-1">{item.alert}</div>}
     </li>
   );
@@ -56,7 +54,7 @@ export function UneditableSection({
     <section
       data-slot="uneditable-section"
       className={cn(
-        "rounded-uneditable-section p-uneditable-section-padding",
+        "rounded-uneditable-section py-uneditable-section-py px-uneditable-section-px",
         background
           ? "bg-uneditable-section-bg"
           : "bg-transparent",
@@ -66,20 +64,22 @@ export function UneditableSection({
       {...props}
     >
       {(title || description) && (
-        <header className="mb-4">
+        <header className="mb-6">
           {title && (
-            <h3 className="text-lg font-semibold text-lifesg-text">{title}</h3>
+            <h3 className="text-typography-heading-sm leading-typography-heading-sm font-semibold text-lifesg-text">
+              {title}
+            </h3>
           )}
           {description && (
-            <p className="text-sm text-lifesg-text-subtle mt-1">{description}</p>
+            <p className="text-base text-lifesg-text mt-2">{description}</p>
           )}
         </header>
       )}
-      {topSection && <div className="mb-4">{topSection}</div>}
+      {topSection && <div className="mb-6">{topSection}</div>}
       {items && items.length > 0 && (
         <ul
           className={cn(
-            "grid grid-cols-1 lifesg-xl:grid-cols-2 gap-x-6 gap-y-4",
+            "grid grid-cols-1 lifesg-xl:grid-cols-2 gap-x-6 gap-y-8",
             stretch ? "[&>li]:col-span-2" : ""
           )}
         >
@@ -88,8 +88,8 @@ export function UneditableSection({
           ))}
         </ul>
       )}
-      {children && <div className={items ? "mt-4" : ""}>{children}</div>}
-      {bottomSection && <div className="mt-4">{bottomSection}</div>}
+      {children && <div className={items ? "mt-6" : ""}>{children}</div>}
+      {bottomSection && <div className="mt-6">{bottomSection}</div>}
     </section>
   );
 }

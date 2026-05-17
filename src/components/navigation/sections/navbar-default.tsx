@@ -13,8 +13,8 @@ const sampleItems = [
 export function OursPane() {
   return (
     <div>
-      <code className="text-xs text-muted-foreground" data-token="default">default (with masthead)</code>
-      <div className="mt-2 border border-border overflow-hidden">
+      <code className="text-xs text-muted-foreground">default (with masthead)</code>
+      <div className="mt-2 border border-border overflow-hidden" data-token="default">
         <Navbar
           brand={{ brandName: "Agency", href: "#" }}
           items={sampleItems}
@@ -34,8 +34,8 @@ export function OursPane() {
 export function LifeSGPane() {
   return (
     <div>
-      <code className="text-xs text-muted-foreground" data-token="default">default (with masthead)</code>
-      <div className="mt-2 border border-border overflow-hidden">
+      <code className="text-xs text-muted-foreground">default (with masthead)</code>
+      <div className="mt-2 border border-border overflow-hidden" data-token="default">
         <LifeSGNavbar
           items={{
             desktop: sampleItems.map((i) => ({ id: i.id, children: i.label, href: i.href })),

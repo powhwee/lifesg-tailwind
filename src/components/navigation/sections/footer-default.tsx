@@ -26,8 +26,8 @@ const lastUpdated = new Date(2026, 4, 12);
 export function OursPane() {
   return (
     <div>
-      <code className="text-xs text-muted-foreground" data-token="default">default</code>
-      <div className="mt-2 border border-border overflow-hidden">
+      <code className="text-xs text-muted-foreground">default</code>
+      <div className="mt-2 border border-border overflow-hidden" data-token="default">
         <Footer links={sampleLinks} copyrightInfo="Agency name" lastUpdated={lastUpdated} />
       </div>
     </div>
@@ -37,8 +37,8 @@ export function OursPane() {
 export function LifeSGPane() {
   return (
     <div>
-      <code className="text-xs text-muted-foreground" data-token="default">default</code>
-      <div className="mt-2 border border-border overflow-hidden">
+      <code className="text-xs text-muted-foreground">default</code>
+      <div className="mt-2 border border-border overflow-hidden" data-token="default">
         <LifeSGFooter links={sampleLinks} copyrightInfo="Agency name" lastUpdated={lastUpdated} />
       </div>
     </div>

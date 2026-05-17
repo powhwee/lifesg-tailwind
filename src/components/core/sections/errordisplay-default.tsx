@@ -13,8 +13,8 @@ const ROW_IMAGE_ONLY_MIN_H = "min-h-[360px]";
 function Row({ label, minH, children }: { label: string; minH?: string; children: ReactNode }) {
   return (
     <div className={`flex flex-col gap-2 py-3 border-b border-border last:border-0 ${minH ?? ""}`}>
-      <code className="text-xs text-muted-foreground" data-token={label}>{label}</code>
-      <div className="w-full">{children}</div>
+      <code className="text-xs text-muted-foreground">{label}</code>
+      <div className="w-full" data-token={label}>{children}</div>
     </div>
   );
 }

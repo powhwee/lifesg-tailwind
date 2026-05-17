@@ -15,22 +15,22 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-8 max-w-xl">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2" data-token="default">
           <LinkList items={items.slice(0, 3)} />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="small">small</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">small</code>
+        <div className="mt-2" data-token="small">
           <LinkList items={items.slice(0, 3)} style="small" />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="max-shown">maxShown = 2 (view more / view less)</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">maxShown = 2 (view more / view less)</code>
+        <div className="mt-2" data-token="max-shown">
           <LinkList items={items} maxShown={2} />
         </div>
       </section>
@@ -42,22 +42,22 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-8 max-w-xl">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2" data-token="default">
           <LifeSGLinkList items={items.slice(0, 3)} />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="small">small</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">small</code>
+        <div className="mt-2" data-token="small">
           <LifeSGLinkList items={items.slice(0, 3)} style="small" />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="max-shown">maxShown = 2 (view more / view less)</code>
-        <div className="mt-2">
+        <code className="text-xs text-muted-foreground">maxShown = 2 (view more / view less)</code>
+        <div className="mt-2" data-token="max-shown">
           <LifeSGLinkList items={items} maxShown={2} />
         </div>
       </section>

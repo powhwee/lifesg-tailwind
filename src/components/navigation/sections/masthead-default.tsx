@@ -7,15 +7,15 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2 border border-border">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2 border border-border" data-token="default">
           <Masthead />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="stretch">stretch</code>
-        <div className="mt-2 border border-border">
+        <code className="text-xs text-muted-foreground">stretch</code>
+        <div className="mt-2 border border-border" data-token="stretch">
           <Masthead stretch />
         </div>
       </section>
@@ -27,15 +27,15 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <code className="text-xs text-muted-foreground" data-token="default">default</code>
-        <div className="mt-2 border border-border">
+        <code className="text-xs text-muted-foreground">default</code>
+        <div className="mt-2 border border-border" data-token="default">
           <LifeSGMasthead />
         </div>
       </section>
 
       <section>
-        <code className="text-xs text-muted-foreground" data-token="stretch">stretch</code>
-        <div className="mt-2 border border-border">
+        <code className="text-xs text-muted-foreground">stretch</code>
+        <div className="mt-2 border border-border" data-token="stretch">
           <LifeSGMasthead stretch />
         </div>
       </section>

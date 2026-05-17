@@ -83,20 +83,20 @@ export function OursPane() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="sortable">sortable headers</code>
-        <div className="mt-2"><OursSortable /></div>
+        <code className="text-xs text-muted-foreground">sortable headers</code>
+        <div className="mt-2" data-token="sortable"><OursSortable /></div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="multi-select">multi-select + action bar + alternating rows</code>
-        <div className="mt-2"><OursMultiSelect /></div>
+        <code className="text-xs text-muted-foreground">multi-select + action bar + alternating rows</code>
+        <div className="mt-2" data-token="multi-select"><OursMultiSelect /></div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="loading">loadState=&quot;loading&quot;</code>
-        <div className="mt-2"><OursLoading /></div>
+        <code className="text-xs text-muted-foreground">loadState=&quot;loading&quot;</code>
+        <div className="mt-2" data-token="loading"><OursLoading /></div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="empty">empty (default no-item-found)</code>
-        <div className="mt-2"><OursEmpty /></div>
+        <code className="text-xs text-muted-foreground">empty (default no-item-found)</code>
+        <div className="mt-2" data-token="empty"><OursEmpty /></div>
       </div>
     </div>
   );
@@ -149,20 +149,20 @@ export function LifeSGPane() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <code className="text-xs text-muted-foreground" data-token="sortable">sortable headers</code>
-        <div className="mt-2"><LifeSGSortable /></div>
+        <code className="text-xs text-muted-foreground">sortable headers</code>
+        <div className="mt-2" data-token="sortable"><LifeSGSortable /></div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="multi-select">multi-select + action bar + alternating rows</code>
-        <div className="mt-2"><LifeSGMultiSelect /></div>
+        <code className="text-xs text-muted-foreground">multi-select + action bar + alternating rows</code>
+        <div className="mt-2" data-token="multi-select"><LifeSGMultiSelect /></div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="loading">loadState=&quot;loading&quot;</code>
-        <div className="mt-2"><LifeSGDataTable headers={headers} rows={[]} loadState="loading" /></div>
+        <code className="text-xs text-muted-foreground">loadState=&quot;loading&quot;</code>
+        <div className="mt-2" data-token="loading"><LifeSGDataTable headers={headers} rows={[]} loadState="loading" /></div>
       </div>
       <div>
-        <code className="text-xs text-muted-foreground" data-token="empty">empty</code>
-        <div className="mt-2"><LifeSGDataTable headers={headers} rows={[]} /></div>
+        <code className="text-xs text-muted-foreground">empty</code>
+        <div className="mt-2" data-token="empty"><LifeSGDataTable headers={headers} rows={[]} /></div>
       </div>
     </div>
   );
