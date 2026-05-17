@@ -18,6 +18,24 @@ const routes = [
 
 const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor", "borderRadius", "padding"];
 
+// Expected divergences — (route, token) pairs where ours and LifeSG render
+// different things by design. Each entry needs a reason; do not add without one.
+// Mirrors the allowlist pattern in measure-content.mjs.
+const expectedDivergences = [
+  {
+    route: "drawer",
+    token: "default",
+    reason:
+      "LifeSG ships no standalone Drawer (it's a private internal of Sidenav/Navbar). The 'LifeSG' pane is an explanatory placeholder, not a comparable widget — height delta is text-block vs trigger-buttons, not chrome.",
+  },
+  {
+    route: "menu",
+    token: "default",
+    reason:
+      "LifeSG ships no public Menu (Storybook entry is an internal). The 'LifeSG' pane is an explanatory placeholder, not a comparable widget — height delta is text-block vs trigger-buttons, not chrome.",
+  },
+];
+
 async function probe(page, paneSelector) {
   return await page.evaluate(
     ({ paneSelector, props }) => {
@@ -45,7 +63,11 @@ const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
 
 let total = 0;
 let mismatches = 0;
+let expectedSeen = 0;
 const allRows = [];
+
+const isExpected = (route, token) =>
+  expectedDivergences.find((d) => d.route === route && d.token === token);
 
 for (const [name, route] of routes) {
   await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
@@ -72,8 +94,14 @@ for (const [name, route] of routes) {
     if (o.w !== l.w && !isBorderArtifact) diffs.push(`w: ${o.w} ≠ ${l.w}`);
     if (o.h !== l.h) diffs.push(`h: ${o.h} ≠ ${l.h}`);
     if (diffs.length > 0) {
-      mismatches++;
-      allRows.push({ route: name, token: t, mismatch: diffs.join("; ").slice(0, 200) });
+      const expected = isExpected(name, t);
+      if (expected) {
+        expectedSeen++;
+        allRows.push({ route: name, token: t, mismatch: `[expected] ${diffs.join("; ").slice(0, 160)}` });
+      } else {
+        mismatches++;
+        allRows.push({ route: name, token: t, mismatch: diffs.join("; ").slice(0, 200) });
+      }
     } else {
       allRows.push({ route: name, token: t, mismatch: "" });
     }
@@ -90,5 +118,9 @@ for (const r of allRows) {
   console.log(w(r.route, 22), w(r.token, 36), result);
 }
 console.log("-".repeat(140));
-console.log(`paired: ${total}, mismatches: ${mismatches}`);
+console.log(`paired: ${total}, mismatches: ${mismatches}, expected: ${expectedSeen}`);
+if (expectedSeen > 0) {
+  console.log("\nExpected divergences (suppressed from exit code):");
+  for (const d of expectedDivergences) console.log(`  ${d.route}:${d.token} — ${d.reason}`);
+}
 process.exit(mismatches > 0 ? 1 : 0);
