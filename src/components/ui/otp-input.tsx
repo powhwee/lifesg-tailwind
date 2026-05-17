@@ -97,7 +97,7 @@ function OtpInput({
             key={i}
             aria-invalid={isError || undefined}
             className={cn(
-              "size-14 rounded-lg border bg-otp-bg text-center text-lg font-semibold outline-none transition-colors",
+              "w-otp-cell-width h-otp-cell-height rounded-otp-cell border bg-otp-bg text-center text-lg font-semibold outline-none transition-colors",
               "border-otp-border text-otp-text",
               "focus:border-otp-border-focus focus:ring-3 focus:ring-otp-ring-focus",
               "aria-invalid:border-otp-border-error aria-invalid:ring-3 aria-invalid:ring-otp-ring-error"

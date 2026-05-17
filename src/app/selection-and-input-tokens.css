@@ -180,6 +180,11 @@
 
   --otp-ring-focus:               color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
   --otp-ring-error:               color-mix(in srgb, var(--lifesg-bg-error-strong) 20%, transparent);
+
+  /* Cell dimensions — match LifeSG OTP cell (72px wide x 48px tall, 4px radius). */
+  --otp-cell-width:               4.5rem;     /* 72px */
+  --otp-cell-height:              3rem;       /* 48px */
+  --otp-cell-radius:              0.25rem;    /* 4px */
 }
 
 /* ═══════════ feedback-rating ═══════════ */

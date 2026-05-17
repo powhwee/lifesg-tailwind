@@ -268,6 +268,9 @@
   --color-otp-prefix:                        var(--otp-prefix);
   --color-otp-ring-focus:                    var(--otp-ring-focus);
   --color-otp-ring-error:                    var(--otp-ring-error);
+  --spacing-otp-cell-width:                  var(--otp-cell-width);
+  --spacing-otp-cell-height:                 var(--otp-cell-height);
+  --radius-otp-cell:                         var(--otp-cell-radius);
 
   /* L3 — radio */
   --color-radio-bg:                          var(--radio-bg);
