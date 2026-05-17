@@ -22,8 +22,11 @@ const suites = [
   { name: "smoke-selection-and-input",  cmd: "node scripts/smoke-selection-and-input.mjs" },
 
   // L2 Measurement — do computed styles match between ours and LifeSG?
-  { name: "measure-content",           cmd: "node scripts/measure-content.mjs" },
-  { name: "measure-typography",        cmd: "node scripts/measure-typography.mjs" },
+  { name: "measure-content",              cmd: "node scripts/measure-content.mjs" },
+  { name: "measure-typography",           cmd: "node scripts/measure-typography.mjs" },
+  { name: "measure-form",                 cmd: "node scripts/measure-form.mjs" },
+  { name: "measure-overlays",             cmd: "node scripts/measure-overlays.mjs" },
+  { name: "measure-selection-and-input",  cmd: "node scripts/measure-selection-and-input.mjs" },
 
   // L3 Behavioral — do keyboard interactions and ARIA states match?
   { name: "behavioral-content",        cmd: "node scripts/behavioral-content.mjs" },
