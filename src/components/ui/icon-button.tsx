@@ -26,8 +26,8 @@ const iconButtonVariants = cva(
           "bg-icon-button-bg-light text-icon-button-text-light hover:bg-icon-button-bg-light-hover",
       },
       sizeType: {
-        large:   "size-20 [&_svg:not([class*='size-'])]:size-8",
-        default: "size-14 [&_svg:not([class*='size-'])]:size-6",
+        large:   "size-16 [&_svg:not([class*='size-'])]:size-7",
+        default: "size-12 [&_svg:not([class*='size-'])]:size-5",
         small:   "size-10 [&_svg:not([class*='size-'])]:size-4",
       },
     },

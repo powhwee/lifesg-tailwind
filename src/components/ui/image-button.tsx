@@ -39,8 +39,10 @@ function ImageButton({
       )}
       {...props}
     >
+      {/* LifeSG insets the image inside button padding rather than fullbleed:
+          24px vertical, 16px horizontal. Matches LifeSG ImageButton chrome. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={imgSrc} alt="" className="absolute inset-0 size-full object-cover" />
+      <img src={imgSrc} alt="" className="absolute inset-y-6 inset-x-4 object-contain" />
     </ButtonPrimitive>
   );
 }

@@ -20,8 +20,8 @@ const checkboxVariants = cva(
   {
     variants: {
       displaySize: {
-        default: "size-6",
-        small: "size-5",
+        default: "size-8",
+        small: "size-6",
       },
     },
     defaultVariants: {
@@ -46,9 +46,9 @@ function Checkbox({ className, displaySize, indeterminate, ...props }: CheckboxP
     >
       <CheckboxPrimitive.Indicator className="inline-flex items-center justify-center">
         {indeterminate ? (
-          <Minus className={displaySize === "small" ? "size-3" : "size-4"} strokeWidth={3} />
+          <Minus className={displaySize === "small" ? "size-4" : "size-5"} strokeWidth={3} />
         ) : (
-          <Check className={displaySize === "small" ? "size-3" : "size-4"} strokeWidth={3} />
+          <Check className={displaySize === "small" ? "size-4" : "size-5"} strokeWidth={3} />
         )}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
