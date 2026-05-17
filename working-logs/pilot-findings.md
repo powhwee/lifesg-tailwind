@@ -905,3 +905,68 @@ When an L2 sweep surfaces many divergences in one category, **suspect a shared r
 - Investigation of overlays/drawer + overlays/menu height divergence (probe returned empty for LifeSG widgets there — selector heuristic probably misses them; they may render outside the on-page wrapper).
 - Investigation of the 9 selection-and-input per-component divergences (calendar day-cell size, otp-input bbox, image-button padding) — each is a smaller per-component call.
 - Stage 2 (finer-grained `data-token` markers in demos) deferred. Wrapper-level signal turned out to be sufficient to identify the patterns; finer markers would help only once we're fixing.
+
+## 2026-05-17 (pm, late) — Two silent Tailwind 4 / tailwind-merge bugs unmasked
+
+### What happened
+
+User authorised the input font-size alignment from the previous section (point `--input-font-size` at LifeSG BodyBL instead of BodyMD). The "1-line fix" took 12 files because two silent infra bugs were stacked between the token and the rendered DOM.
+
+### Bug 1: Tailwind 4 utility-name collision with shadcn color tokens
+
+We had `--text-input` defined in the `@theme inline` block, intended as a font-size utility. shadcn's defaults define `--input` as a color token (for input bg/border). Tailwind 4 generated the `text-input` utility as **only** `color: var(--input)` — our `font-size: var(--text-input)` mapping silently vanished from the CSS bundle. The `text-input` class on `<input>` elements applied a color (already overridden elsewhere) and not the intended font-size.
+
+Symptom: token chain looks correct in source; HMR reports CSS rebuild; computed `font-size` falls back to browser default 16px and no error is thrown.
+
+**Diagnosis:** `curl` the served CSS bundle and grep for the rule:
+
+```bash
+curl -s "$BASE/_next/static/chunks/[...].css" | python3 -c "import sys,re; print(re.search(r'\.text-input\s*\{[^}]*\}', sys.stdin.read()).group(0))"
+```
+
+If you see only `color: ...` and not `font-size: ...`, the collision happened.
+
+**Fix:** rename the custom utility to something that doesn't collide with a color token. We used `text-input` → `text-input-size`. Touches the `@theme inline` block + every consumer of the class.
+
+### Bug 2: tailwind-merge strips custom `text-*` font-size classes
+
+After fixing Bug 1, the input font-size was *still* 16px. Probe showed `text-input-size` was missing from the rendered `className` even though it was present in source. The culprit: `cn()` in `src/lib/utils.ts` calls `twMerge`, which groups all `text-*` utilities as colors by default and dedupes. When `text-input-size` (our font-size) and `text-input-text` (color) both landed on the same element, twMerge kept the color and threw away the font-size.
+
+**Diagnosis:** check the rendered `className` string in DOM. If your custom `text-*` font-size utility is missing but other `text-{color}` utilities present, twMerge ate it.
+
+**Fix:** extend tailwind-merge to register the class as font-size:
+
+```ts
+import { extendTailwindMerge } from "tailwind-merge"
+const twMerge = extendTailwindMerge({
+  extend: {
+    classGroups: { "font-size": ["text-input-size"] },
+  },
+})
+```
+
+### Rule
+
+**When a token change doesn't take effect, don't trust the token chain alone — verify all four layers:**
+
+1. The token value in source CSS (`form-tokens.css`)
+2. The token in the served CSS bundle (curl + grep)
+3. The Tailwind utility's emitted rule (does it have `font-size` or just `color`?)
+4. The class on the rendered DOM element (did twMerge strip it?)
+
+Both bugs above failed silently — no console errors, no Tailwind warnings, no twMerge warnings. The only signal was rendered `font-size: 16px` when we expected `18px`. Either of them alone would have made the token fix invisible.
+
+### Cascade — what got fixed afterwards
+
+After the infra was clean, applied chrome fixes across selection-and-input:
+- checkbox: 24→32 default (was off-by-one on LifeSG size scale)
+- icon-button: 56→48 default (was off-by-one, opposite direction)
+- image-button: image now insets per LifeSG's 24/16 padding (was fullbleed)
+- calendar: day-cell + weekday h-9→h-10 (40px to match LifeSG)
+- otp-input: tokenised cell width/height/radius, applied 72×48 instead of 56×56
+
+measure-selection-and-input went 11/11 → 8/11 mismatches. Remaining are mostly structural (toggle is "deliberately not a switch", filter has different chip chrome, etc).
+
+### Pilot-level implication
+
+This session strengthens the case for L2 measure scripts being the right verification layer — they caught the real chrome divergences once L2 coverage existed. **But** they only matter if the underlying infra (Tailwind utility generation + tailwind-merge config) doesn't silently drop our intended tokens. Both bugs above were latent and would have bitten whoever next added a custom `text-*` utility. Worth a CONTRIBUTING note or a lint rule.

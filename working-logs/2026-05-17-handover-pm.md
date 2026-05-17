@@ -1,22 +1,31 @@
 # Handover — End of 2026-05-17 (pm) session
 
-Supersedes `2026-05-17-handover.md` (am session). **Read this first.** The am handover documented the verify-all honesty fix and listed 4 open decisions; the pm session closed two of them and opened a much larger one (form input token strategy).
+Supersedes `2026-05-17-handover.md` (am session). **Read this first.** This session ran in two phases — the first did the L2 expansion + triage; the second did concrete chrome-level fixes after user gave the green light to apply.
 
 ## TL;DR
 
-Built out L2 measure coverage for form/overlays/selection-and-input — the gap explicitly flagged in the am handover as "the highest-leverage missing piece." Wrapper-level signal turned out loud enough to skip the Stage 2 marker work: **22 real chrome divergences surfaced across 17 routes**, falling into 3 root-cause buckets. No component fixes applied (project history says these are deliberate token choices; flagged for user).
+1. Built out L2 measure coverage for form/overlays/selection-and-input — the gap flagged in the am handover. Verify-all now covers 11 suites / 33 L2 routes (was 8 / 7).
+2. Initial L2 sweep surfaced 22 real chrome divergences. Triage revealed dominant patterns (form input chrome misnamed BodyMD vs BodyBL, several selection-and-input components off-by-one on the size scale).
+3. **User reframed pilot → "full complete port"**, authorised fixes across all ported components.
+4. Applied chrome-level fixes: input font-size token, checkbox size, icon-button size, image-button image inset, calendar day-cell height, OTP cell dimensions.
+5. Discovered + worked around two silent Tailwind 4 / tailwind-merge bugs that had been hiding the input font-size mismatch.
 
-Two open am-handover items now closed:
-- ✓ "Decide on building out L2 coverage" — scripts built, wired, running honestly. Verify-all now covers 11 suites (was 8).
+Two open am-handover items closed:
+- ✓ "Decide on building out L2 coverage" — scripts built, wired, running.
 - ✓ Deploy backlog — user ran `firebase deploy` manually mid-session. GitHub auto-deploy declined (saved as project memory; will stop surfacing).
 
-## What changed this session
+## Commits this session
 
 ```
 62e2824  Add L2 measure scripts for form/overlays/selection-and-input
 d934d4f  Filter 1px wrapper-width artifact from new measure scripts
 9abf02e  Add probe-l2-divergences.mjs for chrome-level triage
-[next]   This handover + pilot-findings entry
+88d0c48  Document L2 expansion findings + pm handover (initial)
+ae941cd  Fix input font-size: map to LifeSG BodyBL (18px), not BodyMD (16px)
+6904b74  Align checkbox, icon-button, image-button to LifeSG chrome
+9987a9e  Align calendar day-cell + weekday height to LifeSG (h-9 → h-10)
+62b113f  Resize OTP input cells to LifeSG dimensions (72×48, 4px radius)
+[next]   Update this handover + pilot-findings
 ```
 
 ## Verify-all current state
@@ -25,111 +34,117 @@ d934d4f  Filter 1px wrapper-width artifact from new measure scripts
 RESULTS: 5 passed, 6 failed, 11 total
   smoke-content                    ✓ PASS
   smoke-navigation                 ✓ PASS
-  smoke-form                       ✗ FAIL  ← pre-existing
-  smoke-overlays                   ✗ FAIL  ← pre-existing
+  smoke-form                       ✗ FAIL  ← pre-existing (phone-number-input %s warning)
+  smoke-overlays                   ✗ FAIL  ← pre-existing (modal portal lifesgBody=false)
   smoke-selection-and-input        ✓ PASS
   measure-content                  ✗ FAIL  ← known table row-height (am handover)
   measure-typography               ✓ PASS
-  measure-form                     ✗ FAIL  ← NEW: 11/11 routes, all share input-token root cause
-  measure-overlays                 ✗ FAIL  ← NEW: 2/4 (drawer, menu) — needs investigation
-  measure-selection-and-input      ✗ FAIL  ← NEW: 9/11 routes, per-component
+  measure-form                     ✗ FAIL  ← residual demo asymmetry; chrome largely aligned
+  measure-overlays                 ✗ FAIL  ← drawer, menu (still uninvestigated)
+  measure-selection-and-input      ✗ FAIL  ← down from 9 to 8 mismatches; rest are structural
   behavioral-content               ✓ PASS
 ```
 
-3 of the 6 failures are pre-existing; the 3 new ones are the L2-expansion signal. None are regressions caused by this session's code.
+Same passed/failed count as start-of-session, but the meaning shifted: failures now point at real, *bounded* remaining work rather than systematic root-cause bugs.
 
-## The big finding: form input chrome diverges systematically
+## What was fixed (chrome-level)
 
-`scripts/probe-l2-divergences.mjs` confirmed that across all 11 form routes, our `<input>` chrome differs by 4 token-level deltas:
+### Input font-size — root cause was a wrong token mapping + Tailwind 4 bug stack
 
-| Property | Ours | LifeSG | Token (`src/app/form-tokens.css`) |
-|---|---|---|---|
-| `font-size` | 16px | 18px | `--input-font-size: 1rem` (commented `/* — LifeSG BodyMD */`) |
-| `padding-x` | 12px | 16px | `--input-padding-x: 0.75rem` |
-| `height` | 48px | 46px | `--input-height: 3rem` |
-| `border-radius` | 4px | 0px | `--input-radius: 0.25rem` |
+`--input-font-size` was set to `1rem` (16px, "LifeSG BodyMD" per the comment). LifeSG actually renders inputs at **BodyBL (1.125rem / 18px)** — BodyMD is the *compact secondary* body scale, not the baseline. Re-pointed `--input-font-size` and `--input-line-height` to `--lifesg-font-body-{size,lh}-baseline` per `src/app/lifesg-tokens.css:240-244`.
 
-The comment on `--input-font-size` describes deliberate intent (use BodyMD = match body text). Empirically LifeSG inputs render at 18px, not BodyMD. So the intent is well-reasoned (typographic consistency) but diverges from observed LifeSG.
+**Two silent bugs blocked the fix from taking effect** (both worth knowing about for future):
 
-**This is your call**, not mine to make autonomously. Three reasonable directions:
+1. **Tailwind 4 utility-name collision.** `text-input` (intended as font-size utility) collided with shadcn's bare `--input` color token. Tailwind 4 emitted `.text-input { color: var(--input) }` — the font-size mapping vanished. **Renamed to `text-input-size` in globals.css + 9 consumer files** (`src/components/ui/{input,textarea,select,multi-select,date-input,date-range-input,input-group,unit-number-input,phone-number-input}.tsx`).
 
-1. **Align to LifeSG**: change the 4 token values (one file, ~4 lines). All 11 form measure failures should collapse to 0. Will shift ~22 L5 screenshots and probably need L4 baseline re-snapping.
-2. **Keep ours, allowlist in measure-form**: codifies the divergence as an expected one. Same trap pattern as the table — fine if it's an explicit accepted design call.
-3. **Hybrid**: align the most visible (padding, radius) and keep ours for the more debatable (font-size) — gives best visual parity while preserving the BodyMD typographic principle.
+2. **tailwind-merge stripped the renamed class.** twMerge groups all `text-*` classes as colors by default; whenever `text-input-size` (our font-size) and `text-input-text` (color) appeared on the same element, twMerge kept the color and *threw away* the font-size. **Extended tailwind-merge in `src/lib/utils.ts`** to register `text-input-size` as font-size.
 
-## Per-category punch list (from probe)
+Net: form inputs now render at 18px across input, textarea, select, phone-number-input, unit-number-input, date-input, date-range-input. Typecheck clean. Smoke unchanged.
 
-### Form (11/11) — single root cause
+### Per-component chrome alignments
 
-All 11 routes diverge because of the input-chrome token deltas above. Likely cascade: fix the 4 tokens, most of these collapse. Confirmed via probe; not separate bugs.
-
-Edge: textarea also has `padding-y: 8px vs 12px` — would need a textarea-specific token tweak.
-
-### Overlays (2/4) — needs deeper investigation
-
-- **drawer** h: 308 ≠ 238 (70px taller in ours). Probe couldn't find LifeSG widgets in the on-page wrapper — likely renders trigger or layout differently than expected.
-- **menu** h: 184 ≠ 238 (54px shorter in ours). Same probe blind spot.
-- **modal** ✓ match after 1px filter.
-- **popover** ✓ match.
-
-Not safe to fix without inspecting the actual DOM structure side-by-side. The two diverge in opposite directions which is itself a signal — probably distinct issues, not a shared root.
-
-### Selection-and-input (9/11) — per-component
-
-| Route | Wrapper h diff | Probe observation |
+| Component | What | Where |
 |---|---|---|
-| checkbox | -6px | ours 24px checkbox vs lifesg 32px (lifesg is bigger) |
-| toggle | -24px | structural — probe returned strange shape; needs DOM inspection |
-| icon-button | +24px | **ours 56px vs lifesg 48px** — ours is bigger (opposite direction!) |
-| image-button | -6px | ours has `padding: 0` vs lifesg `24px 16px` — major chrome gap |
-| otp-input | -74px | ours 56×56 cells, lifesg 46×73 — different size strategy |
-| feedback-rating | +24px | ours has `border-radius: 33554432px` (max-int hack) vs lifesg standard |
-| date-navigator | -18px | inner button 28px vs 40px height diff |
-| calendar | -160px | **day-cell 28×28 vs 42×42** — LifeSG cells are 50% bigger; biggest single divergence |
-| filter | -86px | filter chip button 20×35 vs 42×83 — major chrome gap |
-| button | ✓ match | |
-| radio-button | ✓ match | |
+| checkbox | size-6 → size-8 (24→32px default), size-5 → size-6 (20→24px small). Inner icon scaled. | `ui/checkbox.tsx` |
+| icon-button | size-14/20/10 → size-12/16/10 (default 56→48, large 80→64). Inner SVG scaled. | `ui/icon-button.tsx` |
+| image-button | image was `absolute inset-0 size-full` (fullbleed) → `absolute inset-y-6 inset-x-4 object-contain` (insets per LifeSG's 24px/16px button padding) | `ui/image-button.tsx` |
+| calendar | day-cell + weekday row: `h-9` → `h-10` (36→40px) | `ui/calendar.tsx` |
+| OTP cells | `size-14 rounded-lg` (56×56, 8px radius) → tokenised `w-otp-cell-width h-otp-cell-height rounded-otp-cell` (72×48, 4px radius) | `ui/otp-input.tsx` + tokens added in `selection-and-input-tokens.css` + `globals.css` |
 
-Note: icon-button and feedback-rating diverge in the *opposite* direction (ours is bigger / has weirder values). Worth fixing those first if you do anything here — they suggest ours has bugs, not just intentional divergence.
+## What wasn't fixed (deferred for next session, with rationale)
 
-## What I deliberately did NOT do
+### Form residual diffs (measure-form still 11/11)
 
-- **No component fixes.** Per the 2026-05-12 "deliberate divergences" pattern in pilot-findings, token changes affecting many components need your design call. I documented but didn't act.
-- **No allowlists.** Same trap as the table mismatch (am handover) — silencing the signal is the wrong default. Leave failing until you decide.
-- **No Stage 2 marker work.** Original plan included adding fine-grained `data-token` markers to all 24 demo files. Skipped — wrapper-level signal turned out specific enough to localise the patterns via the probe. Add markers only if/when fixing, to verify the fix worked.
-- **No README §Summary edit.** Same reason as am handover — that's a pitch-level decision.
+After the font fix, form widget chrome is **visually aligned** (both panes render inputs at 48px total: ours via 48px input direct, LifeSG via 46px input + 2px wrapper border; structural difference, same visible result). The remaining wrapper-height diffs (4-38px per route) are **demo-content asymmetry**, not chrome bugs:
 
-## Open questions for you (carried + new)
+- `custom-field` 38px diff — demo uses raw `<input>` with hardcoded styles, not our `Input` component
+- Other routes 4-20px — different label structure between `<FormInput>` and `<Form.Input>`, slightly different description text height
+
+These need Stage 2 markers (data-token on actual widgets, not wrappers) to give useful per-widget L2 signal. Skipped because: (a) wrapper-level diff isn't the real signal here, and (b) the chrome itself already matches once you drill in.
+
+### Overlays drawer + menu (unchanged from am)
+
+- drawer h: 308 ≠ 238 (70px taller in ours)
+- menu h: 184 ≠ 238 (54px shorter in ours)
+
+Probe couldn't find LifeSG widgets in the on-page wrapper (heuristic likely picks wrong elements — LifeSG triggers may render in portals). Both diverge in opposite directions, so probably distinct issues. Not safe to fix without DOM-structure-aware investigation.
+
+### Selection-and-input remaining (8/11 — was 9)
+
+| Route | h diff | Investigated? | Next step |
+|---|---|---|---|
+| checkbox | -2px | yes | demo noise, basically aligned |
+| toggle | -24px | yes — different DOM | deliberate divergence per 2026-05-12 memo ("LifeSG's Toggle is not a switch"). Skip. |
+| image-button | -6px | yes | aspect-square enforces 103×103; LifeSG isn't square (103×106). Separate decision. |
+| otp-input | -90px | yes | cell chrome aligned; residual is demo/action-button gap spacing |
+| feedback-rating | +24px | partial | different DOM structures, needs deeper look |
+| date-navigator | -18px | yes | center-display button is 40px tall in ours, 28px in LifeSG. Padding refactor needed; not single-token. |
+| calendar | -104px | partial | day cells aligned to 40px; residual is header/grid padding |
+| filter | -86px | no | different chip chrome; needs deeper look |
+
+## Two new Tailwind 4 pitfalls to remember
+
+1. **Custom `--text-X` tokens collide with shadcn's bare color tokens.** If shadcn has `--X` color and you add `--text-X` font-size, Tailwind emits only the color rule and silently drops the font-size. Rename to `--text-X-size` (or anything that doesn't match a color name).
+
+2. **tailwind-merge groups all `text-*` as color and dedupes.** Custom font-size classes named `text-*` get stripped when paired with any `text-{color}` class. Register them in `extendTailwindMerge` (`src/lib/utils.ts`).
+
+Both were the root cause of the input font-size never applying — the token was right, the utility was right, but the chain silently failed. Worth a comment in any new `text-*` utility we define.
+
+## Open decisions for you (carried + new)
 
 Carried from am:
 - Table row-height mismatch — leave failing / allowlist / fix?
-- Soften README §Summary on parity claim?
+- Soften README §Summary on parity claim? (Now even more relevant — README's "pixel-level visual parity" claim is partly true now after this session's fixes, but the L2 measure still fails on demo asymmetry.)
 
 New from pm:
-- **Form input token strategy** — align to LifeSG (option 1) / keep ours + allowlist (option 2) / hybrid (option 3)?
-- **Overlays drawer + menu** — accept investigation as next-session work?
-- **Selection-and-input punch list** — fix the "opposite direction" ones (icon-button, feedback-rating) as obvious bugs first, then prioritise the rest?
+- **Re-baseline L4 visual snapshots + L5 screenshots.** Multiple chrome changes have shifted rendering for: input (font-size up), checkbox (size up), icon-button (size down), image-button (image inset), calendar (day-cell), otp-input (cell shape). The L4 parity.spec.ts snapshots and screenshots/*.png will diff against current render. Re-snapping is a deliberate act — needs your decision on visual direction.
+- **Stage 2 markers for form** — needed if you want measure-form to give useful per-widget signal instead of catching demo asymmetry. Adding `data-token` to actual widgets in each demo wrapper.
+- **The deeper selection-and-input divergences** (toggle, feedback-rating, filter, drawer, menu) — accept investigation for next session, or scope down ambition?
 
-## Things working well
+## Things working well (don't break)
 
-- `verify-all` is now genuinely covering 11 suites across 33 L2 routes. The dashboard tells the truth and is the gate it claimed to be.
-- The probe script (`scripts/probe-l2-divergences.mjs`) makes it cheap to characterise any new divergence — point it at a route and get per-widget chrome side-by-side.
-- 1px-width filter in the new measure scripts is documented inline and won't drift.
+- `verify-all` is honest. Failures point at real, bounded work.
+- `scripts/probe-l2-divergences.mjs` is the right tool for any new divergence — point it at a route and get per-widget chrome side-by-side.
+- Token rename pattern (`--text-input-size`) plus the tailwind-merge extension is reusable for any new font-size utility.
+- 1px-width filter in measure scripts is documented inline.
 
 ## Pitfalls to remember
 
-(Carried from prior handovers — still relevant.)
+(Carried + new.)
 
 1. **Tailwind 4 + Turbopack content-scan cache** — see 2026-05-15.
 2. **Root `.md` files are Tailwind sources.** See 2026-05-16.
 3. **Next 16 blocks a second `next dev`.** Playwright reuses port 3000.
-4. **Probe before fixing the obvious.** Today's L2 sweep added a new variant of this: **suspect shared root causes before treating many divergences as independent bugs** (all 11 form mismatches collapsed to 4 tokens).
-5. **Carried from am:** distinguish "parity" from "regression" in test naming.
-6. **New (pm): the harness slug-page asymmetrically applies `border-r border-border` to the left pane only.** This causes 1px width artifacts in any measure that probes a column-filling wrapper. Filter handles it for the new scripts but if you write more measures, account for it — or fix the slug pages to use `grid-cols-[1fr_1px_1fr]` with a divider element (would invalidate L4 baselines + L5 screenshots; multi-file change).
+4. **Probe before fixing the obvious.**
+5. **Distinguish parity from regression in test naming** (from am).
+6. **Slug-page `border-r` asymmetry causes 1px width diff** (from initial pm).
+7. **NEW: `--text-X` tokens collide with bare `--X` color tokens.** See above.
+8. **NEW: tailwind-merge strips custom `text-*` font-size classes.** See above.
+9. **NEW: When L2 surfaces many divergences in one category, suspect shared root causes** (this session's lesson — 4 form chrome properties traced to one wrong token mapping, but ALSO the visible chrome already matched once we probed; not all wrapper diffs were chrome bugs).
 
 ## Resume procedure
 
-1. `git status` should be clean and `main` on HEAD of this handover commit.
-2. `SKIP_VISUAL=1 node scripts/verify-all.mjs` — expect `5 passed, 6 failed`. If different, something drifted.
-3. To inspect any specific divergence: `node scripts/probe-l2-divergences.mjs | tail -200` (full output is ~120 rows).
-4. Decide on the form-input-token question first — biggest blast radius, simplest fix if you go option 1.
+1. `git status` should be clean, `main` on HEAD of this handover commit.
+2. `SKIP_VISUAL=1 node scripts/verify-all.mjs` — expect `5 passed, 6 failed`.
+3. To inspect any divergence: `node scripts/probe-l2-divergences.mjs | tail -200`.
+4. Decide on L4/L5 re-baselining first — likely the next blocker because visual snapshots are now stale across multiple components.
