@@ -863,3 +863,45 @@ I left it at option 1 to avoid silencing the signal again. Option 2 is a one-lin
 ### Pilot-level implication
 
 This is one of the more important findings of the pilot for the "should we adopt LifeSG-as-dep / fork / shadcn-port" decision: **the verification system catches what it measures, and the measure scripts don't yet cover most categories.** Only `measure-content` (6 routes) and `measure-typography` (one route) exist; the README claims extension to form and selection-and-input but `scripts/measure-form.mjs` and `scripts/measure-selection-and-input.mjs` do not exist. That's a real coverage gap. A team taking this port forward should either build out measure scripts per category, or be explicit that visual parity for forms/overlays/selection-and-input is asserted only by L1 (mount) + L4 (own-baseline regression), not by computed-style comparison.
+
+## 2026-05-17 (pm) — L2 expansion to form/overlays/selection-and-input
+
+### What happened
+
+User reframed the project from "pilot" to "full complete port" — the quality bar is now apply-to-all, not sample-a-slice. Following directly from the morning entry above, built out `measure-form.mjs`, `measure-overlays.mjs`, `measure-selection-and-input.mjs` on the same wrapper-pattern as `measure-content.mjs`, wired into `verify-all`. Total L2 coverage went from 7 routes (6 content + 1 typography) to 33 routes (+ 26 across the three new categories).
+
+### What the new scripts immediately surfaced
+
+After filtering one verified false positive (1px wrapper-width delta caused by `border-r` on the left pane in the slug-page harness — `[[parity-vs-regression-trap]]` rule still applied, only filter what is verifiably an artifact, not what is inconvenient), the L2 sweep returned **22 real divergences** that L1 + L4 had not caught:
+
+| Category | Routes diverging | Pattern |
+|---|---|---|
+| form | 11 / 11 | all share a single root cause: input chrome tokens differ from LifeSG |
+| overlays | 2 / 4 | drawer (h: 308≠238), menu (h: 184≠238) — likely structural |
+| selection-and-input | 9 / 11 | per-component chrome differences (calendar day-cell, otp-input sizing, image-button padding, etc.) |
+
+The form pattern is the largest single finding. `scripts/probe-l2-divergences.mjs` confirmed that across every form route the rendered `<input>` chrome differs systematically:
+
+- `font-size`: ours **16px** vs LifeSG **18px**
+- `padding-x`: ours **12px** vs LifeSG **16px**
+- `height`: ours **48px** vs LifeSG **46px**
+- `border-radius`: ours **4px** vs LifeSG **0px**
+
+All four trace to deliberate values in `src/app/form-tokens.css` (e.g. `--input-font-size: 1rem; /* 16px — LifeSG BodyMD */`). The comments describe an intentional choice (use BodyMD for input text, match LifeSG body type), but empirically LifeSG's own input chrome doesn't use BodyMD — it uses 18px. So the comment captures intent (consistency with body text) but the intent diverges from observed LifeSG. This is a token-strategy decision, not a bug fix — flagged in the handover for the user to call.
+
+### What I changed
+
+- 3 new measure scripts + wired into `verify-all`. Initial sweep with 1px width filter.
+- `scripts/probe-l2-divergences.mjs` — one-shot Playwright probe that walks each diverging route and reports per-widget chrome on both panes. Deletable once punch list is worked through.
+- No component fixes. Per project history of "deliberate divergences" (2026-05-12 entries note this pattern), token changes that touch many components need the user's design call.
+
+### Rule
+
+When an L2 sweep surfaces many divergences in one category, **suspect a shared root cause before treating them as independent bugs.** All 11 form mismatches collapsed to ~4 token deltas in one file. Fixing those 4 lines would cascade across the entire category. Counter-rule: when the project history says the divergent values are deliberate (here: `/* 16px — LifeSG BodyMD */` is a comment explaining choice, not a TODO), don't autonomously override — escalate.
+
+### Outstanding for next session
+
+- User decision on whether to align input tokens to LifeSG (4 lines in `form-tokens.css`) or accept the divergence and allowlist.
+- Investigation of overlays/drawer + overlays/menu height divergence (probe returned empty for LifeSG widgets there — selector heuristic probably misses them; they may render outside the on-page wrapper).
+- Investigation of the 9 selection-and-input per-component divergences (calendar day-cell size, otp-input bbox, image-button padding) — each is a smaller per-component call.
+- Stage 2 (finer-grained `data-token` markers in demos) deferred. Wrapper-level signal turned out to be sufficient to identify the patterns; finer markers would help only once we're fixing.
