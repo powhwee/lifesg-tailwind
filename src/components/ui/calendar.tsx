@@ -87,11 +87,11 @@ function Calendar(props: CalendarProps) {
     button_next: "size-7 inline-flex items-center justify-center rounded-md hover:bg-calendar-bg-hover cursor-pointer text-calendar-text",
     month_grid: "w-full border-collapse",
     weekdays: "flex",
-    weekday: "flex-1 h-9 text-xs text-calendar-text-subtle font-normal flex items-center justify-center",
+    weekday: "flex-1 h-10 text-xs text-calendar-text-subtle font-normal flex items-center justify-center",
     week: "flex",
     day: "flex-1 p-0.5 text-sm relative",
     day_button: cn(
-      "w-full h-9 inline-flex items-center justify-center rounded-md cursor-pointer text-sm",
+      "w-full h-10 inline-flex items-center justify-center rounded-md cursor-pointer text-sm",
       "hover:bg-calendar-bg-hover",
       "focus-visible:ring-3 focus-visible:ring-calendar-ring-focus focus-visible:outline-none"
     ),
