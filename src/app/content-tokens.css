@@ -25,8 +25,9 @@
   --table-radius:         0.5rem;
   --table-cell-x:         1rem;
   --table-cell-x-first:   1.5rem;
-  --table-cell-y:         1.5rem;
+  --table-cell-y:         1.25rem;
   --table-head-y:         1.25rem;
+  --table-head-row-h:     6rem;
 }
 
 /* ═══════════ uneditable-section ═══════════ */

@@ -327,6 +327,7 @@
   --spacing-table-cell-x-first:              var(--table-cell-x-first);
   --spacing-table-cell-y:                    var(--table-cell-y);
   --spacing-table-head-y:                    var(--table-head-y);
+  --spacing-table-head-row-h:                var(--table-head-row-h);
   --radius-table:                            var(--table-radius);
 
   /* ──────── Scope #3 sweep: previously-arbitrary tokens ──────── */
