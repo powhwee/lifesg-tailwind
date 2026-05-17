@@ -71,7 +71,7 @@ function UnitNumberInput({
   };
 
   const inputCx =
-    "h-input-height bg-transparent border-0 outline-none px-1 text-center text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
+    "h-input-height bg-transparent border-0 outline-none px-1 text-center text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
   return (
     <div
@@ -84,7 +84,7 @@ function UnitNumberInput({
     >
       <span
         aria-hidden="true"
-        className="grid place-items-center pl-3 text-input-text select-none text-input"
+        className="grid place-items-center pl-3 text-input-text select-none text-input-size"
       >
         #
       </span>

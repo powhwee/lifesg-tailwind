@@ -38,7 +38,7 @@ function defaultListExtractor<T>(item: T): string {
 }
 
 const triggerCx =
-  "h-input-height w-full rounded-input border border-input-border bg-input-bg px-input-padding-x text-left text-input flex items-center justify-between gap-2 hover:border-input-border-hover focus-visible:border-input-border-focus focus-visible:ring-3 focus-visible:ring-input-ring-focus focus-visible:outline-none data-[disabled]:cursor-not-allowed data-[disabled]:bg-input-bg-disabled data-[disabled]:border-input-border-disabled data-[disabled]:text-input-text-disabled";
+  "h-input-height w-full rounded-input border border-input-border bg-input-bg px-input-padding-x text-left text-input-size flex items-center justify-between gap-2 hover:border-input-border-hover focus-visible:border-input-border-focus focus-visible:ring-3 focus-visible:ring-input-ring-focus focus-visible:outline-none data-[disabled]:cursor-not-allowed data-[disabled]:bg-input-bg-disabled data-[disabled]:border-input-border-disabled data-[disabled]:text-input-text-disabled";
 
 const popupCx =
   "max-h-72 w-anchor-width min-w-[10rem] overflow-auto rounded-md border border-border bg-popover shadow-lg py-1";

@@ -148,7 +148,7 @@ function PhoneNumberInput({
         readOnly={readOnly}
         placeholder={placeholder}
         autoComplete="tel"
-        className="h-input-height flex-1 min-w-0 bg-transparent border-0 outline-none px-3 text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled"
+        className="h-input-height flex-1 min-w-0 bg-transparent border-0 outline-none px-3 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled"
         {...props}
       />
     </div>

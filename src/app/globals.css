@@ -236,8 +236,11 @@
   --spacing-input-height:                    var(--input-height);
   --spacing-input-padding-x:                 var(--input-padding-x);
   --radius-input:                            var(--input-radius);
-  --text-input:                              var(--input-font-size);
-  --text-input--line-height:                 var(--input-line-height);
+  /* `text-input-size` (not `text-input`) — bare `text-input` collides with
+     shadcn's `--input` color and Tailwind 4 resolves it as a color utility,
+     dropping the font-size mapping silently. */
+  --text-input-size:                         var(--input-font-size);
+  --text-input-size--line-height:            var(--input-line-height);
 
   /* L1 — extra LifeSG semantic colors used as utilities */
   --color-lifesg-border:                     var(--lifesg-border);
@@ -392,7 +395,7 @@
   --color-image-button-border: var(--image-button-border);
   --color-image-button-ring-focus: var(--image-button-ring-focus);
 
-  /* L3 — input (leading paired with existing --text-input) */
+  /* L3 — input (leading paired with --text-input-size) */
   --leading-input: var(--input-line-height);
 
   /* L3 — layout */

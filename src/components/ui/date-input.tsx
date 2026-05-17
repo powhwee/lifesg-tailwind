@@ -109,10 +109,10 @@ function DateInput({
   };
 
   const segmentCx =
-    "bg-transparent border-0 outline-none p-0 text-center text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
+    "bg-transparent border-0 outline-none p-0 text-center text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
   const separatorCx =
-    "select-none text-input leading-input text-input-text-placeholder";
+    "select-none text-input-size leading-input text-input-text-placeholder";
 
   return (
     <Popover open={open} onOpenChange={(o) => { if (!disabled && !readOnly) setOpen(o); }}>

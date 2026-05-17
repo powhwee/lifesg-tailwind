@@ -33,8 +33,8 @@
   --input-radius:              0.25rem;
   --input-padding-x:           0.75rem;
   --input-height:              3rem;       /* 48px */
-  --input-font-size:           1rem;       /* 16px — LifeSG BodyMD */
-  --input-line-height:         1.5rem;     /* 24px */
+  --input-font-size:           var(--lifesg-font-body-size-baseline);   /* 18px — LifeSG BodyBL */
+  --input-line-height:         var(--lifesg-font-body-lh-baseline);     /* 26px */
 
   /* input-group addon */
   --input-group-addon-bg:      var(--lifesg-bg-strong);

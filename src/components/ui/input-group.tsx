@@ -24,7 +24,7 @@ function InputGroup({
 }
 
 const addonCx =
-  "flex shrink-0 items-center px-3 text-input-group-addon-text text-input leading-input";
+  "flex shrink-0 items-center px-3 text-input-group-addon-text text-input-size leading-input";
 
 function InputGroupAddon({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
@@ -33,7 +33,7 @@ function InputGroupAddon({ className, ...props }: React.HTMLAttributes<HTMLDivEl
 }
 
 const groupInputCx =
-  "h-input-height w-full bg-transparent border-0 outline-none px-3 text-input leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
+  "h-input-height w-full bg-transparent border-0 outline-none px-3 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
 function InputGroupInput({
   className,
