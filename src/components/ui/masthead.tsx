@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Collapsible } from "@base-ui/react/collapsible";
-import { ChevronDown, Lock, Globe } from "lucide-react";
+import { ChevronDown, Lock, Landmark, CircleAlert, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface MastheadProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -71,13 +71,22 @@ function Masthead({ stretch, className, ...rest }: MastheadProps) {
           <Collapsible.Panel className="overflow-hidden h-collapsible-panel-height transition-[height] duration-200">
             <div className="py-3 grid grid-cols-1 md:grid-cols-2 gap-4 text-[0.8125rem]">
               <div className="flex gap-2">
-                <Globe size={18} className="shrink-0 mt-0.5 text-masthead-icon" />
+                <Landmark size={18} className="shrink-0 mt-0.5 text-masthead-icon" />
                 <div>
                   <p className="font-semibold mb-0.5">Official website links end with .gov.sg</p>
                   <p className="text-lifesg-text-subtle">
                     Government agencies communicate via .gov.sg websites
-                    (e.g. <span className="underline">go.gov.sg/open</span>). Trusted websites.
+                    (e.g. <span className="underline">go.gov.sg/open</span>).
                   </p>
+                  <a
+                    href="https://www.gov.sg/trusted-sites"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 mt-1 text-masthead-link underline-offset-4 hover:underline"
+                  >
+                    Trusted websites
+                    <ExternalLink size={12} aria-hidden="true" />
+                  </a>
                 </div>
               </div>
               <div className="flex gap-2">
@@ -89,6 +98,16 @@ function Masthead({ stretch, className, ...rest }: MastheadProps) {
                     <Lock size={12} className="inline align-baseline" />
                     ) or <span className="font-mono">https://</span> as an added precaution.
                     Share sensitive information only on official, secure websites.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <CircleAlert size={18} className="shrink-0 mt-0.5 text-masthead-icon" />
+                <div>
+                  <p className="font-semibold mb-0.5">Scam alert</p>
+                  <p className="text-lifesg-text-subtle">
+                    Government officers will never ask you to send money or share your details
+                    over the phone. When unsure, hang up and call Scamshield at 1799.
                   </p>
                 </div>
               </div>

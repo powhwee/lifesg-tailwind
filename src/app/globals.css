@@ -488,6 +488,9 @@
   --spacing-sidenav-label-line: var(--sidenav-label-line);
   --text-sidenav-label: var(--sidenav-label-size);
 
+  /* L3 — shared navigation convention */
+  --spacing-nav-block-spacing: var(--nav-block-spacing);
+
   /* L3 — toggle */
   --color-toggle-bg-checked: var(--toggle-bg-checked);
   --color-toggle-bg-disabled: var(--toggle-bg-disabled);

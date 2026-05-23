@@ -1,5 +1,17 @@
 /* Layer 3 — navigation component tokens (consolidated). */
 
+/* ═══════════ shared navigation conventions ═══════════ */
+/* Decision (2026-05-23): navigation components carry their own internal
+   vertical breathing room, mirroring LifeSG's "self-contained" convention
+   (shadcn default is the opposite — minimal components, consumer-provided
+   spacing). Use this token for the outer margin of any nav block that
+   should claim breathing room from the document flow (breadcrumb,
+   link-list, local-nav, footer-block). One edit retunes the rhythm
+   everywhere. See [[nav-spacing-convention]] memory. */
+:root {
+  --nav-block-spacing:           1.5rem;   /* 24px — matches LifeSG built-in nav margins */
+}
+
 /* ═══════════ avatar ═══════════ */
 /* Layer 3 — Component tokens for Avatar. */
 

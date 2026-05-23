@@ -37,7 +37,7 @@ function Breadcrumb({
     <nav
       aria-label="Breadcrumb"
       className={cn(
-        "text-breadcrumb-text text-base leading-6",
+        "my-nav-block-spacing text-breadcrumb-text text-base leading-6",
         className
       )}
       {...props}
