@@ -474,6 +474,14 @@
   --color-sidenav-icon: var(--sidenav-icon);
   --color-sidenav-text-subtle: var(--sidenav-text-subtle);
   --color-sidenav-text: var(--sidenav-text);
+  --spacing-sidenav-rail-width: var(--sidenav-rail-width);
+  --spacing-sidenav-rail-pt: var(--sidenav-rail-pt);
+  --spacing-sidenav-rail-pb: var(--sidenav-rail-pb);
+  --spacing-sidenav-pill-w: var(--sidenav-pill-w);
+  --spacing-sidenav-pill-h: var(--sidenav-pill-h);
+  --spacing-sidenav-icon-size: var(--sidenav-icon-size);
+  --spacing-sidenav-label-line: var(--sidenav-label-line);
+  --text-sidenav-label: var(--sidenav-label-size);
 
   /* L3 — toggle */
   --color-toggle-bg-checked: var(--toggle-bg-checked);

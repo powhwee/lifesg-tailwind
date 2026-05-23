@@ -101,6 +101,16 @@
   --sidenav-icon-selected:     var(--lifesg-icon-primary);
   --sidenav-text:              var(--lifesg-text);
   --sidenav-text-subtle:       var(--lifesg-text-subtle);
+
+  /* sizing — sourced from LifeSG getComputedStyle probe */
+  --sidenav-rail-width:        8.5rem;    /* 136px */
+  --sidenav-rail-pt:           0.5rem;    /* 8px  */
+  --sidenav-rail-pb:           1.5rem;    /* 24px */
+  --sidenav-pill-w:            3.25rem;   /* 52px */
+  --sidenav-pill-h:            1.75rem;   /* 28px */
+  --sidenav-label-size:        0.75rem;   /* 12px */
+  --sidenav-label-line:        1.25rem;   /* 20px */
+  --sidenav-icon-size:         1.5rem;    /* 24px */
 }
 
 /* ═══════════ navbar ═══════════ */

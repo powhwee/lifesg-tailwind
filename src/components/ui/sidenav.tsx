@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type DrawerSubitemElement = React.ReactElement<SidenavDrawerSubitemProps>;
@@ -31,12 +31,13 @@ function Sidenav({ children, fixed = true, className, id, "aria-label": ariaLabe
         id={id}
         aria-label={ariaLabel}
         className={cn(
-          "flex bg-sidenav-bg text-sidenav-text border-r border-sidenav-border",
+          "flex text-sidenav-text",
           fixed ? "fixed left-0 top-0 bottom-0 z-30" : "h-full",
           className
         )}
       >
-        <nav className="w-[8.5rem] flex flex-col items-stretch py-4">
+        {/* Icon rail — narrow column with right border */}
+        <nav className="w-sidenav-rail-width pt-sidenav-rail-pt pb-sidenav-rail-pb flex flex-col items-stretch border-r border-sidenav-border bg-sidenav-bg">
           {children}
         </nav>
         <DrawerPanel>{children}</DrawerPanel>
@@ -55,7 +56,7 @@ export interface SidenavGroupProps {
 
 function Group({ children, separator, className, id, "aria-label": ariaLabel }: SidenavGroupProps) {
   return (
-    <div id={id} aria-label={ariaLabel} className={cn("flex flex-col gap-1", separator && "pb-3 mb-3 relative after:content-[''] after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:bg-sidenav-border", className)}>
+    <div id={id} aria-label={ariaLabel} className={cn("flex flex-col gap-1", separator && "pb-3 mb-3 relative after:content-[''] after:absolute after:left-3 after:right-3 after:bottom-0 after:h-px after:bg-sidenav-border", className)}>
       {children}
     </div>
   );
@@ -77,6 +78,10 @@ function Item({ title, icon, selected, onClick, children, id, className }: Siden
   const itemId = id ?? internalId;
   const hasChildren = React.Children.count(children) > 0;
   const isOpen = ctx?.openId === itemId;
+  const drawerIsOpen = ctx?.openId !== null && ctx?.openId !== undefined;
+  // When a drawer is open, only highlight the open item — suppress `selected`
+  // on other items. Matches LifeSG behavior.
+  const isActive = isOpen || (selected && !drawerIsOpen);
   const handle = () => {
     if (hasChildren) {
       ctx?.setOpenId(isOpen ? null : itemId);
@@ -91,15 +96,23 @@ function Item({ title, icon, selected, onClick, children, id, className }: Siden
       aria-pressed={hasChildren ? isOpen : undefined}
       aria-current={selected ? "page" : undefined}
       className={cn(
-        "relative mx-2 py-2 inline-flex flex-col items-center justify-center gap-1 rounded-md text-sidenav-icon hover:bg-sidenav-bg-hover outline-none focus-visible:ring-2 focus-visible:ring-lifesg-border-focus",
-        (selected || isOpen) && "bg-sidenav-bg-selected text-sidenav-icon-selected",
+        "relative mx-2 inline-flex flex-col items-center justify-center gap-1 outline-none focus-visible:ring-2 focus-visible:ring-lifesg-border-focus",
         className
       )}
     >
-      <span aria-hidden="true" className="[&_svg]:size-6">
-        {icon}
+      {/* Icon pill — selected/open highlight scoped to icon area */}
+      <span
+        aria-hidden="true"
+        className={cn(
+          "w-sidenav-pill-w h-sidenav-pill-h inline-flex items-center justify-center rounded-lg text-sidenav-icon hover:bg-sidenav-bg-hover",
+          isActive && "bg-sidenav-bg-selected text-sidenav-icon-selected"
+        )}
+      >
+        <span className="size-sidenav-icon-size [&_svg]:size-full">{icon}</span>
       </span>
-      <span className={cn("text-[0.6875rem] leading-tight text-sidenav-text", (selected || isOpen) && "text-sidenav-icon-selected font-semibold")}>
+      <span
+        className={cn("text-sidenav-label leading-sidenav-label-line text-sidenav-text", isActive && "text-sidenav-icon-selected font-semibold")}
+      >
         {title}
       </span>
     </button>
@@ -126,17 +139,6 @@ function DrawerPanel({ children }: { children: React.ReactNode }) {
   const ai = activeItem as ItemElement;
   return (
     <div className="w-72 border-l border-sidenav-border bg-sidenav-drawer-bg flex flex-col">
-      <header className="flex items-center justify-between px-4 h-14 border-b border-sidenav-border">
-        <h2 className="text-base font-semibold">{ai.props.title}</h2>
-        <button
-          type="button"
-          aria-label="Close"
-          onClick={() => ctx?.setOpenId(null)}
-          className="size-8 inline-flex items-center justify-center rounded hover:bg-sidenav-bg-hover"
-        >
-          <X size={18} />
-        </button>
-      </header>
       <div className="flex-1 overflow-y-auto px-2 py-3 flex flex-col gap-1">
         {ai.props.children}
       </div>
@@ -178,7 +180,7 @@ function DrawerItem({ title, onClick, children, id, className }: SidenavDrawerIt
         className="w-full flex items-center justify-between gap-2 px-3 h-10 rounded text-left text-sidenav-text font-semibold hover:bg-sidenav-bg-hover outline-none focus-visible:bg-sidenav-bg-hover"
       >
         <span>{title}</span>
-        <ChevronDown size={16} className={cn("transition-transform", !open && "-rotate-90")} />
+        <ChevronDown size={16} className={cn("transition-transform", open && "rotate-180")} />
       </button>
       {open && (
         <div className="ml-3 mt-0.5 flex flex-col gap-0.5">{children}</div>
