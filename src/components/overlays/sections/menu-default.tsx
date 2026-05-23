@@ -21,10 +21,10 @@ export function OursPane() {
   const [italic, setItalic] = useState(false);
   const [align, setAlign] = useState("left");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">basic — action menu</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="basic">
           <Menu>
             <MenuTrigger
               render={(triggerProps) => (
@@ -48,7 +48,7 @@ export function OursPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">overflow trigger + groups + checkbox + radio</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="overflow">
           <Menu>
             <MenuTrigger
               render={(triggerProps) => (
@@ -91,7 +91,7 @@ export function OursPane() {
 
 export function LifeSGPane() {
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md" data-token="no-equivalent">
       <section>
         <code className="text-xs text-muted-foreground">LifeSG ships no public Menu component</code>
         <div className="mt-3 rounded-md border border-lifesg-border p-4 bg-lifesg-bg-strong text-sm space-y-2">

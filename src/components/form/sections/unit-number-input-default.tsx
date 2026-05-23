@@ -10,10 +10,10 @@ export function OursPane() {
   const [b, setB] = useState("12-345");
   const [raw, setRaw] = useState<[string, string]>(["", ""]);
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormUnitNumberInput</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-unit">
           <FormUnitNumberInput
             label="Unit number"
             description="Floor and unit (e.g. 12-345)"
@@ -28,13 +28,13 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <UnitNumberInput value={b} onChange={setB} />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <UnitNumberInput value="03-021" disabled />
         </div>
       </section>
@@ -47,10 +47,10 @@ export function LifeSGPane() {
   const [b, setB] = useState("12-345");
   const [raw, setRaw] = useState<string[]>(["", ""]);
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.UnitNumberInput</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-unit">
           <Form.UnitNumberInput
             label={{ children: "Unit number", subtitle: "Floor and unit (e.g. 12-345)" }}
             value={a}
@@ -64,13 +64,13 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <LifeSGUnitNumberInput value={b} onChange={setB} />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <LifeSGUnitNumberInput value="03-021" disabled />
         </div>
       </section>

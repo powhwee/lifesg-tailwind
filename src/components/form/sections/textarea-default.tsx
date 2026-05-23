@@ -9,10 +9,10 @@ export function OursPane() {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormTextarea (label + description)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-textarea">
           <FormTextarea
             label="Reason for application"
             description="Please describe in 1-2 sentences."
@@ -25,7 +25,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">with counter (maxLength=200)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="counter">
           <Textarea
             value={b}
             onChange={(e) => setB(e.target.value)}
@@ -38,7 +38,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <Textarea disabled defaultValue="This field is locked." rows={3} />
         </div>
       </section>
@@ -50,10 +50,10 @@ export function LifeSGPane() {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.Textarea</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-textarea">
           <Form.Textarea
             label={{ children: "Reason for application", subtitle: "Please describe in 1-2 sentences." }}
             placeholder="e.g. I am applying because..."
@@ -65,7 +65,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">with counter (maxLength=200)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="counter">
           <LifeSGTextarea
             value={b}
             onChange={(e) => setB(e.target.value)}
@@ -77,7 +77,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <LifeSGTextarea disabled defaultValue="This field is locked." rows={3} />
         </div>
       </section>

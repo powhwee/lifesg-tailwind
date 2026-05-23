@@ -7,10 +7,10 @@ import { OtpInput as LifeSGOtpInput } from "@lifesg/react-design-system/otp-inpu
 export function OursPane() {
   const [v, setV] = useState<string[]>(["", "", "", "", "", ""]);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">basic, 6 digits, 30s cooldown</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="basic">
           <OtpInput
             numOfInput={6}
             value={v}
@@ -22,7 +22,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">with prefix &amp; error</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefix-error">
           <OtpInput
             numOfInput={4}
             prefix={{ value: "ABC", separator: "-" }}
@@ -39,10 +39,10 @@ export function OursPane() {
 export function LifeSGPane() {
   const [v, setV] = useState<string[]>(["", "", "", "", "", ""]);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">basic, 6 digits, 30s cooldown</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="basic">
           <LifeSGOtpInput
             numOfInput={6}
             value={v}
@@ -54,7 +54,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">with prefix &amp; error</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefix-error">
           <LifeSGOtpInput
             numOfInput={4}
             prefix={{ value: "ABC", separator: "-" }}

@@ -14,10 +14,10 @@ const IMAGES = [
 export function OursPane() {
   const [selected, setSelected] = useState<number | null>(0);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">selectable group</code>
-        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md">
+        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md" data-token="selectable">
           {IMAGES.map((img, i) => (
             <ImageButton
               key={img.label}
@@ -31,7 +31,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states</code>
-        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md">
+        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md" data-token="states">
           <ImageButton imgSrc={IMAGES[0].src} aria-label="Default" />
           <ImageButton imgSrc={IMAGES[1].src} selected aria-label="Selected" />
           <ImageButton imgSrc={IMAGES[2].src} error aria-label="Error" />
@@ -45,10 +45,10 @@ export function OursPane() {
 export function LifeSGPane() {
   const [selected, setSelected] = useState<number | null>(0);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">selectable group</code>
-        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md">
+        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md" data-token="selectable">
           {IMAGES.map((img, i) => (
             <LifeSGImageButton
               key={img.label}
@@ -63,7 +63,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states</code>
-        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md">
+        <div className="mt-3 grid grid-cols-4 gap-3 max-w-md" data-token="states">
           <LifeSGImageButton imgSrc={IMAGES[0].src} aria-label="Default" style={{ aspectRatio: "1 / 1" }} />
           <LifeSGImageButton imgSrc={IMAGES[1].src} selected aria-label="Selected" style={{ aspectRatio: "1 / 1" }} />
           <LifeSGImageButton imgSrc={IMAGES[2].src} error aria-label="Error" style={{ aspectRatio: "1 / 1" }} />

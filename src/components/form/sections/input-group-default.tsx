@@ -13,10 +13,10 @@ import { InputGroup as LifeSGInputGroup } from "@lifesg/react-design-system/inpu
 export function OursPane() {
   const [amount, setAmount] = useState("");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormInputGroup — currency</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-input-group">
           <FormInputGroup label="Amount" description="In Singapore dollars">
             <InputGroupAddon>$</InputGroupAddon>
             <InputGroupInput
@@ -30,7 +30,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">label addon (left)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="addon-left">
           <InputGroup>
             <InputGroupAddon>https://</InputGroupAddon>
             <InputGroupInput placeholder="example.com" />
@@ -39,7 +39,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">label addon (right)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="addon-right">
           <InputGroup>
             <InputGroupInput placeholder="Search..." />
             <InputGroupAddon>Go</InputGroupAddon>
@@ -53,10 +53,10 @@ export function OursPane() {
 export function LifeSGPane() {
   const [amount, setAmount] = useState("");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.InputGroup — currency</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-input-group">
           <Form.InputGroup
             label={{ children: "Amount", subtitle: "In Singapore dollars" }}
             type="number"
@@ -69,7 +69,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">label addon (left)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="addon-left">
           <LifeSGInputGroup
             placeholder="example.com"
             addon={{ type: "label", attributes: { value: "https://" } }}
@@ -78,7 +78,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">label addon (right)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="addon-right">
           <LifeSGInputGroup
             placeholder="Search..."
             addon={{ type: "label", attributes: { value: "Go" }, position: "right" }}

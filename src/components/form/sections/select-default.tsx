@@ -17,10 +17,10 @@ export function OursPane() {
   const [a, setA] = useState<typeof FRUITS[number] | null>(null);
   const [b, setB] = useState<typeof FRUITS[number] | null>(FRUITS[1]);
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormSelect (label + description)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-select">
           <FormSelect
             label="Favourite fruit"
             description="Pick one."
@@ -32,7 +32,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled (Banana)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <Select
             aria-label="Favourite fruit"
             options={FRUITS}
@@ -43,7 +43,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <Select aria-label="Disabled fruit" options={FRUITS} selectedOption={FRUITS[2]} disabled />
         </div>
       </section>
@@ -55,10 +55,10 @@ export function LifeSGPane() {
   const [a, setA] = useState<typeof FRUITS[number] | undefined>(undefined);
   const [b, setB] = useState<typeof FRUITS[number] | undefined>(FRUITS[1]);
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.Select</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-select">
           <Form.Select<typeof FRUITS[number], string>
             label={{ children: "Favourite fruit", subtitle: "Pick one." }}
             options={FRUITS}
@@ -71,7 +71,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled (Banana)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <LifeSGInputSelect<typeof FRUITS[number], string>
             options={FRUITS}
             selectedOption={b}
@@ -83,7 +83,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <LifeSGInputSelect<typeof FRUITS[number], string>
             options={FRUITS}
             selectedOption={FRUITS[2]}

@@ -5,10 +5,10 @@ import { Button as LifeSGButton } from "@lifesg/react-design-system/button";
 
 export function OursPane() {
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">variants</code>
-        <div className="mt-2 flex flex-wrap items-center gap-3">
+        <div className="mt-2 flex flex-wrap items-center gap-3" data-token="variants">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="ghost">Ghost</Button>
@@ -19,7 +19,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">sizes</code>
-        <div className="mt-2 flex flex-wrap items-center gap-3">
+        <div className="mt-2 flex flex-wrap items-center gap-3" data-token="sizes">
           <Button size="sm">Small</Button>
           <Button>Default</Button>
           <Button size="lg">Large</Button>
@@ -31,10 +31,10 @@ export function OursPane() {
 
 export function LifeSGPane() {
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">variants</code>
-        <div className="mt-2 flex flex-wrap items-center gap-3">
+        <div className="mt-2 flex flex-wrap items-center gap-3" data-token="variants">
           <LifeSGButton.Default>Primary</LifeSGButton.Default>
           <LifeSGButton.Default styleType="secondary">Secondary</LifeSGButton.Default>
           <LifeSGButton.Default styleType="light">Ghost</LifeSGButton.Default>
@@ -45,7 +45,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">sizes</code>
-        <div className="mt-2 flex flex-wrap items-center gap-3">
+        <div className="mt-2 flex flex-wrap items-center gap-3" data-token="sizes">
           <LifeSGButton.Small>Small</LifeSGButton.Small>
           <LifeSGButton.Default>Default</LifeSGButton.Default>
           <LifeSGButton.Large>Large</LifeSGButton.Large>

@@ -8,10 +8,10 @@ export function OursPane() {
   const [a, setA] = useState(false);
   const [b, setB] = useState(true);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">states &mdash; default size</code>
-        <div className="mt-3 flex items-center gap-6">
+        <div className="mt-3 flex items-center gap-6" data-token="default-size">
           <label className="flex items-center gap-2 cursor-pointer">
             <Checkbox checked={a} onCheckedChange={(v) => setA(Boolean(v))} />
             <span className="text-sm">Unchecked</span>
@@ -36,7 +36,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states &mdash; small</code>
-        <div className="mt-3 flex items-center gap-6">
+        <div className="mt-3 flex items-center gap-6" data-token="small-size">
           <Checkbox displaySize="small" />
           <Checkbox displaySize="small" checked />
           <Checkbox displaySize="small" indeterminate />
@@ -52,10 +52,10 @@ export function LifeSGPane() {
   const [a, setA] = useState(false);
   const [b, setB] = useState(true);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">states &mdash; default size</code>
-        <div className="mt-3 flex items-center gap-6">
+        <div className="mt-3 flex items-center gap-6" data-token="default-size">
           <label style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
             <LifeSGCheckbox checked={a} onChange={() => setA(!a)} />
             <span style={{ fontSize: 14 }}>Unchecked</span>
@@ -80,7 +80,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states &mdash; small</code>
-        <div className="mt-3 flex items-center gap-6">
+        <div className="mt-3 flex items-center gap-6" data-token="small-size">
           <LifeSGCheckbox displaySize="small" />
           <LifeSGCheckbox displaySize="small" checked />
           <LifeSGCheckbox displaySize="small" indeterminate checked />

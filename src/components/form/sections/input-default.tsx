@@ -9,10 +9,10 @@ export function OursPane() {
   const [a, setA] = useState("");
   const [b, setB] = useState("user@example.com");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormInput (label + description + error)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-input">
           <FormInput
             label="Email address"
             description="We'll only use this to contact you about your application."
@@ -26,7 +26,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">Input + allowClear</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="allow-clear">
           <Input
             type="text"
             aria-label="Email with clear button"
@@ -39,13 +39,13 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">readOnly</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="read-only">
           <Input type="text" aria-label="Read-only email" readOnly defaultValue="locked@example.com" />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <Input type="text" aria-label="Disabled email" disabled defaultValue="user@example.com" />
         </div>
       </section>
@@ -57,10 +57,10 @@ export function LifeSGPane() {
   const [a, setA] = useState("");
   const [b, setB] = useState("user@example.com");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.Input (label + error)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-input">
           <Form.Input
             label={{ children: "Email address", subtitle: "We'll only use this to contact you about your application." }}
             type="email"
@@ -73,7 +73,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">Input + allowClear</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="allow-clear">
           <LifeSGInput
             type="text"
             value={b}
@@ -85,13 +85,13 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">readOnly</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="read-only">
           <LifeSGInput type="text" readOnly defaultValue="locked@example.com" />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <LifeSGInput type="text" disabled defaultValue="user@example.com" />
         </div>
       </section>

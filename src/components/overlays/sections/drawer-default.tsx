@@ -16,10 +16,10 @@ export function OursPane() {
   const [openL, setOpenL] = useState(false);
   const [openB, setOpenB] = useState(false);
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">side=&quot;right&quot; (default)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="right">
           <Drawer open={openR} onOpenChange={setOpenR}>
             <Button variant="secondary" size="sm" onClick={() => setOpenR(true)}>
               Open right drawer
@@ -47,7 +47,7 @@ export function OursPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">side=&quot;left&quot;</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="left">
           <Drawer open={openL} onOpenChange={setOpenL}>
             <Button variant="secondary" size="sm" onClick={() => setOpenL(true)}>
               Open left drawer
@@ -70,7 +70,7 @@ export function OursPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">side=&quot;bottom&quot; — sheet</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="bottom">
           <Drawer open={openB} onOpenChange={setOpenB}>
             <Button variant="secondary" size="sm" onClick={() => setOpenB(true)}>
               Open bottom sheet
@@ -94,7 +94,7 @@ export function OursPane() {
 
 export function LifeSGPane() {
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md" data-token="no-equivalent">
       <section>
         <code className="text-xs text-muted-foreground">LifeSG ships no standalone Drawer</code>
         <div className="mt-3 rounded-md border border-lifesg-border p-4 bg-lifesg-bg-strong text-sm space-y-2">

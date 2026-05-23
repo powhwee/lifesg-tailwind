@@ -26,7 +26,7 @@ export function OursPane() {
   const [category, setCategory] = useState<FilterCheckboxOption[]>([CATEGORY_OPTIONS[0]]);
   const [status, setStatus] = useState<FilterCheckboxOption[]>([]);
   return (
-    <div className="flex" data-token="default">
+    <div className="flex" data-token="filter">
       <Filter onClear={() => { setCategory([]); setStatus([]); }}>
         <Filter.Checkbox
           title="Category"
@@ -51,7 +51,7 @@ export function LifeSGPane() {
   const [category, setCategory] = useState<FilterCheckboxOption[]>([CATEGORY_OPTIONS[0]]);
   const [status, setStatus] = useState<FilterCheckboxOption[]>([]);
   return (
-    <div className="flex" data-token="default">
+    <div className="flex" data-token="filter">
       <LifeSGFilter onClear={() => { setCategory([]); setStatus([]); }}>
         <LifeSGFilter.Checkbox
           title="Category"

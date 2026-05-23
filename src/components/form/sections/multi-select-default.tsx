@@ -19,10 +19,10 @@ export function OursPane() {
   const [a, setA] = useState<typeof TOPPINGS[number][]>([]);
   const [b, setB] = useState<typeof TOPPINGS[number][]>([TOPPINGS[0], TOPPINGS[1]]);
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormMultiSelect (label + description)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-multi">
           <FormMultiSelect
             label="Pizza toppings"
             description="Select all that apply."
@@ -34,7 +34,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled (Cheese + Pepperoni)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <MultiSelect
             options={TOPPINGS}
             selectedOptions={b}
@@ -44,7 +44,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <MultiSelect options={TOPPINGS} selectedOptions={[TOPPINGS[3]]} disabled />
         </div>
       </section>
@@ -56,10 +56,10 @@ export function LifeSGPane() {
   const [a, setA] = useState<typeof TOPPINGS[number][]>([]);
   const [b, setB] = useState<typeof TOPPINGS[number][]>([TOPPINGS[0], TOPPINGS[1]]);
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.MultiSelect</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-multi">
           <Form.MultiSelect<typeof TOPPINGS[number], string>
             label={{ children: "Pizza toppings", subtitle: "Select all that apply." }}
             options={TOPPINGS}
@@ -72,7 +72,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled (Cheese + Pepperoni)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <LifeSGInputMultiSelect<typeof TOPPINGS[number], string>
             options={TOPPINGS}
             selectedOptions={b}
@@ -84,7 +84,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <LifeSGInputMultiSelect<typeof TOPPINGS[number], string>
             options={TOPPINGS}
             selectedOptions={[TOPPINGS[3]]}

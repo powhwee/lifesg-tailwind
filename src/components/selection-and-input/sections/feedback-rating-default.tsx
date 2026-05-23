@@ -11,10 +11,10 @@ export function OursPane() {
   const [rating, setRating] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">basic</code>
-        <div className="mt-3 max-w-md">
+        <div className="mt-3 max-w-md" data-token="basic">
           <FeedbackRating
             description="How would you rate your experience?"
             buttonLabel="Submit feedback"
@@ -31,7 +31,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">with image</code>
-        <div className="mt-3 max-w-md">
+        <div className="mt-3 max-w-md" data-token="with-image">
           <FeedbackRating
             imgSrc={IMG_SRC}
             description="Was this page helpful?"
@@ -49,10 +49,10 @@ export function OursPane() {
 export function LifeSGPane() {
   const [rating, setRating] = useState(0);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">basic</code>
-        <div className="mt-3 max-w-md">
+        <div className="mt-3 max-w-md" data-token="basic">
           <LifeSGFeedbackRating
             description="How would you rate your experience?"
             buttonLabel="Submit feedback"
@@ -64,7 +64,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">with image</code>
-        <div className="mt-3 max-w-md">
+        <div className="mt-3 max-w-md" data-token="with-image">
           <LifeSGFeedbackRating
             imgSrc={IMG_SRC}
             description="Was this page helpful?"

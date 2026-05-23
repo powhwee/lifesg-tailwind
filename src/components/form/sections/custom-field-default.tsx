@@ -8,10 +8,10 @@ import { Form } from "@lifesg/react-design-system/form";
 export function OursPane() {
   const [v, setV] = useState("");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormField (convenience wrapper)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-field">
           <FormField
             label="Address line 1"
             description="Block, street name, building"
@@ -30,7 +30,7 @@ export function OursPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">Field (headless composition)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="headless">
           <Field>
             <FieldLabel>Address line 2</FieldLabel>
             <FieldDescription>Unit number or building name</FieldDescription>
@@ -45,7 +45,7 @@ export function OursPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <FormField label="Email" description="Currently locked" disabled>
             <input
               type="email"
@@ -63,10 +63,10 @@ export function OursPane() {
 export function LifeSGPane() {
   const [v, setV] = useState("");
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.CustomField</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-field">
           <Form.CustomField
             label={{ children: "Address line 1", subtitle: "Block, street name, building" }}
             errorMessage={v.length > 0 && v.length < 5 ? "Too short — at least 5 characters" : undefined}
@@ -92,7 +92,7 @@ export function LifeSGPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">Form.CustomField (no error)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="headless">
           <Form.CustomField label={{ children: "Address line 2", subtitle: "Unit number or building name" }}>
             <input
               type="text"
@@ -113,7 +113,7 @@ export function LifeSGPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <Form.CustomField label="Email" disabled>
             <input
               type="email"

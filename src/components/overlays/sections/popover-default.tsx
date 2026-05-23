@@ -16,10 +16,10 @@ const plainTriggerStyle = {
 
 export function OursPane() {
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">basic — click to open</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="basic">
           <Popover>
             <PopoverTrigger
               render={(triggerProps) => (
@@ -39,7 +39,7 @@ export function OursPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">with icon trigger + custom side offset</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="icon-trigger">
           <Popover>
             <PopoverTrigger
               render={(triggerProps) => (
@@ -65,7 +65,7 @@ export function OursPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">side / align — open above, end-aligned</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="side-align">
           <Popover>
             <PopoverTrigger
               render={(triggerProps) => (
@@ -88,10 +88,10 @@ export function OursPane() {
 
 export function LifeSGPane() {
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">PopoverV2.PopoverTrigger — click</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="basic">
           <LifeSGPopoverTrigger
             trigger="click"
             popoverContent={
@@ -120,7 +120,7 @@ export function LifeSGPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">icon trigger</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="icon-trigger">
           <LifeSGPopoverTrigger
             trigger="click"
             popoverContent={
@@ -151,7 +151,7 @@ export function LifeSGPane() {
 
       <section>
         <code className="text-xs text-muted-foreground">hover variant</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="side-align">
           <LifeSGPopoverTrigger
             trigger="hover"
             popoverContent={<p style={{ fontSize: 14, margin: 0 }}>Hover-triggered popover.</p>}

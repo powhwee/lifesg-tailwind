@@ -9,10 +9,10 @@ import { GearIcon } from "@lifesg/react-icons/gear";
 
 export function OursPane() {
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">styleType</code>
-        <div className="mt-2 flex flex-wrap items-center gap-3">
+        <div className="mt-2 flex flex-wrap items-center gap-3" data-token="style-type">
           <IconButton styleType="primary" aria-label="Save"><Heart /></IconButton>
           <IconButton styleType="secondary" aria-label="Search"><Search /></IconButton>
           <IconButton styleType="light" aria-label="Settings"><Settings /></IconButton>
@@ -21,7 +21,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">sizeType</code>
-        <div className="mt-2 flex flex-wrap items-end gap-3">
+        <div className="mt-2 flex flex-wrap items-end gap-3" data-token="size-type">
           <IconButton sizeType="small" aria-label="Save"><Heart /></IconButton>
           <IconButton sizeType="default" aria-label="Save"><Heart /></IconButton>
           <IconButton sizeType="large" aria-label="Save"><Heart /></IconButton>
@@ -33,10 +33,10 @@ export function OursPane() {
 
 export function LifeSGPane() {
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">styleType</code>
-        <div className="mt-2 flex flex-wrap items-center gap-3">
+        <div className="mt-2 flex flex-wrap items-center gap-3" data-token="style-type">
           <LifeSGIconButton styleType="primary" aria-label="Save"><HeartIcon /></LifeSGIconButton>
           <LifeSGIconButton styleType="secondary" aria-label="Search"><MagnifierIcon /></LifeSGIconButton>
           <LifeSGIconButton styleType="light" aria-label="Settings"><GearIcon /></LifeSGIconButton>
@@ -45,7 +45,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">sizeType</code>
-        <div className="mt-2 flex flex-wrap items-end gap-3">
+        <div className="mt-2 flex flex-wrap items-end gap-3" data-token="size-type">
           <LifeSGIconButton sizeType="small" aria-label="Save"><HeartIcon /></LifeSGIconButton>
           <LifeSGIconButton sizeType="default" aria-label="Save"><HeartIcon /></LifeSGIconButton>
           <LifeSGIconButton sizeType="large" aria-label="Save"><HeartIcon /></LifeSGIconButton>

@@ -10,10 +10,10 @@ export function OursPane() {
   const [end, setEnd] = useState("2026-05-19");
   const [empty, setEmpty] = useState({ start: "", end: "" });
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormDateRangeInput (label)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-date-range">
           <FormDateRangeInput
             label="Booking dates"
             description="From check-in to check-out."
@@ -31,7 +31,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">empty</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="empty">
           <DateRangeInput
             value={empty.start}
             valueEnd={empty.end}
@@ -41,7 +41,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <DateRangeInput value="2026-05-12" valueEnd="2026-05-19" disabled />
         </div>
       </section>
@@ -54,10 +54,10 @@ export function LifeSGPane() {
   const [end, setEnd] = useState("2026-05-19");
   const [empty, setEmpty] = useState({ start: "", end: "" });
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.DateRangeInput</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-date-range">
           <Form.DateRangeInput
             label={{ children: "Booking dates", subtitle: "From check-in to check-out." }}
             value={start}
@@ -74,7 +74,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">empty</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="empty">
           <LifeSGDateRangeInput
             value={empty.start}
             valueEnd={empty.end}
@@ -84,7 +84,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <LifeSGDateRangeInput value="2026-05-12" valueEnd="2026-05-19" disabled />
         </div>
       </section>

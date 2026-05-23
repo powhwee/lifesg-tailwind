@@ -13,10 +13,10 @@ export function OursPane() {
   const [a, setA] = useState<PhoneNumberInputValue>({ countryCode: "+65" });
   const [b, setB] = useState<PhoneNumberInputValue>({ countryCode: "+65", number: "12345678" });
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormPhoneNumberInput (label + description)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-phone">
           <FormPhoneNumberInput
             label="Mobile number"
             description="We'll send a one-time verification code"
@@ -28,13 +28,13 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled value</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <PhoneNumberInput value={b} onChange={setB} />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">fixedCountry — country dropdown locked</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="fixed-country">
           <PhoneNumberInput
             value={{ countryCode: "+65", number: "" }}
             fixedCountry
@@ -44,7 +44,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <PhoneNumberInput value={{ countryCode: "+65", number: "91234567" }} disabled />
         </div>
       </section>
@@ -56,10 +56,10 @@ export function LifeSGPane() {
   const [a, setA] = useState<PhoneNumberInputValue>({ countryCode: "+65" });
   const [b, setB] = useState<PhoneNumberInputValue>({ countryCode: "+65", number: "12345678" });
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.PhoneNumberInput</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-phone">
           <Form.PhoneNumberInput
             label={{ children: "Mobile number", subtitle: "We'll send a one-time verification code" }}
             value={a}
@@ -70,13 +70,13 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">prefilled value</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="prefilled">
           <LifeSGPhoneNumberInput value={b} onChange={(v) => setB(v ?? {})} />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">fixedCountry — country dropdown locked</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="fixed-country">
           <LifeSGPhoneNumberInput
             value={{ countryCode: "+65" }}
             fixedCountry
@@ -86,7 +86,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">disabled</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="disabled">
           <LifeSGPhoneNumberInput
             value={{ countryCode: "+65", number: "91234567" }}
             disabled

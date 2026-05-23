@@ -6,10 +6,10 @@ import { MaskedInput as LifeSGMaskedInput } from "@lifesg/react-design-system/ma
 
 export function OursPane() {
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">FormMaskedInput — full mask (default)</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-masked">
           <FormMaskedInput
             label="Password"
             description="At least 12 characters"
@@ -19,19 +19,19 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">NRIC mask — chars 1-5 hidden, others visible</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="nric-mask">
           <MaskedInput value="S1234567A" maskRange={[1, 6]} maskChar="*" />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">unmaskRange — only last 4 visible</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="unmask-range">
           <MaskedInput value="4111222233334444" unmaskRange={[12, 16]} />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">starts unmasked</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="starts-unmasked">
           <MaskedInput value="open-by-default" disableMask />
         </div>
       </section>
@@ -41,10 +41,10 @@ export function OursPane() {
 
 export function LifeSGPane() {
   return (
-    <div className="flex flex-col gap-10 max-w-md" data-token="default">
+    <div className="flex flex-col gap-10 max-w-md">
       <section>
         <code className="text-xs text-muted-foreground">Form.MaskedInput — full mask</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="form-masked">
           <Form.MaskedInput
             label={{ children: "Password", subtitle: "At least 12 characters" }}
             value="hunter12345"
@@ -53,19 +53,19 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">NRIC mask — chars 1-5 hidden</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="nric-mask">
           <LifeSGMaskedInput value="S1234567A" maskRange={[1, 6]} maskChar="*" />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">unmaskRange — only last 4 visible</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="unmask-range">
           <LifeSGMaskedInput value="4111222233334444" unmaskRange={[12, 16]} />
         </div>
       </section>
       <section>
         <code className="text-xs text-muted-foreground">starts unmasked</code>
-        <div className="mt-3">
+        <div className="mt-3" data-token="starts-unmasked">
           <LifeSGMaskedInput value="open-by-default" disableMask />
         </div>
       </section>

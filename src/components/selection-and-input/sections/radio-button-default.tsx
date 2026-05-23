@@ -7,10 +7,10 @@ import { RadioButton as LifeSGRadioButton } from "@lifesg/react-design-system/ra
 export function OursPane() {
   const [value, setValue] = useState<string>("apple");
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">grouped &mdash; default size</code>
-        <RadioGroup value={value} onValueChange={(v) => setValue(String(v))} className="mt-3 flex items-center gap-6">
+        <RadioGroup value={value} onValueChange={(v) => setValue(String(v))} className="mt-3 flex items-center gap-6" data-token="grouped">
           <label className="flex items-center gap-2 cursor-pointer">
             <RadioButton value="apple" />
             <span className="text-sm">Apple</span>
@@ -27,7 +27,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states</code>
-        <RadioGroup defaultValue="b" className="mt-3 flex items-center gap-6">
+        <RadioGroup defaultValue="b" className="mt-3 flex items-center gap-6" data-token="states">
           <label className="flex items-center gap-2 cursor-pointer">
             <RadioButton value="a" />
             <span className="text-sm">Unchecked</span>
@@ -44,7 +44,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">small size</code>
-        <RadioGroup defaultValue="b" className="mt-3 flex items-center gap-6">
+        <RadioGroup defaultValue="b" className="mt-3 flex items-center gap-6" data-token="small-size">
           <RadioButton value="a" displaySize="small" />
           <RadioButton value="b" displaySize="small" />
           <RadioButton value="c" displaySize="small" disabled />
@@ -57,10 +57,10 @@ export function OursPane() {
 export function LifeSGPane() {
   const [value, setValue] = useState<string>("apple");
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">grouped &mdash; default size</code>
-        <div className="mt-3 flex items-center gap-6">
+        <div className="mt-3 flex items-center gap-6" data-token="grouped">
           {[
             { v: "apple", label: "Apple" },
             { v: "orange", label: "Orange" },
@@ -75,7 +75,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states</code>
-        <div className="mt-3 flex items-center gap-6">
+        <div className="mt-3 flex items-center gap-6" data-token="states">
           <label style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
             <LifeSGRadioButton />
             <span style={{ fontSize: 14 }}>Unchecked</span>
@@ -92,7 +92,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">small size</code>
-        <div className="mt-3 flex items-center gap-6">
+        <div className="mt-3 flex items-center gap-6" data-token="small-size">
           <LifeSGRadioButton displaySize="small" />
           <LifeSGRadioButton displaySize="small" checked />
           <LifeSGRadioButton displaySize="small" disabled />

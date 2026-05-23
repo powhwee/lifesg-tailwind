@@ -9,10 +9,10 @@ export function OursPane() {
   const [radio, setRadio] = useState<string | null>("morning");
   const [yesno, setYesno] = useState<"yes" | "no" | null>(null);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">type=&quot;checkbox&quot;</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="checkbox">
           <Toggle
             type="checkbox"
             checked={checkbox}
@@ -30,7 +30,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">type=&quot;radio&quot;</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="radio">
           {(["morning", "afternoon"] as const).map((slot) => (
             <Toggle
               key={slot}
@@ -48,7 +48,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">type=&quot;yes&quot; / &quot;no&quot;</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="yesno">
           <Toggle type="yes" checked={yesno === "yes"} onCheckedChange={() => setYesno("yes")}>
             Yes, contact me
           </Toggle>
@@ -59,7 +59,7 @@ export function OursPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="states">
           <Toggle type="checkbox" disabled>Disabled</Toggle>
           <Toggle type="checkbox" disabled checked>Disabled checked</Toggle>
           <Toggle type="checkbox" error>Error state</Toggle>
@@ -75,10 +75,10 @@ export function LifeSGPane() {
   const [radio, setRadio] = useState<string | null>("morning");
   const [yesno, setYesno] = useState<"yes" | "no" | null>(null);
   return (
-    <div className="flex flex-col gap-8" data-token="default">
+    <div className="flex flex-col gap-8">
       <section>
         <code className="text-xs text-muted-foreground">type=&quot;checkbox&quot;</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="checkbox">
           <LifeSGToggle
             type="checkbox"
             checked={checkbox}
@@ -98,7 +98,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">type=&quot;radio&quot;</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="radio">
           {(["morning", "afternoon"] as const).map((slot) => (
             <LifeSGToggle
               key={slot}
@@ -115,7 +115,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">type=&quot;yes&quot; / &quot;no&quot;</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="yesno">
           <LifeSGToggle type="yes" checked={yesno === "yes"} onChange={() => setYesno("yes")}>
             Yes, contact me
           </LifeSGToggle>
@@ -126,7 +126,7 @@ export function LifeSGPane() {
       </section>
       <section>
         <code className="text-xs text-muted-foreground">states</code>
-        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl">
+        <div className="mt-3 grid grid-cols-2 gap-3 max-w-2xl" data-token="states">
           <LifeSGToggle type="checkbox" disabled>Disabled</LifeSGToggle>
           <LifeSGToggle type="checkbox" disabled checked>Disabled checked</LifeSGToggle>
           <LifeSGToggle type="checkbox" error>Error state</LifeSGToggle>

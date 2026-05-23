@@ -79,7 +79,7 @@ function LifeSGDemo() {
 
 export function OursPane() {
   return (
-    <div className="flex flex-col gap-4" data-token="default">
+    <div className="flex flex-col gap-4" data-token="modal-trigger">
       <p className="text-xs text-muted-foreground">
         Click to open. <kbd>Esc</kbd>, backdrop click, or close-button all dismiss.
       </p>
@@ -90,7 +90,7 @@ export function OursPane() {
 
 export function LifeSGPane() {
   return (
-    <div className="flex flex-col gap-4" data-token="default">
+    <div className="flex flex-col gap-4" data-token="modal-trigger">
       <p className="text-xs text-muted-foreground">
         Click to open. Backdrop click dismisses.
       </p>
