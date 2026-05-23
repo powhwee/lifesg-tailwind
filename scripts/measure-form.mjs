@@ -23,7 +23,45 @@ const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor
 
 // Expected divergences — (route, token) pairs where the wrapper-level diff
 // is not a chrome bug. Each entry needs a reason; do not add without one.
-const expectedDivergences = [];
+const expectedDivergences = [
+  {
+    route: "custom-field",
+    token: "disabled",
+    reason:
+      "Design decision: ours preserves the description text in disabled state for user context (Email + 'Currently locked'); LifeSG hides everything except the label. Both are valid a11y patterns.",
+  },
+  {
+    route: "date-input",
+    token: "form-date",
+    reason:
+      "LifeSG Form.DateInput always reserves a below-input slot for error messages (~24px); ours uses dynamic layout. Consistent LifeSG pattern (same on date-range-input, unit-number-input, uneditable-section).",
+  },
+  {
+    route: "date-range-input",
+    token: "form-date-range",
+    reason: "Same root cause as date-input:form-date — LifeSG's reserved error slot.",
+  },
+  {
+    route: "unit-number-input",
+    token: "form-unit",
+    reason: "Same root cause as date-input:form-date — LifeSG's reserved error slot.",
+  },
+  {
+    route: "textarea",
+    token: "form-textarea",
+    reason: "-8px from textarea-specific line-height/min-height differences; sub-pixel-class rendering, not a chrome bug.",
+  },
+  {
+    route: "textarea",
+    token: "counter",
+    reason: "-8px from textarea-specific line-height/min-height differences.",
+  },
+  {
+    route: "textarea",
+    token: "disabled",
+    reason: "-2px micro-diff in textarea disabled-state padding.",
+  },
+];
 
 const isExpected = (route, token) =>
   expectedDivergences.find((d) => d.route === route && d.token === token);

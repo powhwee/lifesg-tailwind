@@ -116,6 +116,7 @@ function OtpInput({
       {!otpOnly && (
         <div className="mt-5 mb-8 flex flex-col gap-3">
           <Button
+            size="sm"
             className="w-full"
             {...actionButtonProps}
             onClick={handleClick}

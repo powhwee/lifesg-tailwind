@@ -43,6 +43,7 @@ function FeedbackRating({
         <p className="text-center text-lg font-semibold text-feedback-rating-text">{description}</p>
       )}
 
+      <span className="sr-only">Minimum, 1 star. Maximum, 5 stars.</span>
       <div role="radiogroup" aria-label="Rating" className="flex items-center gap-2">
         {[1, 2, 3, 4, 5].map((value) => {
           const isActive = value <= rating;

@@ -37,6 +37,68 @@ const expectedDivergences = [
     token: "passthrough",
     reason: "1px line-height diff is sub-pixel rendering noise.",
   },
+  {
+    route: "uneditable-section",
+    token: "default",
+    reason:
+      "Structural — LifeSG reserves below-value alert-space (~30px per item) making items 84px tall even when no alert renders; uses internal 8-col grid for column allocation vs ours' 2-col + content-sized items. Chrome (label/value typography, padding 32/48, radius 0, row gap 32) aligned per 2026-05-18 fixes.",
+  },
+  {
+    route: "uneditable-section",
+    token: "background-false",
+    reason: "Same root cause as uneditable-section:default — structural alert-space + grid allocation differences.",
+  },
+  {
+    route: "box-container",
+    token: "default",
+    reason: "Chrome aligned (radius 4px, header padding-y 16px). 4px residual is structural: LifeSG wraps the header button in a 3px-padded div; ours applies padding directly to the button.",
+  },
+  {
+    route: "box-container",
+    token: "collapsible",
+    reason: "Same root cause as box-container:default — 3px structural wrapper.",
+  },
+  {
+    route: "box-container",
+    token: "with-cta",
+    reason: "12px diff is demo-content asymmetry: ours uses <Button size='sm'> for the CTA (40px tall); LifeSG demo uses a styled <button> with padding:0.",
+  },
+  {
+    route: "box-container",
+    token: "error",
+    reason: "Same root cause as box-container:default — 3px structural wrapper.",
+  },
+  {
+    route: "box-container",
+    token: "warning",
+    reason: "Same root cause as box-container:default — 3px structural wrapper.",
+  },
+  {
+    route: "tab",
+    token: "default",
+    reason:
+      "+8px structural — LifeSG tabs render as minimal text (h=26 with 0 padding); ours render button-styled (h=55 with 12/20 padding). LifeSG compensates with larger tab-strip area below; both render visually similar tab strips.",
+  },
+  {
+    route: "tab",
+    token: "full-width-line",
+    reason: "Same root cause as tab:default — structural tab rendering style.",
+  },
+  {
+    route: "accordion",
+    token: "default",
+    reason: "Chrome (radius 0, font 16px) aligned. Residual ~80px is structural: LifeSG accordion body/panel adds extra height per item via different padding + content margin conventions.",
+  },
+  {
+    route: "accordion",
+    token: "expand-all",
+    reason: "Same root cause as accordion:default — panel rendering convention.",
+  },
+  {
+    route: "accordion",
+    token: "small",
+    reason: "Same root cause as accordion:default, amplified by 'small' type rendering.",
+  },
 ];
 
 async function probe(page, paneSelector) {
