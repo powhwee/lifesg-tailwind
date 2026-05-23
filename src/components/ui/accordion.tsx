@@ -117,11 +117,18 @@ function AccordionRoot({
               <Accordion.Trigger
                 className={cn(
                   "group w-full flex items-center gap-3 px-accordion-x text-left cursor-pointer hover:bg-lifesg-bg-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lifesg-border-focus",
-                  small ? "py-4 text-sm" : "py-6 text-base",
-                  "font-semibold text-lifesg-text"
+                  small ? "py-4" : "py-6",
+                  "text-lifesg-text"
                 )}
               >
-                <span className="flex-1 min-w-0">{item.props.title}</span>
+                <span
+                  className={cn(
+                    "flex-1 min-w-0 font-bold",
+                    small ? "text-base leading-6" : "text-typography-heading-sm leading-typography-heading-sm"
+                  )}
+                >
+                  {item.props.title}
+                </span>
                 <ChevronDown
                   aria-hidden
                   className={cn(

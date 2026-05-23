@@ -319,6 +319,7 @@
   --color-local-nav-rail-selected:           var(--local-nav-rail-selected);
 
   /* L3 — table */
+  --color-table-border:                      var(--table-border);
   --color-table-head-bg:                     var(--table-head-bg);
   --color-table-head-text:                   var(--table-head-text);
   --color-table-row-bg-hover:                var(--table-row-bg-hover);
