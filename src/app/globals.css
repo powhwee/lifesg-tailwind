@@ -349,7 +349,7 @@
   /* L3 — card */
   --color-card-bg: var(--card-bg);
   --color-card-border: var(--card-border);
-  --color-card-shadow: var(--card-shadow);
+  --shadow-card-shadow: var(--card-shadow);
   --color-card-text: var(--card-text);
   --radius-card: var(--card-radius);
   --spacing-card-padding-x: var(--card-padding-x);
@@ -361,7 +361,7 @@
   /* L3 — drawer */
   --color-drawer-bg: var(--drawer-bg);
   --color-drawer-overlay: var(--drawer-overlay);
-  --color-drawer-shadow: var(--drawer-shadow);
+  --shadow-drawer-shadow: var(--drawer-shadow);
   --spacing-drawer-height-side: var(--drawer-height-side);
   --spacing-drawer-width-side: var(--drawer-width-side);
 
@@ -443,7 +443,7 @@
   /* L3 — modal */
   --color-modal-backdrop: var(--modal-backdrop);
   --color-modal-box-bg: var(--modal-box-bg);
-  --color-modal-box-shadow: var(--modal-box-shadow);
+  --shadow-modal-box-shadow: var(--modal-box-shadow);
   --radius-modal-box: var(--modal-box-radius);
   --spacing-modal-box-padding: var(--modal-box-padding);
 
@@ -466,7 +466,7 @@
   /* L3 — popover */
   --color-popover-bg: var(--popover-bg);
   --color-popover-border: var(--popover-border);
-  --color-popover-shadow: var(--popover-shadow);
+  --shadow-popover-shadow: var(--popover-shadow);
   --radius-popover: var(--popover-radius);
 
   /* L3 — sidenav */
