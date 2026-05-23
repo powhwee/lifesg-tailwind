@@ -57,7 +57,7 @@ function TableHeaderCell({ className, ...props }: React.ThHTMLAttributes<HTMLTab
       data-slot="table-header-cell"
       scope={props.scope ?? "col"}
       className={cn(
-        "text-left font-bold px-table-cell-x first:pl-table-cell-x-first py-table-head-y text-table-head-text h-table-head-row-h",
+        "text-left font-bold text-component-header-compact leading-component-header-compact px-table-cell-x first:pl-table-cell-x-first py-table-head-y text-table-head-text h-table-head-row-h",
         className
       )}
       {...props}

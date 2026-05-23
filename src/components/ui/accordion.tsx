@@ -43,7 +43,7 @@ function isAccordionItem(node: React.ReactNode): node is React.ReactElement<Acco
 function AccordionRoot({
   children,
   title,
-  enableExpandAll = false,
+  enableExpandAll = true,
   initialDisplay,
   headingLevel = 3,
   onExpandCollapseChange,
@@ -87,17 +87,17 @@ function AccordionRoot({
       className={cn("flex flex-col rounded-accordion overflow-hidden border border-accordion-border", className)}
     >
       {(title || enableExpandAll) && (
-        <div className="flex items-center justify-between gap-3 px-accordion-x py-3 border-b border-accordion-border bg-lifesg-bg">
+        <div className="flex items-center gap-3 px-accordion-x py-3 border-b border-accordion-border bg-lifesg-bg">
           {title && (
-            <div className="text-base font-semibold text-lifesg-text">{title}</div>
+            <div className="text-component-header leading-component-header font-bold text-lifesg-text">{title}</div>
           )}
           {enableExpandAll && (
             <button
               type="button"
               onClick={handleToggleAll}
-              className="text-sm font-semibold text-lifesg-text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lifesg-border-focus cursor-pointer"
+              className="ml-auto text-component-body-compact leading-component-body-compact font-semibold text-lifesg-text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lifesg-border-focus cursor-pointer"
             >
-              {allExpanded ? "Collapse all" : "Expand all"}
+              {allExpanded ? "Hide all" : "Show all"}
             </button>
           )}
         </div>
@@ -124,7 +124,9 @@ function AccordionRoot({
                 <span
                   className={cn(
                     "flex-1 min-w-0 font-bold",
-                    small ? "text-base leading-6" : "text-typography-heading-sm leading-typography-heading-sm"
+                    small
+                      ? "text-component-header-compact leading-component-header-compact"
+                      : "text-component-header leading-component-header"
                   )}
                 >
                   {item.props.title}
@@ -143,7 +145,7 @@ function AccordionRoot({
               // @base-ui Accordion — not a design token, stays as arbitrary value.
               className="data-[ending-style]:h-0 data-[starting-style]:h-0 h-accordion-panel-height overflow-hidden transition-[height] duration-200"
             >
-              <div className={cn("px-accordion-x", small ? "pb-4 text-sm" : "pb-6 text-sm")}>
+              <div className={cn("px-accordion-x", small ? "pb-4 text-component-body-compact leading-component-body-compact" : "pb-6 text-component-body leading-component-body")}>
                 {item.props.children}
               </div>
             </Accordion.Panel>

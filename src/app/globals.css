@@ -528,6 +528,19 @@
   --text-typography-heading-xl: var(--typography-heading-xl-size);
   --text-typography-heading-xs: var(--typography-heading-xs-size);
   --text-typography-heading-xxl: var(--typography-heading-xxl-size);
+
+  /* L3 — component header convention (see core-tokens.css) */
+  --text-component-header: var(--component-header-size);
+  --leading-component-header: var(--component-header-lh);
+  --text-component-header-compact: var(--component-header-compact-size);
+  --leading-component-header-compact: var(--component-header-compact-lh);
+
+  /* L3 — component body convention (see core-tokens.css) */
+  --text-component-body: var(--component-body-size);
+  --leading-component-body: var(--component-body-lh);
+  --text-component-body-compact: var(--component-body-compact-size);
+  --leading-component-body-compact: var(--component-body-compact-lh);
+
   --tracking-typography-body-bl: var(--typography-body-bl-ls);
   --tracking-typography-body-md: var(--typography-body-md-ls);
   --tracking-typography-body-sm: var(--typography-body-sm-ls);

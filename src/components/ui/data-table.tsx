@@ -190,7 +190,7 @@ export function DataTable({
                     scope="col"
                     style={h.style}
                     className={cn(
-                      "text-left font-bold px-data-table-cell-x first:pl-data-table-cell-x-first py-data-table-head-y text-lifesg-text",
+                      "text-left font-bold text-component-header-compact leading-component-header-compact px-data-table-cell-x first:pl-data-table-cell-x-first py-data-table-head-y text-lifesg-text",
                       clickable && "cursor-pointer select-none hover:bg-lifesg-bg-hover"
                     )}
                     onClick={clickable ? () => onHeaderClick?.(h.fieldKey) : undefined}

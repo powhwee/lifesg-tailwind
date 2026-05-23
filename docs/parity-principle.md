@@ -81,6 +81,55 @@ Tied to the parity principle but worth stating outright: navigation components i
 
 Other categories (form, content, S&I, overlays) follow the same convention — opinionated LifeSG-like defaults, tokenized, overridable at three scopes.
 
+## Convention: component header typography
+
+LifeSG treats "the title at the top of a widget" as heading-prominent: HeadingSM (22/28/bold) for primary headers like BoxContainer header, Accordion title, Card title, Modal title; HeadingXS (18/26/bold) for compact contexts like Table head cells. Shadcn-style minimal `text-base` titles do not feel like LifeSG.
+
+Two shared L3 tokens in `src/app/core-tokens.css` capture this:
+
+```css
+--component-header-size:         var(--lifesg-font-heading-size-sm);    /* 22px */
+--component-header-lh:           var(--lifesg-font-heading-lh-sm);      /* 28px */
+--component-header-weight:       var(--lifesg-font-weight-bold);
+
+--component-header-compact-size: var(--lifesg-font-heading-size-xs);    /* 18px */
+--component-header-compact-lh:   var(--lifesg-font-heading-lh-xs);      /* 26px */
+```
+
+Registered as `--text-component-header`, `--leading-component-header`, `--text-component-header-compact`, `--leading-component-header-compact` in `@theme inline`.
+
+**How to apply**: any "widget title at the top of a component" should use:
+```tsx
+className="text-component-header leading-component-header font-bold"
+```
+or the `-compact` variants for tighter contexts. **Never reach for raw `text-lg` / `text-xl` on a component header** — that creates the inconsistency we just fixed.
+
+**Currently applied** (2026-05-23 sweep): BoxContainer header, Card title, Accordion title (+ section title bar), Filter header, Table head cell, DataTable head cell. Modal/Drawer titles use base-ui primitives and are styled by consumers.
+
+See `[[component-header-convention]]` memory.
+
+## Convention: component body typography
+
+Parallel to the header convention. Body text inside components (Accordion panel, Card body/description, Filter checkbox label, UneditableSection k/v, etc.) uses two shared tokens:
+
+```css
+--component-body-size:           var(--lifesg-font-body-size-md);    /* 16px */
+--component-body-lh:             var(--lifesg-font-body-lh-md);      /* 24px */
+
+--component-body-compact-size:   var(--lifesg-font-body-size-sm);    /* 14px */
+--component-body-compact-lh:     var(--lifesg-font-body-lh-sm);      /* 26px */
+```
+
+**How to apply**:
+- Primary body text: `text-component-body leading-component-body`
+- Compact/secondary text (descriptions, captions, link-list items): `text-component-body-compact leading-component-body-compact`
+
+**Why this beats Tailwind's `text-sm`**: Tailwind's `text-sm` is 14/20 (14px font, 20px line-height). LifeSG's BodySM is 14/26. Same font-size, different vertical rhythm. Using `text-sm` looks cramped vs LifeSG. The compact token gets the right 26px line-height.
+
+**Currently applied** (2026-05-23 sweep): Accordion panel (primary/compact via small), Card body (primary) + Card description (compact), Filter checkbox label (compact), UneditableSection label/value (primary) + description (compact).
+
+See `[[component-body-convention]]` memory.
+
 ## Implications for the verification system
 
 `measure-*` scripts report computed-style divergences between ours and LifeSG. With this principle:

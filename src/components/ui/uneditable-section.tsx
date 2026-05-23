@@ -30,8 +30,8 @@ function Item({ item }: { item: UneditableSectionItem }) {
         item.displayWidth === "half" ? "lifesg-xl:col-span-1" : "lifesg-xl:col-span-2"
       )}
     >
-      <div className="text-base text-lifesg-text">{item.label}</div>
-      <div className="text-base text-lifesg-text font-semibold">{item.value}</div>
+      <div className="text-component-body leading-component-body text-lifesg-text">{item.label}</div>
+      <div className="text-component-body leading-component-body text-lifesg-text font-semibold">{item.value}</div>
       {item.alert && <div className="mt-1">{item.alert}</div>}
     </li>
   );
@@ -71,7 +71,7 @@ export function UneditableSection({
             </h3>
           )}
           {description && (
-            <p className="text-base text-lifesg-text mt-2">{description}</p>
+            <p className="text-component-body-compact leading-component-body-compact text-lifesg-text mt-2">{description}</p>
           )}
         </header>
       )}

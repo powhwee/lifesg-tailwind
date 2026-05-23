@@ -38,7 +38,7 @@ function FilterRoot({
       )}
     >
       <header className="flex items-center justify-between border-b border-filter-border px-4 py-4">
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-component-header leading-component-header font-bold">{title}</h2>
         <button
           type="button"
           onClick={onClear}
@@ -167,7 +167,7 @@ function FilterCheckbox<T extends FilterCheckboxOption>({
         {visible.map((item) => {
           const v = getValue(item);
           return (
-            <label key={v} className="flex items-center gap-2 cursor-pointer text-sm">
+            <label key={v} className="flex items-center gap-2 cursor-pointer text-component-body-compact leading-component-body-compact">
               <Checkbox
                 displaySize="small"
                 checked={selectedValues.has(v)}

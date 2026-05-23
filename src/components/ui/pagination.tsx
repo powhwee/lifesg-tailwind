@@ -48,7 +48,11 @@ function Pagination({
   totalItems,
   activePage,
   pageSize = 10,
-  pageSizeOptions = [{ value: 10, label: "10" }, { value: 20, label: "20" }, { value: 50, label: "50" }],
+  pageSizeOptions = [
+    { value: 10, label: "10 per page" },
+    { value: 20, label: "20 per page" },
+    { value: 50, label: "50 per page" },
+  ],
   showFirstAndLastNav,
   showPageSizeChanger,
   onPageChange,
@@ -131,7 +135,7 @@ function Pagination({
               return match ? { value: String(match.value), label: match.label } : null;
             })()}
             onSelectOption={(_, v) => onPageSizeChange?.(1, Number(v))}
-            className="h-12 w-20"
+            className="h-input-height w-auto"
           />
         </div>
       )}

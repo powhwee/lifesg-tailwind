@@ -28,7 +28,7 @@ function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElem
   return (
     <h3
       data-slot="card-title"
-      className={cn("text-lg font-semibold leading-snug", className)}
+      className={cn("text-component-header leading-component-header font-bold", className)}
       {...props}
     />
   );
@@ -38,14 +38,14 @@ function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParag
   return (
     <p
       data-slot="card-description"
-      className={cn("text-sm text-lifesg-text-subtle", className)}
+      className={cn("text-component-body-compact leading-component-body-compact text-lifesg-text-subtle", className)}
       {...props}
     />
   );
 }
 
 function CardBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div data-slot="card-body" className={cn("text-sm", className)} {...props} />;
+  return <div data-slot="card-body" className={cn("text-component-body leading-component-body", className)} {...props} />;
 }
 
 function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

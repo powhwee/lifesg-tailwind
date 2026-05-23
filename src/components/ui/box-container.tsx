@@ -62,7 +62,7 @@ export function BoxContainer({
       <section id={id} data-slot="box-container" className={rootClass}>
         <div className="flex items-center gap-3 px-box-container-padding-x py-box-container-header-y">
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <div className="text-lg font-semibold text-lifesg-text truncate">{title}</div>
+            <div className="text-component-header leading-component-header font-bold text-lifesg-text truncate">{title}</div>
           </div>
           <div className="flex items-center gap-2">
             {callToActionComponent}
@@ -94,7 +94,7 @@ export function BoxContainer({
           }
         >
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <div className="text-lg font-semibold text-lifesg-text truncate">{title}</div>
+            <div className="text-component-header leading-component-header font-bold text-lifesg-text truncate">{title}</div>
           </div>
           <div className="flex items-center gap-3">
             {callToActionComponent && (
@@ -117,7 +117,7 @@ export function BoxContainer({
         <div className="flex items-center gap-3 px-box-container-padding-x py-box-container-header-y">
           <div className="flex items-center gap-2 min-w-0 flex-1">
             <StateIcon state={displayState} />
-            <div className="text-lg font-semibold text-lifesg-text truncate">{title}</div>
+            <div className="text-component-header leading-component-header font-bold text-lifesg-text truncate">{title}</div>
           </div>
           <div className="flex items-center gap-3">
             {callToActionComponent}

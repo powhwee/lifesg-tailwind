@@ -5,7 +5,7 @@ import { FeedbackRating } from "@/components/ui/feedback-rating";
 import { FeedbackRating as LifeSGFeedbackRating } from "@lifesg/react-design-system/feedback-rating";
 
 const IMG_SRC =
-  "https://assets.life.gov.sg/react-design-system/img/feedback-rating/star-default.png";
+  "https://assets.life.gov.sg/react-design-system/img/feedback-rating/feedback-rating-banner.png";
 
 export function OursPane() {
   const [rating, setRating] = useState(0);

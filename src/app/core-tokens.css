@@ -44,6 +44,55 @@
   --typography-body-xs-ls:           var(--lifesg-font-body-ls-xs);
 }
 
+/* ═══════════ component-header convention ═══════════
+ *
+ * Shared typography for component headers / titles that sit at the top of a
+ * widget — BoxContainer header, Accordion title, Card title, Modal title,
+ * Drawer title, Table head, Filter header, etc.
+ *
+ * Default matches LifeSG's HeadingSM (22/28/bold) so a developer arriving
+ * from LifeSG sees the familiar heading-prominent treatment everywhere
+ * without per-component judgment.
+ *
+ * Compact variant matches LifeSG's HeadingXS (18/26/bold) for tighter
+ * contexts (small/sub-headers within already-headered widgets).
+ *
+ * Override per-component by passing className with text-* / font-* / leading-*;
+ * override globally by re-binding these tokens in a parent CSS scope.
+ *
+ * Decision captured in docs/parity-principle.md "Component header typography
+ * convention" and [[component-header-convention]] memory.
+ */
+:root {
+  --component-header-size:         var(--lifesg-font-heading-size-sm);    /* 22px */
+  --component-header-lh:           var(--lifesg-font-heading-lh-sm);      /* 28px */
+  --component-header-weight:       var(--lifesg-font-weight-bold);        /* 700 */
+
+  --component-header-compact-size: var(--lifesg-font-heading-size-xs);    /* 18px */
+  --component-header-compact-lh:   var(--lifesg-font-heading-lh-xs);      /* 26px */
+}
+
+/* ═══════════ component-body convention ═══════════
+ *
+ * Parallel to --component-header-*. Shared typography for body text inside
+ * components — Accordion panel body, Card body/description, Filter checkbox
+ * label, UneditableSection label/value, etc.
+ *
+ * Default matches LifeSG's BodyMD (16/24) so component body text feels like
+ * LifeSG everywhere. Compact variant matches LifeSG's BodySM (14/26) for
+ * secondary text like descriptions, hints, link-list-style labels.
+ *
+ * Decision captured in docs/parity-principle.md and
+ * [[component-body-convention]] memory.
+ */
+:root {
+  --component-body-size:           var(--lifesg-font-body-size-md);    /* 16px */
+  --component-body-lh:             var(--lifesg-font-body-lh-md);      /* 24px */
+
+  --component-body-compact-size:   var(--lifesg-font-body-size-sm);    /* 14px */
+  --component-body-compact-lh:     var(--lifesg-font-body-lh-sm);      /* 26px */
+}
+
 /* ═══════════ divider ═══════════ */
 /* Layer 3 — Component tokens for Divider.
  *
