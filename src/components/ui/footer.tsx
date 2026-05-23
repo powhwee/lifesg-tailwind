@@ -75,7 +75,9 @@ function Footer({
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-4 text-sm text-lifesg-text">
+        <hr className="my-0 border-0 border-t border-footer-border" />
+
+        <div className="flex items-center justify-between gap-4 py-5 text-sm text-lifesg-text">
           <ul className="flex items-center gap-x-8 list-none m-0 p-0">
             <li><a className={linkCx} {...disclaimer.privacy}>Privacy Statement</a></li>
             <li><a className={linkCx} {...disclaimer.termsOfUse}>Terms of Use</a></li>

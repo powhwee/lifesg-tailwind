@@ -5,6 +5,12 @@ import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+/** LifeSG's default star illustration. Defaults match LifeSG's
+ * FeedbackRating decoration so a LifeSG developer sees the familiar visual
+ * without passing imgSrc. Override with a custom asset for branded usage. */
+const DEFAULT_STAR_IMG_SRC =
+  "https://assets.life.gov.sg/react-design-system/img/feedback-rating/star-default.png";
+
 export interface FeedbackRatingProps {
   imgSrc?: string;
   description?: string;
@@ -17,7 +23,7 @@ export interface FeedbackRatingProps {
 }
 
 function FeedbackRating({
-  imgSrc,
+  imgSrc = DEFAULT_STAR_IMG_SRC,
   description,
   buttonLabel = "Submit",
   className,
@@ -36,7 +42,7 @@ function FeedbackRating({
     >
       {imgSrc && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={imgSrc} alt="" className="h-24 w-auto object-contain" />
+        <img src={imgSrc} alt="" className="h-36 w-auto object-contain" />
       )}
 
       {description && (

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 const textareaCx =
-  "min-h-[6rem] w-full rounded-input border border-input-border bg-input-bg px-input-padding-x py-2 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder outline-none transition-colors hover:border-input-border-hover focus-visible:border-input-border-focus focus-visible:ring-3 focus-visible:ring-input-ring-focus disabled:cursor-not-allowed disabled:bg-input-bg-disabled disabled:text-input-text-disabled disabled:border-input-border-disabled aria-invalid:border-input-border-error aria-invalid:ring-3 aria-invalid:ring-input-ring-error read-only:bg-input-bg-readonly resize-y";
+  "min-h-[6rem] w-full rounded-input border border-input-border bg-input-bg px-input-padding-x py-3 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder outline-none transition-colors hover:border-input-border-hover focus-visible:border-input-border-focus focus-visible:ring-3 focus-visible:ring-input-ring-focus disabled:cursor-not-allowed disabled:bg-input-bg-disabled disabled:text-input-text-disabled disabled:border-input-border-disabled aria-invalid:border-input-border-error aria-invalid:ring-3 aria-invalid:ring-input-ring-error read-only:bg-input-bg-readonly resize-y";
 
 interface TextareaOwnProps {
   showCounter?: boolean;

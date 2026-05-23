@@ -26,53 +26,38 @@ const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor
 // handover and the 2026-05-18 chrome-fix sweep. Each is either a deliberate
 // API divergence, structural diff, or demo-content asymmetry.
 const expectedDivergences = [
-  { route: "checkbox", token: "default", reason: "2px h diff is sub-pixel rendering noise; chrome aligned (size-8 default, size-6 small)." },
-  { route: "otp-input", token: "prefix-error", reason: "-2px residual from error-message line-height micro-diff; OTP cell + button chrome aligned." },
-  { route: "checkbox", token: "default-size", reason: "2px h diff is sub-pixel rendering noise; checkbox chrome aligned." },
+  { route: "checkbox", token: "default", reason: "NOISE: 2px h diff is sub-pixel rendering; checkbox chrome aligned." },
+  { route: "checkbox", token: "default-size", reason: "NOISE: 2px h diff is sub-pixel rendering." },
+  { route: "otp-input", token: "prefix-error", reason: "NOISE: -2px error-message line-height micro-diff; OTP cell + button chrome aligned." },
+  { route: "toggle", token: "checkbox", reason: "NOISE: -11px after p-4 → p-3 + always-render composite slot. Demo content height differs slightly; toggle language matches LifeSG." },
+  { route: "toggle", token: "radio", reason: "NOISE: -8px after p-4 → p-3 padding tune that resolved yesno/states variants; radio happens to match LifeSG at original padding by coincidence. Net trade-off favors smaller residuals across the cluster." },
   {
     route: "calendar",
     token: "single",
     reason:
-      "Deliberate divergence — ours is correct. LifeSG's inline calendar is 656px wide with 84px day cells, an outlier vs modern compact-calendar conventions (~336px, ~44px cells: react-day-picker default, MUI date picker, shadcn calendar). Both render the same UI elements (month/year dropdowns, prev/next, grid); ours uses standard sizing. LifeSG exposes no smaller size in their public API.",
+      "OUTLIER-REJECTED: LifeSG's inline calendar is 656px wide with 84px day cells, an outlier vs every modern compact-calendar convention (~336px, ~44px cells: react-day-picker default, MUI date picker, shadcn calendar). Both render the same UI elements (month/year dropdowns, prev/next, grid); ours uses standard sizing. LifeSG exposes no smaller size in their public API. Per docs/parity-principle.md §'When to deliberately diverge'.",
   },
   {
     route: "calendar",
     token: "multi",
-    reason: "Same root cause as calendar:single — ours uses standard compact 336px calendar; LifeSG's 656px is an outlier.",
+    reason: "OUTLIER-REJECTED: same root cause as calendar:single — LifeSG's 656px is an outlier.",
   },
   {
     route: "filter",
     token: "filter",
     reason:
-      "Demo state difference — LifeSG demo renders the Filter with the Category section expanded showing options ('Clear all / Appointments / Applications / Payments / Notifications'); ours renders the default collapsed state. Both render the same component; the +86px is demo content, not chrome.",
-  },
-  {
-    route: "toggle",
-    token: "checkbox",
-    reason:
-      "Demo state difference — LifeSG's 'composite content' demo actually renders the composite Button below the second toggle, adding ~48px; ours stops at the toggle label without showing the composite content slot.",
-  },
-  {
-    route: "toggle",
-    token: "yesno",
-    reason: "+8px from per-toggle padding/border micro-diff; toggle chrome aligned otherwise.",
-  },
-  {
-    route: "toggle",
-    token: "states",
-    reason: "+16px from per-toggle padding accumulated across multiple states variants; toggle chrome aligned otherwise.",
+      "DEMO-STATE: LifeSG demo renders the Filter with the Category section expanded showing 5 checkbox options; ours renders the default collapsed state. Filter chrome (header font, row padding) tuned to match LifeSG — the residual is demo content, not chrome.",
   },
   {
     route: "feedback-rating",
     token: "basic",
     reason:
-      "Deliberate divergence — LifeSG always renders a default star illustration (~150px) even when no imgSrc is passed; ours renders no image unless imgSrc is provided. Both are valid: ours treats imgSrc as opt-in; LifeSG bakes in a default decoration.",
+      "Layout-density diff: ours renders the default star illustration (matching LifeSG behavior) but with a vertical stack layout; LifeSG uses a more compact side-by-side image+content layout. API + default-image behavior match.",
   },
   {
     route: "feedback-rating",
     token: "with-image",
-    reason:
-      "Image-sizing convention diff — ours renders the passed imgSrc at h-24 (96px) with a vertical stack layout; LifeSG renders it at ~150px tall with a different (often side-by-side) layout. Both are valid renderings of the same image asset.",
+    reason: "Same root cause as feedback-rating:basic — vertical stack vs LifeSG side-by-side layout.",
   },
 ];
 

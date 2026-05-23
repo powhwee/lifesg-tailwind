@@ -25,79 +25,58 @@ const expectedDivergences = [
     route: "table",
     token: "default",
     reason:
-      "1400px viewport allocates 'Date' column 4px narrower on LifeSG, causing '12 May 2026' to wrap to 3 lines vs ours' 2; ~100px row-height delta is text-wrap noise, not chrome. Chrome (cell padding, head row min-height) verified aligned at 1500px screenshot viewport.",
+      "NOISE: 1400px viewport allocates 'Date' column 4px narrower on LifeSG, causing '12 May 2026' to wrap to 3 lines vs ours' 2; ~100px row-height delta is text-wrap, not chrome. Chrome verified aligned at 1500px screenshot viewport.",
   },
   {
     route: "card",
     token: "default",
-    reason: "2px height diff is sub-pixel rendering noise within normal browser-paint tolerance.",
+    reason: "NOISE: 2px h diff is sub-pixel rendering within normal browser-paint tolerance.",
   },
   {
     route: "card",
     token: "passthrough",
-    reason: "1px line-height diff is sub-pixel rendering noise.",
-  },
-  {
-    route: "uneditable-section",
-    token: "default",
-    reason:
-      "Structural — LifeSG reserves below-value alert-space (~30px per item) making items 84px tall even when no alert renders; uses internal 8-col grid for column allocation vs ours' 2-col + content-sized items. Chrome (label/value typography, padding 32/48, radius 0, row gap 32) aligned per 2026-05-18 fixes.",
-  },
-  {
-    route: "uneditable-section",
-    token: "background-false",
-    reason: "Same root cause as uneditable-section:default — structural alert-space + grid allocation differences.",
-  },
-  {
-    route: "box-container",
-    token: "default",
-    reason: "Chrome aligned (radius 4px, header padding-y 16px). 4px residual is structural: LifeSG wraps the header button in a 3px-padded div; ours applies padding directly to the button.",
-  },
-  {
-    route: "box-container",
-    token: "collapsible",
-    reason: "Same root cause as box-container:default — 3px structural wrapper.",
+    reason: "NOISE: 1px line-height diff is sub-pixel rendering.",
   },
   {
     route: "box-container",
     token: "with-cta",
-    reason: "12px diff is demo-content asymmetry: ours uses <Button size='sm'> for the CTA (40px tall); LifeSG demo uses a styled <button> with padding:0.",
+    reason: "DEMO-STATE: ours uses <Button size='sm'> (40px); LifeSG demo uses a styled <button> with padding:0. Demo content asymmetry.",
   },
   {
-    route: "box-container",
-    token: "error",
-    reason: "Same root cause as box-container:default — 3px structural wrapper.",
+    route: "uneditable-section",
+    token: "default",
+    reason:
+      "STRUCTURAL: LifeSG uses an 8-col grid; ours uses a 2-col grid. With wider columns LifeSG fits values on single lines; ours wraps long values to 2 lines (+24px per wrapped item). Chrome (typography, padding 32/48, radius 0, gap 32) aligned. Both render the same label/value concept; grid decomposition differs.",
   },
   {
-    route: "box-container",
-    token: "warning",
-    reason: "Same root cause as box-container:default — 3px structural wrapper.",
+    route: "uneditable-section",
+    token: "background-false",
+    reason: "STRUCTURAL: same root cause as uneditable-section:default — 2-col vs 8-col grid decomposition.",
   },
   {
     route: "tab",
     token: "default",
-    reason:
-      "+8px structural — LifeSG tabs render as minimal text (h=26 with 0 padding); ours render button-styled (h=55 with 12/20 padding). LifeSG compensates with larger tab-strip area below; both render visually similar tab strips.",
+    reason: "NOISE: -4px residual after --tab-y 12 → 16 + --tab-panel-pt 20 → 0 tune. Matches LifeSG language (similar strip height + flush panel).",
   },
   {
     route: "tab",
     token: "full-width-line",
-    reason: "Same root cause as tab:default — structural tab rendering style.",
+    reason: "NOISE: -3px residual; same root cause as tab:default.",
   },
   {
     route: "accordion",
     token: "default",
-    reason: "Chrome (radius 0, font 16px) aligned. Residual ~80px is structural: LifeSG accordion body/panel adds extra height per item via different padding + content margin conventions.",
+    reason: "NOISE: -10px residual after py-4 → py-6 trigger + pb-4 → pb-6 panel tune; matches LifeSG language. Close enough.",
   },
   {
     route: "accordion",
     token: "expand-all",
-    reason: "Same root cause as accordion:default — panel rendering convention.",
+    reason: "DEMO-STATE: +29 from extra item count being expanded by default; ours and LifeSG handle expand-all differently but render same general look.",
   },
   {
     route: "accordion",
     token: "small",
-    reason: "Same root cause as accordion:default, amplified by 'small' type rendering.",
+    reason: "Deliberate divergence: ours small variant is intentionally more compact than LifeSG's (LifeSG's small at h=321 is barely smaller than its default at h=442). Per parity principle, ours-more-compact is fine when LifeSG's variant is barely differentiated.",
   },
 ];
 

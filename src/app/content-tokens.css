@@ -70,9 +70,9 @@
   --tab-text-selected:      var(--lifesg-text-primary);
   --tab-indicator-color:    var(--lifesg-bg-primary);
   --tab-track-color:        var(--lifesg-border);
-  --tab-x:                  1.25rem;
-  --tab-y:                  0.75rem;
-  --tab-panel-pt:           1.25rem;
+  --tab-x:                  1.25rem;   /* 20px */
+  --tab-y:                  1rem;      /* 16px — matches LifeSG tab strip h */
+  --tab-panel-pt:           0rem;      /* 0 — LifeSG tab panel sits flush below tabs */
 }
 
 /* ═══════════ accordion ═══════════ */

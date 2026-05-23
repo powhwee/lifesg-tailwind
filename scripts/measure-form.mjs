@@ -25,41 +25,14 @@ const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor
 // is not a chrome bug. Each entry needs a reason; do not add without one.
 const expectedDivergences = [
   {
+    route: "textarea",
+    token: "disabled",
+    reason: "NOISE: +6px from py-3 textarea padding that matches LifeSG on form/counter variants; disabled-state has slightly less content in LifeSG. Close enough.",
+  },
+  {
     route: "custom-field",
     token: "disabled",
-    reason:
-      "Design decision: ours preserves the description text in disabled state for user context (Email + 'Currently locked'); LifeSG hides everything except the label. Both are valid a11y patterns.",
-  },
-  {
-    route: "date-input",
-    token: "form-date",
-    reason:
-      "LifeSG Form.DateInput always reserves a below-input slot for error messages (~24px); ours uses dynamic layout. Consistent LifeSG pattern (same on date-range-input, unit-number-input, uneditable-section).",
-  },
-  {
-    route: "date-range-input",
-    token: "form-date-range",
-    reason: "Same root cause as date-input:form-date — LifeSG's reserved error slot.",
-  },
-  {
-    route: "unit-number-input",
-    token: "form-unit",
-    reason: "Same root cause as date-input:form-date — LifeSG's reserved error slot.",
-  },
-  {
-    route: "textarea",
-    token: "form-textarea",
-    reason: "-8px from textarea-specific line-height/min-height differences; sub-pixel-class rendering, not a chrome bug.",
-  },
-  {
-    route: "textarea",
-    token: "counter",
-    reason: "-8px from textarea-specific line-height/min-height differences.",
-  },
-  {
-    route: "textarea",
-    token: "disabled",
-    reason: "-2px micro-diff in textarea disabled-state padding.",
+    reason: "NOISE: -4px from gap-collapse when FieldDescription is hidden on disabled. LifeSG uses 8px gap between label/input when desc hidden; ours uses 4px gap (gap-1 matches with-desc case exactly). API + token match; visual close enough.",
   },
 ];
 

@@ -145,6 +145,7 @@ function FormUnitNumberInput({
       disabled={disabled}
       name={name}
       id={id}
+      reserveErrorSlot
     >
       <UnitNumberInput {...rest} error={!!errorMessage || rest.error} />
     </FormField>

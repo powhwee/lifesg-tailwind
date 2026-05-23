@@ -37,14 +37,14 @@ function FilterRoot({
         className
       )}
     >
-      <header className="flex items-center justify-between border-b border-filter-border px-4 py-3">
-        <h2 className="text-base font-semibold">{title}</h2>
+      <header className="flex items-center justify-between border-b border-filter-border px-4 py-4">
+        <h2 className="text-lg font-semibold">{title}</h2>
         <button
           type="button"
           onClick={onClear}
           disabled={clearButtonDisabled}
           className={cn(
-            "text-sm font-semibold cursor-pointer text-filter-text-link",
+            "text-base font-semibold cursor-pointer text-filter-text-link",
             "hover:underline disabled:opacity-50 disabled:cursor-not-allowed disabled:no-underline outline-none"
           )}
         >
@@ -94,13 +94,13 @@ function FilterItem({
     >
       {collapsible ? (
         <Accordion.Header>
-          <Accordion.Trigger className="group/filter-item flex w-full items-center justify-between gap-2 px-4 py-3 text-left cursor-pointer outline-none focus-visible:bg-filter-bg-hover">
-            <span className="text-sm font-semibold">{title}</span>
+          <Accordion.Trigger className="group/filter-item flex w-full items-center justify-between gap-2 px-4 py-4 text-left cursor-pointer outline-none focus-visible:bg-filter-bg-hover">
+            <span className="text-base font-semibold">{title}</span>
             <ChevronDown className="size-4 transition-transform group-data-[panel-open]/filter-item:rotate-180" />
           </Accordion.Trigger>
         </Accordion.Header>
       ) : (
-        <div className="px-4 py-3 text-sm font-semibold">{title}</div>
+        <div className="px-4 py-4 text-base font-semibold">{title}</div>
       )}
       <Accordion.Panel className="overflow-hidden data-[ending-style]:hidden">
         <div className="px-4 pb-3">{children}</div>

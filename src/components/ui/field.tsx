@@ -36,7 +36,7 @@ function FieldDescription({ className, ...props }: FieldPrimitive.Description.Pr
       data-slot="field-description"
       className={cn(
         "text-field-description leading-field-description text-field-text-description",
-        "data-[disabled]:text-field-text-disabled",
+        "data-[disabled]:hidden",
         className
       )}
       {...props}

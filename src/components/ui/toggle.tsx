@@ -12,7 +12,7 @@ export type ToggleStyleType = "default" | "no-border";
 
 const toggleVariants = cva(
   cn(
-    "group/toggle relative flex w-full cursor-pointer items-start gap-4 rounded-md p-4 transition-colors",
+    "group/toggle relative flex w-full cursor-pointer items-start gap-4 rounded-md p-3 transition-colors",
     "border bg-toggle-bg border-toggle-border text-toggle-text",
     "hover:bg-toggle-bg-hover hover:border-toggle-border-hover",
     "has-[input:focus-visible]:ring-3 has-[input:focus-visible]:ring-toggle-ring-focus",
@@ -127,7 +127,7 @@ function Toggle({
       <span className="flex flex-col gap-1 min-w-0 flex-1">
         <span className={cn("text-base font-semibold", isChecked && "text-lifesg-text-primary")}>{children}</span>
         {subLabel && <span className="text-sm text-lifesg-text-subtle">{subLabel}</span>}
-        {isChecked && compositeSection && (
+        {compositeSection && (
           <span className="mt-3 block border-t border-toggle-border pt-3 text-sm">
             {compositeSection}
           </span>

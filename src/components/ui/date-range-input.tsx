@@ -393,6 +393,7 @@ function FormDateRangeInput({
       disabled={disabled}
       name={name}
       id={id}
+      reserveErrorSlot
     >
       <DateRangeInput {...rest} error={!!errorMessage || rest.error} />
     </FormField>

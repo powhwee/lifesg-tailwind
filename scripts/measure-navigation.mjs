@@ -26,50 +26,47 @@ const expectedDivergences = [
   {
     route: "footer",
     token: "default",
-    reason:
-      "Structural diff — LifeSG renders an HR separator + dedicated bottom section with 100px anchor-padded row; ours uses a compact 40px single-row disclaimer-links design. Both display the same content; ours is more compact (modern footer convention). -45px is structure, not chrome.",
+    reason: "NOISE: -4px residual after adding HR + py-5 bottom section (matches LifeSG structure). Anchor link rendering micro-diff.",
   },
   {
     route: "navbar",
     token: "default",
-    reason:
-      "Demo content diff — ours navbar demo includes Masthead text above the nav items; LifeSG demo renders just the nav items. +9px is demo composition, not chrome.",
+    reason: "DEMO-STATE: ours navbar demo includes Masthead text above the nav items; LifeSG demo renders just the nav items. +9px is demo composition, not chrome.",
   },
   {
     route: "masthead",
     token: "default",
-    reason:
-      "+8px from text-wrap differences at 1400px viewport — LifeSG's web-component renders the icon at a slightly different width, causing the announcement text to reflow over fewer lines.",
+    reason: "NOISE: +8px from text-wrap at 1400px viewport — LifeSG's web-component icon renders at slightly different width, causing announcement text to reflow over fewer lines.",
   },
   {
     route: "masthead",
     token: "stretch",
-    reason: "Same root cause as masthead:default — text-wrap diff at 1400px viewport.",
+    reason: "NOISE: same root cause as masthead:default — text-wrap at 1400px viewport.",
   },
   {
     route: "link-list",
     token: "default",
-    reason: "+4px per-row rendering noise; link-list chrome aligned (per-row padding/font matches).",
+    reason: "NOISE: +4px per-row content rendering (title/desc line-height micro-diff); chrome aligned.",
   },
   {
     route: "link-list",
     token: "small",
-    reason: "-4px per-row noise; link-list small chrome aligned.",
+    reason: "NOISE: -4px per-row content rendering; small variant chrome aligned.",
   },
   {
     route: "link-list",
     token: "max-shown",
-    reason: "+11px noise from per-row spacing + 'View more' row layout micro-diff.",
+    reason: "NOISE: +11px from per-row spacing + 'View more' row layout micro-diff.",
   },
   {
     route: "local-nav",
     token: "menu",
-    reason: "-8px from per-item padding micro-diff; local-nav chrome aligned otherwise.",
+    reason: "NOISE: -8px (2px/item × 4 items) from per-item padding micro-diff; chrome aligned otherwise.",
   },
   {
     route: "local-nav",
     token: "dropdown",
-    reason: "+6px from outer wrapper padding micro-diff; dropdown trigger chrome aligned.",
+    reason: "NOISE: +6px from outer wrapper padding micro-diff; dropdown trigger chrome aligned.",
   },
 ];
 
