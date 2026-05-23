@@ -16,7 +16,7 @@ const routes = [
   ["menu",     "/overlays/menu/default"],
 ];
 
-const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor", "borderRadius", "padding"];
+const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor", "borderRadius", "padding", "border", "borderColor", "borderWidth", "boxShadow", "gap", "margin"];
 
 // Expected divergences — (route, token) pairs where ours and LifeSG render
 // different things by design. Each entry needs a reason; do not add without one.

@@ -23,7 +23,8 @@ const suites = [
 
   // L2 Measurement — do computed styles match between ours and LifeSG?
   { name: "measure-content",              cmd: "node scripts/measure-content.mjs" },
-  { name: "measure-typography",           cmd: "node scripts/measure-typography.mjs" },
+  { name: "measure-navigation",            cmd: "node scripts/measure-navigation.mjs" },
+  { name: "measure-typography",            cmd: "node scripts/measure-typography.mjs" },
   { name: "measure-form",                 cmd: "node scripts/measure-form.mjs" },
   { name: "measure-overlays",             cmd: "node scripts/measure-overlays.mjs" },
   { name: "measure-selection-and-input",  cmd: "node scripts/measure-selection-and-input.mjs" },

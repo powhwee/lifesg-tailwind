@@ -1051,3 +1051,85 @@ This is a load-bearing convention that should be enforced. Options for future:
 3. Make `data-token` validation part of the smoke scripts: each demo must have `data-token` on at least one non-`<code>` element.
 
 The cost of letting this slip is exactly what we paid this session: a passing verification dashboard hiding chrome divergences that were obvious to the eye.
+
+## 2026-05-17 (eve) — Phase 0A: per-widget token relocation + Sidenav component overhaul
+
+### What happened
+
+Previous sessions relocated `data-token` markers in content/core/navigation demos (19 files). This session completed the relocation for the remaining three categories — **form (11 files)**, **selection-and-input (11 files)**, and **overlays (4 files)** — bringing every demo across all five component groups to per-widget measurement granularity. Content and navigation were audited and confirmed already correct.
+
+Additionally, L5 screenshot review revealed the **Sidenav component had 7 structural divergences** from LifeSG that the L2 measure was completely blind to (the `data-token="default"` was on a fixed-height `h-[28rem]` container, so outer dimensions always matched). Fixed the component itself.
+
+### Phase 0A token relocation — pattern applied
+
+Before: `data-token="default"` on the outer `<div className="flex flex-col gap-8">` that wraps all variant sections. The measure script compared one aggregate box per route. Actual per-variant divergences were averaged out or hidden.
+
+After: `data-token="specific-variant"` on the div wrapping each individual component instance. The measure script now compares per-variant boxes, surfacing exact component-level divergences.
+
+**Mismatch count went UP (intended).** Before: 18 wrapper-level mismatches. After: 24 clean matches + 38 specific per-widget divergences. The higher count is correct — we're measuring more things at finer granularity.
+
+| Category | Files changed | Tokens before | Tokens after |
+|---|---|---|---|
+| Form | 11 | 11× `"default"` on stack | 37 per-widget |
+| Selection & Input | 11 | 11× `"default"` on stack | 25 per-widget |
+| Overlays | 4 | 4× `"default"` on stack | Per-section; drawer/menu marked `no-equivalent` |
+| Content | 0 | Already per-variant | No change |
+| Navigation | 0 | Already per-variant | No change |
+
+### Sidenav — component was structurally wrong, not just token-wrong
+
+The measure script reported `sidenav default ✓ match` because the token was on a fixed-height container. L5 screenshot comparison revealed 7 real differences. All fixed:
+
+| Divergence | Before | After (matches LifeSG) |
+|---|---|---|
+| Icon rail background | On outer `<div>` (blue bleeds everywhere) | On `<nav>` only |
+| Selected highlight shape | Full-width rectangle covering icon + label | Rounded pill on icon area only (`rounded-lg`) |
+| Selected-state suppression | Home stays highlighted when Calendar drawer opens | `isOpen \|\| (selected && !drawerIsOpen)` — opening drawer un-highlights other items |
+| Drawer header | "Calendar" title bar + X close button | Removed — content starts immediately |
+| Chevron direction | Collapsed = `-rotate-90` | Expanded = `rotate-180` (up when open) |
+| Rail width / pill / label sizing | Hardcoded Tailwind values | L3 tokens in `navigation-tokens.css` |
+| Token consumption | Inline `style={{ var() }}` | Tailwind utilities via `--spacing-*` / `--text-*` registration |
+
+### The sizing-token enforcement pattern
+
+Initial fix used inline `style={{ width: 'var(--sidenav-rail-width)' }}`. User flagged this as diverging from the established convention. Correct pattern (from Avatar precedent):
+
+1. **L3 token** in `navigation-tokens.css`: `--sidenav-rail-width: 8.5rem;`
+2. **Register in `globals.css`**: `--spacing-sidenav-rail-width: var(--sidenav-rail-width);`
+3. **Use in component**: `w-sidenav-rail-width` (Tailwind utility)
+
+Eight new sizing tokens added: `rail-width`, `rail-pt`, `rail-pb`, `pill-w`, `pill-h`, `icon-size`, `label-size`, `label-line`. All values sourced from `getComputedStyle` probe against LifeSG reference pane — not eyeballed.
+
+### Rules reinforced
+
+1. **Fixed-height demo containers mask real divergences.** Sidenav's `h-[28rem]` harness box caused `✓ match` on the outer dimensions while hiding 7 structural bugs inside. Per-widget tokens must be on the component itself, not the demo harness.
+
+2. **Probe before fixing visually.** This session's sidenav started with an incorrect `w-[5.5rem]` rail width (eyeballed from the screenshot). `getComputedStyle` probe showed LifeSG is actually 136px (8.5rem). The eyeball was 48px wrong. Always probe.
+
+3. **Sizing tokens follow the same convention as color tokens.** Colors → `--color-*` prefix → `bg-*`, `text-*` utilities. Sizing → `--spacing-*` prefix → `w-*`, `h-*`, `p-*`, `size-*` utilities. Font size → `--text-*` prefix → `text-*` utility. No inline `style={{}}`.
+
+### Verify-all baseline after all changes
+
+```
+RESULTS: 7 passed, 6 failed, 13 total
+  smoke-content                    ✓ PASS
+  smoke-navigation                 ✓ PASS
+  smoke-form                       ✗ FAIL  ← pre-existing
+  smoke-overlays                   ✗ FAIL  ← pre-existing
+  smoke-selection-and-input        ✓ PASS
+  measure-content                  ✗ FAIL  ← 12 mismatches, 3 expected
+  measure-navigation               ✗ FAIL  ← navbar h:295≠286, footer h:346≠391
+  measure-typography               ✓ PASS
+  measure-form                     ✗ FAIL  ← 22 per-widget mismatches
+  measure-overlays                 ✓ PASS
+  measure-selection-and-input      ✗ FAIL  ← 16 per-widget mismatches
+  behavioral-content               ✓ PASS
+  screenshot-all                   ✓ PASS
+```
+
+### Outstanding for next session
+
+- **Phase 1 root-cause fixes.** The 38 per-widget divergences collapse into a few systematic patterns: form wrapper spacing (+4px), input height (+2px), accordion/box-container/tab heights, and navigation navbar/footer deltas. These are now cleanly identified and ready for targeted L3 token fixes.
+- **Sidenav visual verification.** Drawer interaction (clicking Calendar/Documents) should be tested manually to confirm behavioural parity post-overhaul.
+- **L5 screenshot refresh.** Multiple component changes have shifted rendering.
+

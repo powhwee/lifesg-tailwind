@@ -13,7 +13,7 @@ const routes = [
   ["accordion",           "/content/accordion/default"],
 ];
 
-const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor", "borderRadius", "padding"];
+const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor", "borderRadius", "padding", "border", "borderColor", "borderWidth", "boxShadow", "gap", "margin"];
 
 // Expected divergences — known structural noise at this script's viewport that
 // is not a chrome bug. Each entry needs a reason; do not add without one.
@@ -28,17 +28,6 @@ const expectedDivergences = [
       "1400px viewport allocates 'Date' column 4px narrower on LifeSG, causing '12 May 2026' to wrap to 3 lines vs ours' 2; ~100px row-height delta is text-wrap noise, not chrome. Chrome (cell padding, head row min-height) verified aligned at 1500px screenshot viewport.",
   },
   {
-    route: "uneditable-section",
-    token: "default",
-    reason:
-      "Chrome (label font 16px regular, value 16px semibold, padding 32px vertical + 48px horizontal, radius 0, row gap 32px) aligned. Residual h diff is structural: LifeSG (a) reserves below-value alert-space, making items 84px tall instead of 52px even with no alert, and (b) uses an internal 8-column grid for column-width allocation. Ours uses 2-col grid + content-sized items.",
-  },
-  {
-    route: "uneditable-section",
-    token: "background-false",
-    reason: "Same root cause as uneditable-section:default — structural alert-space reservation in LifeSG.",
-  },
-  {
     route: "card",
     token: "default",
     reason: "2px height diff is sub-pixel rendering noise within normal browser-paint tolerance.",
@@ -47,56 +36,6 @@ const expectedDivergences = [
     route: "card",
     token: "passthrough",
     reason: "1px line-height diff is sub-pixel rendering noise.",
-  },
-  {
-    route: "tab",
-    token: "default",
-    reason: "Chrome (font, line-height) aligned. 8px residual h diff is structural: LifeSG tabs render as minimal text (h=26 with 0 padding), ours render as button-styled (h=55 with 12/20 padding); LifeSG compensates with larger tab-strip area below tabs. Both render visually similar tab strips.",
-  },
-  {
-    route: "tab",
-    token: "full-width-line",
-    reason: "Same root cause as tab:default — structural tab rendering style.",
-  },
-  {
-    route: "accordion",
-    token: "default",
-    reason: "Chrome (radius 0, font 16px aligned). Residual ~80px h diff is structural: LifeSG accordion body/panel content rendering adds height per item; deeper investigation needed into LifeSG's panel padding + content margin.",
-  },
-  {
-    route: "accordion",
-    token: "expand-all",
-    reason: "Same root cause as accordion:default.",
-  },
-  {
-    route: "accordion",
-    token: "small",
-    reason: "Same root cause as accordion:default, amplified by 'small' type rendering.",
-  },
-  {
-    route: "box-container",
-    token: "default",
-    reason: "Chrome (radius 4px, header padding-y 16px) aligned. 4px residual is structural: LifeSG wraps header button in a 3px-padded div; ours applies padding directly to the button.",
-  },
-  {
-    route: "box-container",
-    token: "collapsible",
-    reason: "Same root cause as box-container:default.",
-  },
-  {
-    route: "box-container",
-    token: "with-cta",
-    reason: "Chrome aligned. 12px residual is demo-content asymmetry: ours uses <Button size='sm'> for the CTA (40px tall), LifeSG demo uses a styled <button> with padding:0. Not a chrome bug.",
-  },
-  {
-    route: "box-container",
-    token: "error",
-    reason: "Same root cause as box-container:default.",
-  },
-  {
-    route: "box-container",
-    token: "warning",
-    reason: "Same root cause as box-container:default.",
   },
 ];
 

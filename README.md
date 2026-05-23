@@ -181,15 +181,20 @@ Each layer catches what the layer above cannot. All automated layers propagate e
 VERIFY-ALL: Running all verification suites
   smoke-content                  ✓ PASS
   smoke-navigation               ✓ PASS
-  smoke-form                     ✓ PASS
-  smoke-overlays                 ✓ PASS
+  smoke-form                     ✗ FAIL  ← LifeSG library console warning (noise)
+  smoke-overlays                 ✗ FAIL  ← LifeSG modal portal heuristic (noise)
   smoke-selection-and-input      ✓ PASS
   measure-content                ✓ PASS
+  measure-form                   ✓ PASS
+  measure-overlays               ✓ PASS
+  measure-selection-and-input    ✓ PASS
   measure-typography             ✓ PASS
   behavioral-content             ✓ PASS
   screenshot-all                 ✓ PASS
-  RESULTS: 9 passed, 0 failed, 9 total
+  RESULTS: 10 passed, 2 failed, 12 total
 ```
+
+The two failures are pre-existing LifeSG library noise, not real defects — left unfixed to avoid masking future regressions.
 
 ### How the verification system evolved
 
@@ -201,6 +206,9 @@ The system didn't ship complete on day one. Each gap below was identified during
 | **Fixed `waitForTimeout` sleeps caused flaky results.** Most scripts used 500–1200ms fixed sleeps for styled-components injection. Under CPU load, these were insufficient, causing false mismatches on slow machines and CI. | Replaced fixed sleeps with deterministic `data-testid` locator waits (`waitFor({ state: 'visible' })`). A small fallback timeout (200–300ms) remains for styled-components paint, but the primary wait is now event-driven. |
 | **Behavioural tests covered only Tab and Accordion.** Modal open/close lifecycle, Drawer focus trap, Select keyboard nav, Checkbox indeterminate state — all shipped with assumed, not proven, behavioural parity. | Added `smoke-overlays.mjs` and `smoke-form.mjs` for mount-level coverage. Keyboard-driven behavioural probes (`modal-test.mjs`, `probe-tab-kbd.mjs`, `carousel-test.mjs`) extended interaction coverage to overlays and content components. |
 | **Formal Playwright suite covered 6 of 52 components.** The template (render + snapshot + axe) was proven but the coverage was skeletal — large holes in the regression safety net. | Expanded `parity.spec.ts` to cover high-risk components (button, input, select, table, accordion, modal) with the same three-assertion pattern: render both panes, visual snapshot at 1% pixel-diff tolerance, axe-core serious/critical scan. |
+| **Measure scripts counted mismatches but exited 0.** `measure-content.mjs` found a 100px table row-height divergence but silently exited clean. `verify-all` trusted the exit code, so the dashboard showed green while a known divergence hid underneath. | Added `process.exit(mismatches > 0 ? 1 : 0)` to all measure scripts. The table divergence immediately surfaced in `verify-all` as `FAIL` — which is the correct signal. The meta-lesson: a verification system that finds divergences but doesn't propagate failure is worse than no system, because it creates false confidence. |
+| **`data-token` markers were on labels, not widgets.** In 19 of 23 demos, `data-token` was placed on a decorative `<code>` element ("default" text) instead of the actual widget. The measure scripts were comparing two identical 16×50px text labels and reporting `✓ match` while never measuring the real component chrome. | Relocated `data-token` across all 19 demos to mark the widget itself. 14 real chrome divergences immediately surfaced — from trivial (card +2px) to major (UneditableSection h: 324 vs 622). All were fixed or allowlisted with documented reasons. Rule added: `data-token` must go on the widget or its wrapping div, never on decorative labels. |
+| **"Parity test" naming hid a conceptual trap.** `parity.spec.ts` visual snapshots compare the current render against a *previous snapshot of itself* — that's a regression test, not a parity test. A divergent baseline passes forever. | Documented the distinction: *parity* tests compare ours to LifeSG (L2 measure scripts); *regression* tests compare ours to yesterday's ours (L4 visual snapshots). Both are valuable but catch different things. The naming stays for now; the understanding is what matters. |
 | **No mobile/touch testing.** Hover-vs-tap, outside-tap dismissal, swipe-to-close, iOS Safari scroll-lock — all unverified. Touch-device regressions were invisible. | Acknowledged as a gap that surfaces when the first real screen ships to a device. The Drawer and Navbar refactors (Base UI Dialog with scroll lock and focus trap) structurally improved the mobile story, but end-to-end touch testing remains deferred to device-in-hand QA. |
 | **No screen reader testing.** Focus order, ARIA live regions, announcement sequences unverified. Accessibility compliance was structural, not proven. | axe-core scans in `parity.spec.ts` provide static ARIA correctness. Dynamic screen-reader behaviour (announcement sequences, live regions) is deferred to manual QA with VoiceOver/NVDA — the tooling for automated screen-reader assertions doesn't exist at the fidelity needed. |
 
@@ -223,6 +231,6 @@ The system didn't ship complete on day one. Each gap below was identified during
 
 The pilot's purpose is to **replace `@lifesg/react-design-system` with a fully-owned Tailwind + shadcn + Base UI stack** that a 1–2 engineering squad can maintain. It proves viability across three equal pillars:
 
-1. **Parity** — 52 components ported with pixel-level visual parity and keyboard/ARIA behavioural parity, proven by programmatic measurement rather than visual judgment.
+1. **Parity** — 52 components ported with visual and keyboard/ARIA behavioural parity. Parity is proven by a multi-layer system: programmatic `getComputedStyle` + bounding-box measurement against live LifeSG components (L2, 33 routes), keyboard-driven ARIA assertions (L3), axe-core accessibility scans (L4), and human visual review of side-by-side screenshots (L5). No single layer is sufficient — the pilot proved that L5 spotting catches what L2 misses (the data-token meta-bug), and L2 catches what L5 can't quantify (sub-pixel chrome divergences).
 2. **Architecture** — A 3-layer token system (L1→L2→L3→@theme) that makes re-theming a file edit; headless-primitive delegation that keeps interaction complexity out of the squad's maintenance surface; documented conventions that prevent decay.
-3. **Verification** — A five-layer test pyramid runnable in one command, covering mount correctness, computed-style parity, interaction parity, visual snapshots, and accessibility — with identified gaps that need to be closed to make the system robust enough for ongoing confidence.
+3. **Verification** — A five-layer test pyramid hardened through the pilot itself. Three meta-bugs in the verification system were caught and fixed during the pilot (silent exit codes, misplaced data-token markers, parity-vs-regression naming confusion) — each would have hidden real divergences. The system's value is not that it shipped perfect on day one, but that its layered design surfaces its own blind spots.

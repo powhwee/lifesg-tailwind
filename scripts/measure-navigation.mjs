@@ -1,28 +1,27 @@
-// Probes computed style on every `[data-token]`-tagged element on every /form
-// default page, pairing ours-pane vs lifesg-pane values where labels match.
-// Walks the rendered DOM rather than enumerating component-by-component.
-// Mirrors the measure-content.mjs pattern; see that file for design rationale.
+// Probes computed style on every `[data-token]`-tagged element on every
+// /navigation default page, pairing ours-pane vs lifesg-pane values where
+// labels match. Walks the rendered DOM rather than enumerating
+// component-by-component. Mirrors measure-content.mjs; see that file for
+// design rationale.
 import { chromium } from "@playwright/test";
 
 const base = process.env.BASE ?? "http://localhost:3000";
 const routes = [
-  ["custom-field",        "/form/custom-field/default"],
-  ["input",               "/form/input/default"],
-  ["textarea",            "/form/textarea/default"],
-  ["masked-input",        "/form/masked-input/default"],
-  ["input-group",         "/form/input-group/default"],
-  ["phone-number-input",  "/form/phone-number-input/default"],
-  ["unit-number-input",   "/form/unit-number-input/default"],
-  ["date-input",          "/form/date-input/default"],
-  ["date-range-input",    "/form/date-range-input/default"],
-  ["select",              "/form/select/default"],
-  ["multi-select",        "/form/multi-select/default"],
+  ["avatar",      "/navigation/avatar/default"],
+  ["breadcrumb",  "/navigation/breadcrumb/default"],
+  ["link-list",   "/navigation/link-list/default"],
+  ["masthead",    "/navigation/masthead/default"],
+  ["pagination",  "/navigation/pagination/default"],
+  ["local-nav",   "/navigation/local-nav/default"],
+  ["sidenav",     "/navigation/sidenav/default"],
+  ["navbar",      "/navigation/navbar/default"],
+  ["footer",      "/navigation/footer/default"],
 ];
 
 const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor", "borderRadius", "padding", "border", "borderColor", "borderWidth", "boxShadow", "gap", "margin"];
 
-// Expected divergences — (route, token) pairs where the wrapper-level diff
-// is not a chrome bug. Each entry needs a reason; do not add without one.
+// Expected divergences — (route, token) pairs where the diff is not a chrome
+// bug. Each entry needs a reason; do not add without one.
 const expectedDivergences = [];
 
 const isExpected = (route, token) =>
@@ -61,8 +60,8 @@ const allRows = [];
 for (const [name, route] of routes) {
   await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
   await page.waitForTimeout(800);
-  const ours = await probe(page, '[data-testid="form-ours"]');
-  const lifesg = await probe(page, '[data-testid="form-lifesg"]');
+  const ours = await probe(page, '[data-testid="navigation-ours"]');
+  const lifesg = await probe(page, '[data-testid="navigation-lifesg"]');
   const tokens = new Set([...Object.keys(ours), ...Object.keys(lifesg)]);
   for (const t of tokens) {
     const o = ours[t];
