@@ -114,7 +114,7 @@ function OtpInput({
       )}
 
       {!otpOnly && (
-        <div className="flex flex-col gap-3">
+        <div className="mt-5 mb-8 flex flex-col gap-3">
           <Button
             className="w-full"
             {...actionButtonProps}

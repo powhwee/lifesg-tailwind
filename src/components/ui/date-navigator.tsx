@@ -101,7 +101,7 @@ function DateNavigator({
     <div
       id={id}
       className={cn(
-        "inline-flex items-center gap-2 rounded-md border border-date-navigator-border bg-date-navigator-bg p-1",
+        "h-14 inline-flex items-center gap-2 rounded-md border border-date-navigator-border bg-date-navigator-bg px-1",
         className
       )}
     >

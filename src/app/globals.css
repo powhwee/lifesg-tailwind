@@ -400,6 +400,9 @@
   --color-image-button-border-selected: var(--image-button-border-selected);
   --color-image-button-border: var(--image-button-border);
   --color-image-button-ring-focus: var(--image-button-ring-focus);
+  --spacing-image-button-py: var(--image-button-py);
+  --spacing-image-button-px: var(--image-button-px);
+  --spacing-image-button-img-size: var(--image-button-img-size);
 
   /* L3 — input (leading paired with --text-input-size) */
   --leading-input: var(--input-line-height);

@@ -162,6 +162,10 @@
   --image-button-text-checkmark:      var(--lifesg-text-inverse);
 
   --image-button-ring-focus:          color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+
+  --image-button-py:                  1.5rem;   /* 24px — matches LifeSG vertical padding */
+  --image-button-px:                  1rem;     /* 16px — matches LifeSG horizontal padding */
+  --image-button-img-size:            3.5rem;   /* 56px — matches LifeSG image size */
 }
 
 /* ═══════════ otp-input ═══════════ */

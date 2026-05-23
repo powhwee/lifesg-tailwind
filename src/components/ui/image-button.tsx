@@ -28,7 +28,7 @@ function ImageButton({
       aria-pressed={selected}
       aria-invalid={error || undefined}
       className={cn(
-        "group/image-button relative aspect-square overflow-hidden rounded-lg cursor-pointer outline-none transition-all",
+        "group/image-button relative py-image-button-py px-image-button-px overflow-hidden rounded-lg cursor-pointer outline-none transition-all",
         "border border-image-button-border",
         "hover:border-image-button-border-hover",
         "focus-visible:ring-3 focus-visible:ring-image-button-ring-focus",
@@ -39,10 +39,8 @@ function ImageButton({
       )}
       {...props}
     >
-      {/* LifeSG insets the image inside button padding rather than fullbleed:
-          24px vertical, 16px horizontal. Matches LifeSG ImageButton chrome. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={imgSrc} alt="" className="absolute inset-y-6 inset-x-4 object-contain" />
+      <img src={imgSrc} alt="" className="mx-auto h-image-button-img-size w-image-button-img-size object-contain" />
     </ButtonPrimitive>
   );
 }
