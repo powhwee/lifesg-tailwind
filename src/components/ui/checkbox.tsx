@@ -20,6 +20,11 @@ const checkboxVariants = cva(
   {
     variants: {
       displaySize: {
+        // NOTE (2026-05-23): sized at 32/24 historically. Tried 24/20 mid-session
+        // to match LifeSG visual but caused inconsistency vs radio (still 32).
+        // Restored to 32/24 pending the selection-and-input convention sweep
+        // scheduled for next session — see working-logs/2026-05-23-handover.md
+        // § "Hand-off to next session".
         default: "size-8",
         small: "size-6",
       },

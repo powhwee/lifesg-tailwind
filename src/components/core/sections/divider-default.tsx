@@ -34,8 +34,8 @@ export function OursPane() {
       <Row label="in a CSS grid (col-span-2 of 4)">
         <div className="grid grid-cols-4 gap-2">
           <div className="col-span-2"><OurDivider thickness={2} /></div>
-          <div className="col-span-2 text-xs text-muted-foreground">↑ spans 2 of 4 via wrapper</div>
         </div>
+        <div className="text-xs text-muted-foreground mt-1">↑ spans 2 of 4 via wrapper</div>
       </Row>
     </div>
   );
