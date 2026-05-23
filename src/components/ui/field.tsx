@@ -10,7 +10,7 @@ function Field({ className, ...props }: FieldPrimitive.Root.Props) {
   return (
     <FieldPrimitive.Root
       data-slot="field"
-      className={cn("flex flex-col gap-2", className)}
+      className={cn("flex flex-col gap-1", className)}
       {...props}
     />
   );
@@ -35,7 +35,7 @@ function FieldDescription({ className, ...props }: FieldPrimitive.Description.Pr
     <FieldPrimitive.Description
       data-slot="field-description"
       className={cn(
-        "text-sm text-field-text-description",
+        "text-field-description leading-field-description text-field-text-description",
         "data-[disabled]:text-field-text-disabled",
         className
       )}

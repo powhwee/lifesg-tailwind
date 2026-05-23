@@ -7,8 +7,10 @@
   --field-text-subtitle:     var(--lifesg-text-subtle);
   --field-text-error:        var(--lifesg-text-error);
   --field-text-disabled:     var(--lifesg-text-disabled);
-  --field-label-font-size:   1.125rem;   /* 18px — matches LifeSG HeadingXS */
-  --field-label-line-height: 1.625rem;   /* 26px */
+  --field-label-font-size:   1rem;            /* 16px — matches LifeSG BodyMD */
+  --field-label-line-height: 1.5rem;          /* 24px */
+  --field-description-font-size:   0.875rem;  /* 14px — matches LifeSG BodySM */
+  --field-description-line-height: 1.625rem;  /* 26px */
 }
 
 /* ═══════════ input + textarea + masked-input + input-group ═══════════ */

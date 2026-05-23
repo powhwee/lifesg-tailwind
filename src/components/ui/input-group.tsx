@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { FormField, type FormFieldProps } from "@/components/ui/form-field";
 
 const groupCx =
-  "flex w-full overflow-hidden rounded-input border border-input-border bg-input-bg transition-colors hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus data-[error=true]:border-input-border-error data-[error=true]:ring-3 data-[error=true]:ring-input-ring-error data-[disabled=true]:bg-input-bg-disabled data-[disabled=true]:border-input-border-disabled data-[disabled=true]:cursor-not-allowed";
+  "h-input-height flex w-full overflow-hidden rounded-input border border-input-border bg-input-bg transition-colors hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus data-[error=true]:border-input-border-error data-[error=true]:ring-3 data-[error=true]:ring-input-ring-error data-[disabled=true]:bg-input-bg-disabled data-[disabled=true]:border-input-border-disabled data-[disabled=true]:cursor-not-allowed";
 
 function InputGroup({
   className,
@@ -33,7 +33,7 @@ function InputGroupAddon({ className, ...props }: React.HTMLAttributes<HTMLDivEl
 }
 
 const groupInputCx =
-  "h-input-height w-full bg-transparent border-0 outline-none px-3 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
+  "h-full w-full bg-transparent border-0 outline-none px-3 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
 function InputGroupInput({
   className,

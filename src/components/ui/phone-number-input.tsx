@@ -83,7 +83,7 @@ function PhoneNumberInput({
   return (
     <div
       className={cn(
-        "flex items-stretch w-full rounded-input border border-input-border bg-input-bg hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
+        "h-input-height flex items-stretch w-full rounded-input border border-input-border bg-input-bg hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
         error &&
           "border-input-border-error ring-3 ring-input-ring-error",
         disabled &&
@@ -148,7 +148,7 @@ function PhoneNumberInput({
         readOnly={readOnly}
         placeholder={placeholder}
         autoComplete="tel"
-        className="h-input-height flex-1 min-w-0 bg-transparent border-0 outline-none px-3 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled"
+        className="h-full flex-1 min-w-0 bg-transparent border-0 outline-none px-3 text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled"
         {...props}
       />
     </div>

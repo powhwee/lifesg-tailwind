@@ -380,6 +380,8 @@
   --color-field-text-label: var(--field-text-label);
   --leading-field-label: var(--field-label-line-height);
   --text-field-label: var(--field-label-font-size);
+  --leading-field-description: var(--field-description-line-height);
+  --text-field-description: var(--field-description-font-size);
 
   /* L3 — icon */
   --color-icon-color-default: var(--icon-color-default);

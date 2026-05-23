@@ -71,12 +71,12 @@ function UnitNumberInput({
   };
 
   const inputCx =
-    "h-input-height bg-transparent border-0 outline-none px-1 text-center text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
+    "h-full bg-transparent border-0 outline-none px-1 text-center text-input-size leading-input text-input-text placeholder:text-input-text-placeholder disabled:cursor-not-allowed disabled:text-input-text-disabled";
 
   return (
     <div
       className={cn(
-        "inline-flex items-stretch w-fit rounded-input border border-input-border bg-input-bg hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
+        "h-input-height inline-flex items-stretch w-fit rounded-input border border-input-border bg-input-bg hover:border-input-border-hover focus-within:border-input-border-focus focus-within:ring-3 focus-within:ring-input-ring-focus",
         error && "border-input-border-error ring-3 ring-input-ring-error",
         disabled && "bg-input-bg-disabled border-input-border-disabled cursor-not-allowed",
         className
