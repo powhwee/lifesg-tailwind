@@ -26,8 +26,12 @@ const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor
 // handover and the 2026-05-18 chrome-fix sweep. Each is either a deliberate
 // API divergence, structural diff, or demo-content asymmetry.
 const expectedDivergences = [
-  { route: "checkbox", token: "default", reason: "NOISE: 2px h diff is sub-pixel rendering; checkbox chrome aligned." },
-  { route: "checkbox", token: "default-size", reason: "NOISE: 2px wrapper-row height diff from label/span line-height interaction; checkbox chrome itself sized to LifeSG box-model (size-8 = 32px)." },
+  { route: "checkbox", token: "default", reason: "VISUAL-PARITY: ours size-7 (28px) matches LifeSG's visible SVG content (~25.6px) rather than their 32px box-model container. See selection-and-input audit 2026-05-24." },
+  { route: "checkbox", token: "default-size", reason: "VISUAL-PARITY: same as checkbox:default — outer ring matches LifeSG's visible disc, not their 32px box." },
+  { route: "checkbox", token: "small-size", reason: "VISUAL-PARITY: ours size-5 (20px) matches LifeSG's visible small content (~19px) vs their 24px box-model." },
+  { route: "radio-button", token: "grouped", reason: "VISUAL-PARITY: ours size-7 (28px) matches LifeSG's visible SVG outer ring; box-model gap of 4px vs LifeSG's 32px container." },
+  { route: "radio-button", token: "states", reason: "VISUAL-PARITY: same root cause as radio-button:grouped." },
+  { route: "radio-button", token: "small-size", reason: "VISUAL-PARITY: same root cause for small — size-5 (20px) vs LifeSG 24px box-model." },
   { route: "otp-input", token: "prefix-error", reason: "NOISE: -2px error-message line-height micro-diff; OTP cell + button chrome aligned." },
   { route: "toggle", token: "checkbox", reason: "DEMO-STATE: ours renders an always-on composite section beneath the second toggle; LifeSG renders 'Show more' collapsed by default. Demo content height differs; toggle chrome (padding, radius, indicator language) matches LifeSG." },
   { route: "toggle", token: "radio", reason: "NOISE: ±8px from toggle inner padding (12/16) vs LifeSG's 11/16/8/16 asymmetric padding. Toggle chrome aligned otherwise." },

@@ -140,15 +140,15 @@ See `[[component-radius-convention]]` memory.
 
 ## Convention: selection-and-input indicator sizing
 
-Checkbox and RadioButton ship at `size-8` (32px) default and `size-6` (24px) small — matching LifeSG's box-model exactly.
+Checkbox and RadioButton ship at `size-7` (28px) default and `size-5` (20px) small — sized to LifeSG's *visible* SVG content (~25.6 / ~19 px) rather than their 32 / 24 box-model containers.
 
-The chrome is rendered via Lucide icons (`Square` for unchecked checkbox, `Circle` / `CircleDot` for radio) rather than CSS borders. This came out of a 2026-05-24 audit that iterated three times on `size-X` + `border-X` combinations trying to pixel-match LifeSG's branded `@lifesg/react-icons` SVGs:
+The chrome is rendered via Lucide icons (`Square` for unchecked checkbox, `Circle` for radio outer ring) rather than CSS borders. This came out of a 2026-05-24 audit that iterated multiple times on `size-X` + `border-X` combinations trying to pixel-match LifeSG's branded `@lifesg/react-icons` SVGs. The diagnosis: CSS border + inner span and LifeSG's branded SVG paths are different rendering primitives. Pixel-matching one with the other is a no-win.
 
-1. `size-8` + `border-1`: ours read thinner / smaller than LifeSG.
-2. `size-8` + `border-2`: ours read heavier than LifeSG.
-3. `size-6` + `border-2`, then `size-7` + `border-2`: chasing LifeSG's visible-content geometry (~22-26px inside a 32px container) — the visual still didn't read identical.
+Lucide is our project's chosen icon vocabulary, so switching the chrome to `Circle` / `Square` ends the rendering-primitive mismatch: SVG everywhere, visual weight set by Lucide's stroke design rather than CSS. The divergence from LifeSG's branded icons is classified as DESIGN-LANGUAGE in the divergence table above.
 
-The diagnosis: CSS border + inner span and LifeSG's branded SVG paths are different rendering primitives. Pixel-matching one with the other is a no-win. Lucide is our project's chosen icon vocabulary, so switching the chrome to `Circle` / `CircleDot` / `Square` ends the iteration loop: same rendering primitive throughout our codebase, visual weight set by Lucide's stroke design rather than CSS, and the divergence from LifeSG's branded icons is documented as DESIGN-LANGUAGE in the table above.
+Sizing was tuned to `size-7` / `size-5` after the Lucide switch — `size-8` (32px) made our visible ring one Tailwind step bigger than LifeSG's visible ring (~25.6px). The box-model gap of 4px vs LifeSG's containers is allowlisted as VISUAL-PARITY in `scripts/measure-selection-and-input.mjs`.
+
+The radio's inner filled dot is a CSS `<span class="rounded-full bg-current" />` sized to `size-3` (default) / `size-2.5` (small) — Lucide's `CircleDot` icon has its inner dot proportionally too small to read as a conventional radio.
 
 See `[[selection-input-indicator-convention]]` memory.
 

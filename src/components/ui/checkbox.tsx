@@ -28,10 +28,10 @@ const checkboxVariants = cva(
   {
     variants: {
       displaySize: {
-        // Matches LifeSG's box-model (32px / 24px). Visual chrome divergence
-        // from LifeSG is DESIGN-LANGUAGE, not a defect — see radio-button.tsx.
-        default: "size-8",
-        small: "size-6",
+        // Sized to LifeSG's *visible* SVG content (~25.6 / ~19 px inside their
+        // 32 / 24 containers). See radio-button.tsx for the rationale.
+        default: "size-7",
+        small: "size-5",
       },
     },
     defaultVariants: {
