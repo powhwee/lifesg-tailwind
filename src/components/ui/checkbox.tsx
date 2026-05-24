@@ -28,10 +28,14 @@ const checkboxVariants = cva(
   {
     variants: {
       displaySize: {
-        // Sized to LifeSG's *visible* SVG content (~25.6 / ~19 px inside their
-        // 32 / 24 containers). See radio-button.tsx for the rationale.
-        default: "size-7",
-        small: "size-5",
+        // Sized to LifeSG's *visible* SVG content (~22 / ~16 px inside their
+        // 32 / 24 containers). The checkbox SVG path covers less of the
+        // viewBox than the radio's outer ring, so checkbox tracks one step
+        // smaller than radio for the same visible weight. See
+        // docs/parity-principle.md "Convention: selection-and-input
+        // indicator sizing".
+        default: "size-6",
+        small: "size-4",
       },
     },
     defaultVariants: {
@@ -47,7 +51,7 @@ export interface CheckboxProps
     VariantProps<typeof checkboxVariants> {}
 
 function Checkbox({ className, displaySize, indeterminate, ...props }: CheckboxProps) {
-  const iconSize = displaySize === "small" ? "size-4" : "size-5";
+  const iconSize = displaySize === "small" ? "size-3" : "size-4";
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"

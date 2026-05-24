@@ -140,7 +140,7 @@ See `[[component-radius-convention]]` memory.
 
 ## Convention: selection-and-input indicator sizing
 
-Checkbox and RadioButton ship at `size-7` (28px) default and `size-5` (20px) small — sized to LifeSG's *visible* SVG content (~25.6 / ~19 px) rather than their 32 / 24 box-model containers.
+RadioButton ships at `size-7` (28px) default and `size-5` (20px) small; Checkbox ships at `size-6` (24px) default and `size-4` (16px) small. Both are sized to LifeSG's *visible* SVG content (~25.6/~19 px for radio, ~22/~16 px for checkbox) rather than their 32/24 box-model containers. Checkbox tracks one Tailwind step smaller than radio because LifeSG's checkbox SVG path occupies less of the viewBox than the radio's outer ring.
 
 The chrome is rendered via Lucide icons (`Square` for unchecked checkbox, `Circle` for radio outer ring) rather than CSS borders. This came out of a 2026-05-24 audit that iterated multiple times on `size-X` + `border-X` combinations trying to pixel-match LifeSG's branded `@lifesg/react-icons` SVGs. The diagnosis: CSS border + inner span and LifeSG's branded SVG paths are different rendering primitives. Pixel-matching one with the other is a no-win.
 
