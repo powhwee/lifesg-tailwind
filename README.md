@@ -4,7 +4,7 @@
 
 Port the LifeSG design system (`@lifesg/react-design-system`) into a **Tailwind 4 + shadcn + Base UI** stack so the team can drop the LifeSG package entirely — no hybrid, no ongoing dependency. The product (CareerNav) must still look like LifeSG for government compliance, but the implementation is fully owned by the team.
 
-This repo is the **one-week pilot that proves the port is viable** and establishes the patterns, conventions, and verification infrastructure the team will carry forward.
+This repo is the **production port** — it establishes the patterns, conventions, and verification infrastructure the team carries forward.
 
 ## Why the port
 
@@ -19,17 +19,17 @@ LifeSG is a multi-tenant government design system built on styled-components. Th
 - **Brand volatility.** The agency is in a brand-development phase — LifeSG's palette is a placeholder. A re-theme is coming. LifeSG-as-dep offers no clean re-theme path without forking the package.
 - **Iteration velocity.** Visual changes to LifeSG-as-dep require a fork-and-rebuild round-trip. Ported components hot-reload via Turbopack in ~100ms.
 
-The port decision was already made. The pilot's job is to execute it well.
+The port decision was already made. This repo executes it.
 
 ---
 
 ## Three equal pillars
 
-Visual parity is a goal, but not the only goal. The pilot must satisfy three pillars simultaneously, because a port that matches the pixels but is architecturally messy, or one that is clean but can't prove it matches, fails the team just as surely.
+Visual parity is a goal, but not the only goal. The port must satisfy three pillars simultaneously, because a port that matches the pixels but is architecturally messy, or one that is clean but can't prove it matches, fails the team just as surely.
 
 ### Pillar 1 — Visual and behavioural parity
 
-The ported components must be indistinguishable from LifeSG's — in rendered pixels, in keyboard/focus behaviour, and in ARIA semantics. This must be **proven programmatically**, not argued by eye. The pilot builds the evidence machine (see Verification below).
+The ported components must be indistinguishable from LifeSG's — in rendered pixels, in keyboard/focus behaviour, and in ARIA semantics. This must be **proven programmatically**, not argued by eye. The verification system is the evidence machine (see Verification below).
 
 ### Pillar 2 — Architectural and engineering cleanliness
 
@@ -133,7 +133,7 @@ Every comparison page has two files: a **component** (`src/components/ui/{name}.
 
 Every visible parity diff must be classified before any code is touched:
 
-| Classification | Meaning | Where to fix | Example from the pilot |
+| Classification | Meaning | Where to fix | Example |
 |---------------|---------|-------------|----------------------|
 | **DEMO** | The section file's `OursPane()` and `LifeSGPane()` pass non-equivalent props, render different variants, or include different wrapping markup. The component itself is fine. | The section file in `src/components/{category}/sections/` | Checkbox comparison showed 5 states on LifeSG but appeared to show 4 on ours. Source check: both rendered 5 — label text was wrapping at the narrower available width, making one row look like it was missing. No code fix needed. |
 | **COMPONENT** | Both panes pass equivalent props, but the component renders differently from LifeSG. | The component in `src/components/ui/` | Footer rendered a top border + padding (`pt-6 border-t`) on its bottom row that LifeSG didn't have. Fix: remove the structural classes from `footer.tsx`, not from the demo. |
@@ -143,7 +143,7 @@ Every visible parity diff must be classified before any code is touched:
 
 A recurring anti-pattern surfaced early: fixing the **demo** to hide a **component** bug. The visual diff "passes" on the comparison page, but the underlying component is still wrong — and the bug reappears on every other page that uses the component.
 
-Concrete examples caught during the pilot:
+Concrete examples caught during development:
 
 - **Footer border strip.** An AI-assisted review suggested removing `pt-6 border-t border-[var(--footer-border)]` from a `<div>`. If this had been applied in the demo section file (stripping the border for that one page), the Footer component would still render the border everywhere else. The fix belonged in `footer.tsx` — the component itself shouldn't have the border. Classification: **COMPONENT**.
 
@@ -198,7 +198,7 @@ The two failures are pre-existing LifeSG library noise, not real defects — lef
 
 ### How the verification system evolved
 
-The system didn't ship complete on day one. Each gap below was identified during the pilot, then addressed as the system matured — examples of the kind of hardening that turns an ad-hoc script collection into a reliable quality gate.
+The system didn't ship complete on day one. Each gap below was identified during development, then addressed as the system matured — examples of the kind of hardening that turns an ad-hoc script collection into a reliable quality gate.
 
 | Gap identified | What we did |
 |---------------|------------|
@@ -232,8 +232,8 @@ The system didn't ship complete on day one. Each gap below was identified during
 
 ## Summary
 
-The pilot's purpose is to **replace `@lifesg/react-design-system` with a fully-owned Tailwind + shadcn + Base UI stack** that a 1–2 engineering squad can maintain. It proves viability across three equal pillars:
+This project **replaces `@lifesg/react-design-system` with a fully-owned Tailwind + shadcn + Base UI stack** that a 1–2 engineering squad can maintain. It delivers on three equal pillars:
 
-1. **Parity** — 53 components ported with visual and keyboard/ARIA behavioural parity. Parity is proven by a multi-layer system: programmatic `getComputedStyle` + bounding-box measurement against live LifeSG components (L2, 34 routes), keyboard-driven ARIA assertions (L3), axe-core accessibility scans (L4), and human visual review of side-by-side screenshots (L5). No single layer is sufficient — the pilot proved that L5 spotting catches what L2 misses (the data-token meta-bug), and L2 catches what L5 can't quantify (sub-pixel chrome divergences).
+1. **Parity** — 53 components ported with visual and keyboard/ARIA behavioural parity. Parity is proven by a multi-layer system: programmatic `getComputedStyle` + bounding-box measurement against live LifeSG components (L2, 34 routes), keyboard-driven ARIA assertions (L3), axe-core accessibility scans (L4), and human visual review of side-by-side screenshots (L5). No single layer is sufficient — L5 spotting catches what L2 misses (the data-token meta-bug), and L2 catches what L5 can't quantify (sub-pixel chrome divergences).
 2. **Architecture** — A 3-layer token system (L1→L2→L3→@theme) that makes re-theming a file edit; headless-primitive delegation that keeps interaction complexity out of the squad's maintenance surface; documented conventions that prevent decay.
-3. **Verification** — A five-layer test pyramid hardened through the pilot itself. Six meta-bugs in the verification system were caught and fixed during the pilot (silent exit codes, misplaced data-token markers, parity-vs-regression naming confusion, two Tailwind 4 @theme namespace mismatches that silently dropped utilities, mechanical re-baselining as a regression vector) — each would have hidden real divergences. The system's value is not that it shipped perfect on day one, but that its layered design surfaces its own blind spots — and that those blind spots get codified as memory entries so future maintainers don't re-walk into them.
+3. **Verification** — A five-layer test pyramid hardened through development itself. Six meta-bugs in the verification system were caught and fixed (silent exit codes, misplaced data-token markers, parity-vs-regression naming confusion, two Tailwind 4 @theme namespace mismatches that silently dropped utilities, mechanical re-baselining as a regression vector) — each would have hidden real divergences. The system's value is not that it shipped perfect on day one, but that its layered design surfaces its own blind spots — and that those blind spots get codified as memory entries so future maintainers don't re-walk into them.
