@@ -47,14 +47,14 @@ The team needs a verification system that catches regressions **mechanically** �
 
 Every component is rendered on a comparison page with two panes: "ours" (Tailwind/shadcn) on the left, LifeSG (wrapped in `<LifeSGProvider>`) on the right. Both panes receive equivalent props. Differences are visible at a glance and measurable programmatically via `[data-testid]` and `[data-token]` attributes.
 
-52 components are ported across LifeSG's full Storybook taxonomy:
+53 components are ported across LifeSG's full Storybook taxonomy:
 
 | Category | Components |
 |----------|-----------|
 | **Foundations** | Themes, Colours, Font, Breakpoint, Spacing, Motion, Radius, Border, Component tokens, Shadow |
 | **Core** | Typography, Divider, Icon, Markup, TextList, Layout, ErrorDisplay |
 | **Content** | Card, Table, UneditableSection, BoxContainer, Tab, Accordion, DataTable, FullscreenImageCarousel |
-| **Overlays** | Modal, Popover, Drawer, Menu |
+| **Overlays** | Modal, ModalV2, Popover, Drawer, Menu |
 | **Navigation** | Avatar, Breadcrumb, LinkList, Masthead, Pagination, LocalNav, Sidenav, Navbar, Footer |
 | **Selection & Input** | Checkbox, RadioButton, Toggle, Button, IconButton, ImageButton, OtpInput, FeedbackRating, Calendar, DateNavigator, Filter |
 | **Form** | Field, Label, FormField (CustomField), Input, Textarea, MaskedInput, InputGroup, PhoneNumberInput, UnitNumberInput, DateInput, DateRangeInput, Select, MultiSelect |
@@ -223,7 +223,7 @@ The system didn't ship complete on day one. Each gap below was identified during
 |-----|--------|
 | **Dark mode is a no-op outside Foundations.** No `.dark` block rebinds L2 tokens system-wide. Fix path documented. | Known, unaddressed |
 | **Table row height** — bisected and resolved. Two real chrome bugs (cell padding 24→20px, head row no explicit height vs LifeSG's `height: 6rem`) plus one viewport artifact (LifeSG allocates the Date column 4px narrower at 1400x900, causing "12 May 2026" to wrap to 3 lines). Chrome aligned; text-wrap diff allowlisted in `measure-content.mjs` with reason. | Resolved |
-| **L2 measurement coverage** — extended from 7 routes (content + typography) to 33 routes by adding `measure-form.mjs`, `measure-overlays.mjs`, and `measure-selection-and-input.mjs`. Initial sweep surfaced 22 chrome divergences across form/overlays/selection-and-input; the form ones traced to a single token-mapping bug (input font-size 16→18px) and were fixed. Selection-and-input residuals (toggle/feedback-rating/filter/date-navigator) are documented per-component judgment calls. | Coverage expanded; some residuals deliberate |
+| **L2 measurement coverage** — extended from 7 routes (content + typography) to 34 routes by adding `measure-form.mjs`, `measure-overlays.mjs`, and `measure-selection-and-input.mjs`. Initial sweep surfaced 22 chrome divergences across form/overlays/selection-and-input; the form ones traced to a single token-mapping bug (input font-size 16→18px) and were fixed. Selection-and-input residuals (toggle/feedback-rating/filter/date-navigator) are documented per-component judgment calls. | Coverage expanded; some residuals deliberate |
 | **Polish punch list and arbitrary-value debt are both fully resolved** (Sidenav, Navbar, ImageButton, Pagination, UnitNumberInput, PhoneNumberInput, DateInput, DateRangeInput all landed; 506 arbitrary-value usages swept). | Completed |
 | **No form-submission integration.** Base UI Field's `validate` and `validationMode` props untested in a real `<form>` with submit handler. | Deferred to first real screen |
 | **Two pre-existing verify-all `smoke` failures** (`phone-number-input` console warning from LifeSG library; modal `lifesgBody=false` portal heuristic) are noise, not real defects. Left as-is to avoid masking unrelated future regressions. | Documented, not blocking |
@@ -234,6 +234,6 @@ The system didn't ship complete on day one. Each gap below was identified during
 
 The pilot's purpose is to **replace `@lifesg/react-design-system` with a fully-owned Tailwind + shadcn + Base UI stack** that a 1–2 engineering squad can maintain. It proves viability across three equal pillars:
 
-1. **Parity** — 52 components ported with visual and keyboard/ARIA behavioural parity. Parity is proven by a multi-layer system: programmatic `getComputedStyle` + bounding-box measurement against live LifeSG components (L2, 33 routes), keyboard-driven ARIA assertions (L3), axe-core accessibility scans (L4), and human visual review of side-by-side screenshots (L5). No single layer is sufficient — the pilot proved that L5 spotting catches what L2 misses (the data-token meta-bug), and L2 catches what L5 can't quantify (sub-pixel chrome divergences).
+1. **Parity** — 53 components ported with visual and keyboard/ARIA behavioural parity. Parity is proven by a multi-layer system: programmatic `getComputedStyle` + bounding-box measurement against live LifeSG components (L2, 34 routes), keyboard-driven ARIA assertions (L3), axe-core accessibility scans (L4), and human visual review of side-by-side screenshots (L5). No single layer is sufficient — the pilot proved that L5 spotting catches what L2 misses (the data-token meta-bug), and L2 catches what L5 can't quantify (sub-pixel chrome divergences).
 2. **Architecture** — A 3-layer token system (L1→L2→L3→@theme) that makes re-theming a file edit; headless-primitive delegation that keeps interaction complexity out of the squad's maintenance surface; documented conventions that prevent decay.
 3. **Verification** — A five-layer test pyramid hardened through the pilot itself. Six meta-bugs in the verification system were caught and fixed during the pilot (silent exit codes, misplaced data-token markers, parity-vs-regression naming confusion, two Tailwind 4 @theme namespace mismatches that silently dropped utilities, mechanical re-baselining as a regression vector) — each would have hidden real divergences. The system's value is not that it shipped perfect on day one, but that its layered design surfaces its own blind spots — and that those blind spots get codified as memory entries so future maintainers don't re-walk into them.
