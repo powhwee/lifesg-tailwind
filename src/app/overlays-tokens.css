@@ -28,3 +28,49 @@
   --modal-box-padding:  2rem;
 }
 
+/* ═══════════ modal-v2 ═══════════ */
+/* LifeSG ships a v2 with a slot-based composition: Card / Content / Footer /
+   CloseButton — fixed 40rem card, generous 64px slot padding, 32px between
+   stacked content + footer, primary button on the right on desktop and stacked
+   below on mobile. Backdrop + scroll lock are shared with v1 in spirit; we use
+   a separate token namespace so v1 + v2 can diverge. */
+
+:root {
+  --modal-v2-backdrop:        color-mix(in srgb, var(--lifesg-neutral-10) 60%, transparent);
+  --modal-v2-card-bg:         var(--lifesg-bg);
+  --modal-v2-card-radius:     0.75rem;   /* 12px — matches LifeSG `radius.lg` */
+  --modal-v2-card-shadow:     0 20px 25px -5px color-mix(in srgb, var(--lifesg-neutral-10) 20%, transparent), 0 8px 10px -6px color-mix(in srgb, var(--lifesg-neutral-10) 10%, transparent);
+  --modal-v2-card-width:      40rem;     /* 640px */
+
+  --modal-v2-slot-x:          4rem;      /* 64px — Content / Footer horizontal margin (desktop) */
+  --modal-v2-slot-x-mobile:   1.25rem;   /* 20px — same on viewports <=sm */
+  --modal-v2-slot-y:          4rem;      /* 64px — first/last slot vertical breathing room */
+  --modal-v2-slot-y-between:  2rem;      /* 32px — between Content and Footer when both present */
+
+  --modal-v2-footer-col-gap:  2rem;      /* 32px — between buttons on desktop */
+  --modal-v2-footer-row-gap:  1rem;      /* 16px — between buttons when stacked on mobile */
+
+  --modal-v2-close-margin:    1rem;      /* 16px — gap around the close button */
+}
+
+/* SlotSpacer rules — express the children-aware vertical margin behavior
+   LifeSG implements via styled-components selectors. Encoded here as plain
+   CSS rather than ten Tailwind arbitrary variants because the selectors are
+   identical to upstream and easier to read in one block.
+
+   Anatomy: ModalV2.Card lays out children with `flex-direction: column-reverse`
+   so the (optional) close button sits visually at the top while content +
+   footer sit beneath in source order. The spacer wraps content + footer. */
+
+[data-slot="modal-v2-spacer"] > [data-slot="modal-v2-content"]:last-child,
+[data-slot="modal-v2-spacer"] > [data-slot="modal-v2-footer"]:last-child {
+  margin-bottom: var(--modal-v2-slot-y);
+}
+[data-slot="modal-v2-spacer"] > [data-slot="modal-v2-footer"]:not(:first-child) {
+  margin-top: var(--modal-v2-slot-y-between);
+}
+[data-slot="modal-v2-spacer"][data-has-close="false"] > [data-slot="modal-v2-content"]:first-child,
+[data-slot="modal-v2-spacer"][data-has-close="false"] > [data-slot="modal-v2-footer"]:first-child {
+  margin-top: var(--modal-v2-slot-y);
+}
+

@@ -450,6 +450,18 @@
   --radius-modal-box: var(--modal-box-radius);
   --spacing-modal-box-padding: var(--modal-box-padding);
 
+  /* L3 — modal-v2 */
+  --color-modal-v2-backdrop:         var(--modal-v2-backdrop);
+  --color-modal-v2-card-bg:          var(--modal-v2-card-bg);
+  --shadow-modal-v2-card:            var(--modal-v2-card-shadow);
+  --radius-modal-v2-card:            var(--modal-v2-card-radius);
+  --spacing-modal-v2-card-width:     var(--modal-v2-card-width);
+  --spacing-modal-v2-slot-x:         var(--modal-v2-slot-x);
+  --spacing-modal-v2-slot-x-mobile:  var(--modal-v2-slot-x-mobile);
+  --spacing-modal-v2-footer-col-gap: var(--modal-v2-footer-col-gap);
+  --spacing-modal-v2-footer-row-gap: var(--modal-v2-footer-row-gap);
+  --spacing-modal-v2-close-margin:   var(--modal-v2-close-margin);
+
   /* L3 — navbar */
   --color-navbar-bg-hover: var(--navbar-bg-hover);
   --color-navbar-bg: var(--navbar-bg);

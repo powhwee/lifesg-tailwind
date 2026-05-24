@@ -28,7 +28,9 @@ export function OverlaysIntro() {
         <li><strong>Menu</strong> &mdash; ✅ shipped. <code>@base-ui/react/menu</code>. New
           primitive; no existing consumers, ready for action menus / overflow buttons.</li>
         <li><strong>Overlay</strong> &mdash; intentional skip. Encapsulated inside Modal/Drawer/Popover.</li>
-        <li><strong>ModalV2</strong> &mdash; deferred. v1 covers current needs.</li>
+        <li><strong>ModalV2</strong> &mdash; ✅ shipped. Slot-composition modal (Card / Content /
+          Footer / CloseButton) on the same <code>@base-ui/react/dialog</code> primitive as v1.
+          Use v2 for confirm/decision dialogs; v1 for free-form content.</li>
       </ul>
     </Page>
   );
@@ -109,30 +111,84 @@ export function OverlayIntro() {
 
 export function ModalV2Intro() {
   return (
-    <Page title="ModalV2 (deferred)">
+    <Page title="ModalV2">
       <p>
-        LifeSG ships both <code>Modal</code> (v1) and <code>ModalV2</code>. Our DS ports v1 only;
-        v2 is deferred to a follow-up batch.
+        Slot-composition modal. Same Base UI <code>@base-ui/react/dialog</code> primitive as v1,
+        but with an opinionated layout that matches LifeSG&rsquo;s v2 anatomy: a fixed-width
+        card with generous gutters, content + footer stacked vertically, and an optional close
+        button floating at top-right.
       </p>
-      <h2 className="text-base font-semibold pt-2">What changed in v2 (per LifeSG)</h2>
-      <p>
-        We haven&rsquo;t audited v2 yet. The package shape suggests a different prop API
-        (slot-based content composition instead of <code>Modal.Box</code>) but the behavioural
-        contract is similar.
-      </p>
-      <h2 className="text-base font-semibold pt-2">Why deferred</h2>
+      <h2 className="text-base font-semibold pt-2">Composition shape</h2>
+      <pre className="my-3 rounded bg-muted p-3 text-xs leading-relaxed overflow-x-auto"><code>{`<ModalV2 show={show} onClose={() => setShow(false)}>
+  <ModalV2.Card>
+    <ModalV2.CloseButton />
+    <ModalV2.Content>
+      <h2>Confirm appointment</h2>
+      <p>Bookings can be rescheduled up to 24 hours in advance.</p>
+    </ModalV2.Content>
+    <ModalV2.Footer
+      primaryButton={<Button onClick={...}>Confirm</Button>}
+      secondaryButton={<Button variant="secondary" onClick={...}>Cancel</Button>}
+    />
+  </ModalV2.Card>
+</ModalV2>`}</code></pre>
+      <h2 className="text-base font-semibold pt-2">v1 vs v2 — when to reach for which</h2>
       <ul className="list-disc pl-6 space-y-1">
-        <li>v1 Modal is already shipped on <code>@base-ui/react/dialog</code> and used by{" "}
-          FullscreenImageCarousel + several Form components.</li>
-        <li>No real consumer of our DS has asked for v2 prop shape.</li>
-        <li>Auditing v2 vs v1 differences and deciding whether to (a) ship a separate v2 wrapper,{" "}
-          (b) replace v1, or (c) consolidate into a single Modal that covers both shapes &mdash; is
-          a real design question, not a mechanical port.</li>
+        <li><strong>v1 (<code>Modal</code> + <code>Modal.Box</code>)</strong> &mdash; open-ended.
+          Wraps any content in a styled box; the consumer owns the inner layout. Pick this for
+          dialogs that don&rsquo;t fit a header/body/footer split (e.g.{" "}
+          <code>FullscreenImageCarousel</code>&rsquo;s lightbox).</li>
+        <li><strong>v2 (slot composition)</strong> &mdash; opinionated. Card/Content/Footer slots
+          enforce LifeSG&rsquo;s spacing rhythm (64px gutters, 32px between content + footer)
+          and the desktop primary-on-right / mobile-stacked button row. Pick this for
+          confirm/decision dialogs and most form-style modals.</li>
       </ul>
+      <h2 className="text-base font-semibold pt-2">Slot anatomy</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li><code>ModalV2.Card</code> &mdash; fixed at 40rem (640px) wide; caps to{" "}
+          <code>calc(100% - 3rem)</code> on narrow viewports. Detects whether{" "}
+          <code>CloseButton</code> is present and adjusts the first-slot top margin.</li>
+        <li><code>ModalV2.CloseButton</code> &mdash; floats top-right with 16px gutter. Wires to{" "}
+          the root <code>onClose</code> via context.</li>
+        <li><code>ModalV2.Content</code> &mdash; main body slot, 64px horizontal margin on desktop
+          (20px on mobile).</li>
+        <li><code>ModalV2.Footer</code> &mdash; takes{" "}
+          <code>primaryButton</code> + <code>secondaryButton</code> props. Desktop:{" "}
+          <code>flex-direction: row-reverse</code> + 32px column-gap so primary sits on the right.
+          Mobile: stacked column with 16px row-gap.</li>
+      </ul>
+      <h2 className="text-base font-semibold pt-2">Dismissal semantics</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li><code>onClose</code> &mdash; fires on Escape, on close-button click.</li>
+        <li><code>onOverlayClick</code> &mdash; fires only when backdrop is clicked (and only if{" "}
+          <code>enableOverlayClick</code>). Backdrop click does <em>not</em> auto-fire{" "}
+          <code>onClose</code>; the consumer decides whether to dismiss.</li>
+        <li><code>enableOverlayClick</code> &mdash; default <code>true</code>. Set false to make
+          the backdrop inert (mandatory-decision dialogs).</li>
+        <li><code>dismissKeyboardOnShow</code> &mdash; default <code>true</code>. Blurs the
+          active element on open so a soft keyboard collapses on mobile.</li>
+        <li><code>disableInitialFocus</code> &mdash; skip auto-focusing the first focusable
+          element inside the modal on open.</li>
+      </ul>
+      <h2 className="text-base font-semibold pt-2">Tokens</h2>
       <p>
-        <strong>Status:</strong> deferred. Revisit when a consumer needs v2 features or when
-        LifeSG deprecates v1.
+        New L3 namespace <code>--modal-v2-*</code> in{" "}
+        <code>src/app/overlays-tokens.css</code> covers card chrome (bg, radius, shadow, width),
+        slot gutters, footer gaps, and the close-button margin. Slot vertical spacing (first/
+        last/between-content-and-footer) is encoded as scoped CSS rules on{" "}
+        <code>[data-slot=&quot;modal-v2-spacer&quot;]</code> rather than ten arbitrary Tailwind
+        variants &mdash; same rule shape as LifeSG&rsquo;s styled-components selectors.
       </p>
+      <h2 className="text-base font-semibold pt-2">What did not get ported</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li><code>rootComponentId</code> &mdash; LifeSG&rsquo;s DOM-id-lookup portal target. Same
+          deferral as v1 (Base UI Dialog defaults to <code>document.body</code>; pass a{" "}
+          <code>container</code> ref directly if needed).</li>
+        <li>The internal visual-viewport tracking LifeSG uses to handle iOS Safari&rsquo;s
+          mobile-keyboard offset &mdash; Base UI handles scroll lock; the dynamic-viewport
+          quirks haven&rsquo;t been re-implemented and may need a follow-up if mobile usage
+          reveals layout issues.</li>
+      </ul>
     </Page>
   );
 }

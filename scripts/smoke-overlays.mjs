@@ -4,6 +4,7 @@ const base = process.env.BASE ?? "http://localhost:3000";
 const routes = [
   "/overlays/introduction",
   "/overlays/modal/default",
+  "/overlays/modal-v2/default",
   "/overlays/popover/default",
   "/overlays/drawer/default",
   "/overlays/menu/default",

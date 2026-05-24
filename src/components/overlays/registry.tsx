@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import * as prose from "./sections/prose";
 import * as modalDefault from "./sections/modal-default";
+import * as modalV2Default from "./sections/modal-v2-default";
 import * as popoverDefault from "./sections/popover-default";
 import * as drawerDefault from "./sections/drawer-default";
 import * as menuDefault from "./sections/menu-default";
@@ -52,6 +53,7 @@ export const tree: Node[] = [
   ]),
   folder("modal-v2", "ModalV2", [
     leaf("introduction", "Introduction", { Prose: prose.ModalV2Intro }),
+    leaf("default",      "Default",      { Ours: modalV2Default.OursPane, LifeSG: modalV2Default.LifeSGPane }),
   ]),
   folder("overlay", "Overlay", [
     leaf("introduction", "Introduction", { Prose: prose.OverlayIntro }),

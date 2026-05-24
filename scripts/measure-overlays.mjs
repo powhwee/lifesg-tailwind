@@ -11,6 +11,7 @@ import { chromium } from "@playwright/test";
 const base = process.env.BASE ?? "http://localhost:3000";
 const routes = [
   ["modal",    "/overlays/modal/default"],
+  ["modal-v2", "/overlays/modal-v2/default"],
   ["popover",  "/overlays/popover/default"],
   ["drawer",   "/overlays/drawer/default"],
   ["menu",     "/overlays/menu/default"],
@@ -33,6 +34,12 @@ const expectedDivergences = [
     token: "default",
     reason:
       "LifeSG ships no public Menu (Storybook entry is an internal). The 'LifeSG' pane is an explanatory placeholder, not a comparable widget — height delta is text-block vs trigger-buttons, not chrome.",
+  },
+  {
+    route: "modal-v2",
+    token: "modal-v2-trigger",
+    reason:
+      "DEMO-STATE-DIFF: the [data-token] wrapper holds the explanatory <p> + the trigger button. The ours-pane paragraph mentions slot anatomy (CloseButton / Content / Footer) and wraps to two lines; the LifeSG-pane paragraph is shorter and wraps to one. ~16px height delta is the line-count difference, not a chrome divergence — the open-modal chrome is measured by node scripts that drive the dialog open separately.",
   },
 ];
 
