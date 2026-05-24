@@ -9,7 +9,9 @@
     "lint": "eslint",
     "extract-tokens": "node scripts/extract-lifesg-tokens.mjs",
     "test": "playwright test",
-    "test:update": "playwright test --update-snapshots"
+    "test:update": "playwright test --update-snapshots",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
@@ -31,12 +33,18 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
     "@playwright/test": "^1.59.1",
+    "@storybook/addon-a11y": "^10.2.10",
+    "@storybook/addon-links": "^10.2.10",
+    "@storybook/addon-themes": "^10.2.10",
+    "@storybook/nextjs": "^10.2.10",
+    "@storybook/react": "^10.2.10",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "storybook": "^10.2.10",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
