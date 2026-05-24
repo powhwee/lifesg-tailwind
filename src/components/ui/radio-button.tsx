@@ -3,29 +3,33 @@
 import * as React from "react";
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
+import { Circle, CircleDot } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
+/* Radio chrome renders via Lucide `Circle` (unchecked) and `CircleDot` (checked).
+ * Rationale: Lucide is the project-wide icon vocabulary (~30 icons across the
+ * codebase). LifeSG renders its radio via branded SVG icons from
+ * `@lifesg/react-icons`, which is the outlier within OUR design language.
+ * Visual chrome divergence from LifeSG is classified as DESIGN-LANGUAGE in
+ * docs/parity-principle.md, not a defect to chase. */
+
 const radioVariants = cva(
   cn(
-    "peer inline-flex shrink-0 items-center justify-center rounded-full border-2 bg-clip-padding outline-none transition-colors cursor-pointer",
-    "border-radio-border bg-radio-bg text-radio-dot",
-    "hover:border-radio-border-hover hover:bg-radio-bg-hover",
+    "peer group relative inline-flex shrink-0 items-center justify-center rounded-full outline-none transition-colors cursor-pointer",
+    // Background drives off its own variants; icon colors are set on each
+    // child below so disabled-checked vs disabled-unchecked can diverge.
+    "bg-radio-bg hover:bg-radio-bg-hover",
+    "data-[disabled]:bg-radio-bg-disabled data-[disabled]:cursor-not-allowed",
     "focus-visible:ring-3 focus-visible:ring-radio-ring-focus",
-    "data-[checked]:border-radio-border-checked",
-    "data-[disabled]:bg-radio-bg-disabled data-[disabled]:border-radio-border-disabled data-[disabled]:text-radio-dot-disabled data-[disabled]:cursor-not-allowed",
-    "aria-invalid:border-radio-border-error aria-invalid:ring-3 aria-invalid:ring-radio-ring-error"
+    "aria-invalid:ring-3 aria-invalid:ring-radio-ring-error"
   ),
   {
     variants: {
       displaySize: {
-        // LifeSG renders the radio via an SVG icon whose outer ring spans
-        // coords 2..18 of a 0..20 viewBox inside their 32px container —
-        // i.e. *visible* outer ring is ~25.6px. We pin to size-7 (28px) for
-        // a close match (smaller box-model than LifeSG, larger visible
-        // diameter than the SVG ring, net visual weight in the same range).
-        // See `[[selection-input-indicator-convention]]`.
-        default: "size-7",
+        // Matches LifeSG's box-model (32px / 24px). Visual chrome divergence
+        // from LifeSG is classified as DESIGN-LANGUAGE — see docs/parity-principle.md.
+        default: "size-8",
         small: "size-6",
       },
     },
@@ -52,12 +56,22 @@ function RadioButton<V = string>({
       className={cn(radioVariants({ displaySize, className }))}
       {...props}
     >
-      <RadioPrimitive.Indicator
+      {/* Outline ring shown when unchecked */}
+      <Circle
+        aria-hidden
         className={cn(
-          "rounded-full bg-current",
-          displaySize === "small" ? "size-2.5" : "size-3"
+          "size-full text-radio-border",
+          "group-hover:text-radio-border-hover",
+          "group-data-[disabled]:text-radio-border-disabled",
+          "group-aria-invalid:text-radio-border-error",
+          "group-data-[checked]:hidden"
         )}
+        strokeWidth={1.5}
       />
+      {/* Checked-state ring + filled dot (BaseUI Indicator only renders when checked) */}
+      <RadioPrimitive.Indicator className="absolute inset-0 inline-flex items-center justify-center text-radio-border-checked group-data-[disabled]:text-radio-dot-disabled">
+        <CircleDot aria-hidden className="size-full" strokeWidth={1.5} />
+      </RadioPrimitive.Indicator>
     </RadioPrimitive.Root>
   );
 }

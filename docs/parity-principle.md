@@ -72,6 +72,7 @@ The principle is "default to LifeSG-like" — but not slavishly. Override when L
 | Component | Decision | Reason |
 |---|---|---|
 | **Calendar** | Ours 336px wide, LifeSG 656px | LifeSG's inline calendar is 2× wider than every modern compact-calendar convention (react-day-picker, MUI, shadcn). Genuine outlier. |
+| **Checkbox + RadioButton chrome** | Ours renders Lucide `Square` / `Circle` / `CircleDot`; LifeSG renders branded `SquareIcon` / `CircleDotIcon` from `@lifesg/react-icons`. | Lucide is our project's icon vocabulary (~30 icons across the codebase). LifeSG's branded SVG paths are the outlier within OUR design language. Visual weight (stroke thickness, disc-to-dot ratio) will differ slightly side-by-side; the chrome shapes / states / colors / sizes still match. |
 
 Any "we deliberately don't match LifeSG" decision needs an entry here with a one-line reason. Without it, future maintainers (and future me) will keep chasing the divergence as a defect.
 
@@ -139,13 +140,15 @@ See `[[component-radius-convention]]` memory.
 
 ## Convention: selection-and-input indicator sizing
 
-Checkbox and RadioButton ship at `size-7` (28px) default and `size-6` (24px) small. Both are smaller than LifeSG's measured box-model (32px / 24px containers) but tuned to LifeSG's *visible* SVG content area — LifeSG renders a 20-unit viewBox SVG whose outer ring spans coords 2..18 (~16/20 units, ~25.6px at the 32px container) inside the rest as transparent padding.
+Checkbox and RadioButton ship at `size-8` (32px) default and `size-6` (24px) small — matching LifeSG's box-model exactly.
 
-Choosing visible-size parity over box-model parity is deliberate:
+The chrome is rendered via Lucide icons (`Square` for unchecked checkbox, `Circle` / `CircleDot` for radio) rather than CSS borders. This came out of a 2026-05-24 audit that iterated three times on `size-X` + `border-X` combinations trying to pixel-match LifeSG's branded `@lifesg/react-icons` SVGs:
 
-- **Side-by-side panes look like the same widget**: the alternative (32px outer with thin border) made our checkboxes look smaller; with a 2px border, heavier than LifeSG; both 32 and a size-6 attempt missed the LifeSG visual weight by ~6px in opposite directions. `size-7` (28px) lands within 2px of LifeSG's ~25.6px visible disc — the closest standard Tailwind size.
-- **The hit-area gap is closed at the label**: every S&I demo wraps the indicator in a `<label>` whose text extends the click target well past 28px. Touch-target accessibility is preserved.
-- **`measure-*` divergences are explicit**: the box-model gap (28 ≠ 32 default) is allowlisted as VISUAL-PARITY in `scripts/measure-selection-and-input.mjs` so the trade-off doesn't drift back into "should we re-bump to 32?" cycles. Small variant `size-6` (24px) matches LifeSG's box-model exactly — no allowlist needed there.
+1. `size-8` + `border-1`: ours read thinner / smaller than LifeSG.
+2. `size-8` + `border-2`: ours read heavier than LifeSG.
+3. `size-6` + `border-2`, then `size-7` + `border-2`: chasing LifeSG's visible-content geometry (~22-26px inside a 32px container) — the visual still didn't read identical.
+
+The diagnosis: CSS border + inner span and LifeSG's branded SVG paths are different rendering primitives. Pixel-matching one with the other is a no-win. Lucide is our project's chosen icon vocabulary, so switching the chrome to `Circle` / `CircleDot` / `Square` ends the iteration loop: same rendering primitive throughout our codebase, visual weight set by Lucide's stroke design rather than CSS, and the divergence from LifeSG's branded icons is documented as DESIGN-LANGUAGE in the table above.
 
 See `[[selection-input-indicator-convention]]` memory.
 
