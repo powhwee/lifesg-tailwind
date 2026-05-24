@@ -139,13 +139,13 @@ See `[[component-radius-convention]]` memory.
 
 ## Convention: selection-and-input indicator sizing
 
-Checkbox and RadioButton ship at `size-6` (24px) default and `size-5` (20px) small. Both are smaller than LifeSG's measured box-model (32px / 24px containers) but match LifeSG's *visible* SVG content area — LifeSG renders a 20-unit viewBox SVG whose path uses only ~14 viewBox units, leaving ~6 units of transparent padding inside the container.
+Checkbox and RadioButton ship at `size-7` (28px) default and `size-6` (24px) small. Both are smaller than LifeSG's measured box-model (32px / 24px containers) but tuned to LifeSG's *visible* SVG content area — LifeSG renders a 20-unit viewBox SVG whose outer ring spans coords 2..18 (~16/20 units, ~25.6px at the 32px container) inside the rest as transparent padding.
 
 Choosing visible-size parity over box-model parity is deliberate:
 
-- **Side-by-side panes look like the same widget**: the alternative (32px outer with thin border) made our checkboxes look smaller, then with a 2px border made them look heavier than LifeSG — neither matched the visual weight.
-- **The hit-area gap is closed at the label**: every S&I demo wraps the indicator in a `<label>` whose text extends the click target well past 24px. Touch-target accessibility is preserved.
-- **`measure-*` divergences are explicit**: the box-model gap is allowlisted as VISUAL-PARITY in `scripts/measure-selection-and-input.mjs` so the trade-off doesn't drift back into "should we re-bump to 32?" cycles.
+- **Side-by-side panes look like the same widget**: the alternative (32px outer with thin border) made our checkboxes look smaller; with a 2px border, heavier than LifeSG; both 32 and a size-6 attempt missed the LifeSG visual weight by ~6px in opposite directions. `size-7` (28px) lands within 2px of LifeSG's ~25.6px visible disc — the closest standard Tailwind size.
+- **The hit-area gap is closed at the label**: every S&I demo wraps the indicator in a `<label>` whose text extends the click target well past 28px. Touch-target accessibility is preserved.
+- **`measure-*` divergences are explicit**: the box-model gap (28 ≠ 32 default) is allowlisted as VISUAL-PARITY in `scripts/measure-selection-and-input.mjs` so the trade-off doesn't drift back into "should we re-bump to 32?" cycles. Small variant `size-6` (24px) matches LifeSG's box-model exactly — no allowlist needed there.
 
 See `[[selection-input-indicator-convention]]` memory.
 

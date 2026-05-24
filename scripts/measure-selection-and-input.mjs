@@ -27,11 +27,9 @@ const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor
 // API divergence, structural diff, or demo-content asymmetry.
 const expectedDivergences = [
   { route: "checkbox", token: "default", reason: "NOISE: 2px h diff is sub-pixel rendering; checkbox chrome aligned." },
-  { route: "checkbox", token: "default-size", reason: "VISUAL-PARITY: LifeSG renders an SVG whose path uses ~14 of 20 viewBox units inside their 32px container (visible checkbox ~22px). We pin our box to size-6 (24px) for visual parity — measured h thus differs from LifeSG's 32px container by 8px. See selection-and-input audit 2026-05-24." },
-  { route: "checkbox", token: "small-size", reason: "VISUAL-PARITY: matches LifeSG's *visible* small-size content (~16.8px) at size-5 (20px) — see checkbox:default-size." },
-  { route: "radio-button", token: "grouped", reason: "VISUAL-PARITY: same root cause as checkbox:default-size — size-6 outer matches LifeSG's visible SVG content, not their 32px container." },
+  { route: "checkbox", token: "default-size", reason: "VISUAL-PARITY: LifeSG renders an SVG whose outer path spans coords 2..18 of a 0..20 viewBox inside their 32px container (visible checkbox ~25.6px). We pin our box to size-7 (28px) — slightly larger than LifeSG's visible content but well below their 32px box-model — for the closest side-by-side weight match. See selection-and-input audit 2026-05-24." },
+  { route: "radio-button", token: "grouped", reason: "VISUAL-PARITY: same root cause as checkbox:default-size — size-7 outer matches LifeSG's visible SVG content, not their 32px box-model container." },
   { route: "radio-button", token: "states", reason: "VISUAL-PARITY: same root cause as radio-button:grouped." },
-  { route: "radio-button", token: "small-size", reason: "VISUAL-PARITY: same root cause as checkbox:small-size for small variant." },
   { route: "otp-input", token: "prefix-error", reason: "NOISE: -2px error-message line-height micro-diff; OTP cell + button chrome aligned." },
   { route: "toggle", token: "checkbox", reason: "DEMO-STATE: ours renders an always-on composite section beneath the second toggle; LifeSG renders 'Show more' collapsed by default. Demo content height differs; toggle chrome (padding, radius, indicator language) matches LifeSG." },
   { route: "toggle", token: "radio", reason: "NOISE: ±8px from toggle inner padding (12/16) vs LifeSG's 11/16/8/16 asymmetric padding. Toggle chrome aligned otherwise." },

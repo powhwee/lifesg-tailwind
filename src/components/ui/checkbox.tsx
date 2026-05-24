@@ -21,13 +21,14 @@ const checkboxVariants = cva(
     variants: {
       displaySize: {
         // Sized to match LifeSG's *visible* checkbox area. LifeSG renders an
-        // SVG whose path uses ~14 of the 20-unit viewBox (the remainder is
-        // transparent padding inside their 32px container), so their checkbox
-        // reads as ~22.4 / ~16.8 px even though the box-model is 32 / 24. We
-        // pin our outer box to that visible size for parity. Touch hit-area
-        // extends via the surrounding <label> in every S&I demo.
-        default: "size-6",
-        small: "size-5",
+        // SVG whose path spans ~14-16 of the 20-unit viewBox (the rest is
+        // transparent padding inside their 32px container), so the visible
+        // checkbox reads ~22-26px. Pinned to size-7 (28px) — slightly above
+        // LifeSG's visible size, far below their 32px box-model — for the
+        // closest side-by-side weight match. Touch hit-area extends via the
+        // surrounding <label> in every S&I demo.
+        default: "size-7",
+        small: "size-6",
       },
     },
     defaultVariants: {
@@ -52,9 +53,9 @@ function Checkbox({ className, displaySize, indeterminate, ...props }: CheckboxP
     >
       <CheckboxPrimitive.Indicator className="inline-flex items-center justify-center">
         {indeterminate ? (
-          <Minus className={displaySize === "small" ? "size-3" : "size-4"} strokeWidth={3} />
+          <Minus className={displaySize === "small" ? "size-4" : "size-5"} strokeWidth={3} />
         ) : (
-          <Check className={displaySize === "small" ? "size-3" : "size-4"} strokeWidth={3} />
+          <Check className={displaySize === "small" ? "size-4" : "size-5"} strokeWidth={3} />
         )}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

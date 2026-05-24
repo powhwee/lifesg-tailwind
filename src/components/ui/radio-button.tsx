@@ -19,10 +19,14 @@ const radioVariants = cva(
   {
     variants: {
       displaySize: {
-        // See checkbox.tsx for sizing rationale (matched to LifeSG's visible
-        // SVG content, not their 32px box-model container).
-        default: "size-6",
-        small: "size-5",
+        // LifeSG renders the radio via an SVG icon whose outer ring spans
+        // coords 2..18 of a 0..20 viewBox inside their 32px container —
+        // i.e. *visible* outer ring is ~25.6px. We pin to size-7 (28px) for
+        // a close match (smaller box-model than LifeSG, larger visible
+        // diameter than the SVG ring, net visual weight in the same range).
+        // See `[[selection-input-indicator-convention]]`.
+        default: "size-7",
+        small: "size-6",
       },
     },
     defaultVariants: {
@@ -51,7 +55,7 @@ function RadioButton<V = string>({
       <RadioPrimitive.Indicator
         className={cn(
           "rounded-full bg-current",
-          displaySize === "small" ? "size-2" : "size-2.5"
+          displaySize === "small" ? "size-2.5" : "size-3"
         )}
       />
     </RadioPrimitive.Root>
