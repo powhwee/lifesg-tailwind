@@ -108,6 +108,47 @@ or the `-compact` variants for tighter contexts. **Never reach for raw `text-lg`
 
 See `[[component-header-convention]]` memory.
 
+## Convention: touch-target sizing
+
+Component chrome that exposes a tap surface (pagination buttons, breadcrumb items, icon-button, date-navigator arrows, accordion expand trigger) uses two shared L3 tokens in `src/app/core-tokens.css`:
+
+```css
+--touch-target-default: 3rem;     /* 48px — input, button-default, IconButton-default, pagination */
+--touch-target-compact: 2.5rem;   /* 40px — IconButton-small, date-navigator arrow, breadcrumb item */
+```
+
+Registered as `--spacing-touch-target-*` in `@theme inline` so utilities `h-touch-target-default`, `size-touch-target-default`, `min-w-touch-target-default` work.
+
+**How to apply**: any interactive chrome element should use one of these tokens instead of raw `size-12` / `size-10` / `h-12` / `h-10`. Picking between default and compact is contextual — default for standalone primary controls (pagination row, page-size selector), compact for dense in-row controls (breadcrumb items, date-navigator arrows, accordion triggers).
+
+See `[[touch-target-convention]]` memory.
+
+## Convention: component-radius
+
+Most LifeSG component chrome uses a **4px** corner radius (`--lifesg-radius-default`). Tailwind's `rounded-md` is 6.4px, which drifts visibly away from LifeSG on Toggle, Filter, DateNavigator and similar wrapper containers. A shared token captures the LifeSG default:
+
+```css
+--component-radius: 0.25rem;   /* 4px */
+```
+
+Registered as `--radius-component` so `rounded-component` is the utility.
+
+**How to apply**: prefer `rounded-component` over `rounded-md` for any component wrapper. Exceptions: Card, Modal, Popover, OTP cell — these already carry per-component `--X-radius` tokens that resolve to 4px (no change needed). ImageButton intentionally stays at `rounded-lg` (8px) — LifeSG matches there.
+
+See `[[component-radius-convention]]` memory.
+
+## Convention: selection-and-input indicator sizing
+
+Checkbox and RadioButton ship at `size-6` (24px) default and `size-5` (20px) small. Both are smaller than LifeSG's measured box-model (32px / 24px containers) but match LifeSG's *visible* SVG content area — LifeSG renders a 20-unit viewBox SVG whose path uses only ~14 viewBox units, leaving ~6 units of transparent padding inside the container.
+
+Choosing visible-size parity over box-model parity is deliberate:
+
+- **Side-by-side panes look like the same widget**: the alternative (32px outer with thin border) made our checkboxes look smaller, then with a 2px border made them look heavier than LifeSG — neither matched the visual weight.
+- **The hit-area gap is closed at the label**: every S&I demo wraps the indicator in a `<label>` whose text extends the click target well past 24px. Touch-target accessibility is preserved.
+- **`measure-*` divergences are explicit**: the box-model gap is allowlisted as VISUAL-PARITY in `scripts/measure-selection-and-input.mjs` so the trade-off doesn't drift back into "should we re-bump to 32?" cycles.
+
+See `[[selection-input-indicator-convention]]` memory.
+
 ## Convention: component body typography
 
 Parallel to the header convention. Body text inside components (Accordion panel, Card body/description, Filter checkbox label, UneditableSection k/v, etc.) uses two shared tokens:

@@ -48,7 +48,7 @@ function Breadcrumb({
           const { className: linkClassName, children, ...rest } = link;
           return (
             <React.Fragment key={i}>
-              <li className="h-10 inline-flex items-center min-w-0">
+              <li className="h-touch-target-compact inline-flex items-center min-w-0">
                 <a
                   aria-current={isLast ? "page" : undefined}
                   className={cn(
@@ -64,7 +64,7 @@ function Breadcrumb({
                 </a>
               </li>
               {!isLast && (
-                <li aria-hidden="true" className="h-10 inline-flex items-center">
+                <li aria-hidden="true" className="h-touch-target-compact inline-flex items-center">
                   <Separator kind={separator} />
                 </li>
               )}

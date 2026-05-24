@@ -33,12 +33,12 @@ function FilterRoot({
       id={id}
       data-slot="filter"
       className={cn(
-        "flex w-72 shrink-0 flex-col rounded-md border border-filter-border bg-filter-bg",
+        "flex min-w-filter-min-width shrink-0 flex-col rounded-component border border-filter-border bg-filter-bg",
         className
       )}
     >
       <header className="flex items-center justify-between border-b border-filter-border px-4 py-4">
-        <h2 className="text-component-header leading-component-header font-bold">{title}</h2>
+        <h2 className="text-component-header-compact leading-component-header-compact font-bold">{title}</h2>
         <button
           type="button"
           onClick={onClear}

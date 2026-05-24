@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 const radioVariants = cva(
   cn(
-    "peer inline-flex shrink-0 items-center justify-center rounded-full border bg-clip-padding outline-none transition-colors cursor-pointer",
+    "peer inline-flex shrink-0 items-center justify-center rounded-full border-2 bg-clip-padding outline-none transition-colors cursor-pointer",
     "border-radio-border bg-radio-bg text-radio-dot",
     "hover:border-radio-border-hover hover:bg-radio-bg-hover",
     "focus-visible:ring-3 focus-visible:ring-radio-ring-focus",
@@ -19,8 +19,10 @@ const radioVariants = cva(
   {
     variants: {
       displaySize: {
-        default: "size-8",
-        small: "size-6",
+        // See checkbox.tsx for sizing rationale (matched to LifeSG's visible
+        // SVG content, not their 32px box-model container).
+        default: "size-6",
+        small: "size-5",
       },
     },
     defaultVariants: {
@@ -49,7 +51,7 @@ function RadioButton<V = string>({
       <RadioPrimitive.Indicator
         className={cn(
           "rounded-full bg-current",
-          displaySize === "small" ? "size-2.5" : "size-3.5"
+          displaySize === "small" ? "size-2" : "size-2.5"
         )}
       />
     </RadioPrimitive.Root>

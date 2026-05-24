@@ -36,50 +36,52 @@ function FeedbackRating({
     <div
       id={id}
       className={cn(
-        "flex flex-col items-center gap-4 py-4",
+        "flex flex-col items-center gap-4 py-4 md:flex-row md:items-center md:justify-center md:gap-6 md:py-4 md:px-12",
         className
       )}
     >
       {imgSrc && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={imgSrc} alt="" className="h-36 w-auto object-contain" />
+        <img src={imgSrc} alt="" className="h-36 w-auto object-contain md:h-32" />
       )}
 
-      {description && (
-        <p className="text-center text-lg font-semibold text-feedback-rating-text">{description}</p>
-      )}
+      <div className="flex flex-col items-center gap-4 md:flex-1">
+        {description && (
+          <p className="text-center text-lg font-semibold text-feedback-rating-text">{description}</p>
+        )}
 
-      <span className="sr-only">Minimum, 1 star. Maximum, 5 stars.</span>
-      <div role="radiogroup" aria-label="Rating" className="flex items-center gap-2">
-        {[1, 2, 3, 4, 5].map((value) => {
-          const isActive = value <= rating;
-          return (
-            <button
-              key={value}
-              type="button"
-              role="radio"
-              aria-checked={value === rating}
-              onClick={() => onRatingChange(value)}
-              className={cn(
-                "rounded-full p-1 transition-colors outline-none cursor-pointer",
-                "text-feedback-rating-star",
-                isActive && "text-feedback-rating-star-active",
-                "hover:text-feedback-rating-star-hover",
-                "focus-visible:ring-3 focus-visible:ring-feedback-rating-ring-focus"
-              )}
-              aria-label={`${value} star${value === 1 ? "" : "s"}`}
-            >
-              <Star
-                className="size-10"
-                fill={isActive ? "currentColor" : "none"}
-                strokeWidth={1.5}
-              />
-            </button>
-          );
-        })}
+        <span className="sr-only">Minimum, 1 star. Maximum, 5 stars.</span>
+        <div role="radiogroup" aria-label="Rating" className="flex items-center gap-2">
+          {[1, 2, 3, 4, 5].map((value) => {
+            const isActive = value <= rating;
+            return (
+              <button
+                key={value}
+                type="button"
+                role="radio"
+                aria-checked={value === rating}
+                onClick={() => onRatingChange(value)}
+                className={cn(
+                  "rounded-full p-1 transition-colors outline-none cursor-pointer",
+                  "text-feedback-rating-star",
+                  isActive && "text-feedback-rating-star-active",
+                  "hover:text-feedback-rating-star-hover",
+                  "focus-visible:ring-3 focus-visible:ring-feedback-rating-ring-focus"
+                )}
+                aria-label={`${value} star${value === 1 ? "" : "s"}`}
+              >
+                <Star
+                  className="size-10"
+                  fill={isActive ? "currentColor" : "none"}
+                  strokeWidth={1.5}
+                />
+              </button>
+            );
+          })}
+        </div>
+
+        <Button onClick={onSubmit} disabled={rating === 0} className="w-full md:w-auto md:self-stretch">{buttonLabel}</Button>
       </div>
-
-      <Button onClick={onSubmit} disabled={rating === 0} className="w-full">{buttonLabel}</Button>
     </div>
   );
 }

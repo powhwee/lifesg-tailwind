@@ -100,7 +100,13 @@
 }
 
 /* ═══════════ toggle ═══════════ */
-/* Layer 3 — Component tokens for Toggle (LifeSG selectable card). */
+/* Layer 3 — Component tokens for Toggle (LifeSG selectable card).
+ *
+ * Padding: LifeSG uses 11/16/8/16 (top/right/bottom/left); we ship 12/16
+ * uniform-vertical so a single token covers both edges. The 4px horizontal
+ * delta vs our prior `p-3` brings the indicator-to-content rhythm in line
+ * with LifeSG without recreating their asymmetric vertical spacing.
+ */
 
 :root {
   --toggle-bg:                    var(--lifesg-bg);
@@ -119,6 +125,9 @@
   --toggle-text-disabled:         var(--lifesg-text-disabled);
 
   --toggle-ring-focus:            color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+
+  --toggle-py:                    0.75rem;    /* 12px */
+  --toggle-px:                    1rem;       /* 16px */
 }
 
 /* ═══════════ icon-button ═══════════ */
@@ -230,7 +239,13 @@
 }
 
 /* ═══════════ date-navigator ═══════════ */
-/* Layer 3 — Component tokens for DateNavigator. */
+/* Layer 3 — Component tokens for DateNavigator.
+ *
+ * `--date-navigator-date-min-width` controls the inner date-string span so
+ * long formats like "12 May 2026, Tuesday" don't truncate or jump width
+ * between values. LifeSG renders a wider date column (~288px) than ours did
+ * pre-audit; this token captures the LifeSG-style minimum.
+ */
 
 :root {
   --date-navigator-bg:                var(--lifesg-bg);
@@ -241,10 +256,19 @@
   --date-navigator-text-date:         var(--lifesg-text-primary);
 
   --date-navigator-ring-focus:        color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+
+  --date-navigator-date-min-width:    18rem;     /* 288px — fits "DD Mmm YYYY, Day" */
 }
 
 /* ═══════════ filter ═══════════ */
-/* Layer 3 — Component tokens for Filter. */
+/* Layer 3 — Component tokens for Filter.
+ *
+ * `--filter-min-width` replaces the previously-hardcoded `w-72` (288px) on
+ * the sidebar. LifeSG's sidebar is intrinsic; we ship a minimum (184px =
+ * LifeSG's measured floor) and let content drive overall width. Consumers
+ * who want a fixed-width sidebar can pass `w-X` via className per the
+ * parity-principle 3-knob model.
+ */
 
 :root {
   --filter-bg:                        var(--lifesg-bg);
@@ -254,5 +278,7 @@
 
   --filter-text:                      var(--lifesg-text);
   --filter-text-link:                 var(--lifesg-text-primary);
+
+  --filter-min-width:                 11.5rem;    /* 184px — LifeSG intrinsic floor */
 }
 

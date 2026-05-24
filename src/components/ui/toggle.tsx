@@ -12,7 +12,7 @@ export type ToggleStyleType = "default" | "no-border";
 
 const toggleVariants = cva(
   cn(
-    "group/toggle relative flex w-full cursor-pointer items-start gap-4 rounded-md p-3 transition-colors",
+    "group/toggle relative flex w-full cursor-pointer items-start gap-4 rounded-component py-toggle-py px-toggle-px transition-colors",
     "border bg-toggle-bg border-toggle-border text-toggle-text",
     "hover:bg-toggle-bg-hover hover:border-toggle-border-hover",
     "has-[input:focus-visible]:ring-3 has-[input:focus-visible]:ring-toggle-ring-focus",

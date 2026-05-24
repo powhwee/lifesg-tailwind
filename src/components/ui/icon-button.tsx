@@ -27,8 +27,8 @@ const iconButtonVariants = cva(
       },
       sizeType: {
         large:   "size-16 [&_svg:not([class*='size-'])]:size-7",
-        default: "size-12 [&_svg:not([class*='size-'])]:size-5",
-        small:   "size-10 [&_svg:not([class*='size-'])]:size-4",
+        default: "size-touch-target-default [&_svg:not([class*='size-'])]:size-5",
+        small:   "size-touch-target-compact [&_svg:not([class*='size-'])]:size-4",
       },
     },
     defaultVariants: { styleType: "primary", sizeType: "default" },

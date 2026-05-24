@@ -27,10 +27,14 @@ const props = ["fontSize", "fontWeight", "lineHeight", "color", "backgroundColor
 // API divergence, structural diff, or demo-content asymmetry.
 const expectedDivergences = [
   { route: "checkbox", token: "default", reason: "NOISE: 2px h diff is sub-pixel rendering; checkbox chrome aligned." },
-  { route: "checkbox", token: "default-size", reason: "NOISE: 2px h diff is sub-pixel rendering." },
+  { route: "checkbox", token: "default-size", reason: "VISUAL-PARITY: LifeSG renders an SVG whose path uses ~14 of 20 viewBox units inside their 32px container (visible checkbox ~22px). We pin our box to size-6 (24px) for visual parity — measured h thus differs from LifeSG's 32px container by 8px. See selection-and-input audit 2026-05-24." },
+  { route: "checkbox", token: "small-size", reason: "VISUAL-PARITY: matches LifeSG's *visible* small-size content (~16.8px) at size-5 (20px) — see checkbox:default-size." },
+  { route: "radio-button", token: "grouped", reason: "VISUAL-PARITY: same root cause as checkbox:default-size — size-6 outer matches LifeSG's visible SVG content, not their 32px container." },
+  { route: "radio-button", token: "states", reason: "VISUAL-PARITY: same root cause as radio-button:grouped." },
+  { route: "radio-button", token: "small-size", reason: "VISUAL-PARITY: same root cause as checkbox:small-size for small variant." },
   { route: "otp-input", token: "prefix-error", reason: "NOISE: -2px error-message line-height micro-diff; OTP cell + button chrome aligned." },
-  { route: "toggle", token: "checkbox", reason: "NOISE: -11px after p-4 → p-3 + always-render composite slot. Demo content height differs slightly; toggle language matches LifeSG." },
-  { route: "toggle", token: "radio", reason: "NOISE: -8px after p-4 → p-3 padding tune that resolved yesno/states variants; radio happens to match LifeSG at original padding by coincidence. Net trade-off favors smaller residuals across the cluster." },
+  { route: "toggle", token: "checkbox", reason: "DEMO-STATE: ours renders an always-on composite section beneath the second toggle; LifeSG renders 'Show more' collapsed by default. Demo content height differs; toggle chrome (padding, radius, indicator language) matches LifeSG." },
+  { route: "toggle", token: "radio", reason: "NOISE: ±8px from toggle inner padding (12/16) vs LifeSG's 11/16/8/16 asymmetric padding. Toggle chrome aligned otherwise." },
   {
     route: "calendar",
     token: "single",
@@ -46,18 +50,18 @@ const expectedDivergences = [
     route: "filter",
     token: "filter",
     reason:
-      "DEMO-STATE: LifeSG demo renders the Filter with the Category section expanded showing 5 checkbox options; ours renders the default collapsed state. Filter chrome (header font, row padding) tuned to match LifeSG — the residual is demo content, not chrome.",
+      "DEMO-STATE: LifeSG demo renders the Filter with the Category section expanded showing 5 checkbox options; ours renders the default collapsed state. Filter chrome (header font, width, radius) tuned to match LifeSG — the residual is demo content, not chrome.",
   },
   {
     route: "feedback-rating",
     token: "basic",
     reason:
-      "Layout-density diff: ours renders the default star illustration (matching LifeSG behavior) but with a vertical stack layout; LifeSG uses a more compact side-by-side image+content layout. API + default-image behavior match.",
+      "NOISE: -30px residual after switching ours to LifeSG-style row layout on md+. Both render same image+description+stars+button language; minor padding/star-button-size diffs account for the residual.",
   },
   {
     route: "feedback-rating",
     token: "with-image",
-    reason: "Same root cause as feedback-rating:basic — vertical stack vs LifeSG side-by-side layout.",
+    reason: "Same root cause as feedback-rating:basic — minor residual after row-layout sweep.",
   },
 ];
 

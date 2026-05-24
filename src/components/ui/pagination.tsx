@@ -39,10 +39,10 @@ function pageWindow(active: number, total: number): (number | null)[] {
 }
 
 const navButtonCx =
-  "inline-flex items-center justify-center size-12 rounded-md border border-pagination-border bg-pagination-bg text-pagination-chevron hover:bg-pagination-bg-hover disabled:pointer-events-none disabled:opacity-40 outline-none focus-visible:border-lifesg-border-focus focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)]";
+  "inline-flex items-center justify-center size-touch-target-default rounded-md border border-pagination-border bg-pagination-bg text-pagination-chevron hover:bg-pagination-bg-hover disabled:pointer-events-none disabled:opacity-40 outline-none focus-visible:border-lifesg-border-focus focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)]";
 
 const pageButtonCx =
-  "inline-flex items-center justify-center min-w-12 h-12 px-2 rounded-md border border-pagination-border bg-pagination-bg tabular-nums text-pagination-text hover:bg-pagination-bg-hover outline-none focus-visible:border-lifesg-border-focus focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)] aria-[current=page]:bg-pagination-bg-active aria-[current=page]:text-pagination-text-active aria-[current=page]:border-pagination-bg-active aria-[current=page]:font-semibold";
+  "inline-flex items-center justify-center min-w-touch-target-default h-touch-target-default px-2 rounded-md border border-pagination-border bg-pagination-bg tabular-nums text-pagination-text hover:bg-pagination-bg-hover outline-none focus-visible:border-lifesg-border-focus focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--lifesg-border-focus)_50%,transparent)] aria-[current=page]:bg-pagination-bg-active aria-[current=page]:text-pagination-text-active aria-[current=page]:border-pagination-bg-active aria-[current=page]:font-semibold";
 
 function Pagination({
   totalItems,
@@ -90,7 +90,7 @@ function Pagination({
       </button>
       {pages.map((p, i) =>
         p === null ? (
-          <span key={`gap-${i}`} className="inline-flex items-center justify-center size-12 text-lifesg-text-subtle select-none">
+          <span key={`gap-${i}`} className="inline-flex items-center justify-center size-touch-target-default text-lifesg-text-subtle select-none">
             ⋯
           </span>
         ) : (
@@ -135,7 +135,7 @@ function Pagination({
               return match ? { value: String(match.value), label: match.label } : null;
             })()}
             onSelectOption={(_, v) => onPageSizeChange?.(1, Number(v))}
-            className="h-input-height w-auto"
+            className="h-touch-target-default w-auto"
           />
         </div>
       )}

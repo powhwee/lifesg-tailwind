@@ -158,12 +158,14 @@
   --color-date-navigator-border:             var(--date-navigator-border);
   --color-date-navigator-text-date:          var(--date-navigator-text-date);
   --color-date-navigator-ring-focus:         var(--date-navigator-ring-focus);
+  --spacing-date-navigator-date-min-width:   var(--date-navigator-date-min-width);
 
   /* L3 — filter */
   --color-filter-bg:                         var(--filter-bg);
   --color-filter-bg-hover:                   var(--filter-bg-hover);
   --color-filter-border:                     var(--filter-border);
   --color-filter-text-link:                  var(--filter-text-link);
+  --spacing-filter-min-width:                var(--filter-min-width);
 
   /* L3 — button */
   --color-button-bg-default:                 var(--button-bg-default);
@@ -492,7 +494,16 @@
   /* L3 — shared navigation convention */
   --spacing-nav-block-spacing: var(--nav-block-spacing);
 
+  /* L3 — shared touch-target convention (core-tokens.css) */
+  --spacing-touch-target-default: var(--touch-target-default);
+  --spacing-touch-target-compact: var(--touch-target-compact);
+
+  /* L3 — shared component-radius convention (core-tokens.css) */
+  --radius-component: var(--component-radius);
+
   /* L3 — toggle */
+  --spacing-toggle-py: var(--toggle-py);
+  --spacing-toggle-px: var(--toggle-px);
   --color-toggle-bg-checked: var(--toggle-bg-checked);
   --color-toggle-bg-disabled: var(--toggle-bg-disabled);
   --color-toggle-bg-error: var(--toggle-bg-error);

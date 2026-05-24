@@ -93,6 +93,43 @@
   --component-body-compact-lh:     var(--lifesg-font-body-lh-sm);      /* 26px */
 }
 
+/* ═══════════ touch-target convention ═══════════
+ *
+ * Shared minimum-tap-size tokens for chrome that surfaces interactive controls
+ * (page-size buttons, pagination, breadcrumb items, date-navigator arrows,
+ * icon-button-small, etc.). Codifies the 48 / 40 split that has been emerging
+ * organically across components.
+ *
+ * Default 48px matches WCAG 2.5.5 AAA minimum for primary actions; compact
+ * 40px is acceptable for dense layouts where a 48px target would dominate
+ * (breadcrumb row, paginator dropdown, in-row arrow buttons).
+ *
+ * Override per-component by passing `h-[…]` or `size-[…]` className; override
+ * globally by re-binding these tokens. Register in @theme inline as
+ * `--spacing-touch-target-*` to produce `h-touch-target-*` / `size-touch-target-*`
+ * utilities.
+ */
+:root {
+  --touch-target-default: 3rem;     /* 48px */
+  --touch-target-compact: 2.5rem;   /* 40px */
+}
+
+/* ═══════════ component-radius convention ═══════════
+ *
+ * Default radius for component chrome (Toggle, Filter sidebar, DateNavigator,
+ * etc.). LifeSG uses 4px consistently across selection-and-input chrome;
+ * shadcn's `rounded-md` (6.4px) drifts away from that. Use --component-radius
+ * for new component chrome unless the LifeSG counterpart explicitly uses
+ * a different value (e.g. ImageButton stays at `rounded-lg` 8px).
+ *
+ * Per-component overrides (Card, Modal, Popover, OTP cell) keep their own
+ * --X-radius tokens — those existed before this convention and are wired
+ * through @theme inline as `--radius-X`.
+ */
+:root {
+  --component-radius: 0.25rem;   /* 4px — matches LifeSG */
+}
+
 /* ═══════════ divider ═══════════ */
 /* Layer 3 — Component tokens for Divider.
  *

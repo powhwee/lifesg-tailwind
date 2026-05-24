@@ -101,7 +101,7 @@ function DateNavigator({
     <div
       id={id}
       className={cn(
-        "h-14 inline-flex items-center gap-2 rounded-md border border-date-navigator-border bg-date-navigator-bg px-1",
+        "h-14 inline-flex items-center gap-2 rounded-component border border-date-navigator-border bg-date-navigator-bg px-1",
         className
       )}
     >
@@ -110,7 +110,7 @@ function DateNavigator({
         aria-label="Previous"
         disabled={!canGoBack}
         onClick={() => onLeftArrowClick(shiftIso(selectedDate, -step))}
-        className="size-10 inline-flex items-center justify-center rounded-md hover:bg-date-navigator-bg-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
+        className="size-touch-target-compact inline-flex items-center justify-center rounded-component hover:bg-date-navigator-bg-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
       >
         <ChevronLeft className="size-5" />
       </button>
@@ -118,10 +118,10 @@ function DateNavigator({
       {onCalendarDateSelect ? (
         <Popover>
           <PopoverTrigger
-            className="inline-flex items-center gap-2 px-3 h-10 rounded-md text-sm font-semibold hover:bg-date-navigator-bg-hover cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
+            className="inline-flex items-center gap-2 px-3 h-touch-target-compact rounded-component text-sm font-semibold hover:bg-date-navigator-bg-hover cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
             disabled={loading}
           >
-            <span className="min-w-[12rem] text-center text-date-navigator-text-date font-bold">{display}</span>
+            <span className="min-w-date-navigator-date-min-width text-center text-date-navigator-text-date font-bold">{display}</span>
           </PopoverTrigger>
           <PopoverContent sideOffset={6} align="center">
             <Calendar
@@ -135,7 +135,7 @@ function DateNavigator({
           </PopoverContent>
         </Popover>
       ) : (
-        <span className="px-3 h-10 inline-flex items-center text-sm font-bold min-w-[12rem] justify-center">
+        <span className="px-3 h-touch-target-compact inline-flex items-center text-sm font-bold min-w-date-navigator-date-min-width justify-center">
           {display}
         </span>
       )}
@@ -145,7 +145,7 @@ function DateNavigator({
         aria-label="Next"
         disabled={!canGoForward}
         onClick={() => onRightArrowClick(shiftIso(selectedDate, step))}
-        className="size-10 inline-flex items-center justify-center rounded-md hover:bg-date-navigator-bg-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
+        className="size-touch-target-compact inline-flex items-center justify-center rounded-component hover:bg-date-navigator-bg-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer outline-none focus-visible:ring-3 focus-visible:ring-date-navigator-ring-focus"
       >
         <ChevronRight className="size-5" />
       </button>

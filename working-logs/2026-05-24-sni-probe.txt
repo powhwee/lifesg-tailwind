@@ -1,0 +1,64 @@
+
+=== checkbox  (/selection-and-input/checkbox/default) ===
+  default-indicator:
+    ours    tag=span  w=32  h=32  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=4.8px  flexDirection=row
+    lifesg  not found
+  small-indicator:
+    ours    tag=span  w=24  h=24  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=4.8px  flexDirection=row
+    lifesg  not found
+
+=== radio-button  (/selection-and-input/radio-button/default) ===
+  default-indicator:
+    ours    tag=span  w=32  h=32  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=3.35544e+07px  flexDirection=row
+    lifesg  not found
+  small-indicator:
+    ours    tag=span  w=24  h=24  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=3.35544e+07px  flexDirection=row
+    lifesg  not found
+
+=== toggle  (/selection-and-input/toggle/default) ===
+  checkbox-card:
+    ours    tag=label  w=240  h=143  padding=12px  gap=16px  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=6.4px  flexDirection=row
+    lifesg  tag=div  w=240  h=108  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=4px  flexDirection=column
+  radio-card:
+    ours    tag=label  w=240  h=74  padding=12px  gap=16px  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=6.4px  flexDirection=row
+    lifesg  tag=div  w=240  h=82  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=4px  flexDirection=column
+
+=== image-button  (/selection-and-input/image-button/default) ===
+  selectable:
+    ours    tag=button  w=103  h=106  padding=24px 16px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=8px  flexDirection=row
+    lifesg  tag=button  w=103  h=106  padding=24px 16px  gap=8px  fontSize=18px  lineHeight=26px  fontWeight=600  borderRadius=8px  flexDirection=column
+
+=== otp-input  (/selection-and-input/otp-input/default) ===
+  cell:
+    ours    tag=input  w=72  h=48  padding=0px  gap=normal  fontSize=18px  lineHeight=28px  fontWeight=600  borderRadius=4px  flexDirection=row
+    lifesg  tag=input  w=73  h=46  padding=0px  gap=normal  fontSize=18px  lineHeight=26px  fontWeight=400  borderRadius=0px  flexDirection=row
+
+=== feedback-rating  (/selection-and-input/feedback-rating/default) ===
+  basic-root:
+    ours    tag=div  w=448  h=348  padding=16px 0px  gap=16px  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=0px  flexDirection=column
+    lifesg  tag=div  w=448  h=246  padding=16px 48px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=0px  flexDirection=row
+  basic-img:
+    ours    tag=img  w=140  h=144  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=0px  flexDirection=row
+    lifesg  tag=img  w=148  h=152  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=0px  flexDirection=row
+  basic-star:
+    ours    tag=button  w=48  h=48  padding=4px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=3.35544e+07px  flexDirection=row
+    lifesg  not found
+  basic-button:
+    ours    tag=button  w=448  h=48  padding=0px 16px  gap=8px  fontSize=18px  lineHeight=26px  fontWeight=600  borderRadius=6.4px  flexDirection=row
+    lifesg  tag=button  w=332  h=48  padding=8px 16px  gap=normal  fontSize=18px  lineHeight=26px  fontWeight=600  borderRadius=4px  flexDirection=row
+
+=== filter  (/selection-and-input/filter/default) ===
+  filter-aside:
+    ours    tag=aside  w=288  h=176  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=6.4px  flexDirection=column
+    lifesg  tag=div  w=182  h=226  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=0px  flexDirection=row
+  filter-title:
+    ours    tag=h2  w=69  h=28  padding=0px  gap=normal  fontSize=22px  lineHeight=28px  fontWeight=700  borderRadius=0px  flexDirection=row
+    lifesg  tag=h2  w=77  h=26  padding=0px  gap=normal  fontSize=18px  lineHeight=26px  fontWeight=600  borderRadius=0px  flexDirection=row
+
+=== date-navigator  (/selection-and-input/date-navigator/default) ===
+  container:
+    ours    tag=div  w=322  h=56  padding=0px 4px  gap=8px  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=6.4px  flexDirection=row
+    lifesg  tag=div  w=492  h=56  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=0px  flexDirection=row
+  arrow:
+    ours    tag=button  w=40  h=40  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=6.4px  flexDirection=row
+    lifesg  tag=button  w=40  h=40  padding=0px  gap=normal  fontSize=16px  lineHeight=24px  fontWeight=400  borderRadius=4px  flexDirection=row
