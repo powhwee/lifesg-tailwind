@@ -17,7 +17,7 @@ LifeSG is a multi-tenant government design system built on styled-components. Th
 - **Hand-rolled interaction logic.** LifeSG's interactive components (Tab, Accordion, Modal, Select, OTP field) implement their own keyboard navigation, focus management, and ARIA state. Edge-case coverage (RTL keyboard, iOS Safari scroll lock, paste-into-OTP, restore-focus-on-close) varies.
 - **Multi-tenancy tax.** LifeSG supports 13 government brands. A single-brand team pays the abstraction cost of infrastructure it doesn't use.
 - **Brand volatility.** The agency is in a brand-development phase — LifeSG's palette is a placeholder. A re-theme is coming. LifeSG-as-dep offers no clean re-theme path without forking the package.
-- **Iteration velocity.** Visual changes to LifeSG-as-dep require a fork-and-rebuild round-trip. Ported components hot-reload via Turbopack in ~100ms.
+- **Iteration velocity.** Modifying LifeSG component internals (layout, composition, interaction) requires forking the package and round-tripping a publish cycle. Ported components are local source — edits hot-reload via Turbopack.
 
 ---
 
