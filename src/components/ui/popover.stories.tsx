@@ -7,7 +7,6 @@ import { Typography } from "./typography";
 const meta: Meta<typeof Popover> = {
   title: "Overlays/Popover",
   component: Popover,
-  tags: ["autodocs"],
 };
 
 export default meta;

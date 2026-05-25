@@ -13,7 +13,6 @@ const mockOptions = [
 const meta: Meta<typeof MultiSelect> = {
   title: "Form/MultiSelect",
   component: MultiSelect,
-  tags: ["autodocs"],
   argTypes: {
     placeholder: {
       control: "text",

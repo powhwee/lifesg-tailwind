@@ -1,0 +1,46 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as RadioStories from "./radio-button.stories";
+
+<Meta of={RadioStories} />
+
+# RadioButton
+
+Single-selection input for mutually exclusive options. Always rendered inside
+a `<RadioGroup>` parent which owns the selected value.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { RadioButton, RadioGroup } from "@/components/ui/radio-button";`}
+/>
+
+## Default
+
+<Canvas of={RadioStories.Default} />
+
+## Sizes
+
+<Canvas of={RadioStories.SmallSize} />
+
+## States
+
+<Canvas of={RadioStories.States} />
+
+## Props
+
+<Controls of={RadioStories.Default} />
+
+## Accessibility
+
+- `<RadioGroup>` provides keyboard arrow-key navigation between siblings.
+- Each `<RadioButton>` should pair with a `<label htmlFor={id}>` so screen
+  readers announce the control with its label.
+- `aria-invalid="true"` flips the chrome to the error variant.
+
+## Notes
+
+- Default size is `size-7` (28 px); small is `size-5` (20 px). These match
+  LifeSG's *visible* SVG ring (~25.6 px in their 32 px container).
+- Inner dot is a CSS `<span>` inside a Lucide `<Circle>` outline (rather than
+  Lucide's `<CircleDot>` whose proportions read too small).

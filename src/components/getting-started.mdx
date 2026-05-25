@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Getting Started" />
+
+# LifeSG → Tailwind/shadcn Component Library
+
+This Storybook documents the components ported from
+[`@lifesg/react-design-system`](https://designsystem.life.gov.sg/react/index.html)
+into a Tailwind 4 + shadcn + Base UI stack. The product looks like LifeSG; the
+implementation is fully owned.
+
+## Stack
+
+- **React 19** + **Next.js 16** (App Router, Turbopack)
+- **Tailwind 4** with `@theme inline` token registration
+- **shadcn** as the source recipe for base primitives
+- **Base UI** (`@base-ui/react`) for headless interactive primitives (Dialog,
+  Popover, Menu, Tabs, etc.)
+- **Lucide** as the icon vocabulary
+
+## Using a component
+
+Each component lives in `src/components/ui/`. Import by name:
+
+```tsx
+import { Button } from "@/components/ui/button";
+import { Modal } from "@/components/ui/modal";
+import { Input, FormInput } from "@/components/ui/input";
+
+export function Example() {
+  return (
+    <Button variant="default" size="default">
+      Click me
+    </Button>
+  );
+}
+```
+
+The `@/` alias resolves to `src/`. See [Buttons →](?path=/docs/selection-and-input-button--docs)
+for a fully documented example.
+
+## How the library is organized
+
+### Foundations
+
+Design primitives the component system rests on — colours, typography, spacing,
+shadows, radius. Browse the [Foundations section](?path=/docs/foundations-colours--default)
+of the sidebar.
+
+### Components
+
+Grouped by LifeSG's taxonomy:
+
+- **Core** — `Typography`, `Divider`, `Icon`, `Layout`, …
+- **Content** — `Card`, `Tab`, `Accordion`, `DataTable`, …
+- **Overlays** — `Modal`, `ModalV2`, `Popover`, `Drawer`, `Menu`
+- **Navigation** — `Avatar`, `Breadcrumb`, `Masthead`, `Pagination`, …
+- **Selection and input** — `Button`, `Checkbox`, `RadioButton`, `Toggle`, `Filter`, …
+- **Form** — `Input`, `Select`, `MultiSelect`, `DateInput`, …
+
+## Parity principle
+
+The library follows a **match the language, not the layout** principle:
+components ship opinionated LifeSG-like defaults via Level-3 design tokens,
+overridable at per-call / global / scoped layers. Where LifeSG itself is an
+outlier within this project's design language (e.g. branded SVG icons), the
+port deliberately diverges and documents the decision.
+
+See `docs/parity-principle.md` for the full discussion.
+
+## Conventions
+
+Established shared conventions (each documented in
+`docs/parity-principle.md`):
+
+| Convention | Token / API | What it covers |
+|---|---|---|
+| Nav block spacing | `--nav-block-spacing` | Navigation components carry internal vertical spacing |
+| Component header | `--component-header-*` | Widget titles — 22/28 bold default, 18/26 bold compact |
+| Component body | `--component-body-*` | Widget body text — 16/24 default, 14/26 compact |
+| Touch-target sizing | `--touch-target-*` | 48 px default / 40 px compact for interactive chrome |
+| Component-radius | `--component-radius` | 4 px default via `rounded-component` |
+| Selection-input indicator | `size-6 / size-5` … | Visible-disc parity for Checkbox + RadioButton |
+
+## Verification
+
+The port ships with a multi-layer verification harness — smoke, computed-style
+measurement, behavioural, and pixel-diff visual review — runnable in one
+command. See README.md "Pillar 3" for the full architecture.

@@ -1,0 +1,52 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as CheckboxStories from "./checkbox.stories";
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+Single-selection input for binary or indeterminate boolean state. Two display
+sizes; supports `checked`, `defaultChecked`, `indeterminate`, `disabled`, and
+`aria-invalid`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Checkbox } from "@/components/ui/checkbox";`}
+/>
+
+## Default
+
+<Canvas of={CheckboxStories.Default} />
+
+## Variants
+
+<Canvas of={CheckboxStories.Checked} />
+<Canvas of={CheckboxStories.Indeterminate} />
+<Canvas of={CheckboxStories.SmallSize} />
+
+## States
+
+<Canvas of={CheckboxStories.States} />
+
+## Props
+
+<Controls of={CheckboxStories.Default} />
+
+## Accessibility
+
+- Renders a native `<input type="checkbox">` via Base UI primitives; full
+  keyboard support out of the box (Space toggles).
+- Pair with a `<label htmlFor={id}>` so screen readers announce the control
+  with its label.
+- For `indeterminate`, the underlying input also gets `aria-checked="mixed"`.
+
+## Notes
+
+- Default size is `size-6` (24 px), small is `size-4` (16 px). These match
+  LifeSG's *visible* SVG content, not their 32 / 24 px box-model. See
+  `docs/parity-principle.md` "Selection-input indicator" for the rationale.
+- Chrome renders via Lucide icons — see the
+  [DESIGN-LANGUAGE divergence](?path=/docs/getting-started--docs) noted in
+  the parity table.

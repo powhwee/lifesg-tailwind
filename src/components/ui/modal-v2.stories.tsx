@@ -7,7 +7,6 @@ import { Typography } from "./typography";
 const meta: Meta<typeof ModalV2> = {
   title: "Overlays/ModalV2",
   component: ModalV2,
-  tags: ["autodocs"],
   argTypes: {
     show: {
       control: "boolean",

@@ -1,0 +1,48 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as ToggleStories from "./toggle.stories";
+
+<Meta of={ToggleStories} />
+
+# Toggle
+
+Card-style selection control that wraps a checkbox or radio behaviour in a
+labeled, padded surface. Use for opinionated form choices where a plain
+checkbox or radio would feel under-styled (e.g. "Select a delivery option").
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Toggle } from "@/components/ui/toggle";`}
+/>
+
+## Default
+
+<Canvas of={ToggleStories.Default} />
+
+## Variants
+
+<Canvas of={ToggleStories.Checked} />
+<Canvas of={ToggleStories.Disabled} />
+<Canvas of={ToggleStories.ErrorState} />
+
+## Composite section
+
+<Canvas of={ToggleStories.CompositeSection} />
+
+## Group
+
+<Canvas of={ToggleStories.ToggleGroup} />
+
+## Props
+
+<Controls of={ToggleStories.Default} />
+
+## Notes
+
+- `type` controls the underlying input ("checkbox", "radio", "yes", "no").
+- `subLabel` adds a secondary description below the primary label.
+- `compositeSection` renders content below the toggle card, revealed when the
+  toggle is checked.
+- Padding uses `--toggle-py / --toggle-px`; the card itself uses
+  `rounded-component` (4 px) per the component-radius convention.

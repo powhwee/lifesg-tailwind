@@ -1,0 +1,48 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as ButtonStories from "./button.stories";
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Primary call-to-action component. Supports six variants (`default`, `outline`,
+`secondary`, `ghost`, `destructive`, `link`) and seven sizes including four
+icon-only sizes.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Button } from "@/components/ui/button";`}
+/>
+
+## Default
+
+<Canvas of={ButtonStories.Default} />
+
+## Variants
+
+<Canvas of={ButtonStories.Outline} />
+<Canvas of={ButtonStories.Secondary} />
+<Canvas of={ButtonStories.Ghost} />
+<Canvas of={ButtonStories.Destructive} />
+<Canvas of={ButtonStories.Link} />
+
+## Sizes
+
+<Canvas of={ButtonStories.Sizes} />
+
+## States
+
+<Canvas of={ButtonStories.Disabled} />
+
+## Props
+
+<Controls of={ButtonStories.Default} />
+
+## Accessibility
+
+- Renders a native `<button>` by default; pair `aria-label` with `size="icon*"`
+  when the button has no visible text.
+- Disabled buttons set `aria-disabled` and skip focus.
+- Focus ring uses `--lifesg-border-focus` via the component-radius token.

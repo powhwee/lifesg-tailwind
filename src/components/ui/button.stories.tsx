@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./button";
+import { Row, Stack } from "@/components/storybook-common";
 
 const meta: Meta<typeof Button> = {
   title: "Selection and input/Button",
   component: Button,
-  tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",
@@ -68,20 +68,20 @@ export const Link: Story = {
 
 export const Sizes: Story = {
   render: (args) => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-4">
+    <Stack>
+      <Row>
         <Button {...args} size="xs">Extra Small</Button>
         <Button {...args} size="sm">Small</Button>
         <Button {...args} size="default">Default</Button>
         <Button {...args} size="lg">Large</Button>
-      </div>
-      <div className="flex items-center gap-4">
+      </Row>
+      <Row>
         <Button {...args} size="icon-xs" title="Icon XS">X</Button>
         <Button {...args} size="icon-sm" title="Icon SM">S</Button>
         <Button {...args} size="icon" title="Icon Default">D</Button>
         <Button {...args} size="icon-lg" title="Icon LG">L</Button>
-      </div>
-    </div>
+      </Row>
+    </Stack>
   ),
 };
 

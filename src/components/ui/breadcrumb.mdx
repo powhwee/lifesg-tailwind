@@ -1,0 +1,36 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as BreadcrumbStories from "./breadcrumb.stories";
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+Hierarchical wayfinding for nested routes. Renders an ordered list of links
+with chevron or slash separators.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Breadcrumb } from "@/components/ui/breadcrumb";`}
+/>
+
+## Default
+
+<Canvas of={BreadcrumbStories.Default} />
+
+## Slash separator
+
+<Canvas of={BreadcrumbStories.SlashSeparator} />
+
+## Props
+
+<Controls of={BreadcrumbStories.Default} />
+
+## Accessibility
+
+- Renders inside `<nav aria-label="Breadcrumb">`.
+- The final crumb is marked `aria-current="page"` so screen readers
+  announce it as the current location.
+- Each link has a `--touch-target-compact` (40 px) hit area for
+  comfortable touch use.

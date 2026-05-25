@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
 import { Toggle } from "./toggle";
+import { Stack } from "@/components/storybook-common";
 
 const meta: Meta<typeof Toggle> = {
   title: "Selection and input/Toggle",
   component: Toggle,
-  tags: ["autodocs"],
   argTypes: {
     type: {
       control: "select",
@@ -73,19 +73,17 @@ export const CompositeSection: Story = {
 };
 
 export const ToggleGroup: Story = {
-  render: () => {
-    return (
-      <div className="flex flex-col gap-3 max-w-md">
-        <Toggle type="radio" name="grp" defaultChecked>
-          Option A
-        </Toggle>
-        <Toggle type="radio" name="grp">
-          Option B
-        </Toggle>
-        <Toggle type="radio" name="grp">
-          Option C
-        </Toggle>
-      </div>
-    );
-  },
+  render: () => (
+    <Stack gap={3} className="max-w-md">
+      <Toggle type="radio" name="grp" defaultChecked>
+        Option A
+      </Toggle>
+      <Toggle type="radio" name="grp">
+        Option B
+      </Toggle>
+      <Toggle type="radio" name="grp">
+        Option C
+      </Toggle>
+    </Stack>
+  ),
 };

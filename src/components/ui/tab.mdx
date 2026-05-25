@@ -1,0 +1,43 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as TabStories from "./tab.stories";
+
+<Meta of={TabStories} />
+
+# Tab
+
+Horizontally scrollable tab strip with active-indicator underline. Each
+`<Tab.Item>` accepts a `title` and renders its children when active.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Tab } from "@/components/ui/tab";`}
+/>
+
+## Default
+
+<Canvas of={TabStories.Default} />
+
+## Props
+
+<Controls of={TabStories.Default} />
+
+## Composition
+
+```tsx
+<Tab initialActive={0} fullWidthIndicatorLine>
+  <Tab.Item title="Profile">…</Tab.Item>
+  <Tab.Item title="Applications">…</Tab.Item>
+  <Tab.Item title="Inbox">…</Tab.Item>
+</Tab>
+```
+
+## Accessibility
+
+- Tab triggers are `role="tab"`, panels are `role="tabpanel"`, with proper
+  `aria-controls` / `aria-labelledby` wiring (via Base UI).
+- Left / Right arrows move focus between triggers; Home / End jump to
+  first / last.
+- `fullWidthIndicatorLine` extends the bottom border across the full tab
+  strip even when tabs don't fill the row.

@@ -1,0 +1,46 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as PopoverStories from "./popover.stories";
+
+<Meta of={PopoverStories} />
+
+# Popover
+
+Anchored floating panel for contextual help, menus, or pickers. Built on
+`@base-ui/react/popover`. Use `<PopoverTrigger>` to anchor a popover to any
+focusable element.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";`}
+/>
+
+## Default
+
+<Canvas of={PopoverStories.Default} />
+
+## Custom placement
+
+<Canvas of={PopoverStories.CustomPlacement} />
+
+## Composition
+
+```tsx
+<Popover>
+  <PopoverTrigger
+    render={(triggerProps) => <Button {...triggerProps}>Help</Button>}
+  />
+  <PopoverContent side="top" align="start">
+    Helpful prose…
+  </PopoverContent>
+</Popover>
+```
+
+## Accessibility
+
+- Anchored to its trigger via `aria-haspopup` / `aria-expanded`.
+- Dismissed by clicking outside or pressing Escape.
+- Focus returns to the trigger on close.
+- `side` accepts `top` / `right` / `bottom` / `left`; `align` accepts
+  `start` / `center` / `end`. Auto-flips when there isn't room.

@@ -1,0 +1,42 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as MultiSelectStories from "./multi-select.stories";
+
+<Meta of={MultiSelectStories} />
+
+# MultiSelect
+
+Multi-choice dropdown for picking zero-or-more options. The trigger
+summarizes the current selection; the listbox is a checkbox list inside a
+popover.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { MultiSelect, FormMultiSelect } from "@/components/ui/multi-select";`}
+/>
+
+## Default
+
+<Canvas of={MultiSelectStories.Default} />
+
+## Variants
+
+<Canvas of={MultiSelectStories.MaxSelectable} />
+<Canvas of={MultiSelectStories.CustomSummary} />
+
+## Composite form field
+
+<Canvas of={MultiSelectStories.CompositeFormField} />
+
+## Props
+
+<Controls of={MultiSelectStories.Default} />
+
+## Notes
+
+- `maxSelectable` caps the count of selected options. Once reached, the
+  unselected checkboxes are disabled.
+- `formatSummary({ count, labels })` lets you customize the trigger label —
+  e.g. "3 fruits selected" instead of the default comma-joined list.
+- Reach for `FormMultiSelect` when you need the standard form-field layout.

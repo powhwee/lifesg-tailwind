@@ -1,0 +1,42 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as AccordionStories from "./accordion.stories";
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+Stacked, collapsible content sections with an optional global expand-all
+control. Uses Base UI's accordion primitives for keyboard nav and ARIA.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Accordion } from "@/components/ui/accordion";`}
+/>
+
+## Default
+
+<Canvas of={AccordionStories.Default} />
+
+## Small variant
+
+<Canvas of={AccordionStories.SmallVariant} />
+
+## Props
+
+<Controls of={AccordionStories.Default} />
+
+## Composition
+
+Each section is an `<Accordion.Item>` with a `title` prop and the body content
+as children. The `type="small"` prop tightens padding and uses the compact
+header type.
+
+## Accessibility
+
+- Item triggers expose `aria-expanded` and `aria-controls` on the trigger
+  button, with `role="region"` on the panel.
+- Arrow keys move focus between triggers; Home / End jump to first / last.
+- The "Expand all" toggle, when enabled, updates every section's open state
+  in sync.

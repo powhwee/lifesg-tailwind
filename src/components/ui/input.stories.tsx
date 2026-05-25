@@ -5,7 +5,6 @@ import { Input, FormInput } from "./input";
 const meta: Meta<typeof Input> = {
   title: "Form/Input",
   component: Input,
-  tags: ["autodocs"],
   argTypes: {
     allowClear: {
       control: "boolean",

@@ -1,0 +1,42 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as SelectStories from "./select.stories";
+
+<Meta of={SelectStories} />
+
+# Select
+
+Single-choice dropdown for picking one option from a list. Built on
+`@base-ui/react/select`. Reach for `FormSelect` when you need the standard
+form-field layout (label + description + error).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Select, FormSelect } from "@/components/ui/select";`}
+/>
+
+## Default
+
+<Canvas of={SelectStories.Default} />
+
+## Variants
+
+<Canvas of={SelectStories.Disabled} />
+<Canvas of={SelectStories.ErrorState} />
+
+## Composite form field
+
+<Canvas of={SelectStories.CompositeFormField} />
+
+## Props
+
+<Controls of={SelectStories.Default} />
+
+## Accessibility
+
+- Listbox keyboard nav: Up / Down to move, Enter / Space to commit,
+  Escape to close.
+- Type-ahead: hitting a letter jumps to the next option starting with that
+  letter.
+- `aria-expanded` and `aria-controls` wire the trigger to the listbox.

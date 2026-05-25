@@ -4,7 +4,6 @@ import { Tab } from "./tab";
 const meta: Meta<typeof Tab> = {
   title: "Content/Tab",
   component: Tab,
-  tags: ["autodocs"],
   argTypes: {
     initialActive: {
       control: "number",

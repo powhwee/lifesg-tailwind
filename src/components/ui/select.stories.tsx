@@ -13,7 +13,6 @@ const mockOptions = [
 const meta: Meta<typeof Select> = {
   title: "Form/Select",
   component: Select,
-  tags: ["autodocs"],
   argTypes: {
     placeholder: {
       control: "text",

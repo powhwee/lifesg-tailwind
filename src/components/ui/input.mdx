@@ -1,0 +1,48 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as InputStories from "./input.stories";
+
+<Meta of={InputStories} />
+
+# Input
+
+Plain single-line text input. For a fully composed form field (label +
+description + error), reach for `FormInput`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Input, FormInput } from "@/components/ui/input";`}
+/>
+
+## Default
+
+<Canvas of={InputStories.Default} />
+
+## Variants
+
+<Canvas of={InputStories.Clearable} />
+<Canvas of={InputStories.Disabled} />
+<Canvas of={InputStories.ReadOnly} />
+<Canvas of={InputStories.ErrorState} />
+
+## Composite form field
+
+<Canvas of={InputStories.CompositeFormField} />
+
+## Form field with error
+
+<Canvas of={InputStories.FormFieldWithError} />
+
+## Props
+
+<Controls of={InputStories.Default} />
+
+## Notes
+
+- `allowClear` adds a clear-button slot when `value` is non-empty; call
+  `onClear` to reset the controlled value.
+- `aria-invalid="true"` flips the input to its error variant (red border,
+  appropriate focus ring).
+- Use `FormInput` when you want the standard label + description + error
+  layout — it's the same input wrapped with the shared `FormField` slot.

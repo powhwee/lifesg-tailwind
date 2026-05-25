@@ -1,0 +1,64 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as TypographyStories from "./typography.stories";
+
+<Meta of={TypographyStories} />
+
+# Typography
+
+The `Typography` component renders text at a fixed scale (variant) and weight,
+inheriting LifeSG's typography ramp. Use it instead of bare HTML elements
+when you want the scale + weight to be explicit and consistent.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Typography } from "@/components/ui/typography";`}
+/>
+
+## Default
+
+<Canvas of={TypographyStories.Default} />
+
+## Variants
+
+### Headings
+
+<Canvas of={TypographyStories.Headings} />
+
+### Body
+
+<Canvas of={TypographyStories.Body} />
+
+### Weights
+
+<Canvas of={TypographyStories.Weights} />
+
+## Line clamp
+
+<Canvas of={TypographyStories.LineClamp} />
+
+## Props
+
+<Controls of={TypographyStories.Default} />
+
+## Scale reference
+
+| Variant | Size / Line-height |
+|---|---|
+| `heading-xxl` | 30 / 38 |
+| `heading-xl` | 26 / 34 |
+| `heading-lg` | 24 / 32 |
+| `heading-md` | 20 / 28 |
+| `heading-sm` | 18 / 26 |
+| `heading-xs` | 16 / 24 |
+| `body-bl` | 18 / 28 |
+| `body-md` | 16 / 24 |
+| `body-sm` | 14 / 26 |
+| `body-xs` | 12 / 20 |
+
+## Notes
+
+- `body-sm` uses a *spacious* 26 px line-height (LifeSG's BodySM line is
+  taller than what Tailwind's `text-sm` would give you — 14 / 20 vs 14 / 26).
+- `paragraph` adds bottom margin; `maxLines` enables CSS line-clamp.

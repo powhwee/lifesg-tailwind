@@ -1,0 +1,63 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as ModalV2Stories from "./modal-v2.stories";
+
+<Meta of={ModalV2Stories} />
+
+# ModalV2
+
+Slot-composition modal for confirm / decision dialogs. Built on
+`@base-ui/react/dialog`. Use ModalV2 (not `Modal`) when your dialog has a
+header + body + button-row shape.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { ModalV2 } from "@/components/ui/modal-v2";`}
+/>
+
+## Default
+
+<Canvas of={ModalV2Stories.Default} />
+
+## Props
+
+<Controls of={ModalV2Stories.Default} />
+
+## Composition
+
+```tsx
+<ModalV2 show={show} onClose={() => setShow(false)}>
+  <ModalV2.Card>
+    <ModalV2.CloseButton />
+    <ModalV2.Content>
+      {/* heading + body prose */}
+    </ModalV2.Content>
+    <ModalV2.Footer
+      primaryButton={<Button onClick={confirm}>Proceed</Button>}
+      secondaryButton={<Button variant="outline" onClick={cancel}>Cancel</Button>}
+    />
+  </ModalV2.Card>
+</ModalV2>
+```
+
+## Dismissal semantics
+
+- **Escape** and the **close button** fire `onClose`.
+- **Backdrop click** fires `onOverlayClick` (gated by `enableOverlayClick`).
+  It does *not* auto-fire `onClose` — the consumer decides whether to
+  dismiss. This is the deliberate cleanup from v1's overload of
+  `onOverlayClick`.
+
+## When to reach for v1 vs v2
+
+- **v1 (`Modal` + `Modal.Box`)** — free-form modal content. Stays for things
+  like fullscreen carousels and form-embedded popups.
+- **v2 (slot composition)** — opinionated confirm / decision dialogs with
+  64 px desktop gutters and primary-on-right / stacked-on-mobile button row.
+
+## What's not yet ported
+
+- `rootComponentId` (LifeSG's DOM-id-lookup portal target) — Base UI Dialog
+  defaults to `document.body`. Pass a `container` ref directly if needed.
+- iOS Safari visual-viewport tracking for the mobile keyboard offset.

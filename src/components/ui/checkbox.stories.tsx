@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./checkbox";
+import { LabeledControl, Stack } from "@/components/storybook-common";
 
 const meta: Meta<typeof Checkbox> = {
   title: "Selection and input/Checkbox",
   component: Checkbox,
-  tags: ["autodocs"],
   argTypes: {
     displaySize: {
       control: "select",
@@ -53,31 +53,37 @@ export const SmallSize: Story = {
 
 export const States: Story = {
   render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-3">
-        <Checkbox id="chk-1" />
-        <label htmlFor="chk-1" className="text-sm">Unchecked</label>
-      </div>
-      <div className="flex items-center gap-3">
-        <Checkbox id="chk-2" defaultChecked />
-        <label htmlFor="chk-2" className="text-sm">Checked</label>
-      </div>
-      <div className="flex items-center gap-3">
-        <Checkbox id="chk-3" indeterminate />
-        <label htmlFor="chk-3" className="text-sm">Indeterminate</label>
-      </div>
-      <div className="flex items-center gap-3">
-        <Checkbox id="chk-4" disabled />
-        <label htmlFor="chk-4" className="text-sm text-muted-foreground">Disabled Unchecked</label>
-      </div>
-      <div className="flex items-center gap-3">
-        <Checkbox id="chk-5" defaultChecked disabled />
-        <label htmlFor="chk-5" className="text-sm text-muted-foreground">Disabled Checked</label>
-      </div>
-      <div className="flex items-center gap-3">
-        <Checkbox id="chk-6" aria-invalid="true" />
-        <label htmlFor="chk-6" className="text-sm text-destructive">Invalid / Error State</label>
-      </div>
-    </div>
+    <Stack>
+      <LabeledControl htmlFor="chk-1" control={<Checkbox id="chk-1" />}>
+        Unchecked
+      </LabeledControl>
+      <LabeledControl htmlFor="chk-2" control={<Checkbox id="chk-2" defaultChecked />}>
+        Checked
+      </LabeledControl>
+      <LabeledControl htmlFor="chk-3" control={<Checkbox id="chk-3" indeterminate />}>
+        Indeterminate
+      </LabeledControl>
+      <LabeledControl
+        htmlFor="chk-4"
+        control={<Checkbox id="chk-4" disabled />}
+        labelClassName="text-muted-foreground"
+      >
+        Disabled Unchecked
+      </LabeledControl>
+      <LabeledControl
+        htmlFor="chk-5"
+        control={<Checkbox id="chk-5" defaultChecked disabled />}
+        labelClassName="text-muted-foreground"
+      >
+        Disabled Checked
+      </LabeledControl>
+      <LabeledControl
+        htmlFor="chk-6"
+        control={<Checkbox id="chk-6" aria-invalid="true" />}
+        labelClassName="text-destructive"
+      >
+        Invalid / Error State
+      </LabeledControl>
+    </Stack>
   ),
 };

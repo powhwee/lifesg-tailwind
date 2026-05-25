@@ -4,7 +4,6 @@ import { Breadcrumb } from "./breadcrumb";
 const meta: Meta<typeof Breadcrumb> = {
   title: "Navigation/Breadcrumb",
   component: Breadcrumb,
-  tags: ["autodocs"],
   argTypes: {
     separator: {
       control: "select",
