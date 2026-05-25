@@ -1,5 +1,12 @@
 # Storybook Handover — May 24, 2026
 
+> **Update 2026-05-25:** Phases 1, 2, and the first 3 stories of Phase 3
+> are done. See `2026-05-25-storybook-phase1-3.md` for the work record,
+> decision log, SB10 quirks, and the MDX template. The remaining Phase 3
+> coverage (14 simple components) + Phase 4 (high-complexity) + Phase 5
+> (foundations polish) stay open; the component inventory + roadmap
+> below is still authoritative for those.
+
 ## Current State
 
 Storybook v10.4.1 is set up and running on this Next.js 16 + Tailwind v4 + Base UI project. Config lives in `.storybook/main.ts` and `.storybook/preview.ts`.
@@ -140,25 +147,25 @@ Notes from original where applicable
 
 Add stories for simpler components that are mostly presentational:
 
-| Component | Category | Complexity |
-|-----------|----------|------------|
-| `divider` | Core | Trivial — just horizontal/vertical |
-| `label` | Form | Trivial — text with optional required indicator |
-| `card` | Content | Low — container with slots |
-| `avatar` | Navigation | Low — image/initials circle |
-| `icon` | Core | Low — render a few icons |
-| `icon-button` | Selection and input | Low — button with icon |
-| `image-button` | Selection and input | Low — button with image |
-| `markup` | Core | Low — HTML renderer |
-| `layout` | Core | Low — container with max-width |
-| `field` | Form | Low — form field wrapper |
-| `form-field` | Form | Low — label + error |
-| `box-container` | Content | Low — styled container |
-| `table` | Content | Low — basic table |
-| `textarea` | Form | Low — multiline input |
-| `feedback-rating` | Selection and input | Low — star/emoji rating |
-| `text-list` | Core (or Form) | Low — ordered/unordered list |
-| `uneditable-section` | Content (or Form) | Low — readonly display |
+| Component | Category | Complexity | Status |
+|-----------|----------|------------|--------|
+| `divider` | Core | Trivial — just horizontal/vertical | ✅ 2026-05-25 (stories only, no MDX yet) |
+| `label` | Form | Trivial — text with optional required indicator | ✅ 2026-05-25 (stories only, no MDX yet) |
+| `icon` | Core | Low — render a few icons | ✅ 2026-05-25 (stories only, no MDX yet) |
+| `card` | Content | Low — container with slots | pending |
+| `avatar` | Navigation | Low — image/initials circle | pending |
+| `icon-button` | Selection and input | Low — button with icon | pending |
+| `image-button` | Selection and input | Low — button with image | pending |
+| `markup` | Core | Low — HTML renderer | pending |
+| `layout` | Core | Low — container with max-width | pending |
+| `field` | Form | Low — form field wrapper | pending |
+| `form-field` | Form | Low — label + error | pending |
+| `box-container` | Content | Low — styled container | pending |
+| `table` | Content | Low — basic table | pending |
+| `textarea` | Form | Low — multiline input | pending |
+| `feedback-rating` | Selection and input | Low — star/emoji rating | pending |
+| `text-list` | Core (or Form) | Low — ordered/unordered list | pending |
+| `uneditable-section` | Content (or Form) | Low — readonly display | pending |
 
 ### Phase 4: Component Coverage — High Complexity
 *Estimated: 2–3 sessions*
