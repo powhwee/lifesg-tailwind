@@ -11,13 +11,6 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    backgrounds: {
-      default: "light",
-      values: [
-        { name: "light", value: "#ffffff" },
-        { name: "dark", value: "#111827" }, // Matches Tailwind gray-900 / dark mode bg
-      ],
-    },
   },
   decorators: [
     withThemeByClassName({

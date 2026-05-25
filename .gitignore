@@ -46,6 +46,9 @@ next-env.d.ts
 /blob-report/
 /playwright/.cache/
 
+# storybook
+/storybook-static/
+
 # claude code (local-only)
 .claude/settings.local.json
 firebase-debug.log
