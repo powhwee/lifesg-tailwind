@@ -1,0 +1,50 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as LabelStories from "./label.stories";
+
+<Meta of={LabelStories} />
+
+# Label
+
+Form field label. Wraps a native `<label>` and inherits the LifeSG field
+label tokens (`--field-label`, `--field-text-label`). Pair with an input
+via `htmlFor`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Label } from "@/components/ui/label";`}
+/>
+
+## Default
+
+<Canvas of={LabelStories.Default} />
+
+## States
+
+<Canvas of={LabelStories.Disabled} />
+<Canvas of={LabelStories.WithRequiredMark} />
+<Canvas of={LabelStories.States} />
+
+## Props
+
+<Controls of={LabelStories.Default} />
+
+## Accessibility
+
+- Always set `htmlFor` matching the associated input `id`. Clicking a
+  label without `htmlFor` does not focus the field.
+- Required marks (`*`) must be `aria-hidden="true"` so screen readers
+  hear the label text rather than punctuation; convey "required" via
+  `required` / `aria-required` on the input itself.
+- Disabled state is exposed via `data-disabled` and styled through the
+  `--field-text-disabled` token; the underlying input still owns the
+  semantic `disabled` attribute.
+
+## Notes
+
+- Typography is driven by `--field-label` / `--leading-field-label` —
+  do not override with raw `text-sm` etc. (see the component-body
+  convention).
+- For more elaborate field composition (label + helper + error),
+  prefer `form-field` once its stories land.

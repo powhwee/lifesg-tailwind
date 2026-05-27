@@ -1,0 +1,64 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as IconStories from "./icon.stories";
+
+<Meta of={IconStories} />
+
+# Icon
+
+Token-driven wrapper around a Lucide (or any SVG) component. Pass the
+icon component via `as`; size and tone come from the design system.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Check } from "lucide-react";
+import { Icon } from "@/components/ui/icon";
+
+<Icon as={Check} tone="success" size="lg" />`}
+/>
+
+## Default
+
+<Canvas of={IconStories.Default} />
+
+## Sizes
+
+<Canvas of={IconStories.Sizes} />
+
+Sizes map to fixed pixel boxes: `xs=12`, `sm=16`, `md=20`, `lg=24`,
+`xl=32`. The same scale Lucide and LifeSG agree on.
+
+## Tones
+
+<Canvas of={IconStories.Tones} />
+
+Tones map to `--icon-color-*` tokens: `default`, `subtle`, `strong`,
+`primary`, `success`, `warning`, `error`, `info`, `inverse`. Use
+`inverse` on dark backgrounds.
+
+## Gallery
+
+<Canvas of={IconStories.Gallery} />
+
+## Props
+
+<Controls of={IconStories.Default} />
+
+## Accessibility
+
+- Decorative icons must set `aria-hidden="true"` (forwarded to the
+  underlying SVG via `...props`).
+- Meaningful icons need an accessible label — usually `aria-label` on
+  the icon, or screen-reader-only text alongside it.
+- Tone is purely visual; never rely on colour alone to convey state
+  (pair `tone="error"` with text or an `aria-label`).
+
+## Notes
+
+- `as` accepts any `ComponentType<SVGProps<SVGSVGElement>>` — Lucide
+  icons are the default fit but custom SVGs work too.
+- `shrink-0` is built in to keep icons from squashing inside flex
+  containers.
+- Token namespace: `--icon-color-*`. Add a new tone by registering the
+  token in `@theme inline` first (see the token convention memory).

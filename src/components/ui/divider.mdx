@@ -1,0 +1,46 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as DividerStories from "./divider.stories";
+
+<Meta of={DividerStories} />
+
+# Divider
+
+Horizontal rule with token-driven thickness, line style, and colour.
+Defaults pull from `--divider-thickness`, `--divider-style`, and
+`--divider-color`; per-call props override only what is passed.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Divider } from "@/components/ui/divider";`}
+/>
+
+## Default
+
+<Canvas of={DividerStories.Default} />
+
+## Variants
+
+<Canvas of={DividerStories.Dashed} />
+<Canvas of={DividerStories.Thickness} />
+<Canvas of={DividerStories.CustomColor} />
+
+## Props
+
+<Controls of={DividerStories.Default} />
+
+## Accessibility
+
+- Renders a native `<hr>`, which assistive tech announces as a separator.
+- Decorative dividers inside a list or grid should set
+  `aria-hidden="true"` on the wrapping element if they add no semantic
+  break.
+
+## Notes
+
+- Token namespace: `--divider-*` (thickness / style / color). Override
+  globally via `:root` or scope via a wrapping `[data-scope]`.
+- Thickness is rendered through `border-t-[length:var(...)]` — Tailwind
+  arbitrary-value syntax — and accepts any CSS length, but stories cap
+  the control at 1–8 px to match LifeSG usage.
