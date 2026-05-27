@@ -1,0 +1,68 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as ModalStories from "./modal.stories";
+
+<Meta of={ModalStories} />
+
+# Modal (v1)
+
+LifeSG's legacy modal API. `Modal` is the root (takes `show` +
+`onOverlayClick`); `Modal.Box` is the standard content shell with
+optional X close button. Wraps Base UI's `Dialog` with a coloured
+backdrop and entry animation.
+
+For new work, prefer **ModalV2** (`Overlays/ModalV2`) — it exposes
+the trigger/title/footer slots as separate parts and matches Base UI's
+modern Dialog shape. Modal v1 stays around for parity with existing
+LifeSG-React-DS migrations.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Modal } from "@/components/ui/modal";
+
+<Modal show={open} onOverlayClick={() => setOpen(false)}>
+  <Modal.Box showCloseButton onClose={() => setOpen(false)}>
+    …
+  </Modal.Box>
+</Modal>`}
+/>
+
+## Default
+
+<Canvas of={ModalStories.Default} />
+
+## Animation directions
+
+<Canvas of={ModalStories.AnimateFromTop} />
+<Canvas of={ModalStories.AnimateFromLeft} />
+<Canvas of={ModalStories.AnimateFromRight} />
+
+## Dismissal
+
+<Canvas of={ModalStories.NoOverlayClick} />
+<Canvas of={ModalStories.PlainBox} />
+
+## Accessibility
+
+- Renders a Base UI `Dialog` which handles focus trap, focus
+  restoration, and Esc to close.
+- The popup accepts `aria-label`, `aria-labelledby`, and
+  `aria-describedby` props at the Modal root; supply at least one for
+  every modal so screen readers announce it.
+- `aria-label="Close"` is built into the X button on `Modal.Box`.
+- Backdrop click closure can be disabled via
+  `enableOverlayClick={false}` for confirmation dialogs — pair with
+  an explicit dismiss button so users aren't trapped.
+
+## Notes
+
+- The `Modal` and `Modal.Box` exports are bundled — `Composite =
+  Object.assign(ModalRoot, { Box: ModalBox })`. One import covers both.
+- Token namespaces: `--modal-backdrop`, `--modal-box-bg`,
+  `--modal-box-shadow`, `--modal-box-padding`, `--modal-box-rounded`.
+- `zIndex` prop bumps the backdrop + popup base z-index (default uses
+  whatever the Portal / stacking context provides) — useful when the
+  modal needs to sit above other floating chrome.
+- For new code prefer **ModalV2**; this component is preserved for
+  parity with existing LifeSG screens.

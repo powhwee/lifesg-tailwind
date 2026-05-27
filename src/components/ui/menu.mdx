@@ -1,0 +1,91 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as MenuStories from "./menu.stories";
+
+<Meta of={MenuStories} />
+
+# Menu
+
+Dropdown menu built on Base UI's `Menu`. Supports plain items, link
+items, checkbox items, radio groups, separators, group labels, and
+submenus.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import {
+  Menu,
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+  MenuCheckboxItem,
+  MenuRadioGroup,
+  MenuRadioItem,
+  MenuGroup,
+  MenuGroupLabel,
+  MenuSeparator,
+  MenuSubmenu,
+  MenuSubmenuTrigger,
+  MenuLinkItem,
+} from "@/components/ui/menu";
+
+<Menu>
+  <MenuTrigger render={<Button>Open</Button>} />
+  <MenuContent>
+    <MenuItem onClick={…}>Action</MenuItem>
+  </MenuContent>
+</Menu>`}
+/>
+
+## Default
+
+<Canvas of={MenuStories.Default} />
+
+## With groups
+
+<Canvas of={MenuStories.WithGroups} />
+
+## Checkbox items
+
+<Canvas of={MenuStories.CheckboxItems} />
+
+## Radio group
+
+<Canvas of={MenuStories.RadioGroup} />
+
+## Submenu
+
+<Canvas of={MenuStories.Submenu} />
+
+## Link items
+
+<Canvas of={MenuStories.LinkItems} />
+
+## Disabled items
+
+<Canvas of={MenuStories.DisabledItems} />
+
+## Accessibility
+
+- Base UI wires the trigger and popup with `aria-haspopup`,
+  `aria-expanded`, `aria-controls`, plus keyboard navigation
+  (Arrow keys, Home/End, type-to-select).
+- Checkbox items expose `aria-checked` correctly with `true` /
+  `false`; radio items report `aria-checked` per group.
+- `MenuLinkItem` is a real `<a>` so screen readers announce it as a
+  link rather than a menu item — pick `MenuItem` (with `onClick`) for
+  in-app navigation handled by JS.
+- Submenu trigger sets `aria-haspopup="menu"` and supports keyboard
+  open (right arrow) and close (left arrow).
+
+## Notes
+
+- Token namespaces: `--popover-*` (shared shell tokens — border, bg,
+  shadow, radius). Items use `--lifesg-bg-hover` for highlight.
+- Use `MenuCheckboxItem` for boolean toggles, `MenuRadioItem` inside a
+  `MenuRadioGroup` for exclusive choices. Don't manually wire the
+  checkmark / dot — both are rendered by the component.
+- Submenu can re-use `MenuContent` so the visual styling stays
+  consistent.
+- For a single button-triggered popover with arbitrary content (not
+  list items), use `popover` instead.

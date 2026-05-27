@@ -1,0 +1,73 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as DrawerStories from "./drawer.stories";
+
+<Meta of={DrawerStories} />
+
+# Drawer
+
+Side-anchored panel built on Base UI's `Dialog`. Slides in from any of
+four sides, supports header + body + footer slots, and ships with a
+built-in close button (can be hidden for custom chrome).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerClose,
+} from "@/components/ui/drawer";
+
+<Drawer>
+  <DrawerTrigger render={<Button>Open</Button>} />
+  <DrawerContent side="right">
+    <DrawerHeader><DrawerTitle>Title</DrawerTitle></DrawerHeader>
+    <DrawerBody>…</DrawerBody>
+    <DrawerFooter>…</DrawerFooter>
+  </DrawerContent>
+</Drawer>`}
+/>
+
+## Sides
+
+<Canvas of={DrawerStories.Default} />
+<Canvas of={DrawerStories.Left} />
+<Canvas of={DrawerStories.Top} />
+<Canvas of={DrawerStories.Bottom} />
+
+## Composition variants
+
+<Canvas of={DrawerStories.HideClose} />
+<Canvas of={DrawerStories.BodyOnly} />
+
+## Triggered
+
+<Canvas of={DrawerStories.TriggeredByButton} />
+
+## Accessibility
+
+- Base UI's `Dialog` handles focus trapping, focus restoration, and Esc
+  to close. Tab cycles inside the drawer until it's dismissed.
+- `DrawerTitle` should always be present (even when visually styled) —
+  Base UI wires it to `aria-labelledby` on the popup.
+- `aria-label="Close"` on the X button is built in; no extra plumbing
+  required.
+- Backdrop blocks pointer events on the rest of the page while the
+  drawer is open.
+
+## Notes
+
+- Token namespaces: `--drawer-width-side`, `--drawer-height-side`,
+  `--drawer-bg`, `--drawer-overlay`, `--drawer-shadow`.
+- The side prop only affects slide direction + dimensions; the same
+  Header / Body / Footer composition works for all four sides.
+- For dropdown-style overlays (no full-screen backdrop), use
+  `popover` or `menu` instead.
+- `DrawerClose` is a render-prop wrapper — pass it any clickable
+  element via `render={…}` to close the drawer on click.
