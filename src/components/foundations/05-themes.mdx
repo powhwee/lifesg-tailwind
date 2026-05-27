@@ -1,0 +1,68 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Themes/Introduction" />
+
+# Themes
+
+This port ships **one canonical theme** — the LifeSG design language.
+Multi-tenant theming (per-agency colour palettes like LifeSG's own
+BookingSG / CCube / IMDA themes) is not in scope.
+
+What **is** in scope:
+
+1. **Dark mode** — opt-in via `.dark` class on `<html>` or a parent
+   element. Surfaces a different set of L2 background values without
+   touching component code.
+2. **Parity principle** — components ship opinionated LifeSG-like
+   defaults via L3 tokens. Consumers override at three scopes
+   (`:root`, `[data-scope]`, per-call) without forking the component.
+
+## Dark mode
+
+Toggle in this Storybook via the Theme switcher in the toolbar (top
+right). In your app, set the `dark` class on the `<html>` element
+(or any wrapper) and the entire token system flips.
+
+<Source
+  language="tsx"
+  code={`<html className={isDark ? "dark" : ""}>
+  …
+</html>`}
+/>
+
+Dark-mode tokens are defined under the `.dark` selector in
+`src/app/lifesg-tokens.css`. Overriding a single L2 alias under
+`.dark` changes how every component looks in dark mode — including
+custom components that haven't been "dark-mode aware" themselves, as
+long as they key off L2 tokens.
+
+## Parity principle (L3 token layer)
+
+The parity principle is the core of how this port stays maintainable
+without forking the LifeSG visual language. The rule:
+
+> **Match the language, not the layout.**
+> Components ship opinionated LifeSG-like defaults via L3 tokens;
+> consumers override at three scopes without editing the component.
+
+Override scopes:
+
+| Scope | Where | When |
+|-------|-------|------|
+| **Per-call** | `style={{ "--card-bg": "…" }}` on the element | One-off override for a single instance |
+| **Scoped** | `[data-scope="…"] { --card-bg: …; }` in a stylesheet | A subtree / page section needs different chrome |
+| **Global** | `:root { --card-bg: …; }` in your `globals.css` | App-wide visual swap |
+
+The component never needs to know which scope is active — it always
+reads its L3 tokens (`var(--card-bg)`, `var(--card-padding-x)`, etc.)
+and the cascade resolves the value.
+
+## See also
+
+- `docs/parity-principle.md` — full write-up of the rationale and
+  patterns.
+- Every component's MDX **Notes** section lists its L3 token namespace
+  so you know what to override.
+- `Foundations/Colours/LifeSG`, `Foundations/Spacing/Default`,
+  `Foundations/Radius/Default`, `Foundations/Shadow/Default` for the
+  L1 / L2 reference.

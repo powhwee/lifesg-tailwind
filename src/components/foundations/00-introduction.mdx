@@ -1,0 +1,61 @@
+import { Meta, Source } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Introduction" />
+
+# Foundations
+
+These pages document the design token system underlying every
+component. The system is layered so a small change at one layer
+propagates upward without touching component code.
+
+## Token layers
+
+The port uses three logical layers, mirroring LifeSG's own taxonomy:
+
+| Layer | What | Examples | Location |
+|-------|------|----------|----------|
+| **L1** | Raw scales — colour ramps, font sizes, spacing, radii | `--lifesg-brand-50`, `--lifesg-spacing-16`, `--lifesg-radius-md` | `src/app/lifesg-tokens.css` |
+| **L2** | Semantic aliases over L1 | `--lifesg-bg-primary`, `--lifesg-text-error`, `--lifesg-border-focus` | `src/app/lifesg-tokens.css` |
+| **L3** | Component tokens over L2 | `--button-bg-primary`, `--input-border-focus`, `--popover-shadow` | `src/app/{core,form,content,...}-tokens.css` |
+
+The L3 layer is where the **parity principle** lives: components ship
+opinionated LifeSG-like defaults via L3 tokens. Consumers override the
+look at three scopes — global (`:root`), wrapping scope
+(`[data-scope]`), or per-call props — without ever editing the
+component's CSS classes.
+
+## Foundation pages
+
+- **Colours** — full LifeSG ramps + semantic aliases
+- **Spacing** — `--lifesg-spacing-*` scale
+- **Radius** — `--lifesg-radius-*` scale + component-radius
+- **Shadow** — `--lifesg-shadow-*` family
+- **Themes** — dark mode + parity-principle convention
+
+## Where to look in code
+
+Token names map cleanly to file locations:
+
+<Source
+  language="bash"
+  code={`# L1/L2 — LifeSG raw + semantic tokens
+src/app/lifesg-tokens.css
+
+# L3 — component tokens by category
+src/app/core-tokens.css
+src/app/form-tokens.css
+src/app/content-tokens.css
+src/app/selection-and-input-tokens.css
+src/app/navigation-tokens.css
+src/app/overlays-tokens.css
+
+# Tailwind @theme inline mapping
+# (maps every token used as a utility, e.g. text-foo, bg-foo)
+src/app/globals.css`}
+/>
+
+## See also
+
+- `docs/parity-principle.md` — the why behind the L3 token layer.
+- Component MDX pages — every component documents its token namespace
+  in the **Notes** section.
