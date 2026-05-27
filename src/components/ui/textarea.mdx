@@ -1,0 +1,59 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as TextareaStories from "./textarea.stories";
+
+<Meta of={TextareaStories} />
+
+# Textarea
+
+Multiline text input. Shares the LifeSG `--input-*` token system with
+`Input`, plus an optional character counter for length-limited fields.
+Exposes two exports: raw `Textarea` and a `FormTextarea` composite that
+embeds it in `FormField`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Textarea, FormTextarea } from "@/components/ui/textarea";`}
+/>
+
+## Default
+
+<Canvas of={TextareaStories.Default} />
+
+## Variants
+
+<Canvas of={TextareaStories.WithCounter} />
+<Canvas of={TextareaStories.Disabled} />
+<Canvas of={TextareaStories.ReadOnly} />
+<Canvas of={TextareaStories.ErrorState} />
+
+## Composite (FormTextarea)
+
+<Canvas of={TextareaStories.CompositeFormField} />
+<Canvas of={TextareaStories.FormFieldWithError} />
+
+## Props
+
+<Controls of={TextareaStories.Default} />
+
+## Accessibility
+
+- `aria-invalid="true"` triggers the error border + ring tokens. Pair
+  it with a visible message via `FormTextarea`'s `errorMessage` so screen
+  readers actually hear what is wrong.
+- The counter ("N characters left") is decorative — it sits outside the
+  control and is not announced. For length-critical fields, surface the
+  same information in the description or error message.
+- `readOnly` keeps the control focusable so users can copy the text;
+  `disabled` removes it from the tab order entirely.
+
+## Notes
+
+- `showCounter` requires `maxLength` — without an upper bound there's
+  nothing to count down from. The component silently ignores
+  `showCounter` if `maxLength` is missing.
+- `resize-y` is built in so users can drag the bottom edge but not the
+  width — keeps the layout stable inside a fixed-width column.
+- Token namespace: shared `--input-*` plus `--input-counter-text` for
+  the counter row.

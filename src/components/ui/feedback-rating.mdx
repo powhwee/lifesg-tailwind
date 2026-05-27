@@ -1,0 +1,58 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as FeedbackRatingStories from "./feedback-rating.stories";
+
+<Meta of={FeedbackRatingStories} />
+
+# FeedbackRating
+
+A controlled five-star rating with banner illustration, optional prompt
+text, and a submit button. Stacks vertically on mobile and shifts to a
+horizontal layout from `md` upwards.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { FeedbackRating } from "@/components/ui/feedback-rating";
+
+const [rating, setRating] = React.useState(0);
+
+<FeedbackRating
+  rating={rating}
+  onRatingChange={setRating}
+  onSubmit={() => submitRating(rating)}
+  description="How was your experience?"
+/>`}
+/>
+
+## Default
+
+<Canvas of={FeedbackRatingStories.Default} />
+
+## Variants
+
+<Canvas of={FeedbackRatingStories.WithDescription} />
+<Canvas of={FeedbackRatingStories.PreFilled} />
+<Canvas of={FeedbackRatingStories.CustomButtonLabel} />
+
+## Accessibility
+
+- The five stars render as a `role="radiogroup"` with each star a
+  `role="radio"` button. Arrow keys move focus between stars (native
+  button keyboard semantics — Tab leaves the group).
+- A screen-reader-only sentence ("Minimum, 1 star. Maximum, 5 stars.")
+  introduces the scale before the radiogroup.
+- Each star button carries `aria-label="N star(s)"` so the selection is
+  announced unambiguously.
+- The submit button is disabled until at least one star is selected —
+  prevents accidental empty submissions and matches LifeSG behaviour.
+
+## Notes
+
+- The component is controlled — `rating` and `onRatingChange` are
+  required. Storybook examples wrap it in a small state holder.
+- `imgSrc` defaults to LifeSG's hosted banner illustration. Override
+  with a project-specific asset (or pass an empty string to suppress
+  the image entirely).
+- Token namespace: `--feedback-rating-*` (text, star resting / hover /
+  active colours, focus ring).

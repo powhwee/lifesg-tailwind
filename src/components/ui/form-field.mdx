@@ -1,0 +1,62 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as FormFieldStories from "./form-field.stories";
+
+<Meta of={FormFieldStories} />
+
+# FormField
+
+Opinionated wrapper around `Field` that renders label, description,
+children, and an optional error in the standard LifeSG order. Most
+single-input form rows should use this rather than composing `Field`
+parts directly.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { FormField } from "@/components/ui/form-field";`}
+/>
+
+## Default
+
+<Canvas of={FormFieldStories.Default} />
+
+## Variants
+
+<Canvas of={FormFieldStories.WithDescription} />
+<Canvas of={FormFieldStories.WithError} />
+<Canvas of={FormFieldStories.Disabled} />
+
+## reserveErrorSlot
+
+<Canvas of={FormFieldStories.ReservedErrorSlot} />
+
+Use `reserveErrorSlot` for composite inputs (date, unit number, etc.)
+where the layout should not shift when an error appears. The slot
+collapses to nothing when omitted — that is the default for simple
+single-input fields.
+
+## Props
+
+<Controls of={FormFieldStories.Default} />
+
+## Accessibility
+
+- `label`, `description`, and `errorMessage` are wired into the child
+  control via Base UI's `Field` plumbing — the rendered input gets
+  `aria-labelledby`, `aria-describedby`, and `aria-invalid` without
+  manual props.
+- When `errorMessage` is set, `invalid` is also forwarded to the
+  underlying `Field` so consumer inputs can pick up the invalid state
+  via Base UI's context.
+- `disabled` propagates to descendants; pair with `disabled` on the
+  underlying control to actually block interaction.
+
+## Notes
+
+- Most paired components in the kit (`FormInput`, `FormTextarea`,
+  `FormSelect`, etc.) are thin wrappers around `FormField` + the
+  matching control. Compose `FormField` directly when no such wrapper
+  exists.
+- For multi-control rows (radio groups, checkbox grids, layouts with
+  internal labels), the lower-level `Field` parts give finer control.

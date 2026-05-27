@@ -1,0 +1,60 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as FieldStories from "./field.stories";
+
+<Meta of={FieldStories} />
+
+# Field
+
+Low-level field composition kit. Thin wrapper around Base UI's `Field`
+primitives — `Field`, `FieldLabel`, `FieldDescription`, `FieldError`,
+`FieldControl`, `FieldValidity` — styled with LifeSG field tokens.
+Use this when you need full control over field layout; for the standard
+label + description + error pattern, prefer `FormField`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+  FieldControl,
+  FieldValidity,
+} from "@/components/ui/field";`}
+/>
+
+## Default
+
+<Canvas of={FieldStories.Default} />
+
+## Variants
+
+<Canvas of={FieldStories.WithDescription} />
+<Canvas of={FieldStories.WithError} />
+<Canvas of={FieldStories.Disabled} />
+
+## Accessibility
+
+- Base UI wires up label-to-control association and validation state
+  automatically when the parts are nested inside `Field`. The control
+  receives the right `aria-invalid` / `aria-describedby` references
+  without manual ID plumbing.
+- `FieldDescription` becomes the input's accessible description; it is
+  hidden via `data-[disabled]:hidden` when the field is disabled, so
+  screen readers don't announce instructions for a control they cannot
+  reach.
+- `FieldError` carries a `CircleAlert` icon by default; pass `hideIcon`
+  if the surrounding layout already conveys the error state visually.
+
+## Notes
+
+- Token namespace: `--field-*` (label/description/error sizes,
+  line-heights, and colours). The composite components in the stories
+  use the existing `--input-*` tokens for the control surface.
+- Pair with `FieldControl` for the actual input element; it is just a
+  re-export of Base UI's `Field.Control` and accepts any input props.
+- For typical forms, reach for `FormField` (one element, label +
+  description + error in the right order) instead of composing these
+  parts by hand.
