@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Form Comparison: LifeSG vs Tailwind Port</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1 { color: #f0f6fc; font-size: 1.5rem; margin-bottom: 0.25rem; }
+    h2 {
+      color: #f0f6fc; font-size: 1.15rem;
+      margin: 2.5rem 0 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #21262d;
+    }
+    .subtitle { color: #8b949e; font-size: 0.9rem; margin-bottom: 2rem; }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .panel {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-bottom: 1px solid #30363d;
+      display: flex;
+      justify-content: space-between;
+    }
+    .panel-header .tag {
+      font-weight: 400;
+      opacity: 0.6;
+    }
+    .panel-header.lifesg { background: #1c1224; color: #d2a8ff; }
+    .panel-header.tailwind { background: #0d2818; color: #7ee787; }
+    .panel pre {
+      padding: 1rem;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.75rem;
+      line-height: 1.65;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre;
+      tab-size: 2;
+    }
+    .cm { color: #8b949e; }
+    .kw { color: #ff7b72; }
+    .fn { color: #d2a8ff; }
+    .str { color: #a5d6ff; }
+    .pr { color: #79c0ff; }
+    .note {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-left: 3px solid #58a6ff;
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+      margin: 0.5rem 0 1.5rem;
+      font-size: 0.85rem;
+      color: #8b949e;
+    }
+    .note strong { color: #c9d1d9; }
+    .note.green { border-left-color: #3fb950; }
+    .note.yellow { border-left-color: #d29922; }
+    .full-width {
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Job Application Form — Full Code Comparison</h1>
+<p class="subtitle">Every file a developer writes, shown side by side. Same feature, same visual output.</p>
+
+<!-- ===================== LAYOUT ===================== -->
+<h2>1. Root Layout — <code>app/layout.tsx</code></h2>
+
+<div class="compare">
+  <div class="panel">
+    <div class="panel-header lifesg">LifeSG v3.x / v4 <span class="tag">app/layout.tsx</span></div>
+    <pre>
+<span class="cm">// app/layout.tsx</span>
+<span class="kw">import</span> { LifeSGProviderWrapper } <span class="kw">from</span> <span class="str">"@/components/lifesg-provider-wrapper"</span>;
+
+<span class="kw">export default function</span> <span class="fn">RootLayout</span>({ children }) {
+  <span class="kw">return</span> (
+    &lt;<span class="kw">html</span> lang=<span class="str">"en"</span>&gt;
+      &lt;<span class="kw">body</span>&gt;
+        &lt;<span class="fn">LifeSGProviderWrapper</span>&gt;
+          {children}
+        &lt;/<span class="fn">LifeSGProviderWrapper</span>&gt;
+      &lt;/<span class="kw">body</span>&gt;
+    &lt;/<span class="kw">html</span>&gt;
+  );
+}
+</pre>
+  </div>
+  <div class="panel">
+    <div class="panel-header tailwind">Tailwind Port <span class="tag">app/layout.tsx</span></div>
+    <pre>
+<span class="cm">// app/layout.tsx</span>
+<span class="kw">import</span> { Navbar } <span class="kw">from</span> <span class="str">"@/components/ui/navbar"</span>;
+<span class="kw">import</span> { Footer } <span class="kw">from</span> <span class="str">"@/components/ui/footer"</span>;
+<span class="kw">import</span> <span class="str">"@/styles/globals.css"</span>;
+
+<span class="kw">export default function</span> <span class="fn">RootLayout</span>({ children }) {
+  <span class="kw">return</span> (
+    &lt;<span class="kw">html</span> lang=<span class="str">"en"</span>&gt;
+      &lt;<span class="kw">body</span>&gt;
+        &lt;<span class="fn">Navbar</span> <span class="pr">title</span>=<span class="str">"CareerNav"</span> <span class="pr">items</span>={[...]} /&gt;
+        &lt;<span class="kw">main</span>&gt;{children}&lt;/<span class="kw">main</span>&gt;
+        &lt;<span class="fn">Footer</span> <span class="pr">links</span>={[...]} /&gt;
+      &lt;/<span class="kw">body</span>&gt;
+    &lt;/<span class="kw">html</span>&gt;
+  );
+}
+</pre>
+  </div>
+</div>
+
+<div class="note yellow">
+  <strong>Difference:</strong> LifeSG needs a <code>'use client'</code> provider wrapper for ThemeProvider. The Tailwind port puts Navbar and Footer directly in the server layout — no provider, no client boundary. The Navbar/Footer code that LifeSG puts in <code>application-form.tsx</code> (below) lives here instead.
+</div>
+
+<!-- ===================== PROVIDER (LifeSG only) ===================== -->
+<h2>2. Provider Wrapper — LifeSG only</h2>
+
+<div class="compare">
+  <div class="panel">
+    <div class="panel-header lifesg">LifeSG v3.x / v4 <span class="tag">components/lifesg-provider-wrapper.tsx</span></div>
+    <pre>
+<span class="str">"use client"</span>; <span class="cm">// Required — ThemeProvider uses React Context</span>
+
+<span class="kw">import</span> { LifeSGProvider } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system"</span>;
+<span class="kw">import</span> { BaseTheme } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/theme"</span>;
+
+<span class="kw">export function</span> <span class="fn">LifeSGProviderWrapper</span>({ children }) {
+  <span class="kw">return</span> (
+    &lt;<span class="fn">LifeSGProvider</span> <span class="pr">theme</span>={BaseTheme}&gt;
+      {children}
+    &lt;/<span class="fn">LifeSGProvider</span>&gt;
+  );
+}
+</pre>
+  </div>
+  <div class="panel">
+    <div class="panel-header tailwind">Tailwind Port</div>
+    <pre>
+
+<span class="cm">// This file does not exist.</span>
+<span class="cm">// No provider wrapper is needed.</span>
+<span class="cm">// Styling is handled by static CSS (globals.css).</span>
+
+</pre>
+  </div>
+</div>
+
+<!-- ===================== PAGE ===================== -->
+<h2>3. Page Component — <code>app/jobs/[id]/apply/page.tsx</code></h2>
+
+<div class="compare">
+  <div class="panel">
+    <div class="panel-header lifesg">LifeSG v3.x / v4 <span class="tag">page.tsx — Server Component</span></div>
+    <pre>
+<span class="cm">// app/jobs/[id]/apply/page.tsx</span>
+<span class="kw">import</span> { ApplicationForm } <span class="kw">from</span> <span class="str">"@/components/jobs/application-form"</span>;
+<span class="kw">import</span> { getJobDetails } <span class="kw">from</span> <span class="str">"@/lib/api"</span>;
+
+<span class="kw">export default async function</span> <span class="fn">ApplyPage</span>({ params }) {
+  <span class="kw">const</span> job = <span class="kw">await</span> getJobDetails(params.id);
+
+  <span class="cm">// Hands off ALL rendering to client component</span>
+  <span class="kw">return</span> &lt;<span class="fn">ApplicationForm</span> <span class="pr">job</span>={job} /&gt;;
+}
+</pre>
+  </div>
+  <div class="panel">
+    <div class="panel-header tailwind">Tailwind Port <span class="tag">page.tsx — Server Component</span></div>
+    <pre>
+<span class="cm">// app/jobs/[id]/apply/page.tsx</span>
+<span class="kw">import</span> { getJobDetails } <span class="kw">from</span> <span class="str">"@/lib/api"</span>;
+<span class="kw">import</span> { Content, Section } <span class="kw">from</span> <span class="str">"@/components/ui/layout"</span>;
+<span class="kw">import</span> { Typography } <span class="kw">from</span> <span class="str">"@/components/ui/typography"</span>;
+<span class="kw">import</span> { ApplicationForm } <span class="kw">from</span> <span class="str">"./application-form"</span>;
+
+<span class="kw">export default async function</span> <span class="fn">ApplyPage</span>({ params }) {
+  <span class="kw">const</span> job = <span class="kw">await</span> getJobDetails(params.id);
+
+  <span class="kw">return</span> (
+    &lt;<span class="fn">Content</span>&gt;
+      &lt;<span class="fn">Section</span>&gt;
+        <span class="cm">{/* Static headings — server-rendered HTML */}</span>
+        &lt;<span class="fn">Typography</span> <span class="pr">as</span>=<span class="str">"h1"</span>&gt;Apply for {job.title}&lt;/<span class="fn">Typography</span>&gt;
+        &lt;<span class="fn">Typography</span> <span class="pr">as</span>=<span class="str">"p"</span>&gt;at {job.company}&lt;/<span class="fn">Typography</span>&gt;
+
+        <span class="cm">{/* Only the form is a client component */}</span>
+        &lt;<span class="fn">ApplicationForm</span> <span class="pr">job</span>={job} /&gt;
+      &lt;/<span class="fn">Section</span>&gt;
+    &lt;/<span class="fn">Content</span>&gt;
+  );
+}
+</pre>
+  </div>
+</div>
+
+<div class="note yellow">
+  <strong>Difference:</strong> The LifeSG page.tsx is a thin pass-through — it fetches data then delegates everything to a client component. The Tailwind port page.tsx renders the layout wrappers and headings directly as server HTML, passing only the interactive form to the client.
+</div>
+
+<!-- ===================== APPLICATION FORM ===================== -->
+<h2>4. Application Form — <code>application-form.tsx</code> <span style="color:#d29922">(the main file)</span></h2>
+
+<div class="compare">
+  <div class="panel">
+    <div class="panel-header lifesg">LifeSG v3.x / v4 <span class="tag">'use client'</span></div>
+    <pre>
+<span class="str">"use client"</span>;
+
+<span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">import</span> { Form } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/form"</span>;
+<span class="kw">import</span> { Layout } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/layout"</span>;
+<span class="kw">import</span> { Navbar } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/navbar"</span>;
+<span class="kw">import</span> { Footer } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/footer"</span>;
+<span class="kw">import</span> { Modal } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/modal"</span>;
+<span class="kw">import</span> { Button } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/button"</span>;
+<span class="kw">import</span> { ErrorDisplay } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/error-display"</span>;
+<span class="kw">import</span> { Text } <span class="kw">from</span> <span class="str">"@lifesg/react-design-system/text"</span>;
+
+<span class="kw">export function</span> <span class="fn">ApplicationForm</span>({ job }) {
+  <span class="kw">const</span> [formData, setFormData] = useState({...});
+  <span class="kw">const</span> [errors, setErrors] = useState({});
+  <span class="kw">const</span> [showConfirm, setShowConfirm] = useState(<span class="kw">false</span>);
+  <span class="cm">// ... validate, handleSubmit ...</span>
+
+  <span class="kw">return</span> (
+    &lt;&gt;
+      <span class="cm">{/* Navbar — static, but must be here */}</span>
+      &lt;<span class="fn">Navbar</span>
+        <span class="pr">title</span>=<span class="str">"CareerNav"</span>
+        <span class="pr">items</span>={[
+          { id: <span class="str">"jobs"</span>, children: <span class="str">"Jobs"</span>, href: <span class="str">"/jobs"</span> },
+          { id: <span class="str">"profile"</span>, children: <span class="str">"Profile"</span>, href: <span class="str">"/profile"</span> },
+        ]}
+      /&gt;
+
+      &lt;<span class="fn">Layout.Content</span>&gt;
+        &lt;<span class="fn">Layout.Section</span>&gt;
+          &lt;<span class="fn">Text.H1</span>&gt;Apply for {job.title}&lt;/<span class="fn">Text.H1</span>&gt;
+          &lt;<span class="fn">Text.Body</span>&gt;at {job.company}&lt;/<span class="fn">Text.Body</span>&gt;
+
+          {submitError &amp;&amp; &lt;<span class="fn">ErrorDisplay</span> ... /&gt;}
+
+          &lt;<span class="fn">Form.Input</span>
+            <span class="pr">label</span>=<span class="str">"Full Name"</span>
+            <span class="pr">placeholder</span>=<span class="str">"Enter your full name"</span>
+            <span class="pr">value</span>={formData.name}
+            <span class="pr">onChange</span>={handleChange}
+            <span class="pr">errorMessage</span>={errors.name}
+          /&gt;
+
+          &lt;<span class="fn">Form.Input</span>
+            <span class="pr">label</span>=<span class="str">"Email Address"</span>
+            <span class="pr">placeholder</span>=<span class="str">"you@example.com"</span>
+            <span class="pr">type</span>=<span class="str">"email"</span>
+            <span class="pr">value</span>={formData.email}
+            <span class="pr">onChange</span>={handleChange}
+            <span class="pr">errorMessage</span>={errors.email}
+          /&gt;
+
+          &lt;<span class="fn">Form.Input</span>
+            <span class="pr">label</span>=<span class="str">"Phone Number"</span>
+            <span class="pr">placeholder</span>=<span class="str">"+65 9123 4567"</span>
+            <span class="pr">value</span>={formData.phone}
+            <span class="pr">onChange</span>={handleChange}
+            <span class="pr">errorMessage</span>={errors.phone}
+          /&gt;
+
+          &lt;<span class="fn">Form.Select</span>
+            <span class="pr">label</span>=<span class="str">"Job Category"</span>
+            <span class="pr">placeholder</span>=<span class="str">"Select a category"</span>
+            <span class="pr">options</span>={job.categories}
+            <span class="pr">selectedOption</span>={formData.category}
+            <span class="pr">onSelectOption</span>={handleSelect}
+            <span class="pr">errorMessage</span>={errors.category}
+          /&gt;
+
+          &lt;<span class="fn">Form.DateInput</span>
+            <span class="pr">label</span>=<span class="str">"Earliest Start Date"</span>
+            <span class="pr">value</span>={formData.startDate}
+            <span class="pr">onChange</span>={handleDateChange}
+            <span class="pr">errorMessage</span>={errors.startDate}
+          /&gt;
+
+          &lt;<span class="fn">Button.Default</span> <span class="pr">onClick</span>={onSubmit}&gt;
+            Submit Application
+          &lt;/<span class="fn">Button.Default</span>&gt;
+        &lt;/<span class="fn">Layout.Section</span>&gt;
+      &lt;/<span class="fn">Layout.Content</span>&gt;
+
+      &lt;<span class="fn">Modal.Default</span>
+        <span class="pr">show</span>={showConfirm}
+        <span class="pr">title</span>=<span class="str">"Confirm Submission"</span>
+        <span class="pr">onClose</span>={handleClose}
+      &gt;
+        &lt;<span class="fn">Modal.Default.Body</span>&gt;
+          &lt;<span class="fn">Text.Body</span>&gt;Submit?&lt;/<span class="fn">Text.Body</span>&gt;
+        &lt;/<span class="fn">Modal.Default.Body</span>&gt;
+        &lt;<span class="fn">Modal.Default.Footer</span>&gt;
+          &lt;<span class="fn">Button.Secondary</span> <span class="pr">onClick</span>={handleClose}&gt;Cancel&lt;/<span class="fn">Button.Secondary</span>&gt;
+          &lt;<span class="fn">Button.Default</span> <span class="pr">onClick</span>={handleSubmit}&gt;Confirm&lt;/<span class="fn">Button.Default</span>&gt;
+        &lt;/<span class="fn">Modal.Default.Footer</span>&gt;
+      &lt;/<span class="fn">Modal.Default</span>&gt;
+
+      <span class="cm">{/* Footer — static, but must be here */}</span>
+      &lt;<span class="fn">Footer</span> <span class="pr">links</span>={[
+        { title: <span class="str">"Terms of Use"</span>, href: <span class="str">"/terms"</span> },
+        { title: <span class="str">"Privacy"</span>, href: <span class="str">"/privacy"</span> },
+      ]} /&gt;
+    &lt;/&gt;
+  );
+}
+</pre>
+  </div>
+  <div class="panel">
+    <div class="panel-header tailwind">Tailwind Port <span class="tag">'use client'</span></div>
+    <pre>
+<span class="str">"use client"</span>;
+
+<span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">import</span> { Field } <span class="kw">from</span> <span class="str">"@/components/ui/field"</span>;
+<span class="kw">import</span> { Input } <span class="kw">from</span> <span class="str">"@/components/ui/input"</span>;
+<span class="kw">import</span> { Select } <span class="kw">from</span> <span class="str">"@/components/ui/select"</span>;
+<span class="kw">import</span> { DateInput } <span class="kw">from</span> <span class="str">"@/components/ui/date-input"</span>;
+<span class="kw">import</span> { Button } <span class="kw">from</span> <span class="str">"@/components/ui/button"</span>;
+<span class="kw">import</span> { Modal } <span class="kw">from</span> <span class="str">"@/components/ui/modal"</span>;
+<span class="kw">import</span> { ErrorDisplay } <span class="kw">from</span> <span class="str">"@/components/ui/error-display"</span>;
+
+<span class="kw">export function</span> <span class="fn">ApplicationForm</span>({ job }) {
+  <span class="kw">const</span> [formData, setFormData] = useState({...});
+  <span class="kw">const</span> [errors, setErrors] = useState({});
+  <span class="kw">const</span> [showConfirm, setShowConfirm] = useState(<span class="kw">false</span>);
+  <span class="cm">// ... validate, handleSubmit ...</span>
+
+  <span class="kw">return</span> (
+    &lt;&gt;
+      <span class="cm">{/* No Navbar — it's in layout.tsx (server) */}</span>
+      <span class="cm">{/* No Layout wrappers — they're in page.tsx (server) */}</span>
+      <span class="cm">{/* No headings — they're in page.tsx (server) */}</span>
+
+      {submitError &amp;&amp; &lt;<span class="fn">ErrorDisplay</span> ... /&gt;}
+
+      &lt;<span class="fn">Field</span> <span class="pr">label</span>=<span class="str">"Full Name"</span> <span class="pr">error</span>={errors.name}&gt;
+        &lt;<span class="fn">Input</span>
+          <span class="pr">placeholder</span>=<span class="str">"Enter your full name"</span>
+          <span class="pr">value</span>={formData.name}
+          <span class="pr">onChange</span>={handleChange}
+        /&gt;
+      &lt;/<span class="fn">Field</span>&gt;
+
+      &lt;<span class="fn">Field</span> <span class="pr">label</span>=<span class="str">"Email Address"</span> <span class="pr">error</span>={errors.email}&gt;
+        &lt;<span class="fn">Input</span>
+          <span class="pr">type</span>=<span class="str">"email"</span>
+          <span class="pr">placeholder</span>=<span class="str">"you@example.com"</span>
+          <span class="pr">value</span>={formData.email}
+          <span class="pr">onChange</span>={handleChange}
+        /&gt;
+      &lt;/<span class="fn">Field</span>&gt;
+
+      &lt;<span class="fn">Field</span> <span class="pr">label</span>=<span class="str">"Phone Number"</span> <span class="pr">error</span>={errors.phone}&gt;
+        &lt;<span class="fn">Input</span>
+          <span class="pr">placeholder</span>=<span class="str">"+65 9123 4567"</span>
+          <span class="pr">value</span>={formData.phone}
+          <span class="pr">onChange</span>={handleChange}
+        /&gt;
+      &lt;/<span class="fn">Field</span>&gt;
+
+      &lt;<span class="fn">Field</span> <span class="pr">label</span>=<span class="str">"Job Category"</span> <span class="pr">error</span>={errors.category}&gt;
+        &lt;<span class="fn">Select</span>
+          <span class="pr">placeholder</span>=<span class="str">"Select a category"</span>
+          <span class="pr">options</span>={job.categories}
+          <span class="pr">value</span>={formData.category}
+          <span class="pr">onValueChange</span>={handleSelect}
+        /&gt;
+      &lt;/<span class="fn">Field</span>&gt;
+
+      &lt;<span class="fn">Field</span> <span class="pr">label</span>=<span class="str">"Earliest Start Date"</span> <span class="pr">error</span>={errors.startDate}&gt;
+        &lt;<span class="fn">DateInput</span>
+          <span class="pr">value</span>={formData.startDate}
+          <span class="pr">onChange</span>={handleDateChange}
+        /&gt;
+      &lt;/<span class="fn">Field</span>&gt;
+
+      &lt;<span class="fn">Button</span> <span class="pr">onClick</span>={onSubmit}&gt;
+        Submit Application
+      &lt;/<span class="fn">Button</span>&gt;
+
+      &lt;<span class="fn">Modal</span>
+        <span class="pr">open</span>={showConfirm}
+        <span class="pr">title</span>=<span class="str">"Confirm Submission"</span>
+        <span class="pr">onClose</span>={handleClose}
+      &gt;
+        &lt;<span class="fn">Typography</span> <span class="pr">as</span>=<span class="str">"p"</span>&gt;Submit?&lt;/<span class="fn">Typography</span>&gt;
+        &lt;<span class="kw">div</span> <span class="pr">className</span>=<span class="str">"flex gap-3 justify-end mt-6"</span>&gt;
+          &lt;<span class="fn">Button</span> <span class="pr">variant</span>=<span class="str">"secondary"</span> <span class="pr">onClick</span>={handleClose}&gt;Cancel&lt;/<span class="fn">Button</span>&gt;
+          &lt;<span class="fn">Button</span> <span class="pr">onClick</span>={handleSubmit}&gt;Confirm&lt;/<span class="fn">Button</span>&gt;
+        &lt;/<span class="kw">div</span>&gt;
+      &lt;/<span class="fn">Modal</span>&gt;
+
+      <span class="cm">{/* No Footer — it's in layout.tsx (server) */}</span>
+    &lt;/&gt;
+  );
+}
+</pre>
+  </div>
+</div>
+
+<div class="note yellow">
+  <strong>What moved out of this file:</strong> In the Tailwind port, Navbar (~7 lines) and Footer (~6 lines) moved to <code>layout.tsx</code>. Layout wrappers and headings (~8 lines) moved to <code>page.tsx</code>. The form and modal code is the same length in both — the total code the developer writes is roughly equal, just distributed across server and client files differently.
+</div>
+
+</body>
+</html>
