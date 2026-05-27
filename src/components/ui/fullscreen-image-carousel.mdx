@@ -1,0 +1,70 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as FicStories from "./fullscreen-image-carousel.stories";
+
+<Meta of={FicStories} />
+
+# FullscreenImageCarousel
+
+Modal-presented full-screen image viewer. Supports keyboard navigation
+(arrow keys), zoom, thumbnails, optional delete, and a `custom` item
+type for non-image content (PDF previews, embedded documents, etc.).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { FullscreenImageCarousel } from "@/components/ui/fullscreen-image-carousel";
+
+<FullscreenImageCarousel
+  show={open}
+  items={[
+    { src: "/photo.jpg", alt: "…", fileName: "photo.jpg", fileSize: "248 KB" },
+  ]}
+  onClose={() => setOpen(false)}
+/>`}
+/>
+
+## Default
+
+<Canvas of={FicStories.Default} />
+
+## Variants
+
+<Canvas of={FicStories.StartingMidGallery} />
+<Canvas of={FicStories.HideThumbnails} />
+<Canvas of={FicStories.HideCounter} />
+<Canvas of={FicStories.HideMagnifier} />
+
+## Interactive
+
+<Canvas of={FicStories.WithDelete} />
+<Canvas of={FicStories.CustomContent} />
+
+## Accessibility
+
+- Wrapped in a `Modal` (Base UI `Dialog`) so focus traps inside the
+  carousel and Esc closes it.
+- The modal's `aria-label` is set to "`{itemType} {n} of {total}`" so
+  the screen reader announces position on open.
+- Arrow keys (←/→) move between items globally while the carousel is
+  open — attached at the document with capture so they take precedence
+  over focus-element handlers.
+- Each chrome button (zoom, delete, close, prev/next) has an explicit
+  `aria-label`; thumbnails carry `aria-current="true"` for the active
+  one.
+
+## Notes
+
+- Token namespaces: `--fic-backdrop`, `--fic-text`,
+  `--fic-button-bg{,-hover}`, `--fic-icon`,
+  `--fic-thumb-border{,-active}`.
+- `items` is a discriminated union: `{ type: "image", src, alt? }` or
+  `{ type: "custom", renderContent, thumbnailSrc?, itemLabel? }`.
+  `type` defaults to `image` so existing image arrays don't need to be
+  reshaped.
+- `initialActiveItemIndex` only reads on `show` going true; changing
+  it while the carousel is already open won't jump indexes — use the
+  imperative ref's `setCurrentItem` for that.
+- The forwarded ref exposes `{ currentItemIndex, setCurrentItem,
+  goToPrevItem, goToNextItem }` for parents that need to drive it
+  imperatively (e.g. external prev/next buttons).

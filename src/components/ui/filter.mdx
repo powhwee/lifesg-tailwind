@@ -1,0 +1,70 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as FilterStories from "./filter.stories";
+
+<Meta of={FilterStories} />
+
+# Filter
+
+Side-panel filter aggregate. Composite of `Filter` (root), `Filter.Item`
+(generic accordion section), and `Filter.Checkbox` (preset checkbox-list
+section with optional "View more / less"). Built on Base UI's
+`Accordion`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Filter } from "@/components/ui/filter";
+
+<Filter onClear={() => setAll([])}>
+  <Filter.Checkbox
+    title="Service type"
+    options={services}
+    selectedOptions={selected}
+    onSelect={setSelected}
+  />
+  <Filter.Item title="Custom field">
+    {/* anything */}
+  </Filter.Item>
+</Filter>`}
+/>
+
+## Default
+
+<Canvas of={FilterStories.Default} />
+
+## Variants
+
+<Canvas of={FilterStories.SingleGroup} />
+<Canvas of={FilterStories.Minimisable} />
+
+## Custom items
+
+<Canvas of={FilterStories.WithCustomItem} />
+
+## Accessibility
+
+- The root is an `<aside>` with the title rendered as an `<h2>` — the
+  region's accessible name follows the heading.
+- Each `Filter.Item` uses Base UI's `Accordion.Header` / `Trigger`,
+  which wires `aria-expanded` and arrow-key navigation between
+  triggers.
+- The Clear button reports `disabled` natively when no filters are
+  applied; parents control the disabled flag via `clearButtonDisabled`.
+- Checkbox labels use a wrapping `<label>` so clicking the text toggles
+  the checkbox (no `htmlFor` plumbing required).
+
+## Notes
+
+- `Filter.Checkbox` is fully controlled — pass `selectedOptions` and
+  `onSelect`. The handler receives the **next full list**, not just
+  the toggled item.
+- `minimisableOptions` + `minimisedCount` adds the "View N more / View
+  less" affordance. Disabled by default — without it, all options
+  always render.
+- Token namespaces: `--filter-bg`, `--filter-border`,
+  `--filter-bg-hover`, `--filter-text-link`. Min-width pins to
+  `--filter-min-width`.
+- For value pickers that need ranges or non-checkbox controls
+  (calendar, slider, text search), use `Filter.Item` as the wrapper
+  and drop in the appropriate primitive.
