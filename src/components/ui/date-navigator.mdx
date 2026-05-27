@@ -1,0 +1,73 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./date-navigator.stories";
+
+<Meta of={Stories} />
+
+# DateNavigator
+
+Compact prev/next arrows with a clickable date label in the middle.
+Useful for "today" headers on dashboards, week-view schedulers, or any
+linear date scrubber. Optionally opens a Popover Calendar from the
+date label.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { DateNavigator } from "@/components/ui/date-navigator";
+
+const [date, setDate] = React.useState("2026-05-27");
+
+<DateNavigator
+  selectedDate={date}
+  onLeftArrowClick={setDate}
+  onRightArrowClick={setDate}
+  onCalendarDateSelect={setDate}
+  view="day"
+/>`}
+/>
+
+## Default
+
+<Canvas of={Stories.Default} />
+
+## Variants
+
+<Canvas of={Stories.ShortForm} />
+<Canvas of={Stories.ShowToday} />
+<Canvas of={Stories.WeekView} />
+
+## With calendar picker
+
+Add `onCalendarDateSelect` to make the centre label a popover trigger:
+
+<Canvas of={Stories.WithCalendarPicker} />
+
+## Constraints
+
+<Canvas of={Stories.ClampedRange} />
+<Canvas of={Stories.LoadingState} />
+
+## Accessibility
+
+- Prev / Next buttons carry `aria-label="Previous"` / `"Next"` and
+  use `disabled` natively when the date hits `minDate` / `maxDate`
+  (or while `loading` is true).
+- The centre label is a real `<button>` when a calendar picker is
+  attached; otherwise it's a non-interactive `<span>`.
+- Focus rings on all three interactive elements come from
+  `--date-navigator-ring-focus` so keyboard users see a clear indicator.
+
+## Notes
+
+- `view="day"` steps by 1 day per click; `view="week"` steps by 7
+  and the label collapses to "DD Mon - DD Mon, YYYY".
+- `showCurrentDateAsToday` appends ", Today" to the day-view label
+  when the selected date matches the system date.
+- `showDateAsShortForm` switches month/day abbreviations from
+  "January" / "Monday" to "Jan" / "Mon".
+- Token namespaces: `--date-navigator-bg{,-hover}`,
+  `--date-navigator-border`, `--date-navigator-text-date`,
+  `--date-navigator-ring-focus`,
+  `--date-navigator-date-min-width`. Buttons use the shared
+  `--touch-target-compact` (40 px).

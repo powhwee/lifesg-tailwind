@@ -1,0 +1,75 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as CalendarStories from "./calendar.stories";
+
+<Meta of={CalendarStories} />
+
+# Calendar
+
+Inline calendar built on `react-day-picker`. Two variants: `single`
+(pick one date) and `multi` (pick N dates with optional min/max
+selection counts). Values are ISO `YYYY-MM-DD` strings.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Calendar } from "@/components/ui/calendar";
+
+const [value, setValue] = React.useState("2026-05-27");
+
+<Calendar variant="single" value={value} onChange={setValue} />
+
+// or:
+<Calendar
+  variant="multi"
+  values={dates}
+  onChange={setDates}
+  minSelectable={2}
+  maxSelectable={5}
+/>`}
+/>
+
+## Default
+
+<Canvas of={CalendarStories.Default} />
+
+## Variants
+
+<Canvas of={CalendarStories.Bordered} />
+<Canvas of={CalendarStories.Multi} />
+<Canvas of={CalendarStories.MultiWithLimit} />
+
+## Constraints
+
+<Canvas of={CalendarStories.WithMinMax} />
+<Canvas of={CalendarStories.WithDisabledDates} />
+
+## Accessibility
+
+- Day buttons are real `<button>`s. `react-day-picker` wires
+  arrow-key navigation between days and tab into the caption / nav
+  buttons.
+- Disabled days are skipped by keyboard navigation and not
+  clickable; today is marked with a small dot indicator.
+- Caption / month / year selects are native `<select>` overlays
+  (`captionLayout="dropdown"`) so screen readers expose them as
+  combobox controls.
+
+## Notes
+
+- All values are ISO `YYYY-MM-DD` strings — internal conversion to
+  `Date` objects is hidden from callers.
+- `disabledDates` accepts plain ISO strings; `minDate` / `maxDate`
+  configure the picker's allowed window. They compose (a date may be
+  disabled via either rule).
+- Multi-variant respects `minSelectable` / `maxSelectable` — selections
+  outside the bounds are silently rejected. Pair with a visible
+  hint if your UX needs to surface the bounds.
+- Token namespaces: `--calendar-bg`, `--calendar-text`,
+  `--calendar-bg-hover`, `--calendar-bg-selected`,
+  `--calendar-text-selected`, `--calendar-text-today`,
+  `--calendar-text-disabled`, `--calendar-ring-focus`,
+  `--calendar-min-width`.
+- For text-entry with a popover calendar, use `DateInput`. For range
+  selection, use `DateRangeInput`. Use the bare `Calendar` for inline
+  pickers (sidebars, settings panels).

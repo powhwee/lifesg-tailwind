@@ -1,0 +1,75 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./date-range-input.stories";
+
+<Meta of={Stories} />
+
+# DateRangeInput
+
+Paired DateInput for start + end dates. Both halves share one shell;
+the Popover surfaces a `range` Calendar with start / middle / end
+highlighting. Empty halves show "From" / "To" placeholders that
+expand to segmented inputs on focus.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import {
+  DateRangeInput,
+  FormDateRangeInput,
+} from "@/components/ui/date-range-input";
+
+const [start, setStart] = React.useState("");
+const [end, setEnd] = React.useState("");
+
+<DateRangeInput
+  value={start}
+  valueEnd={end}
+  onChange={(s, e) => { setStart(s); setEnd(e); }}
+/>`}
+/>
+
+## Default
+
+<Canvas of={Stories.Default} />
+
+## Variants
+
+<Canvas of={Stories.PreFilled} />
+<Canvas of={Stories.WithMinMax} />
+
+## States
+
+<Canvas of={Stories.ErrorState} />
+<Canvas of={Stories.Disabled} />
+
+## Composite (FormDateRangeInput)
+
+<Canvas of={Stories.CompositeFormField} />
+
+## Accessibility
+
+- Each segment carries an `aria-label` namespaced by side
+  ("Start Day", "Start Month", "Start Year", and equivalents for
+  "End"). Screen readers can land on any segment without ambiguity.
+- Placeholder "From" / "To" buttons are real `<button>`s that focus
+  the corresponding day input when activated — keyboard users get a
+  clear entry point.
+- An `ArrowRight` icon between the halves is `aria-hidden`; the
+  semantic separation comes from the labels.
+- Hidden `<input type="hidden" name="X-start" />` /
+  `name="X-end"` mirrors the segmented values for form submit.
+
+## Notes
+
+- Calendar runs in `react-day-picker`'s `mode="range"` — selecting
+  from + to in two clicks auto-closes the popover.
+- Both halves stay in sync via `value` / `valueEnd`; the parent's
+  `onChange` receives both on every edit (even when only one side
+  changed).
+- `minDate` / `maxDate` clamp both halves; the calendar greys out
+  out-of-range dates and the segmented inputs accept any digits (so
+  validation belongs upstream of `DateRangeInput`).
+- Use `FormDateRangeInput` for the standard label + description + error
+  wrapping. Composite uses `reserveErrorSlot` so the layout doesn't
+  shift when the message appears.

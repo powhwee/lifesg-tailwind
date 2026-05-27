@@ -1,0 +1,67 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as DateInputStories from "./date-input.stories";
+
+<Meta of={DateInputStories} />
+
+# DateInput
+
+Three-segment text input (DD / MM / YYYY) paired with a Popover-mounted
+Calendar. Auto-advances between segments as you type; Backspace at an
+empty segment moves focus back. Values are ISO `YYYY-MM-DD` strings.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { DateInput, FormDateInput } from "@/components/ui/date-input";
+
+const [value, setValue] = React.useState("");
+
+<DateInput value={value} onChange={setValue} />`}
+/>
+
+## Default
+
+<Canvas of={DateInputStories.Default} />
+
+## Variants
+
+<Canvas of={DateInputStories.PreFilled} />
+<Canvas of={DateInputStories.WithMinMax} />
+<Canvas of={DateInputStories.WithDisabledDates} />
+<Canvas of={DateInputStories.WithDoneButton} />
+
+## States
+
+<Canvas of={DateInputStories.ErrorState} />
+<Canvas of={DateInputStories.Disabled} />
+
+## Composite (FormDateInput)
+
+<Canvas of={DateInputStories.CompositeFormField} />
+<Canvas of={DateInputStories.FormFieldWithError} />
+
+## Accessibility
+
+- Each segment is a real `<input>` with `aria-label` ("Day" / "Month"
+  / "Year"), `inputMode="numeric"`, and `maxLength` matching the
+  expected digit count.
+- Focus auto-advances when a segment fills; Backspace at an empty
+  segment moves focus to the previous segment for natural correction.
+- The Popover calendar is anchored to the segment container; opening
+  it doesn't steal focus from the typing flow.
+- `name` (if provided) renders a hidden input carrying the composed
+  ISO value so the segmented inputs play nicely with `<form>` submit.
+
+## Notes
+
+- `withButton` switches the calendar to a Cancel + Done flow — picks
+  in the calendar don't fire `onChange` until Done is pressed.
+  Useful when picking a date is an expensive commit.
+- `minDate` / `maxDate` / `disabledDates` propagate to the Calendar
+  inside the Popover.
+- For the standard label + description + error wrapping, use
+  `FormDateInput` — it carries `reserveErrorSlot` by default so the
+  layout doesn't shift when an error appears.
+- Token namespace: shared `--input-*` for shell, `--calendar-*` for
+  the popover content.
