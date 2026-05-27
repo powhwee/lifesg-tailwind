@@ -1,5 +1,6 @@
 import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
 import * as LayoutStories from "./layout.stories";
+import * as SystemStories from "./layout.system.stories";
 
 <Meta of={LayoutStories} />
 
@@ -21,36 +22,32 @@ import { Layout } from "@/components/ui/layout";
 
 ## System tour
 
-These four stories mirror the canonical LifeSG storybook. The lighter
-coral wash is the `Section` background; the darker coral is the
-`Container`. Together they make the max-width + horizontal padding +
-column layout visible at a glance.
+These four stories live in `layout.system.stories.tsx` (sidebar:
+`Core/Layout/System Tour`) and mirror the canonical LifeSG storybook.
+The lighter coral wash is the page-level background; the darker coral
+is the `Container`'s children. Together they make the max-width,
+horizontal padding, and 12-column grid visible at a glance, without any
+labels getting in the way. Click "Show code" on each canvas to see the
+canonical API usage — the demo wash is hidden so you can copy the
+relevant bit.
 
-<Canvas of={LayoutStories.FlexLayout} />
-<Canvas of={LayoutStories.FlexColumnLayout} />
-<Canvas of={LayoutStories.GridLayout} />
-<Canvas of={LayoutStories.Stretch} />
+<Canvas of={SystemStories.FlexLayout} />
+<Canvas of={SystemStories.FlexColumnLayout} />
+<Canvas of={SystemStories.GridLayout} />
+<Canvas of={SystemStories.Stretch} />
 
-The stories below switch to labeled cells and exercise each prop
-concretely — useful when you want to know "what does `smCols={2}` look
-like" rather than "what does the grid system do."
+## API examples
 
-## Container
+The stories below show what each prop **does in practice** — labeled
+cells, real-looking content, breakpoint-aware spans. Useful when you
+already understand the system tour and need to know what to actually
+pass.
 
-Default flex layout — direct children flow as flex items with the
-design-system grid gutter.
+### Grid + ColDiv
 
-<Canvas of={LayoutStories.FlexContainer} />
-
-`type="flex-column"` for vertical stacks:
-
-<Canvas of={LayoutStories.FlexColumnContainer} />
-
-## Grid + ColDiv
-
-`type="grid"` switches the container to CSS Grid with the
-configured number of columns; nest `ColDiv` children to assign spans
-per breakpoint.
+`type="grid"` switches the container to CSS Grid with the configured
+number of columns; nest `ColDiv` children to assign spans per
+breakpoint.
 
 <Canvas of={LayoutStories.GridWithColDivs} />
 
@@ -59,18 +56,12 @@ LifeSG semantics. `-1` means "to the last column":
 
 <Canvas of={LayoutStories.FullSpanCol} />
 
-## Section + Content
+### Section + Content
 
 `Section` provides the outer max-width wrapper; `Content` is the same
 shape minus the outer padding — intended for nested regions.
 
 <Canvas of={LayoutStories.SectionWithContent} />
-
-## Stretch
-
-Pass `stretch` to remove the max-width constraint:
-
-<Canvas of={LayoutStories.StretchToEdge} />
 
 ## Accessibility
 
@@ -88,5 +79,9 @@ Pass `stretch` to remove the max-width constraint:
 - `ColDiv` uses CSS variables (`--coldiv-xxs`, `--coldiv-xs`, …,
   `--coldiv-xxl`) consumed by media queries in `globals.css`. Unset
   breakpoints inherit the fallback so partial configs Just Work.
+- `ColDiv` defaults to `grid-column: 1 / -1` (spans every column) at
+  every breakpoint when no `*Cols` prop is set — bare siblings will
+  overlap as full-width rows rather than dividing the grid. Pass at
+  least `xxsCols={N}` to opt into per-column placement.
 - For one-off non-grid layouts inside a `Section`, drop the
   `Container` / `Content` wrappers and use raw flex/grid utilities.
