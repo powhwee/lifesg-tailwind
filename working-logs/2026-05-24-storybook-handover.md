@@ -2,10 +2,12 @@
 
 > **Update 2026-05-25:** Phases 1, 2, and the first 3 stories of Phase 3
 > are done. See `2026-05-25-storybook-phase1-3.md` for the work record,
-> decision log, SB10 quirks, and the MDX template. The remaining Phase 3
-> coverage (14 simple components) + Phase 4 (high-complexity) + Phase 5
-> (foundations polish) stay open; the component inventory + roadmap
-> below is still authoritative for those.
+> decision log, SB10 quirks, and the MDX template.
+>
+> **Update 2026-05-27:** Phase 3 complete — all 17 low-complexity
+> components now have stories + MDX (see the Phase 3 table below). Phase
+> 4 (high-complexity) + Phase 5 (foundations polish) stay open; the
+> component inventory + roadmap below is still authoritative for those.
 
 ## Current State
 
@@ -147,25 +149,31 @@ Notes from original where applicable
 
 Add stories for simpler components that are mostly presentational:
 
+**Phase 3 complete (2026-05-27)** — all 17 components now have stories
++ MDX. divider / label / icon shipped 2026-05-25 as stories only; the
+matching MDX backfilled the same day. The remaining 14 were added across
+3 batches (Form, Selection/Navigation/Content, Core/Content) on
+2026-05-27.
+
 | Component | Category | Complexity | Status |
 |-----------|----------|------------|--------|
-| `divider` | Core | Trivial — just horizontal/vertical | ✅ 2026-05-25 (stories only, no MDX yet) |
-| `label` | Form | Trivial — text with optional required indicator | ✅ 2026-05-25 (stories only, no MDX yet) |
-| `icon` | Core | Low — render a few icons | ✅ 2026-05-25 (stories only, no MDX yet) |
-| `card` | Content | Low — container with slots | pending |
-| `avatar` | Navigation | Low — image/initials circle | pending |
-| `icon-button` | Selection and input | Low — button with icon | pending |
-| `image-button` | Selection and input | Low — button with image | pending |
-| `markup` | Core | Low — HTML renderer | pending |
-| `layout` | Core | Low — container with max-width | pending |
-| `field` | Form | Low — form field wrapper | pending |
-| `form-field` | Form | Low — label + error | pending |
-| `box-container` | Content | Low — styled container | pending |
-| `table` | Content | Low — basic table | pending |
-| `textarea` | Form | Low — multiline input | pending |
-| `feedback-rating` | Selection and input | Low — star/emoji rating | pending |
-| `text-list` | Core (or Form) | Low — ordered/unordered list | pending |
-| `uneditable-section` | Content (or Form) | Low — readonly display | pending |
+| `divider` | Core | Trivial — just horizontal/vertical | ✅ stories 2026-05-25, MDX 2026-05-25 |
+| `label` | Form | Trivial — text with optional required indicator | ✅ stories 2026-05-25, MDX 2026-05-25 |
+| `icon` | Core | Low — render a few icons | ✅ stories 2026-05-25, MDX 2026-05-25 |
+| `field` | Form | Low — form field wrapper | ✅ 2026-05-27 |
+| `form-field` | Form | Low — label + error | ✅ 2026-05-27 |
+| `textarea` | Form | Low — multiline input | ✅ 2026-05-27 |
+| `feedback-rating` | Selection and input | Low — star/emoji rating | ✅ 2026-05-27 |
+| `card` | Content | Low — container with slots | ✅ 2026-05-27 |
+| `avatar` | Navigation | Low — image/initials circle | ✅ 2026-05-27 |
+| `icon-button` | Selection and input | Low — button with icon | ✅ 2026-05-27 |
+| `image-button` | Selection and input | Low — button with image | ✅ 2026-05-27 |
+| `markup` | Core | Low — HTML renderer | ✅ 2026-05-27 |
+| `layout` | Core | Low — container with max-width | ✅ 2026-05-27 |
+| `text-list` | Core | Low — ordered/unordered list | ✅ 2026-05-27 (titled `Core/TextList`) |
+| `box-container` | Content | Low — styled container | ✅ 2026-05-27 |
+| `table` | Content | Low — basic table | ✅ 2026-05-27 |
+| `uneditable-section` | Content | Low — readonly display | ✅ 2026-05-27 |
 
 ### Phase 4: Component Coverage — High Complexity
 *Estimated: 2–3 sessions*
