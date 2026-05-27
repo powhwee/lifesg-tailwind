@@ -1,0 +1,56 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as MarkupStories from "./markup.stories";
+
+<Meta of={MarkupStories} />
+
+# Markup
+
+Renders CMS-authored HTML with the LifeSG typography scale. Tag-level
+styles flow from the design system; consumers can override the baseline
+text size and colour per call.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Markup } from "@/components/ui/markup";
+
+<Markup dangerouslySetInnerHTML={{ __html: cmsHtml }} />`}
+/>
+
+## Default
+
+<Canvas of={MarkupStories.Default} />
+
+## Variants
+
+<Canvas of={MarkupStories.WithBaseTextSize} />
+<Canvas of={MarkupStories.WithBaseTextColor} />
+<Canvas of={MarkupStories.Inline} />
+
+## Props
+
+<Controls of={MarkupStories.Default} />
+
+## Accessibility
+
+- `Markup` renders raw HTML — sanitize on the server before passing it
+  in. Treat the input as untrusted unless it originates from a system
+  you control.
+- The component does not impose a heading hierarchy. If the CMS content
+  starts at `<h2>`, ensure the surrounding page already has an `<h1>`.
+
+## Notes
+
+- When `baseTextSize` is omitted, typography is inherited from the
+  parent — mirrors LifeSG's behaviour where `Markup` only applies
+  typography when explicitly told to.
+- `baseTextSize` accepts the body scale tokens: `bl`, `md`, `sm`, `xs`.
+  Each maps to the matching `--typography-body-*` size / line-height /
+  letter-spacing trio.
+- `inline` switches the wrapper from `<div>` to `<span>` — useful when
+  CMS-formatted text needs to stay on the same line as surrounding
+  copy.
+- Tag-level styles live in `globals.css` under `.markup-root` — that is
+  where to adjust how `h1`, `h2`, `ul`, `a`, etc. render inside the
+  Markup wrapper.

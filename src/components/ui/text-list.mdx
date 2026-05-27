@@ -1,0 +1,78 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as TextListStories from "./text-list.stories";
+
+<Meta of={TextListStories} />
+
+# TextList
+
+Token-driven `<ul>` and `<ol>` with the LifeSG body typography scale.
+Two exports: `UnorderedList` (custom bullets supported as a React node)
+and `OrderedList` (custom counter type + separator).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { UnorderedList, OrderedList } from "@/components/ui/text-list";`}
+/>
+
+## UnorderedList
+
+<Canvas of={TextListStories.UnorderedDefault} />
+
+### Bullet types
+
+<Canvas of={TextListStories.UnorderedBulletTypes} />
+
+Pass any React node as `bulletType` for custom markers:
+
+<Canvas of={TextListStories.UnorderedCustomBullet} />
+
+Or `"none"` to drop bullets and padding entirely:
+
+<Canvas of={TextListStories.UnorderedNone} />
+
+## OrderedList
+
+<Canvas of={TextListStories.OrderedDecimal} />
+<Canvas of={TextListStories.OrderedAlpha} />
+<Canvas of={TextListStories.OrderedRoman} />
+
+`counterSeparator` defaults to `")"` — override for legal-style
+formatting:
+
+<Canvas of={TextListStories.OrderedCustomSeparator} />
+
+## Sizes
+
+`size` selects from the body scale (`bl`, `md`, `sm`, `xs`):
+
+<Canvas of={TextListStories.SizesUnordered} />
+
+## Props
+
+<Controls of={TextListStories.UnorderedDefault} />
+
+## Accessibility
+
+- Both components render native `<ul>` / `<ol>` — assistive tech
+  announces list semantics and item count automatically.
+- Custom bullets and counters are wrapped with `aria-hidden` so the
+  marker isn't read aloud; the list text is the only announced content.
+- `OrderedList` keeps the native `reversed` / `start` attributes wired
+  through, so they continue to drive both the visible numbering and the
+  accessibility tree.
+
+## Notes
+
+- The `lower-alpha` counter wraps past `z` to `aa`, `ab`, … — matches
+  CSS native `lower-latin` behaviour.
+- Custom-bullet `UnorderedList` falls back to a flex layout
+  (`list-none`, manual marker span) so the React node can be any size
+  without breaking the indent.
+- For inline lists (no marker, items on the same line), pair
+  `bulletType="none"` with `className="flex gap-…"` rather than
+  inventing another mode.
+- Token namespace: typography tokens
+  (`--typography-body-{bl|md|sm|xs}-{size|lh|ls}`) plus the
+  font-family token.

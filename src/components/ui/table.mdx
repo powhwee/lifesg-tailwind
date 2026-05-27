@@ -1,0 +1,67 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as TableStories from "./table.stories";
+
+<Meta of={TableStories} />
+
+# Table
+
+Composite table with `Table.Container`, `Table.Head`, `Table.Body`,
+`Table.Row`, `Table.HeaderCell`, `Table.Cell`. The container provides
+the rounded border + overflow clip; the table itself is a plain
+`<table>` so usage stays familiar.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Table } from "@/components/ui/table";
+
+<Table.Container>
+  <Table>
+    <Table.Head>
+      <Table.Row>
+        <Table.HeaderCell>Column</Table.HeaderCell>
+      </Table.Row>
+    </Table.Head>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Cell</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+</Table.Container>`}
+/>
+
+## Default
+
+<Canvas of={TableStories.Default} />
+
+## Variants
+
+<Canvas of={TableStories.NumericAlignment} />
+<Canvas of={TableStories.LongContent} />
+
+## Accessibility
+
+- `Table.HeaderCell` defaults to `scope="col"`. Override to `"row"` for
+  row-header cells in matrix tables.
+- The table is a plain native `<table>` — assistive tech walks rows and
+  columns correctly without ARIA additions.
+- Cells align to the top by default (`align-top`) so multi-line content
+  stays anchored to the row header rather than centering vertically.
+
+## Notes
+
+- Token namespaces: `--table-border`, `--table-row-border`,
+  `--table-row-bg-hover`, `--table-head-bg`, `--table-head-text`,
+  `--table-cell-x` / `--table-cell-y`, `--table-head-y` /
+  `--table-head-row-h`, `--table-cell-x-first` (left-edge padding for
+  the first cell in each row).
+- Header cells use the compact component-header tokens
+  (`--component-header-compact`); cell content uses default text
+  inherited from the table's `text-base`.
+- The container clips the rows' outer corners via
+  `overflow-hidden` — the `<table>` itself does not get a border
+  radius.
+- For sortable / paginated tables, build that interaction layer on top
+  of these primitives; no built-in support yet.

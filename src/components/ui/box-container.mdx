@@ -1,0 +1,80 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as BoxContainerStories from "./box-container.stories";
+
+<Meta of={BoxContainerStories} />
+
+# BoxContainer
+
+A titled section that collapses on click. Built on Base UI's
+`Collapsible`. Supports `error` / `warning` display states, a
+call-to-action slot in the header, and a fully static (non-collapsible)
+mode.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { BoxContainer } from "@/components/ui/box-container";
+
+<BoxContainer title="Section title" defaultExpanded>
+  Section body…
+</BoxContainer>`}
+/>
+
+## Default (expanded)
+
+<Canvas of={BoxContainerStories.Default} />
+
+## Collapsed by default
+
+<Canvas of={BoxContainerStories.Collapsed} />
+
+## Not collapsible
+
+<Canvas of={BoxContainerStories.NotCollapsible} />
+
+## With call-to-action
+
+The CTA slot stops click propagation, so the button doesn't toggle the
+collapse when clicked:
+
+<Canvas of={BoxContainerStories.WithCallToAction} />
+
+## Display states
+
+<Canvas of={BoxContainerStories.ErrorState} />
+<Canvas of={BoxContainerStories.WarningState} />
+
+## Header toggle behaviour
+
+By default the whole header is clickable. Set `clickableHeader={false}`
+to scope the toggle to a dedicated chevron button on the right:
+
+<Canvas of={BoxContainerStories.HeaderToggleOnly} />
+
+## Props
+
+<Controls of={BoxContainerStories.Default} />
+
+## Accessibility
+
+- The collapse trigger is a real `<button>` and reports
+  `aria-expanded` via Base UI's `Collapsible.Trigger`.
+- The panel is kept mounted (`keepMounted`) so focus inside the panel
+  is preserved across toggles and inline form state doesn't reset.
+- State icons (`error` / `warning`) are decorative (`aria-hidden`) — the
+  state should also be conveyed in the body text or surrounding
+  validation summary.
+- Focus ring on the trigger is inset (`outline-offset: -2px`) so the
+  rounded border isn't broken by the focus indicator.
+
+## Notes
+
+- Token namespace: `--box-container-*` (bg, border, padding-x,
+  header-y, body-y, icon-error, icon-warning).
+- Pass either `expanded` (controlled) or `defaultExpanded`
+  (uncontrolled). Don't mix them on the same instance.
+- Animated height uses `h-collapsible-panel-height` — that arbitrary
+  utility reads Base UI's runtime variable, not a design token, so it
+  stays as an arbitrary-value class rather than being promoted into the
+  token namespace.

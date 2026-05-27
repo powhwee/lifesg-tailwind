@@ -1,0 +1,76 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as LayoutStories from "./layout.stories";
+
+<Meta of={LayoutStories} />
+
+# Layout
+
+Page-layout primitives — `Section`, `Container`, `Content`, `ColDiv` —
+that map LifeSG's grid system onto CSS Grid and Flexbox via design
+tokens.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Section, Container, Content, ColDiv } from "@/components/ui/layout";
+// or
+import { Layout } from "@/components/ui/layout";
+// Layout.Section / Layout.Container / Layout.Content / Layout.ColDiv`}
+/>
+
+## Container
+
+Default flex layout — direct children flow as flex items with the
+design-system grid gutter.
+
+<Canvas of={LayoutStories.FlexContainer} />
+
+`type="flex-column"` for vertical stacks:
+
+<Canvas of={LayoutStories.FlexColumnContainer} />
+
+## Grid + ColDiv
+
+`type="grid"` switches the container to CSS Grid with the
+configured number of columns; nest `ColDiv` children to assign spans
+per breakpoint.
+
+<Canvas of={LayoutStories.GridWithColDivs} />
+
+`[start, end]` tuples are 1-indexed with **exclusive** end, matching
+LifeSG semantics. `-1` means "to the last column":
+
+<Canvas of={LayoutStories.FullSpanCol} />
+
+## Section + Content
+
+`Section` provides the outer max-width wrapper; `Content` is the same
+shape minus the outer padding — intended for nested regions.
+
+<Canvas of={LayoutStories.SectionWithContent} />
+
+## Stretch
+
+Pass `stretch` to remove the max-width constraint:
+
+<Canvas of={LayoutStories.StretchToEdge} />
+
+## Accessibility
+
+- `Section` renders a native `<section>` — give it an accessible name
+  via `aria-label` or `aria-labelledby` when the page has multiple
+  sections; otherwise screen readers cannot distinguish them.
+- `ColDiv` is a pure `<div>` and adds no semantics; the surrounding
+  `Container` / `Section` carries the semantic role.
+
+## Notes
+
+- Token namespaces: `--layout-container-max`, `--layout-container-pad`,
+  `--layout-grid-columns`, `--layout-grid-gutter`. The column count and
+  gutter switch automatically at LifeSG breakpoints.
+- `ColDiv` uses CSS variables (`--coldiv-xxs`, `--coldiv-xs`, …,
+  `--coldiv-xxl`) consumed by media queries in `globals.css`. Unset
+  breakpoints inherit the fallback so partial configs Just Work.
+- For one-off non-grid layouts inside a `Section`, drop the
+  `Container` / `Content` wrappers and use raw flex/grid utilities.

@@ -1,0 +1,76 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as UneditableSectionStories from "./uneditable-section.stories";
+
+<Meta of={UneditableSectionStories} />
+
+# UneditableSection
+
+Read-only summary block for displaying a list of label/value pairs —
+typically used to confirm submitted form data before signing or
+submitting. Renders a 2-column grid at the LifeSG XL breakpoint and a
+1-column stack below it.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { UneditableSection } from "@/components/ui/uneditable-section";
+
+<UneditableSection
+  title="Personal particulars"
+  description="Retrieved from Myinfo."
+  items={[
+    { label: "Full name", value: "Tan Mei Ling" },
+    { label: "NRIC", value: "S••••567A" },
+  ]}
+/>`}
+/>
+
+## Default
+
+<Canvas of={UneditableSectionStories.Default} />
+
+## Variants
+
+<Canvas of={UneditableSectionStories.WithHeader} />
+<Canvas of={UneditableSectionStories.NoBackground} />
+
+## Full-width items
+
+Pass `displayWidth: "full"` on an item to make it span both grid
+columns:
+
+<Canvas of={UneditableSectionStories.FullWidthItems} />
+
+## Children + bottom section
+
+`topSection` and `bottomSection` slots accept arbitrary content (e.g.
+"Update" CTAs):
+
+<Canvas of={UneditableSectionStories.WithChildrenAndCta} />
+
+## Props
+
+<Controls of={UneditableSectionStories.Default} />
+
+## Accessibility
+
+- Renders a native `<section>`. Provide an `aria-label` or rely on the
+  `title` prop (rendered as `<h3>`) for the accessible name.
+- Item labels render in the same paragraph block as values — for
+  programmatic label/value association, prefer a `<dl>`-based pattern
+  (not currently exposed by this component).
+- Values typeset in semibold to visually anchor the label above; do
+  not override unless the page's hierarchy demands it.
+
+## Notes
+
+- Token namespaces: `--uneditable-section-bg`, `--uneditable-section-px`
+  / `--uneditable-section-py`, `--uneditable-section-rounded`.
+- The grid switches columns at the LifeSG XL breakpoint
+  (`lifesg-xl:grid-cols-2`); below XL everything stacks. Don't pre-empt
+  this with raw `grid-cols-*` — the breakpoint is intentional.
+- `stretch` forces every item to span both columns regardless of
+  `displayWidth` — useful for narrow side panels.
+- Pass `background={false}` when the section already sits inside a
+  toned background (e.g. inside a `Card.Body`).
