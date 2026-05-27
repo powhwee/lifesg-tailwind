@@ -1,0 +1,102 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./data-table.stories";
+
+<Meta of={Stories} />
+
+# DataTable
+
+Tabular data with sortable headers, optional row selection (single
+checkbox column + select-all), an action bar that appears when rows are
+selected, alternating row stripes, loading + empty states, and
+per-cell render functions. Built as a single component (not a composite
+like `Table`) so consumers configure everything via props.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { DataTable } from "@/components/ui/data-table";
+
+<DataTable
+  headers={[
+    { fieldKey: "name", label: "Name", keyColumn: true },
+    { fieldKey: "agency", label: "Agency" },
+  ]}
+  rows={[
+    { id: "1", name: "BTO ballot result", agency: "HDB" },
+  ]}
+  enableMultiSelect
+  enableSelectAll
+  selectedIds={selected}
+  onSelect={…}
+  onSelectAll={…}
+/>`}
+/>
+
+## Default
+
+<Canvas of={Stories.Default} />
+
+## Sorting
+
+`headers[].clickable: true` turns each column into a sort toggle.
+`sortIndicators` keys map `fieldKey` → `"asc" | "desc"` and the
+component renders the matching chevron + `aria-sort` value.
+
+<Canvas of={Stories.WithSorting} />
+
+## Selection
+
+<Canvas of={Stories.MultiSelect} />
+<Canvas of={Stories.WithActionBar} />
+<Canvas of={Stories.DisabledRows} />
+
+## Styling
+
+<Canvas of={Stories.AlternatingRows} />
+
+## States
+
+<Canvas of={Stories.LoadingState} />
+<Canvas of={Stories.EmptyState} />
+
+## Custom cell render
+
+`row[fieldKey]` can be a function `(row, { isSelected }) => ReactNode`
+to render an action button, inline link, badge, etc:
+
+<Canvas of={Stories.CustomCellRender} />
+
+## Accessibility
+
+- Sortable headers expose `aria-sort` matching their indicator. Header
+  cells are real `<th scope="col">`s.
+- Row checkboxes get a generated `aria-label` that includes the value
+  from the `keyColumn` field (`Select row: BTO ballot result`) — set
+  one `header.keyColumn: true` so the label reads as the meaningful
+  identifier rather than a numeric id.
+- Select-all checkbox carries `aria-label` reflecting its state
+  ("Select all rows" / "Deselect all rows") and exposes the
+  indeterminate state via Base UI's checkbox primitive.
+- Loading state replaces tbody with a centred dot animation in a
+  single full-width row; `aria-label="Loading"` is on the bouncing
+  group.
+- Empty state defaults to `<ErrorDisplay type="no-item-found" />` —
+  override via `emptyView` (any ReactNode) or `renderCustomEmptyView`
+  (function for lazy-evaluation cases).
+
+## Notes
+
+- Token namespaces: `--data-table-border`, `--data-table-row-border`,
+  `--data-table-row-bg{,-hover,-selected,-alt}`,
+  `--data-table-head-bg`, `--data-table-action-bar-bg`,
+  `--data-table-cell-x{,-first}`, `--data-table-cell-y`,
+  `--data-table-head-y`, `--data-table-icon-strong{,-subtle}`,
+  `--data-table-checkbox-*`.
+- For a simpler API where each row is a `<tr>` you compose by hand,
+  use the lower-level `Table` (`Content/Table`) — it gives you the
+  primitives without the selection / sorting machinery.
+- `enableActionBar` only renders the bar when both
+  `enableMultiSelect` is true AND at least one row is selected.
+  Provide a `actionBarContent` slot for your actions and an
+  `onClearSelectionClick` for the deselect-all CTA.
