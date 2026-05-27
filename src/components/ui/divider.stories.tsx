@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Divider } from "./divider";
-import { Stack } from "@/components/storybook-common";
+
+// API examples — single-use cases that exercise the controls panel.
+// The full thickness scale + grid-integration tour lives in
+// divider.system.stories.tsx so each concern stays editable in one place.
 
 const meta: Meta<typeof Divider> = {
   title: "Core/Divider",
@@ -39,17 +42,6 @@ export const Dashed: Story = {
   args: {
     lineStyle: "dashed",
   },
-};
-
-export const Thickness: Story = {
-  render: () => (
-    <Stack gap={8} className="w-96">
-      <Divider thickness={1} />
-      <Divider thickness={2} />
-      <Divider thickness={4} />
-      <Divider thickness={8} />
-    </Stack>
-  ),
 };
 
 export const CustomColor: Story = {

@@ -1,5 +1,6 @@
 import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
 import * as DividerStories from "./divider.stories";
+import * as SystemStories from "./divider.system.stories";
 
 <Meta of={DividerStories} />
 
@@ -16,14 +17,23 @@ Defaults pull from `--divider-thickness`, `--divider-style`, and
   code={`import { Divider } from "@/components/ui/divider";`}
 />
 
-## Default
+## System tour
+
+These stories live in `divider.system.stories.tsx` (sidebar:
+`Core/Divider/System Tour`) and mirror LifeSG's canonical "Using In
+Grid Layout" / "Setting Grid Columns" patterns. Click "Show code" on
+any canvas for the canonical snippet — the labelled-row layout in the
+preview is decoration.
+
+<Canvas of={SystemStories.ThicknessScale} />
+<Canvas of={SystemStories.LineStyles} />
+<Canvas of={SystemStories.UsingInGridLayout} />
+<Canvas of={SystemStories.VerticalStack} />
+
+## API examples
 
 <Canvas of={DividerStories.Default} />
-
-## Variants
-
 <Canvas of={DividerStories.Dashed} />
-<Canvas of={DividerStories.Thickness} />
 <Canvas of={DividerStories.CustomColor} />
 
 ## Props

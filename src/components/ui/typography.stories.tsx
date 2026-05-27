@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Typography } from "./typography";
-import { Stack } from "@/components/storybook-common";
+
+// API examples — single-use cases that exercise the controls panel.
+// The full type-scale + weight tour lives in
+// typography.system.stories.tsx so each concern stays editable in one place.
 
 const meta: Meta<typeof Typography> = {
   title: "Core/Typography",
@@ -44,44 +47,10 @@ export const Default: Story = {
   },
 };
 
-export const Headings: Story = {
-  render: () => (
-    <Stack>
-      <Typography variant="heading-xxl" weight="bold">Heading XXL (30px/38px)</Typography>
-      <Typography variant="heading-xl" weight="bold">Heading XL (26px/34px)</Typography>
-      <Typography variant="heading-lg" weight="bold">Heading LG (24px/32px)</Typography>
-      <Typography variant="heading-md" weight="bold">Heading MD (20px/28px)</Typography>
-      <Typography variant="heading-sm" weight="bold">Heading SM (18px/26px)</Typography>
-      <Typography variant="heading-xs" weight="bold">Heading XS (16px/24px)</Typography>
-    </Stack>
-  ),
-};
-
-export const Body: Story = {
-  render: () => (
-    <Stack>
-      <Typography variant="body-bl">Body BL (18px/28px) — Extra large body text for callouts.</Typography>
-      <Typography variant="body-md">Body MD (16px/24px) — Standard body text.</Typography>
-      <Typography variant="body-sm">Body SM (14px/26px) — Smaller body text (spacious line height).</Typography>
-      <Typography variant="body-xs">Body XS (12px/20px) — Extra small captions/helper labels.</Typography>
-    </Stack>
-  ),
-};
-
-export const Weights: Story = {
-  render: () => (
-    <Stack>
-      <Typography variant="body-md" weight="light">Light weight copy text.</Typography>
-      <Typography variant="body-md" weight="regular">Regular weight copy text.</Typography>
-      <Typography variant="body-md" weight="semibold">Semibold weight copy text.</Typography>
-      <Typography variant="body-md" weight="bold">Bold weight copy text.</Typography>
-    </Stack>
-  ),
-};
-
 export const LineClamp: Story = {
   args: {
-    children: "This is a very long paragraph of text that should be clamped to three lines maximum. When it clamps, it will truncate with ellipsis at the end. Storybook lets you adjust maxLines in the controls panel to see how it dynamically scales up or down based on your constraints.",
+    children:
+      "This is a very long paragraph of text that should be clamped to three lines maximum. When it clamps, it will truncate with ellipsis at the end. Storybook lets you adjust maxLines in the controls panel to see how it dynamically scales up or down based on your constraints.",
     maxLines: 2,
     variant: "body-md",
   },

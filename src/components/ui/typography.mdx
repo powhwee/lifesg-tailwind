@@ -1,13 +1,14 @@
 import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
 import * as TypographyStories from "./typography.stories";
+import * as SystemStories from "./typography.system.stories";
 
 <Meta of={TypographyStories} />
 
 # Typography
 
-The `Typography` component renders text at a fixed scale (variant) and weight,
-inheriting LifeSG's typography ramp. Use it instead of bare HTML elements
-when you want the scale + weight to be explicit and consistent.
+The `Typography` component renders text at a fixed scale (variant) and
+weight, inheriting LifeSG's typography ramp. Use it instead of bare HTML
+elements when you want the scale + weight to be explicit and consistent.
 
 ## Import
 
@@ -16,29 +17,30 @@ when you want the scale + weight to be explicit and consistent.
   code={`import { Typography } from "@/components/ui/typography";`}
 />
 
-## Default
+## System tour
+
+These stories live in `typography.system.stories.tsx` (sidebar:
+`Core/Typography/System Tour`) and mirror LifeSG's canonical "Typography
+Set". They're labeled visualisations of the full ramp — useful when you
+want to scan the scale rather than dial in a single example. Click "Show
+code" on any canvas to see the canonical variant names.
+
+<Canvas of={SystemStories.TypographySet} />
+<Canvas of={SystemStories.Headings} />
+<Canvas of={SystemStories.Body} />
+<Canvas of={SystemStories.Weights} />
+
+## API examples
+
+### Default
 
 <Canvas of={TypographyStories.Default} />
 
-## Variants
-
-### Headings
-
-<Canvas of={TypographyStories.Headings} />
-
-### Body
-
-<Canvas of={TypographyStories.Body} />
-
-### Weights
-
-<Canvas of={TypographyStories.Weights} />
-
-## Line clamp
+### Line clamp
 
 <Canvas of={TypographyStories.LineClamp} />
 
-## Props
+### Props
 
 <Controls of={TypographyStories.Default} />
 
