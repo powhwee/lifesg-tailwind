@@ -1,0 +1,50 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as MastheadStories from "./masthead.stories";
+
+<Meta of={MastheadStories} />
+
+# Masthead
+
+The Singapore Government "official agency website" banner that sits
+above the navbar. Collapsible — clicking "How to identify" reveals the
+.gov.sg / HTTPS / Scam-alert disclosures.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Masthead } from "@/components/ui/masthead";
+
+<Masthead />
+// or:
+<Masthead stretch />`}
+/>
+
+## Default
+
+<Canvas of={MastheadStories.Default} />
+
+## Stretched
+
+<Canvas of={MastheadStories.Stretched} />
+
+## Accessibility
+
+- The SG crest is `aria-hidden` — the surrounding "A Singapore
+  Government Agency Website" sentence carries the meaning.
+- "How to identify" is a real `<button>` and uses Base UI's
+  `Collapsible.Trigger` so `aria-expanded` flips correctly as the
+  panel opens/closes.
+- The expanded panel uses `aria-hidden` automatically when closed via
+  Base UI; you don't have to wire focus management.
+
+## Notes
+
+- Token namespaces: `--masthead-bg`, `--masthead-text`,
+  `--masthead-link`, `--masthead-icon`, plus the font-size /
+  line-height pair.
+- Default width caps at `max-w-screen-xl`; pass `stretch` for a
+  full-bleed bar (often used inside a self-contained navbar).
+- `Navbar` already conditionally renders Masthead via its `masthead`
+  prop — usually you only mount Masthead directly when building a
+  custom navbar shell.

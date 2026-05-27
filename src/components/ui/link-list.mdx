@@ -1,0 +1,62 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as LinkListStories from "./link-list.stories";
+
+<Meta of={LinkListStories} />
+
+# LinkList
+
+Vertical list of in-page anchors with title, optional description, and
+chevron affordance. Supports a "View more / View less" toggle when
+`maxShown` is fewer than the items.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { LinkList } from "@/components/ui/link-list";
+
+<LinkList
+  items={[
+    { title: "Apply for HDB BTO flat", description: "…", href: "/bto" },
+    { title: "Renew CPF nomination", description: "…", href: "/cpf" },
+  ]}
+  style="default"
+  maxShown={3}
+/>`}
+/>
+
+## Default
+
+<Canvas of={LinkListStories.Default} />
+
+## Variants
+
+<Canvas of={LinkListStories.Small} />
+<Canvas of={LinkListStories.TitleOnly} />
+<Canvas of={LinkListStories.WithSecondaryDescription} />
+
+## Expandable
+
+<Canvas of={LinkListStories.ExpandableViewMore} />
+
+## Accessibility
+
+- Each item is a real `<a>` so assistive tech announces "link". Pass
+  `target="_blank" rel="noopener"` for external links per usual.
+- Chevron + plus / minus icons are `aria-hidden` decoration.
+- The "View more / less" button is a real `<button>`. It doesn't carry
+  `aria-controls` to the hidden items, but the visible/hidden state
+  reflows naturally and the button label updates each toggle.
+
+## Notes
+
+- `style` toggles the title + description text scale
+  (`--link-list-title-default` / `-small`,
+  `--link-list-desc-default` / `-small`).
+- `maxShown` is ignored if it's `>=` the items length — no toggle
+  appears.
+- Token namespaces: `--link-list-link`, `--link-list-border`, plus the
+  title/desc size tokens above.
+- For *external* navigation lists (footer links, sitemaps), reach for
+  `Footer` or a plain `<ul>` — LinkList is calibrated for primary
+  page-content link affordances.

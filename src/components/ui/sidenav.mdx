@@ -1,0 +1,69 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as SidenavStories from "./sidenav.stories";
+
+<Meta of={SidenavStories} />
+
+# Sidenav
+
+Icon-rail side navigation. Items optionally expand into a secondary
+drawer panel showing nested DrawerItems and DrawerSubitems. Inspired by
+LifeSG dashboard chrome (and apps like VS Code's activity bar).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Sidenav } from "@/components/ui/sidenav";
+
+<Sidenav>
+  <Sidenav.Group separator>
+    <Sidenav.Item title="Home" icon={<HomeIcon />} selected />
+    <Sidenav.Item id="docs" title="Docs" icon={<DocIcon />}>
+      <Sidenav.DrawerItem title="Forms">
+        <Sidenav.DrawerSubitem title="Input" />
+        <Sidenav.DrawerSubitem title="Select" />
+      </Sidenav.DrawerItem>
+    </Sidenav.Item>
+  </Sidenav.Group>
+</Sidenav>`}
+/>
+
+## Default
+
+<Canvas of={SidenavStories.Default} />
+
+## With groups
+
+<Canvas of={SidenavStories.WithGroups} />
+
+## With expanding drawer
+
+<Canvas of={SidenavStories.WithExpandingDrawer} />
+
+## Accessibility
+
+- The rail is a `<nav>`; provide `aria-label` on the `Sidenav`
+  root to disambiguate from other navigation landmarks.
+- Items without children act as buttons reporting `aria-current="page"`
+  when selected; items with children report `aria-pressed` reflecting
+  their open state (the drawer toggle is a press, not navigation).
+- When the drawer is open, the `selected` indicator on other top-level
+  items is visually suppressed so only the currently-open item is
+  highlighted (matches LifeSG behaviour).
+- Drawer items with children carry `aria-expanded` reflecting their
+  collapsed state.
+
+## Notes
+
+- Token namespaces: `--sidenav-rail-width`, `--sidenav-rail-pt` /
+  `-pb`, `--sidenav-pill-w` / `-h`, `--sidenav-icon-size`,
+  `--sidenav-label`, `--sidenav-bg`, `--sidenav-bg-hover`,
+  `--sidenav-bg-selected`, `--sidenav-icon` / `-selected`,
+  `--sidenav-text` / `-subtle`, `--sidenav-border`,
+  `--sidenav-drawer-bg`.
+- `fixed` defaults to `true` — pins the rail to the left edge of the
+  viewport. Set `fixed={false}` for use inside a layout that already
+  controls positioning (Storybook stories disable fixed).
+- The drawer panel reads its content from the currently open item's
+  `children` — assign each expandable `Sidenav.Item` an explicit `id`
+  so the lookup is stable.

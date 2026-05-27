@@ -1,0 +1,65 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as NavbarStories from "./navbar.stories";
+
+<Meta of={NavbarStories} />
+
+# Navbar
+
+Site-level top navigation: brand on the left, primary nav items in the
+middle, action buttons (Log in / Sign up) on the right. Collapses to a
+hamburger-triggered Drawer on mobile.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Navbar } from "@/components/ui/navbar";
+
+<Navbar
+  brand={{ brandName: "LifeSG", logoSrc: "/logo.svg" }}
+  items={[
+    { id: "home", label: "Home", href: "/" },
+    { id: "services", label: "Services", href: "/services" },
+  ]}
+  selectedId="services"
+  actions={[
+    { id: "login", label: "Log in", variant: "outline" },
+    { id: "signup", label: "Sign up" },
+  ]}
+  masthead
+/>`}
+/>
+
+## Default
+
+<Canvas of={NavbarStories.Default} />
+
+## Variants
+
+<Canvas of={NavbarStories.WithSelected} />
+<Canvas of={NavbarStories.WithActions} />
+<Canvas of={NavbarStories.WithMasthead} />
+<Canvas of={NavbarStories.FullChrome} />
+
+## Accessibility
+
+- Brand link uses `aria-label={brandName}` so screen readers know what
+  the logo links to.
+- Primary nav is wrapped in `<nav aria-label="Primary">`. Mobile drawer
+  nav is wrapped in `<nav aria-label="Primary mobile">` to disambiguate.
+- The selected item carries `aria-current="page"` plus a visual
+  bottom-bar indicator (`--navbar-indicator` token).
+- Mobile menu trigger uses `aria-expanded` reflecting the drawer state.
+
+## Notes
+
+- Token namespaces: `--navbar-bg`, `--navbar-text`, `--navbar-border`,
+  `--navbar-bg-hover`, `--navbar-indicator`.
+- The hamburger menu shows at `<= md`; primary nav inline shows at
+  `md+`. Action buttons inline at `@4xl+` (container query) — narrower
+  shells push them into the mobile drawer footer automatically.
+- `fixed` pins the bar to the top via `position: fixed top-0 z-40`.
+  Compose with `padding-top` on the page body to avoid content jumping
+  under it.
+- For the legacy `Modal v1` style — see the `Overlays/Modal` stories;
+  the drawer pattern here is built on the newer `Drawer` component.

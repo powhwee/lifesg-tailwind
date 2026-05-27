@@ -1,0 +1,75 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as LocalNavStories from "./local-nav.stories";
+
+<Meta of={LocalNavStories} />
+
+# LocalNav
+
+Page-level "in this page" navigator. Two presentations on the same API:
+`LocalNav.Menu` for a vertical list (desktop sidebar), and
+`LocalNav.Dropdown` for a sticky single-button toggle (mobile / narrow
+columns).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { LocalNav } from "@/components/ui/local-nav";
+
+const items = [
+  { title: "Overview", id: "overview" },
+  { title: "Eligibility", id: "eligibility" },
+];
+
+<LocalNav.Menu
+  items={items}
+  selectedItemIndex={selected}
+  onNavItemSelect={(_, __, i) => setSelected(i)}
+/>
+
+// or sticky dropdown:
+<LocalNav.Dropdown
+  items={items}
+  defaultLabel="On this page"
+  selectedItemIndex={selected}
+  onNavItemSelect={(_, __, i) => setSelected(i)}
+  stickyOffset={64}
+/>`}
+/>
+
+## Menu
+
+<Canvas of={LocalNavStories.Menu} />
+
+## Dropdown
+
+<Canvas of={LocalNavStories.Dropdown} />
+
+## Custom item rendering
+
+<Canvas of={LocalNavStories.MenuWithCustomRender} />
+
+## Accessibility
+
+- Both presentations render as `<nav aria-label="Local navigation">`.
+- The active item carries `aria-current="true"` so screen readers
+  describe the selected section.
+- `Dropdown`'s trigger uses `aria-expanded` reflecting open state. The
+  trigger label always shows `defaultLabel` (not the active item) —
+  matches LifeSG's pattern; if you need the trigger to reflect the
+  current section, pass that into `defaultLabel` from the consumer.
+
+## Notes
+
+- Token namespaces: `--local-nav-bg`, `--local-nav-bg-hover`,
+  `--local-nav-bg-selected`, `--local-nav-text` /
+  `--local-nav-text-selected`, `--local-nav-rail` /
+  `--local-nav-rail-selected`, `--local-nav-border`.
+- `Dropdown` uses an `IntersectionObserver` to detect when it sticks
+  to the top of the scroll container; the `stickied` flag is
+  surfaced to your `renderItem` callback if you want to swap styling.
+- `Menu` paints a 3 px left rail per item — selected items get the
+  highlight rail colour. Don't try to override via `borderLeftWidth`;
+  use the token instead.
+- For site-level navigation, use `Navbar`; for app-shell rails, use
+  `Sidenav`. `LocalNav` is for *within-page* section jumping.
