@@ -5,11 +5,76 @@ import { Section, Container, Content, ColDiv } from "./layout";
 const meta: Meta<typeof Container> = {
   title: "Core/Layout",
   component: Container,
+  parameters: { layout: "fullscreen" },
 };
 
 export default meta;
 type Story = StoryObj<typeof Container>;
 
+const SYSTEM_DEMO_HEIGHT = 360;
+const sectionWashStyle = {
+  backgroundColor: "#FDDDD7",
+  minHeight: SYSTEM_DEMO_HEIGHT,
+} as const;
+const cellWashStyle = {
+  backgroundColor: "#F9B5B2",
+  minHeight: SYSTEM_DEMO_HEIGHT,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#7B2A26",
+  fontWeight: 600,
+} as const;
+
+// LifeSG-style system tours — two coral shades make the Container's
+// max-width + horizontal padding visible at a glance. Mirrors the
+// canonical Storybook at https://designsystem.life.gov.sg/react.
+export const FlexLayout: Story = {
+  render: () => (
+    <div style={sectionWashStyle}>
+      <Container>
+        <div style={{ ...cellWashStyle, flex: 1 }} />
+      </Container>
+    </div>
+  ),
+};
+
+export const FlexColumnLayout: Story = {
+  render: () => (
+    <div style={sectionWashStyle}>
+      <Container type="flex-column">
+        <div style={cellWashStyle}>First item</div>
+        <div style={cellWashStyle}>Second item</div>
+      </Container>
+    </div>
+  ),
+};
+
+export const GridLayout: Story = {
+  render: () => (
+    <div style={sectionWashStyle}>
+      <Container type="grid">
+        {Array.from({ length: 12 }, (_, i) => (
+          <ColDiv key={i} xxsCols={1}>
+            <div style={cellWashStyle}>{i + 1}</div>
+          </ColDiv>
+        ))}
+      </Container>
+    </div>
+  ),
+};
+
+export const Stretch: Story = {
+  render: () => (
+    <div style={sectionWashStyle}>
+      <Container stretch>
+        <div style={{ ...cellWashStyle, flex: 1 }} />
+      </Container>
+    </div>
+  ),
+};
+
+// API-focused examples — labeled cells that exercise each prop concretely.
 const Cell = ({ children }: { children: ReactNode }) => (
   <div className="bg-lifesg-bg-subtle border border-lifesg-border px-3 py-2 text-sm">
     {children}

@@ -19,6 +19,22 @@ import { Layout } from "@/components/ui/layout";
 // Layout.Section / Layout.Container / Layout.Content / Layout.ColDiv`}
 />
 
+## System tour
+
+These four stories mirror the canonical LifeSG storybook. The lighter
+coral wash is the `Section` background; the darker coral is the
+`Container`. Together they make the max-width + horizontal padding +
+column layout visible at a glance.
+
+<Canvas of={LayoutStories.FlexLayout} />
+<Canvas of={LayoutStories.FlexColumnLayout} />
+<Canvas of={LayoutStories.GridLayout} />
+<Canvas of={LayoutStories.Stretch} />
+
+The stories below switch to labeled cells and exercise each prop
+concretely — useful when you want to know "what does `smCols={2}` look
+like" rather than "what does the grid system do."
+
 ## Container
 
 Default flex layout — direct children flow as flex items with the
