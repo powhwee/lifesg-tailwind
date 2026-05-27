@@ -1,0 +1,58 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as CardStories from "./card.stories";
+
+<Meta of={CardStories} />
+
+# Card
+
+Container with token-driven padding, radius, border, and shadow. Exposes
+sub-parts on the same export — `Card.Header`, `Card.Title`,
+`Card.Description`, `Card.Body`, `Card.Footer` — so usage stays compact
+without losing layout structure.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Card } from "@/components/ui/card";
+
+<Card>
+  <Card.Header>
+    <Card.Title>Title</Card.Title>
+    <Card.Description>Subtitle</Card.Description>
+  </Card.Header>
+  <Card.Body>Body content</Card.Body>
+  <Card.Footer>Actions</Card.Footer>
+</Card>`}
+/>
+
+## Default
+
+<Canvas of={CardStories.Default} />
+
+## Variants
+
+<Canvas of={CardStories.TitleOnly} />
+<Canvas of={CardStories.FullComposition} />
+<Canvas of={CardStories.Stacked} />
+
+## Accessibility
+
+- `Card.Title` renders an `<h3>`. Pick a heading level appropriate to
+  the document outline by passing your own heading inside `Card.Header`
+  when `<h3>` doesn't fit.
+- The card itself is a `<div>` — wrap it in an interactive element only
+  when the whole card should be clickable; otherwise leave the buttons /
+  links inside `Card.Footer` as the targets.
+
+## Notes
+
+- Token namespaces: `--card-*` (bg / text / border / radius / shadow,
+  padding-x / padding-y).
+- `Card.Title` uses the component-header tokens
+  (`--component-header` / `--leading-component-header`) and
+  `Card.Description` uses the component-body-compact tokens — both
+  conventions established earlier in the port. Don't override with raw
+  text-lg or text-sm.
+- `Card.Footer` carries a top divider (`border-t border-card-border`)
+  for action rows; omit it for cards that don't need a visual break.

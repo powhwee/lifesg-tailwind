@@ -1,0 +1,66 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as ImageButtonStories from "./image-button.stories";
+
+<Meta of={ImageButtonStories} />
+
+# ImageButton
+
+Image-tile button used for picker layouts (avatar choice, theme
+selection, MCQ with imagery). Carries an explicit `selected` state that
+maps to `aria-pressed` and an `error` state that maps to `aria-invalid`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { ImageButton } from "@/components/ui/image-button";
+
+<ImageButton
+  imgSrc="https://…/photo.jpg"
+  selected={value === id}
+  onClick={() => setValue(id)}
+  aria-label="Lake"
+/>`}
+/>
+
+## Default
+
+<Canvas of={ImageButtonStories.Default} />
+
+## States
+
+<Canvas of={ImageButtonStories.States} />
+
+## Selectable group
+
+<Canvas of={ImageButtonStories.SelectableGroup} />
+
+The component does not bundle group/toggle state — wire it up in the
+parent (see the SelectableGroup story for a single-select pattern; for
+multi-select, swap the `===` check for `Set` membership).
+
+## Props
+
+<Controls of={ImageButtonStories.Default} />
+
+## Accessibility
+
+- `aria-label` is **mandatory** — the image has `alt=""` because it is
+  treated as decorative; the button needs its own name.
+- `selected` becomes `aria-pressed`. For exclusive groups, use a
+  `radiogroup` wrapper with each tile as `role="radio"` instead, so
+  arrow-key navigation works.
+- `error` becomes `aria-invalid` — pair it with a visible error message
+  outside the button (validation summary, field error) for the same
+  reason.
+
+## Notes
+
+- Keeps its 8 px corner radius (`rounded-lg`) rather than the
+  4 px component default — recorded in the component-radius convention
+  as an explicit exception.
+- Token namespace: `--image-button-*` (border, ring-focus, padding,
+  image size).
+- The image render uses a plain `<img>` (lint-disabled) rather than
+  `next/image` so the component can be used inside Storybook and other
+  non-Next contexts without a remote-domain config.

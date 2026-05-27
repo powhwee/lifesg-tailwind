@@ -1,0 +1,70 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as IconButtonStories from "./icon-button.stories";
+
+<Meta of={IconButtonStories} />
+
+# IconButton
+
+Square button containing a single icon. Three style types (`primary`,
+`secondary`, `light`) and three size types (`large`, `default`,
+`small`). Wraps Base UI's `Button` primitive — accepts the usual
+`disabled` / `onClick` / `aria-*` props.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Settings } from "lucide-react";
+import { IconButton } from "@/components/ui/icon-button";
+
+<IconButton aria-label="Settings">
+  <Settings />
+</IconButton>`}
+/>
+
+## Default
+
+<Canvas of={IconButtonStories.Default} />
+
+## Style types
+
+<Canvas of={IconButtonStories.StyleTypes} />
+
+## Sizes
+
+<Canvas of={IconButtonStories.Sizes} />
+
+`default` and `small` map to the shared `--touch-target-*` tokens
+(48 / 40 px) so the icon hit-target matches every other interactive
+control in the system. `large` is a one-off 64 px square for hero
+actions.
+
+## States
+
+<Canvas of={IconButtonStories.Destructive} />
+<Canvas of={IconButtonStories.Disabled} />
+
+## Props
+
+<Controls of={IconButtonStories.Default} />
+
+## Accessibility
+
+- `aria-label` is **mandatory** — icon buttons have no visible text, so
+  screen readers need an explicit name.
+- Disabled state sets `pointer-events: none` and swaps the disabled
+  tokens; the underlying button still reports `disabled` to assistive
+  tech.
+- Focus ring uses `--icon-button-ring-focus` and is visible on keyboard
+  focus only (`focus-visible`).
+
+## Notes
+
+- Icon sizing is automatic via `[&_svg:not([class*='size-'])]:size-N`:
+  large→7, default→5, small→4. Override per call by passing a `size-*`
+  class on the icon if you need a different glyph size.
+- Token namespaces: `--icon-button-bg-*`, `--icon-button-text-*`,
+  `--icon-button-border-*`, `--icon-button-ring-focus`, plus
+  `--touch-target-*` for sizing.
+- For an icon inside a regular button (with a text label), use
+  `<Button size="icon">` from `button.tsx` instead.

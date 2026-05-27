@@ -1,0 +1,59 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as AvatarStories from "./avatar.stories";
+
+<Meta of={AvatarStories} />
+
+# Avatar
+
+Circular identity indicator. Renders a single initial from a string
+child (LifeSG's first-character rule) or an arbitrary node (image, icon).
+Two sizes: `default` and `small`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Avatar } from "@/components/ui/avatar";
+
+<Avatar>Jane Doe</Avatar>             // initial "J"
+<Avatar><img src="…" alt="…" /></Avatar>
+<Avatar sizeType="small">M</Avatar>`}
+/>
+
+## Default
+
+<Canvas of={AvatarStories.Default} />
+
+## Sizes
+
+<Canvas of={AvatarStories.Sizes} />
+
+## Variants
+
+<Canvas of={AvatarStories.Small} />
+<Canvas of={AvatarStories.WithImage} />
+<Canvas of={AvatarStories.WithIcon} />
+<Canvas of={AvatarStories.InitialsGallery} />
+
+## Props
+
+<Controls of={AvatarStories.Default} />
+
+## Accessibility
+
+- The avatar itself is decorative — pair it with the user's name in
+  adjacent text so screen readers announce who it represents.
+- When passing an `<img>`, set a meaningful `alt` (the username) rather
+  than leaving it empty; the avatar wrapper does not provide one.
+- Decorative icons inside the avatar should set `aria-hidden`.
+
+## Notes
+
+- Token namespace: `--avatar-bg`, `--avatar-text`,
+  `--avatar-size-default`, `--avatar-size-small`, plus matching font
+  tokens. Adjust globally via the token; do not override `size-` /
+  `bg-` per call unless intentionally going off-system.
+- The first-character-only rule for string children matches LifeSG's
+  React Design System; pass full text and the component will trim. For
+  multi-initial avatars (e.g. "JD"), pass the literal "JD" as a child
+  via a fragment or just a longer string.
