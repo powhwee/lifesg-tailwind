@@ -1,0 +1,71 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as OtpStories from "./otp-input.stories";
+
+<Meta of={OtpStories} />
+
+# OtpInput
+
+One-time-password input with N cells, optional prefix, error message,
+and a verify button with cooldown countdown. Built on Base UI's
+`OTPField` primitive.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { OtpInput } from "@/components/ui/otp-input";
+
+const [value, setValue] = React.useState<string[]>(Array(6).fill(""));
+
+<OtpInput
+  numOfInput={6}
+  value={value}
+  onChange={setValue}
+  cooldownDuration={30}
+/>`}
+/>
+
+## Default
+
+<Canvas of={OtpStories.Default} />
+
+## Variants
+
+<Canvas of={OtpStories.WithPrefix} />
+<Canvas of={OtpStories.FourDigit} />
+
+## States
+
+<Canvas of={OtpStories.WithError} />
+
+## Layout modes
+
+<Canvas of={OtpStories.OtpOnly} />
+<Canvas of={OtpStories.CustomActionLabel} />
+
+## Accessibility
+
+- Base UI's `OTPField` handles paste-splitting, arrow-key focus
+  navigation between cells, and backspace traversal automatically.
+- Error state sets `aria-invalid` on each cell and renders an error
+  message paragraph below — visible to screen readers via the alert
+  icon's adjacent text.
+- The verify button is disabled until the user has filled every cell;
+  the disabled state is conveyed via the native `disabled` attribute,
+  not just visually.
+- Cooldown countdown announces remaining seconds via the visible "Resend
+  in Ns" message; consumers that need a more aggressive announcement
+  can subscribe to `onCountdownChange` and render their own live region.
+
+## Notes
+
+- Value is `string[]` of length `numOfInput`. Pass through state for
+  controlled usage (story examples wrap it in a controller).
+- `otpOnly` removes the action button + cooldown UI — use when the
+  parent form supplies its own submit affordance.
+- `cooldownDuration` is in seconds; firing the action button starts
+  the timer and disables the button until it elapses.
+- Token namespaces: `--otp-cell-*` (width / height / radius) and
+  `--otp-*` for borders, ring focus, error tokens. The OTP cell uses
+  its own radius token (not the shared `--component-radius`) — recorded
+  in the component-radius convention as an explicit exception.

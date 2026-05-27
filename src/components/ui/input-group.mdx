@@ -1,0 +1,69 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as InputGroupStories from "./input-group.stories";
+
+<Meta of={InputGroupStories} />
+
+# InputGroup
+
+A horizontal flex container that pairs an `<input>` with one or more
+addons (`$`, `https://`, `@gov.sg`, etc.). The whole group reads as a
+single field — focus, hover, error, and disabled states are wired to
+the wrapper so addons and input style together.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  FormInputGroup,
+} from "@/components/ui/input-group";`}
+/>
+
+## Default
+
+<Canvas of={InputGroupStories.Default} />
+
+## Variants
+
+<Canvas of={InputGroupStories.LabelAddon} />
+<Canvas of={InputGroupStories.TrailingAddon} />
+
+## States
+
+<Canvas of={InputGroupStories.ErrorState} />
+<Canvas of={InputGroupStories.Disabled} />
+
+## Composite (FormInputGroup)
+
+<Canvas of={InputGroupStories.CompositeFormField} />
+<Canvas of={InputGroupStories.FormFieldWithError} />
+
+## Props
+
+<Controls of={InputGroupStories.Default} />
+
+## Accessibility
+
+- Focus moves into the inner `<input>`; the wrapper exposes the
+  `focus-within` ring so addons don't lose visual association.
+- Addons are decorative text — wrap them with `aria-hidden` if their
+  meaning is duplicated by an adjacent visible label.
+- `error` sets `data-error` on the wrapper and toggles the ring tokens
+  — pair with `aria-invalid` on the inner input + a `FormField`
+  `errorMessage` so screen readers hear the explanation.
+- `disabled` sets `data-disabled` on the wrapper; the inner input still
+  needs its own `disabled` attribute to actually block input.
+
+## Notes
+
+- Token namespaces: `--input-*` for the shell, `--input-group-addon-*`
+  for the addon text colour.
+- Use `FormInputGroup` for the standard label + description + error
+  wrapping. Drop down to the lower-level parts when you need custom
+  composition (e.g. addon-input-addon, addon-only).
+- For specialized prefix patterns (country code, mask toggle, floor +
+  unit), reach for `phone-number-input`, `masked-input`, or
+  `unit-number-input` instead — they share the same shell tokens.

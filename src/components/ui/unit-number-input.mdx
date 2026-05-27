@@ -1,0 +1,62 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as UnitStories from "./unit-number-input.stories";
+
+<Meta of={UnitStories} />
+
+# UnitNumberInput
+
+Singapore-style floor + unit pair (e.g. `04-56`) as a single field.
+Two inputs share one shell so focus, hover, error, and disabled states
+read as one control.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import {
+  UnitNumberInput,
+  FormUnitNumberInput,
+} from "@/components/ui/unit-number-input";
+
+<UnitNumberInput value="04-56" onChange={(v) => setValue(v)} />`}
+/>
+
+## Default
+
+<Canvas of={UnitStories.Default} />
+
+## Variants
+
+<Canvas of={UnitStories.PreFilled} />
+<Canvas of={UnitStories.Controlled} />
+
+## States
+
+<Canvas of={UnitStories.ErrorState} />
+<Canvas of={UnitStories.Disabled} />
+
+## Composite (FormUnitNumberInput)
+
+<Canvas of={UnitStories.CompositeFormField} />
+<Canvas of={UnitStories.FormFieldWithError} />
+
+## Accessibility
+
+- The `#` prefix is `aria-hidden` decoration; the floor input carries
+  `aria-label="Floor"` and the unit input carries `aria-label="Unit"`
+  so screen readers describe each independently.
+- Both inputs are `inputMode="numeric"` so mobile keyboards open the
+  number pad. `maxLength` is capped (floor=3, unit=5) to match SG
+  HDB / private addressing conventions.
+- The composite uses `reserveErrorSlot` by default — the layout doesn't
+  shift when an error appears or clears (matches LifeSG's pattern for
+  this and related composite inputs).
+
+## Notes
+
+- Value is the joined string `"floor-unit"`. Both pieces are emitted
+  through `onChange`; consumers wanting the raw `[floor, unit]` tuple
+  can use `onChangeRaw` (and `onBlurRaw`).
+- Works both controlled (`value`) and uncontrolled (`defaultValue`).
+- For other composite-input layouts that need slot reservation, use
+  `FormField`'s `reserveErrorSlot` directly.

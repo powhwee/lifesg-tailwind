@@ -1,0 +1,65 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as MaskedInputStories from "./masked-input.stories";
+
+<Meta of={MaskedInputStories} />
+
+# MaskedInput
+
+Input that masks part or all of its value behind bullets and exposes a
+reveal/hide toggle. Built on `Input`; supports masking by index range,
+unmask range, regex, or full mask.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { MaskedInput, FormMaskedInput } from "@/components/ui/masked-input";`}
+/>
+
+## Default (full mask)
+
+<Canvas of={MaskedInputStories.Default} />
+
+## Mask scopes
+
+`maskRange`, `unmaskRange`, and `maskRegex` are mutually exclusive —
+the first one provided wins. Range tuples are `[start, end)`
+(end-exclusive).
+
+<Canvas of={MaskedInputStories.MaskRange} />
+<Canvas of={MaskedInputStories.UnmaskRange} />
+<Canvas of={MaskedInputStories.MaskRegex} />
+
+## Variants
+
+<Canvas of={MaskedInputStories.StartUnmasked} />
+<Canvas of={MaskedInputStories.CustomMaskChar} />
+
+## Composite (FormMaskedInput)
+
+<Canvas of={MaskedInputStories.CompositeFormField} />
+
+## Props
+
+<Controls of={MaskedInputStories.Default} />
+
+## Accessibility
+
+- The toggle button is a real `<button>` with `aria-label` ("Reveal" /
+  "Hide") and `aria-pressed` reflecting the mask state.
+- While masked the input is `readOnly` — prevents accidental edits on
+  the masked display; consumers must explicitly opt into edits via the
+  reveal toggle.
+- Icon-only toggle should keep its `aria-label` even when passing
+  custom `iconMask` / `iconUnmask` overrides (the component preserves
+  the label).
+
+## Notes
+
+- Use this for displaying sensitive values (NRIC, account numbers,
+  passwords with a reveal pattern) — the visual mask is a UI affordance
+  only; storage and transport security still belong upstream.
+- Default `maskChar` is `•`; use `*` or another char to match
+  surrounding form aesthetics.
+- The component is fully controlled via `value` — pass it from parent
+  state. There's no internal value buffer.
