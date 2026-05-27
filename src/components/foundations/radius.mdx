@@ -1,0 +1,56 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as RadiusStories from "./radius.stories";
+
+<Meta of={RadiusStories} />
+
+# Radius
+
+Corner-radius scale plus the **component-radius convention** — most
+LifeSG chrome standardises on 4 px (`--lifesg-radius-sm`), exposed
+as `--component-radius` and the `rounded-component` Tailwind utility.
+
+## Default
+
+<Canvas of={RadiusStories.Default} />
+
+## Component-radius convention
+
+Most interactive chrome (buttons, inputs, addons, accordion triggers,
+etc.) uses **4 px** corners — i.e. `rounded-component`. A few
+components opt out because they have their own canonical radius:
+
+| Component | Token | Value |
+|-----------|-------|-------|
+| `Card` | `--card-rounded` | 8 px |
+| `Modal` v1 + `ModalV2` | `--modal-box-rounded` | 8 px |
+| `Popover` | `--popover-rounded` | 8 px |
+| `OTP cell` | `--otp-cell-rounded` | 8 px |
+| `ImageButton` | explicit `rounded-lg` | 8 px |
+
+Everywhere else, use `rounded-component` rather than
+`rounded-sm` / `rounded-md` directly — keeps the radius decision in one
+token so it's editable in one place.
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`/* Preferred for most chrome — single token controls every corner. */
+<button className="rounded-component" />
+
+/* Use the explicit component-specific radius when one exists. */
+<div className="rounded-modal-box" />
+
+/* L1 raw — for ad-hoc geometry. */
+<div style={{ borderRadius: "var(--lifesg-radius-md)" }} />`}
+/>
+
+## Notes
+
+- The component-radius decision is recorded in `MEMORY.md` (see the
+  component-radius-convention entry). Adding a new component? Pick
+  `rounded-component` unless there's a strong reason to introduce a
+  per-component radius token.
+- `--lifesg-radius-full` (`9999px`) is reserved for pills, avatars,
+  and other "as round as possible" affordances.
+- Token namespace: `src/app/lifesg-tokens.css` for the raw scale.

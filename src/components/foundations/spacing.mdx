@@ -1,0 +1,51 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as SpacingStories from "./spacing.stories";
+
+<Meta of={SpacingStories} />
+
+# Spacing
+
+LifeSG ships a fixed spacing scale at `--lifesg-spacing-{N}` where N
+is the value in pixels. A separate `--lifesg-layout-{size}` scale
+covers responsive layout gutters and outer margins.
+
+## Default
+
+<Canvas of={SpacingStories.Default} />
+
+## When to reach for which
+
+| Token family | Use for |
+|--------------|---------|
+| `--lifesg-spacing-{N}` | Component internal padding/gap (button px, input gutter, card padding) |
+| `--lifesg-layout-{size}` | Page-level outer margins, grid gutters, section gaps |
+| `--{component}-padding-x/y` (L3) | Component-owned spacing — use the L3 alias inside the component, override globally if needed |
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`/* Direct L1 scale — fine for one-off layout adjustments. */
+<div style={{ padding: "var(--lifesg-spacing-16)" }} />
+
+/* L3 component token via Tailwind — preferred for component chrome. */
+<div className="px-card-padding-x py-card-padding-y" />`}
+/>
+
+## Notes
+
+- The scale is **not** a continuous 4 px step — values skip past 24
+  (next is 32, not 28) and 48 (next is 64). This is intentional and
+  matches LifeSG's published scale; if a designer asks for "28 px",
+  push back or use a one-off arbitrary class.
+- The Tailwind 4 `@theme inline` block maps `--spacing-{token}` aliases
+  so utilities like `pt-card-padding-y` work directly. Component
+  padding tokens live in the L3 token files
+  (`--card-padding-y`, `--input-padding-x`, etc.) and surface as
+  Tailwind utilities via the `--spacing-*` shim.
+- For one-off micro-pixel adjustments outside the scale (e.g.
+  `outline-offset: -2px` to inset a focus ring), use a raw arbitrary
+  Tailwind value (`outline-offset-[-2px]`) and note the reason — not
+  every value needs to be a token.
+- Token namespace: `src/app/lifesg-tokens.css` for the raw scale,
+  `globals.css` `@theme inline` for the Tailwind aliasing.

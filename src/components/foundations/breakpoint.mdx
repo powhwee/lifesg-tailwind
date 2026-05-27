@@ -1,0 +1,49 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as BreakpointStories from "./breakpoint.stories";
+
+<Meta of={BreakpointStories} />
+
+# Breakpoint
+
+Seven responsive ranges (`xxs` → `xxl`) — each carries a min width,
+max width, column count, gutter width, and outer margin. Use these
+to keep responsive layouts consistent with LifeSG's grid system.
+
+## Default
+
+<Canvas of={BreakpointStories.Default} />
+
+## Where breakpoints live
+
+CSS variables (`--lifesg-breakpoint-{name}-{min|max|column|gutter|margin}`)
+mirror LifeSG's `Breakpoint[*]` JS API numerically — values match
+exactly, suffixed with `px`. Browsers don't accept `var()` inside
+`@media` queries, so breakpoints are typically referenced via:
+
+| Approach | When |
+|----------|------|
+| Tailwind responsive prefixes (`md:`, `lg:`, etc.) | Most component / layout code |
+| Custom `@media (min-width: var(--lifesg-breakpoint-md-min))` in CSS files where browsers can resolve via CSS Houdini polyfill | Rare — only when matching LifeSG numerically matters |
+| JS check at runtime via `matchMedia(...)` | Imperative breakpoint logic (drawer-on-mobile-only patterns) |
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`/* Tailwind responsive prefixes — match LifeSG breakpoints. */
+<div className="px-4 md:px-6 lg:px-8 xl:px-12" />
+
+/* JS-side check — useful for triggering modal-vs-drawer choice. */
+const isMobile = window.matchMedia("(max-width: 767px)").matches;`}
+/>
+
+## Notes
+
+- Breakpoint widths derive from LifeSG's published responsive grid
+  spec — they don't precisely match Tailwind's default scale. Stick
+  with the LifeSG numbers (`sm 480`, `md 768`, `lg 1024`, `xl 1440`)
+  for parity with LifeSG screens.
+- Column count and gutter values feed the `Layout` component's
+  responsive grid behaviour (see `Core/Layout` for the grid
+  primitives).
+- Token namespace: `src/app/lifesg-tokens.css`.

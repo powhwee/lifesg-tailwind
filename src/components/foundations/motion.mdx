@@ -1,0 +1,60 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as MotionStories from "./motion.stories";
+
+<Meta of={MotionStories} />
+
+# Motion
+
+Six duration steps (`150ms` → `1000ms`) and four easing curves
+(`default`, `standard`, `entrance`, `exit`). Use these so animation
+timings feel consistent with the rest of LifeSG chrome.
+
+## Default
+
+<Canvas of={MotionStories.Default} />
+
+## Duration cheatsheet
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--lifesg-motion-duration-150` | 150 ms | Micro-interactions — hover ripples, checkbox tick |
+| `--lifesg-motion-duration-250` | 250 ms | Common control transitions — buttons, focus rings |
+| `--lifesg-motion-duration-350` | 350 ms | Popover / dropdown reveal |
+| `--lifesg-motion-duration-500` | 500 ms | Modal / drawer entrance |
+| `--lifesg-motion-duration-800` | 800 ms | Page-level transitions, longer slides |
+| `--lifesg-motion-duration-1000` | 1000 ms | Reserved for celebratory / hero animations |
+
+## Easing roles
+
+| Token | Role |
+|-------|------|
+| `--lifesg-motion-ease-default` | Catch-all — same as `standard` |
+| `--lifesg-motion-ease-standard` | Both ends curved — symmetric transitions |
+| `--lifesg-motion-ease-entrance` | Decelerate-out — content arriving on screen |
+| `--lifesg-motion-ease-exit` | Accelerate-in — content leaving the screen |
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`/* Plain inline. */
+<div
+  style={{
+    transition: \`opacity var(--lifesg-motion-duration-250) var(--lifesg-motion-ease-standard)\`,
+  }}
+/>
+
+/* Tailwind via duration / ease utilities — pick the matching LifeSG token. */
+<div className="transition-opacity duration-250 ease-out" />`}
+/>
+
+## Notes
+
+- `prefers-reduced-motion` users get reduced or no animation — keep
+  any imperative animation gated on
+  `window.matchMedia("(prefers-reduced-motion: no-preference)").matches`
+  before firing.
+- Most components ship with their entrance/exit animations baked into
+  Base UI's `Collapsible` / `Dialog` / `Popover` — don't double up
+  with parent-level transitions on the trigger.
+- Token namespace: `src/app/lifesg-tokens.css`.

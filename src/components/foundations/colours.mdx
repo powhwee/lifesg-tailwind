@@ -1,0 +1,50 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as ColoursStories from "./colours.stories";
+
+<Meta of={ColoursStories} />
+
+# Colours
+
+LifeSG ships colour as three concentric layers — raw ramps (L1),
+semantic aliases (L2), and component tokens (L3). The canvas below
+visualises the L1 ramps for the eight named scales (brand, primary,
+secondary, neutral, success, warning, error, info) plus the L2
+semantic groups grouped by intent (text, background, border, icon).
+
+## Default
+
+<Canvas of={ColoursStories.Default} />
+
+## When to reach for which layer
+
+| Use… | When… |
+|------|-------|
+| **L1 raw** — `--lifesg-brand-50`, `--lifesg-primary-60` | One-off illustrations or accent colours that don't map onto a semantic role |
+| **L2 semantic** — `--lifesg-bg-primary`, `--lifesg-text-error`, `--lifesg-border-focus` | Inside component CSS — most of the time |
+| **L3 component** — `--button-bg-primary`, `--input-border-focus` | Inside the component that owns the token, or when overriding that component globally / scoped |
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`/* Prefer semantic L2 aliases in component code. */
+<div className="bg-lifesg-bg text-lifesg-text border border-lifesg-border" />
+
+/* L3 component token through Tailwind utility. */
+<button className="bg-button-bg-primary text-button-text-primary" />
+
+/* Drop to L1 only for one-off accents. */
+<div style={{ background: "var(--lifesg-primary-60)" }} />`}
+/>
+
+## Notes
+
+- L1 ramps span 11 stops (10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 100).
+  Lower numbers are darker; 100 is the lightest tint. Matches LifeSG's
+  ramp convention exactly.
+- The semantic aliases are stable contracts — components reference them
+  by name, so an L2 override (e.g. `--lifesg-bg-primary`) instantly
+  retunes every component that uses it.
+- Dark mode swaps L2 only; ramps don't change. See
+  `Foundations/Themes/Dark Mode` for the toggle behaviour.
+- Token namespace: `src/app/lifesg-tokens.css`.

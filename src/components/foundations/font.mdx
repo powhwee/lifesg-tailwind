@@ -1,0 +1,57 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as FontStories from "./font.stories";
+
+<Meta of={FontStories} />
+
+# Font
+
+Heading and body type scales, plus the four font weights LifeSG
+publishes. Font family is **Open Sans** — loaded via `next/font` in
+both the app and the Storybook preview (see
+`Foundations/Themes/Introduction` if you ever see serif fallback).
+
+## Default
+
+<Canvas of={FontStories.Default} />
+
+## Heading and body scales
+
+| Family | Sizes | Notes |
+|--------|-------|-------|
+| Heading | `xxl`, `xl`, `lg`, `md`, `sm`, `xs` | 30 / 26 / 24 / 20 / 18 / 16 px (line-heights paired in the panel above) |
+| Body | `baseline`, `md`, `sm`, `xs` | 18 / 16 / 14 / 12 px — `body-sm` uses a spacious 26 px line-height (different from Tailwind's default `text-sm`) |
+| Weight | `light`, `regular`, `semibold`, `bold` | 300 / 400 / 600 / 700 |
+
+For component code, prefer the `<Typography>` component
+(`Core/Typography`) which wraps the size + weight tokens into a single
+prop. Reach for raw tokens only when building a primitive that
+`<Typography>` doesn't cover.
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`/* Preferred — Typography component handles size + weight + family. */
+<Typography variant="heading-lg" weight="bold">Title</Typography>
+
+/* Raw tokens — for primitives that compose their own type spec. */
+<h2
+  style={{
+    fontSize: "var(--lifesg-font-heading-size-lg)",
+    lineHeight: "var(--lifesg-font-heading-lh-lg)",
+    fontWeight: "var(--lifesg-font-weight-semibold)",
+    fontFamily: "var(--lifesg-font-family)",
+  }}
+>Title</h2>`}
+/>
+
+## Notes
+
+- `body-sm` deliberately uses a **26 px line-height** (LifeSG's spec)
+  — not 20 px like Tailwind's default `text-sm`. This is why the
+  `Typography` component re-implements the body scale via L3 tokens
+  rather than mapping straight to Tailwind text utilities.
+- The Open Sans webfont is loaded once in `src/app/layout.tsx`
+  (Next.js app) and again in `.storybook/preview.ts` (Storybook
+  iframes). If you see serif anywhere, one of those wirings broke.
+- Token namespace: `src/app/lifesg-tokens.css`.

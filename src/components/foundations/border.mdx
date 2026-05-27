@@ -1,0 +1,49 @@
+import { Canvas, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as BorderStories from "./border.stories";
+
+<Meta of={BorderStories} />
+
+# Border
+
+Border widths and the `solid` line style. LifeSG ships four widths
+(0.5 / 1 / 2 / 4 px) — most chrome uses width-010 (1 px). Border
+colour comes from the semantic L2 aliases under
+`--lifesg-border-*` (see `Foundations/Colours`).
+
+## Default
+
+<Canvas of={BorderStories.Default} />
+
+## Widths at a glance
+
+| Token | Width | Common use |
+|-------|-------|------------|
+| `--lifesg-border-width-005` | 0.5 px | Hairline rules — tables, low-emphasis dividers |
+| `--lifesg-border-width-010` | 1 px | Standard control border — inputs, cards, buttons |
+| `--lifesg-border-width-020` | 2 px | Emphasis / focus rings on the border itself |
+| `--lifesg-border-width-040` | 4 px | Heavy emphasis, decorative rules |
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`/* Width via raw L1; colour via L2 semantic alias. */
+<div
+  style={{
+    borderTop: \`var(--lifesg-border-width-010) var(--lifesg-border-solid) var(--lifesg-border)\`,
+  }}
+/>
+
+/* Or via Tailwind utilities — preferred. */
+<div className="border border-lifesg-border" />`}
+/>
+
+## Notes
+
+- The `solid` token resolves to the literal CSS keyword (`"solid"`).
+  It exists so component CSS can compose a full border declaration
+  through `var()`s without inlining the keyword.
+- Focus rings on interactive chrome use `outline` + an `outline-offset`
+  inset — not borders — so the border doesn't shift when focus lands.
+  See individual component MDX for the focus-ring token used.
+- Token namespace: `src/app/lifesg-tokens.css`.
