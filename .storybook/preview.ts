@@ -42,6 +42,25 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      // Top-level sidebar order — mirrors the LifeSG canonical Storybook
+      // sequence (`Getting started → Foundations → Core → Content →
+      // Navigation → Selection and input → Overlays → Form`). Within each
+      // top-level group, sub-groups + stories sort alphabetically (default
+      // Storybook behaviour). Anything not listed here lands at the end.
+      storySort: {
+        order: [
+          "Getting Started",
+          "Foundations",
+          "Core",
+          "Content",
+          "Navigation",
+          "Selection and input",
+          "Overlays",
+          "Form",
+        ],
+      },
+    },
   },
   decorators: [
     withAppFonts,
