@@ -1,0 +1,62 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as FooterStories from "./footer.stories";
+
+<Meta of={FooterStories} />
+
+# Footer
+
+Page-level footer with optional logo, multi-column link lists,
+disclaimer links (Privacy / Terms / Report Vulnerability), and a
+copyright line. Renders a native `<footer>`.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Footer } from "@/components/ui/footer";
+
+<Footer
+  links={[[
+    { href: "/about", children: "About" },
+    { href: "/help", children: "Help" },
+  ]]}
+  copyrightInfo="© 2026 Government of Singapore"
+/>`}
+/>
+
+## Default
+
+<Canvas of={FooterStories.Default} />
+
+## Variants
+
+<Canvas of={FooterStories.NoLogo} />
+<Canvas of={FooterStories.MinimalDisclaimerOnly} />
+<Canvas of={FooterStories.CustomDisclaimerLinks} />
+
+## Accessibility
+
+- Renders a native `<footer>` landmark — assistive tech navigation
+  jumps directly to it.
+- Disclaimer links carry an external-link icon (`ExternalLink`,
+  `aria-hidden`) on the Report Vulnerability anchor to signal the
+  target opens externally; pair with `target="_blank" rel="noopener"`
+  via the link props if needed.
+- Logo `<img>` uses `alt=""` because the surrounding chrome already
+  conveys "this is the footer for [site]". Pass a custom `alt` via the
+  underlying image if you have brand-specific text to surface.
+
+## Notes
+
+- `links` is `LinkAttrs[][]` — outer array is columns, inner is the
+  link list per column. Two columns by default at the `sm:` breakpoint;
+  collapses to one at narrower widths.
+- `disclaimerLinks` is merged onto sensible defaults
+  (`{ privacy: "#privacy", termsOfUse: "#terms", … }`). Override only
+  what you need.
+- `hideLogo` removes the logo block entirely; `logoSrc` swaps the
+  placeholder colour-block for a real image.
+- Token namespace: `--footer-bg`, `--footer-text`, `--footer-link`,
+  `--footer-border`. The container width pin (`max-w-screen-xl`) is
+  hard-coded — adjust via `className` if your shell needs wider /
+  narrower.

@@ -1,0 +1,78 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as ErrorDisplayStories from "./error-display.stories";
+
+<Meta of={ErrorDisplayStories} />
+
+# ErrorDisplay
+
+Full-page error layout — illustration, title, description, optional
+action button. Ships with 20 built-in `type`s (HTTP codes, common UX
+states like inactivity / logout / no-item-found). Each type has a
+default LifeSG CDN illustration, title, and copy that callers can
+override per-call.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { ErrorDisplay } from "@/components/ui/error-display";
+
+<ErrorDisplay
+  type="404"
+  actionButton={{ children: "Return to dashboard" }}
+/>`}
+/>
+
+## Common HTTP errors
+
+<Canvas of={ErrorDisplayStories.NotFound} />
+<Canvas of={ErrorDisplayStories.Forbidden} />
+<Canvas of={ErrorDisplayStories.ServerError} />
+
+## UX states
+
+<Canvas of={ErrorDisplayStories.NoItemFound} />
+<Canvas of={ErrorDisplayStories.Confirmation} />
+<Canvas of={ErrorDisplayStories.Maintenance} />
+<Canvas of={ErrorDisplayStories.Inactivity} />
+
+## Overrides
+
+<Canvas of={ErrorDisplayStories.WithCustomTitle} />
+<Canvas of={ErrorDisplayStories.WithActionButton} />
+<Canvas of={ErrorDisplayStories.ImageOnly} />
+<Canvas of={ErrorDisplayStories.FallbackIcon} />
+
+## Props
+
+<Controls of={ErrorDisplayStories.NotFound} />
+
+## Accessibility
+
+- The wrapper is a `<section role="alert">` so assistive tech
+  announces the error when it mounts. For polite UX (no live
+  announcement), strip the role downstream.
+- The title renders as an `<h1>` by default; place an ErrorDisplay
+  inside a page where it's the dominant landmark, or override the
+  hierarchy via custom `title` content if you need a different level.
+- Illustrations use `alt=""` (decorative) — the title carries the
+  semantic message.
+- The fallback icon disc (`img={null}`) uses a tone-tinted background
+  derived from `BUILTIN[type].tone` — does not rely on colour alone
+  because the title still conveys the error meaning.
+
+## Notes
+
+- `img` precedence: `null` → fallback icon disc, `ImgHTMLAttributes`
+  → custom `<img>`, any other ReactNode → renders as-is, `undefined` →
+  default LifeSG CDN illustration.
+- `additionalProps` carries type-specific extras
+  (`{ dateString }` for `maintenance`, `{ secondsLeft, reminderInterval }`
+  for `inactivity`); types that need them call `renderDescription`
+  internally.
+- Token namespaces: `--error-display-*` (gap / pad-y / max-width /
+  illus-size / title-color / desc-color) plus
+  `--error-display-tone-{tone}-{bg,fg}` for the fallback disc.
+- For LifeSG's exact illustrations, the component points at
+  `assets.life.gov.sg/react-design-system/img/error/`. Bring your
+  own CDN base by passing a custom `img` prop with the right `src`.

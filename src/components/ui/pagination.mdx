@@ -1,0 +1,64 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as PaginationStories from "./pagination.stories";
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+Controlled page navigator with prev/next, optional first/last buttons,
+ellipsis collapsing for long page lists, and an optional page-size
+changer (built on `Select`).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { Pagination } from "@/components/ui/pagination";
+
+<Pagination
+  totalItems={250}
+  activePage={page}
+  pageSize={10}
+  onPageChange={setPage}
+/>`}
+/>
+
+## Default
+
+<Canvas of={PaginationStories.Default} />
+
+## Variants
+
+<Canvas of={PaginationStories.FewPages} />
+<Canvas of={PaginationStories.ManyPages} />
+<Canvas of={PaginationStories.SinglePage} />
+
+## Optional UI
+
+<Canvas of={PaginationStories.WithFirstLastNav} />
+<Canvas of={PaginationStories.WithPageSizeChanger} />
+
+## Accessibility
+
+- The outer element is a `<nav aria-label="Pagination">` — assistive
+  tech labels the whole region clearly.
+- The active page has `aria-current="page"`.
+- Prev/Next/First/Last buttons carry `aria-label`s ("Previous page" /
+  etc.) so they're navigable without context.
+- Ellipsis cells are visual-only (`select-none`, no semantic role) —
+  screen readers skip past them.
+- Disabled state on edge buttons uses native `disabled` so keyboard
+  users can't tab through dead targets.
+
+## Notes
+
+- The ellipsis kicks in when `totalItems / pageSize > 9` pages; before
+  that all pages render. The window is `first / last / active ± 2`.
+- Pagination is fully controlled — pass `activePage`, `onPageChange`,
+  and optionally `pageSize` / `onPageSizeChange`. Out-of-range
+  `activePage` values are clamped silently.
+- Page-size changer uses our `Select` component — it'll pick up the
+  same theme + L3 tokens as the rest of the form chrome.
+- Token namespace: `--pagination-*` (bg / border / hover bg / active
+  bg & text / chevron text). Shares `--touch-target-default` for
+  button sizing.
