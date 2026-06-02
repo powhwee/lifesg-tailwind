@@ -13,6 +13,7 @@ export default meta;
 type Story = StoryObj<typeof Popover>;
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-12">
       <Popover>
@@ -35,6 +36,7 @@ export const Default: Story = {
 };
 
 export const CustomPlacement: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-24 flex items-center justify-center gap-4">
       <Popover>

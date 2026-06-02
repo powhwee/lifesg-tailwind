@@ -31,6 +31,7 @@ export const Disabled: Story = {
 };
 
 export const WithRequiredMark: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Label htmlFor="label-required">
       Full legal name
@@ -40,6 +41,7 @@ export const WithRequiredMark: Story = {
 };
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Stack>
       <Label htmlFor="lbl-1">Default label</Label>

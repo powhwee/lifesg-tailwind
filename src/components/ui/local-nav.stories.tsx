@@ -19,6 +19,7 @@ const items = [
 ];
 
 export const Menu: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState(0);
     return (
@@ -34,6 +35,7 @@ export const Menu: Story = {
 };
 
 export const Dropdown: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState(0);
     return (
@@ -50,6 +52,7 @@ export const Dropdown: Story = {
 };
 
 export const MenuWithCustomRender: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState(2);
     return (

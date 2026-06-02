@@ -23,14 +23,17 @@ const items: NavbarProps["items"] = [
 ];
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <Navbar brand={brand} items={items} />,
 };
 
 export const WithSelected: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <Navbar brand={brand} items={items} selectedId="services" />,
 };
 
 export const WithActions: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Navbar
       brand={brand}
@@ -45,12 +48,14 @@ export const WithActions: Story = {
 };
 
 export const WithMasthead: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Navbar brand={brand} items={items} selectedId="home" masthead />
   ),
 };
 
 export const FullChrome: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Navbar
       brand={brand}

@@ -37,16 +37,19 @@ function ControlledRating({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledRating />,
 };
 
 export const WithDescription: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledRating description="How was your experience with this service today?" />
   ),
 };
 
 export const PreFilled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledRating
       initial={4}
@@ -56,6 +59,7 @@ export const PreFilled: Story = {
 };
 
 export const CustomButtonLabel: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledRating
       description="Rate this article"

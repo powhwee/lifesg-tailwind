@@ -16,6 +16,7 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Field name="email" className="w-80">
       <FieldLabel>Email address</FieldLabel>
@@ -29,6 +30,7 @@ export const Default: Story = {
 };
 
 export const WithDescription: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Field name="username" className="w-80">
       <FieldLabel>Username</FieldLabel>
@@ -44,6 +46,7 @@ export const WithDescription: Story = {
 };
 
 export const WithError: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Field name="postcode" invalid className="w-80">
       <FieldLabel>Postal code</FieldLabel>
@@ -58,6 +61,7 @@ export const WithError: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Field name="locked" disabled className="w-80">
       <FieldLabel>Account ID</FieldLabel>

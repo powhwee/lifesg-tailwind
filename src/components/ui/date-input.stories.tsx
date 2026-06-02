@@ -34,14 +34,17 @@ function ControlledDateInput({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledDateInput />,
 };
 
 export const PreFilled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledDateInput initial="2026-05-27" />,
 };
 
 export const WithMinMax: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledDateInput
       initial="2026-05-15"
@@ -52,6 +55,7 @@ export const WithMinMax: Story = {
 };
 
 export const WithDisabledDates: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledDateInput
       initial="2026-05-13"
@@ -61,18 +65,22 @@ export const WithDisabledDates: Story = {
 };
 
 export const WithDoneButton: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledDateInput withButton />,
 };
 
 export const ErrorState: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledDateInput initial="2026-05-27" error />,
 };
 
 export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledDateInput initial="2026-05-27" disabled />,
 };
 
 export const CompositeFormField: StoryObj<typeof FormDateInput> = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [v, setV] = React.useState("");
     return (
@@ -89,6 +97,7 @@ export const CompositeFormField: StoryObj<typeof FormDateInput> = {
 };
 
 export const FormFieldWithError: StoryObj<typeof FormDateInput> = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [v, setV] = React.useState("2026-05-27");
     return (

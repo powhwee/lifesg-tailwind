@@ -73,6 +73,7 @@ export const CompositeSection: Story = {
 };
 
 export const ToggleGroup: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Stack gap={3} className="max-w-md">
       <Toggle type="radio" name="grp" defaultChecked>

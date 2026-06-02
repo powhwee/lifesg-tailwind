@@ -11,6 +11,7 @@ export default meta;
 type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Card className="w-80">
       <Card.Header>
@@ -25,6 +26,7 @@ export const Default: Story = {
 };
 
 export const TitleOnly: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Card className="w-80">
       <Card.Title>Quick stat</Card.Title>
@@ -33,6 +35,7 @@ export const TitleOnly: Story = {
 };
 
 export const FullComposition: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Card className="w-96">
       <Card.Header>
@@ -55,6 +58,7 @@ export const FullComposition: Story = {
 };
 
 export const Stacked: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="flex flex-col gap-4 w-80">
       <Card>

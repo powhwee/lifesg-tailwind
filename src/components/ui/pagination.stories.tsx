@@ -34,24 +34,29 @@ function ControlledPagination({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledPagination totalItems={250} />,
 };
 
 export const FewPages: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledPagination totalItems={45} />,
 };
 
 export const ManyPages: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledPagination totalItems={2400} initial={42} />,
 };
 
 export const WithFirstLastNav: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledPagination totalItems={500} initial={5} showFirstAndLastNav />
   ),
 };
 
 export const WithPageSizeChanger: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledPagination
       totalItems={500}
@@ -68,5 +73,6 @@ export const WithPageSizeChanger: Story = {
 };
 
 export const SinglePage: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledPagination totalItems={5} />,
 };

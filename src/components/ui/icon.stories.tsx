@@ -40,6 +40,7 @@ export const Default: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={6}>
       <Icon as={Check} size="xs" />
@@ -52,6 +53,7 @@ export const Sizes: Story = {
 };
 
 export const Tones: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Stack>
       <Row gap={4}>
@@ -76,6 +78,7 @@ export const Tones: Story = {
 };
 
 export const Gallery: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={6}>
       <Icon as={Check} size="lg" />

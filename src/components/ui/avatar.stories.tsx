@@ -32,6 +32,7 @@ export const Small: Story = {
 };
 
 export const WithImage: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Avatar>
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -45,6 +46,7 @@ export const WithImage: Story = {
 };
 
 export const WithIcon: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Avatar>
       <User className="size-1/2" aria-hidden />
@@ -53,6 +55,7 @@ export const WithIcon: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={4}>
       <Avatar sizeType="small">A</Avatar>
@@ -62,6 +65,7 @@ export const Sizes: Story = {
 };
 
 export const InitialsGallery: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={3}>
       <Avatar>Alice</Avatar>

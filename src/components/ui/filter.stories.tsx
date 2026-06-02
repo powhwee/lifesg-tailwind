@@ -60,6 +60,7 @@ function ControlledFilter() {
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="w-80">
       <ControlledFilter />
@@ -68,6 +69,7 @@ export const Default: Story = {
 };
 
 export const SingleGroup: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState<FilterCheckboxOption[]>([services[0]]);
     return (
@@ -90,6 +92,7 @@ export const SingleGroup: Story = {
 };
 
 export const WithCustomItem: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="w-80">
       <Filter onClear={() => {}}>
@@ -113,6 +116,7 @@ export const WithCustomItem: Story = {
 };
 
 export const Minimisable: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState<FilterCheckboxOption[]>([]);
     return (

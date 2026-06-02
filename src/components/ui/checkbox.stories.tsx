@@ -52,6 +52,7 @@ export const SmallSize: Story = {
 };
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Stack>
       <LabeledControl htmlFor="chk-1" control={<Checkbox id="chk-1" />}>

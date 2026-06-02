@@ -17,6 +17,7 @@ const rows = [
 ];
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Table.Container className="w-[36rem]">
       <Table>
@@ -42,6 +43,7 @@ export const Default: Story = {
 };
 
 export const NumericAlignment: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Table.Container className="w-[36rem]">
       <Table>
@@ -73,6 +75,7 @@ export const NumericAlignment: Story = {
 };
 
 export const LongContent: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Table.Container className="w-[40rem]">
       <Table>

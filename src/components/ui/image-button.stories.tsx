@@ -31,6 +31,7 @@ export const Default: Story = {
 };
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={3}>
       <ImageButton imgSrc={IMAGES[0].src} aria-label="Default" />
@@ -42,6 +43,7 @@ export const States: Story = {
 };
 
 export const SelectableGroup: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState(0);
     return (

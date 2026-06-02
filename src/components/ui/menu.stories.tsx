@@ -26,6 +26,7 @@ export default meta;
 type Story = StoryObj<typeof MenuContent>;
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-6">
       <Menu defaultOpen>
@@ -43,6 +44,7 @@ export const Default: Story = {
 };
 
 export const WithGroups: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-6">
       <Menu defaultOpen>
@@ -67,6 +69,7 @@ export const WithGroups: Story = {
 };
 
 export const CheckboxItems: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [bold, setBold] = React.useState(true);
     const [italic, setItalic] = React.useState(false);
@@ -102,6 +105,7 @@ export const CheckboxItems: Story = {
 };
 
 export const RadioGroup: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [value, setValue] = React.useState("light");
     return (
@@ -122,6 +126,7 @@ export const RadioGroup: Story = {
 };
 
 export const Submenu: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-6">
       <Menu defaultOpen>
@@ -147,6 +152,7 @@ export const Submenu: Story = {
 };
 
 export const LinkItems: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-6">
       <Menu defaultOpen>
@@ -164,6 +170,7 @@ export const LinkItems: Story = {
 };
 
 export const DisabledItems: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-6">
       <Menu defaultOpen>

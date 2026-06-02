@@ -35,22 +35,27 @@ function Controlled({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <Controlled />,
 };
 
 export const ShortForm: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <Controlled showDateAsShortForm />,
 };
 
 export const ShowToday: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <Controlled initial={new Date().toISOString().slice(0, 10)} showCurrentDateAsToday />,
 };
 
 export const WeekView: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <Controlled view="week" />,
 };
 
 export const WithCalendarPicker: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [date, setDate] = React.useState("2026-05-27");
     return (
@@ -65,6 +70,7 @@ export const WithCalendarPicker: Story = {
 };
 
 export const ClampedRange: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Controlled
       initial="2026-05-15"
@@ -75,5 +81,6 @@ export const ClampedRange: Story = {
 };
 
 export const LoadingState: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <Controlled loading />,
 };

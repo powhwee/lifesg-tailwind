@@ -12,6 +12,7 @@ export default meta;
 type Story = StoryObj<typeof Sidenav>;
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="h-[640px] flex">
       <Sidenav fixed={false} aria-label="Primary">
@@ -29,6 +30,7 @@ export const Default: Story = {
 };
 
 export const WithGroups: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="h-[640px] flex">
       <Sidenav fixed={false}>
@@ -49,6 +51,7 @@ export const WithGroups: Story = {
 };
 
 export const WithExpandingDrawer: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="h-[640px] flex">
       <Sidenav fixed={false}>

@@ -53,6 +53,7 @@ export const SmallSize: Story = {
 };
 
 export const States: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Stack>
       <RadioGroup defaultValue="">

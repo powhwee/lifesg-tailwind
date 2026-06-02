@@ -32,6 +32,7 @@ const rows: RowProps[] = [
 ];
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="w-[48rem]">
       <DataTable headers={headers} rows={rows} />
@@ -40,6 +41,7 @@ export const Default: Story = {
 };
 
 export const WithSorting: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [sort, setSort] = React.useState<SortIndicatorsProps>({ deadline: "asc" });
     const sortable: HeaderProps[] = headers.map((h) =>
@@ -61,6 +63,7 @@ export const WithSorting: Story = {
 };
 
 export const MultiSelect: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState<string[]>([]);
     return (
@@ -86,6 +89,7 @@ export const MultiSelect: Story = {
 };
 
 export const WithActionBar: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState<string[]>(["1", "3"]);
     return (
@@ -119,6 +123,7 @@ export const WithActionBar: Story = {
 };
 
 export const DisabledRows: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [selected, setSelected] = React.useState<string[]>([]);
     return (
@@ -148,6 +153,7 @@ export const DisabledRows: Story = {
 };
 
 export const AlternatingRows: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="w-[48rem]">
       <DataTable headers={headers} rows={rows} alternatingRows />
@@ -156,6 +162,7 @@ export const AlternatingRows: Story = {
 };
 
 export const LoadingState: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="w-[48rem]">
       <DataTable headers={headers} rows={[]} loadState="loading" />
@@ -164,6 +171,7 @@ export const LoadingState: Story = {
 };
 
 export const EmptyState: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="w-[48rem]">
       <DataTable headers={headers} rows={[]} />
@@ -172,6 +180,7 @@ export const EmptyState: Story = {
 };
 
 export const CustomCellRender: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const withActions: RowProps[] = rows.slice(0, 3).map((r) => ({
       ...r,

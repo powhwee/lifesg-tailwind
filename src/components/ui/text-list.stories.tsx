@@ -28,6 +28,7 @@ export const UnorderedDefault: Story = {
 };
 
 export const UnorderedBulletTypes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Stack gap={6}>
       <UnorderedList bulletType="disc">
@@ -47,6 +48,7 @@ export const UnorderedBulletTypes: Story = {
 };
 
 export const UnorderedCustomBullet: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <UnorderedList
       bulletType={<Star className="size-4 text-lifesg-icon-primary" />}
@@ -59,6 +61,7 @@ export const UnorderedCustomBullet: Story = {
 };
 
 export const UnorderedNone: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <UnorderedList bulletType="none">
       <span>No bullets — just flush text</span>
@@ -68,6 +71,7 @@ export const UnorderedNone: Story = {
 };
 
 export const OrderedDecimal: StoryObj<typeof OrderedList> = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <OrderedList counterType="decimal">
       <span>Sign in with Singpass</span>
@@ -79,6 +83,7 @@ export const OrderedDecimal: StoryObj<typeof OrderedList> = {
 };
 
 export const OrderedAlpha: StoryObj<typeof OrderedList> = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <OrderedList counterType="lower-alpha">
       <span>First choice</span>
@@ -89,6 +94,7 @@ export const OrderedAlpha: StoryObj<typeof OrderedList> = {
 };
 
 export const OrderedRoman: StoryObj<typeof OrderedList> = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <OrderedList counterType="lower-roman">
       <span>Eligibility criteria</span>
@@ -100,6 +106,7 @@ export const OrderedRoman: StoryObj<typeof OrderedList> = {
 };
 
 export const OrderedCustomSeparator: StoryObj<typeof OrderedList> = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <OrderedList counterType="decimal" counterSeparator=".">
       <span>Period separator instead of the default parenthesis</span>
@@ -109,6 +116,7 @@ export const OrderedCustomSeparator: StoryObj<typeof OrderedList> = {
 };
 
 export const SizesUnordered: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Stack gap={6}>
       <UnorderedList size="bl">

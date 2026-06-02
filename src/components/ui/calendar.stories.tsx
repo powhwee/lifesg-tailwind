@@ -17,6 +17,7 @@ export default meta;
 type Story = StoryObj<typeof Calendar>;
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [val, setVal] = React.useState("2026-05-27");
     return <Calendar variant="single" value={val} onChange={setVal} />;
@@ -24,6 +25,7 @@ export const Default: Story = {
 };
 
 export const Bordered: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [val, setVal] = React.useState("2026-05-27");
     return (
@@ -38,6 +40,7 @@ export const Bordered: Story = {
 };
 
 export const Multi: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [vals, setVals] = React.useState<string[]>([
       "2026-05-10",
@@ -49,6 +52,7 @@ export const Multi: Story = {
 };
 
 export const MultiWithLimit: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [vals, setVals] = React.useState<string[]>([]);
     return (
@@ -64,6 +68,7 @@ export const MultiWithLimit: Story = {
 };
 
 export const WithMinMax: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [val, setVal] = React.useState("2026-05-15");
     return (
@@ -79,6 +84,7 @@ export const WithMinMax: Story = {
 };
 
 export const WithDisabledDates: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [val, setVal] = React.useState("2026-05-27");
     return (

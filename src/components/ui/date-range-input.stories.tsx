@@ -48,16 +48,19 @@ function ControlledRange({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledRange />,
 };
 
 export const PreFilled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledRange initialStart="2026-05-12" initialEnd="2026-05-20" />
   ),
 };
 
 export const WithMinMax: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledRange
       initialStart="2026-05-15"
@@ -69,18 +72,21 @@ export const WithMinMax: Story = {
 };
 
 export const ErrorState: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledRange initialStart="2026-05-12" initialEnd="2026-05-20" error />
   ),
 };
 
 export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledRange initialStart="2026-05-12" initialEnd="2026-05-20" disabled />
   ),
 };
 
 export const CompositeFormField: StoryObj<typeof FormDateRangeInput> = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [start, setStart] = React.useState("");
     const [end, setEnd] = React.useState("");

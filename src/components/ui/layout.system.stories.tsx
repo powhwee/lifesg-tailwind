@@ -41,6 +41,7 @@ export const FlexLayout: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -62,6 +63,7 @@ export const FlexColumnLayout: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -86,6 +88,7 @@ export const GridLayout: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -110,6 +113,7 @@ export const Stretch: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",

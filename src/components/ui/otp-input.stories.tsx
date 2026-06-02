@@ -25,10 +25,12 @@ function ControlledOtp({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledOtp numOfInput={6} cooldownDuration={30} />,
 };
 
 export const WithPrefix: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledOtp
       numOfInput={6}
@@ -39,6 +41,7 @@ export const WithPrefix: Story = {
 };
 
 export const WithError: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledOtp
       numOfInput={6}
@@ -50,14 +53,17 @@ export const WithError: Story = {
 };
 
 export const FourDigit: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledOtp numOfInput={4} cooldownDuration={30} />,
 };
 
 export const OtpOnly: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledOtp numOfInput={6} cooldownDuration={30} otpOnly />,
 };
 
 export const CustomActionLabel: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledOtp
       numOfInput={6}

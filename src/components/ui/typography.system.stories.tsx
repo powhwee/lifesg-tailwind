@@ -35,6 +35,7 @@ export const Headings: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -73,6 +74,7 @@ export const Body: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -101,6 +103,7 @@ export const Weights: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -127,6 +130,7 @@ export const TypographySet: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",

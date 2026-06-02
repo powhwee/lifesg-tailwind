@@ -36,6 +36,7 @@ export const ThicknessScale: Story = {
     </Stack>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -54,6 +55,7 @@ export const LineStyles: Story = {
     </Stack>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -79,6 +81,7 @@ export const UsingInGridLayout: Story = {
     </div>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",
@@ -110,6 +113,7 @@ export const VerticalStack: Story = {
     </Stack>
   ),
   parameters: {
+    controls: { disable: true },
     docs: {
       source: {
         language: "tsx",

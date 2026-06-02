@@ -59,6 +59,7 @@ export const WithBaseTextColor: Story = {
 };
 
 export const Inline: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <p className="max-w-prose">
       The form supports{" "}

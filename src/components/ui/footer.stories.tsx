@@ -24,6 +24,7 @@ const sampleLinks = [
 ];
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Footer
       links={sampleLinks}
@@ -33,6 +34,7 @@ export const Default: Story = {
 };
 
 export const NoLogo: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Footer
       hideLogo
@@ -43,12 +45,14 @@ export const NoLogo: Story = {
 };
 
 export const MinimalDisclaimerOnly: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Footer copyrightInfo="© 2026 Government of Singapore" />
   ),
 };
 
 export const CustomDisclaimerLinks: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Footer
       links={sampleLinks}

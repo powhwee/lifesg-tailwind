@@ -64,26 +64,32 @@ function OpenDrawer({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenDrawer />,
 };
 
 export const Left: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenDrawer side="left" />,
 };
 
 export const Top: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenDrawer side="top" />,
 };
 
 export const Bottom: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenDrawer side="bottom" />,
 };
 
 export const HideClose: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenDrawer hideClose />,
 };
 
 export const BodyOnly: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <OpenDrawer>
       <DrawerBody className="p-6">
@@ -94,6 +100,7 @@ export const BodyOnly: Story = {
 };
 
 export const TriggeredByButton: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <div className="p-6">
       <Drawer>

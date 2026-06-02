@@ -21,6 +21,7 @@ const Cell = ({ children }: { children: ReactNode }) => (
 );
 
 export const GridWithColDivs: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Container type="grid">
       <ColDiv smCols={2} mdCols={4} lgCols={6}>
@@ -34,6 +35,7 @@ export const GridWithColDivs: Story = {
 };
 
 export const FullSpanCol: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Container type="grid">
       <ColDiv smCols={[1, -1]}>
@@ -44,6 +46,7 @@ export const FullSpanCol: Story = {
 };
 
 export const SectionWithContent: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Section>
       <Content type="flex-column">

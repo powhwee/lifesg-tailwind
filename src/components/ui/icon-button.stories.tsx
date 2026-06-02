@@ -31,6 +31,7 @@ export const Default: Story = {
 };
 
 export const StyleTypes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={3}>
       <IconButton styleType="primary" aria-label="Primary action">
@@ -47,6 +48,7 @@ export const StyleTypes: Story = {
 };
 
 export const Sizes: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={3}>
       <IconButton sizeType="small" aria-label="Small">
@@ -63,6 +65,7 @@ export const Sizes: Story = {
 };
 
 export const Destructive: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <IconButton styleType="secondary" aria-label="Delete item">
       <Trash2 className="text-lifesg-text-error" />
@@ -71,6 +74,7 @@ export const Destructive: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <Row gap={3}>
       <IconButton styleType="primary" disabled aria-label="Primary disabled">

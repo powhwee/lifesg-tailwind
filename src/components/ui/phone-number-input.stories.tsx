@@ -35,16 +35,19 @@ function ControlledPhone({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <ControlledPhone />,
 };
 
 export const PreFilled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledPhone initial={{ countryCode: "+65", number: "91234567" }} />
   ),
 };
 
 export const FixedCountry: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledPhone
       initial={{ countryCode: "+65", number: "91234567" }}
@@ -54,12 +57,14 @@ export const FixedCountry: Story = {
 };
 
 export const ErrorState: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledPhone initial={{ countryCode: "+65", number: "abc" }} error />
   ),
 };
 
 export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <ControlledPhone initial={{ countryCode: "+65", number: "91234567" }} disabled />
   ),

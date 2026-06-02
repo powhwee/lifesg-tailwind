@@ -24,6 +24,7 @@ export const PreFilled: Story = {
 };
 
 export const Controlled: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [v, setV] = React.useState("04-56");
     return (

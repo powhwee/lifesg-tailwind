@@ -40,26 +40,32 @@ function OpenCarousel({ initial, ...rest }: { initial?: number } & Partial<React
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenCarousel />,
 };
 
 export const StartingMidGallery: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenCarousel initial={2} />,
 };
 
 export const HideThumbnails: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenCarousel hideThumbnail />,
 };
 
 export const HideCounter: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenCarousel hideCounter />,
 };
 
 export const HideMagnifier: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenCarousel hideMagnifier />,
 };
 
 export const WithDelete: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const [items, setItems] = React.useState(PHOTOS);
     const [show, setShow] = React.useState(true);
@@ -78,6 +84,7 @@ export const WithDelete: Story = {
 };
 
 export const CustomContent: Story = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const items: FullscreenImageCarouselItemProps[] = [
       ...PHOTOS.slice(0, 2),

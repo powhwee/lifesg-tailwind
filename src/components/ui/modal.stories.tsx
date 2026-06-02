@@ -56,22 +56,27 @@ function OpenModal({
 }
 
 export const Default: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenModal />,
 };
 
 export const AnimateFromTop: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenModal animationFrom="top" />,
 };
 
 export const AnimateFromLeft: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenModal animationFrom="left" />,
 };
 
 export const AnimateFromRight: Story = {
+  parameters: { controls: { disable: true } },
   render: () => <OpenModal animationFrom="right" />,
 };
 
 export const NoOverlayClick: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <OpenModal enableOverlayClick={false}>
       <Modal.Box showCloseButton onClose={() => {}} className="w-[28rem]">
@@ -92,6 +97,7 @@ export const NoOverlayClick: Story = {
 };
 
 export const PlainBox: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
     <OpenModal>
       <Modal.Box className="w-[24rem]">
