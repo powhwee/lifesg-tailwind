@@ -387,6 +387,40 @@ export function InputGroupIntro() {
   );
 }
 
+export function PredictiveTextInputIntro() {
+  return (
+    <Prose>
+      <h1 className="text-2xl font-semibold tracking-tight">PredictiveTextInput</h1>
+      <p>
+        Text input with an asynchronous autocomplete dropdown. After the user types{" "}
+        <code>minimumCharacters</code> (default 3), the component debounces and calls{" "}
+        <code>fetchOptions(input)</code>. Returned items render as a listbox below the input;
+        ArrowUp / ArrowDown navigate, Enter selects, Escape closes. Generic{" "}
+        <code>&lt;T, V&gt;</code> matches LifeSG&rsquo;s shape.
+      </p>
+      <h2>Architecture</h2>
+      <p>
+        Composition of our <code>&lt;Input&gt;</code> + an absolutely-positioned dropdown sibling
+        controlled by combobox aria attributes (<code>role=&quot;combobox&quot;</code>,{" "}
+        <code>aria-expanded</code>, <code>aria-activedescendant</code>). Manual keyboard
+        handling follows WAI-ARIA combobox patterns.
+      </p>
+      <h2>What we deferred</h2>
+      <ul>
+        <li>
+          <strong>dropdownRootNode</strong> (render-into-rootNode portaling for overflow-hidden
+          parents). Falls back to position: absolute; add a portal layer when first needed.
+        </li>
+        <li>
+          <strong>Match-substring highlighting</strong> inside option labels. Doable as a future
+          render-pipeline tweak — let consumers pass a custom <code>listExtractor</code> that
+          returns a JSX-aware shape if needed.
+        </li>
+      </ul>
+    </Prose>
+  );
+}
+
 export function FileUploadIntro() {
   return (
     <Prose>

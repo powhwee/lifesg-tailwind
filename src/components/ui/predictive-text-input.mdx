@@ -1,0 +1,79 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./predictive-text-input.stories";
+
+<Meta of={Stories} />
+
+# PredictiveTextInput
+
+A text input with an asynchronous autocomplete dropdown. After the user types
+`minimumCharacters` characters (default 3), the component debounces and calls
+`fetchOptions(input)`. The returned items are rendered as a listbox below the
+input; ArrowUp / ArrowDown navigate, Enter selects, Escape closes.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { PredictiveTextInput, FormPredictiveTextInput, type ListItemDisplayProps } from "@/components/ui/predictive-text-input";`}
+/>
+
+## Default
+
+<Canvas of={Stories.Default} />
+
+## Async fetch
+
+`fetchOptions` is the only required prop. It returns a `Promise<T[]>` and may
+throw — failures render an inline "Try again" message.
+
+<Canvas of={Stories.AsyncFetch} />
+
+## Custom list items
+
+When `listExtractor` returns a `ListItemDisplayProps` object instead of a
+string, the dropdown row renders a title + secondary label pair. The input
+value used after selection comes from `displayValueExtractor`.
+
+<Canvas of={Stories.CustomListItems} />
+
+## States
+
+<Canvas of={Stories.Disabled} />
+<Canvas of={Stories.ReadOnly} />
+<Canvas of={Stories.ErrorState} />
+
+## In a form field
+
+The compound `FormPredictiveTextInput` wraps the input in `<FormField>` (label
++ description + error). Parallels `FormInput` and matches LifeSG's
+`Form.PredictiveTextInput`.
+
+<Canvas of={Stories.InFormField} />
+
+## Props
+
+<Controls of={Stories.Default} />
+
+## Accessibility
+
+- The input announces itself as `role="combobox"` with `aria-expanded`,
+  `aria-controls`, `aria-haspopup="listbox"`, `aria-autocomplete="list"`.
+- The dropdown is `role="listbox"`; each option is `role="option"` with
+  `aria-selected` toggled to reflect the active descendant.
+- The active row is announced via `aria-activedescendant` rather than
+  shifting focus, so screen readers stay on the input as the user types.
+- Loading and error messages render as plain text — surface them via a
+  separate aria-live region if your form needs explicit announcements.
+
+## Notes
+
+- LifeSG implements PredictiveTextInput on top of a shared `DropdownList` +
+  `ElementWithDropdown` infrastructure used by Select / MultiSelect. We
+  implement a focused, combobox-only variant that wraps our `<Input>` and
+  positions a dropdown sibling via plain CSS (no floating-ui dependency).
+- For consumers that need portal-style positioning (e.g. when the input is
+  inside a `overflow: hidden` modal), set `dropdownZIndex` and `dropdownWidth`.
+  Render-into-rootNode is not currently supported — log a follow-up issue if
+  you hit this.
+- All visual tokens live under `--predictive-text-input-*` in
+  `form-tokens.css`.
