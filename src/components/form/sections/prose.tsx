@@ -387,6 +387,34 @@ export function InputGroupIntro() {
   );
 }
 
+export function FileUploadIntro() {
+  return (
+    <Prose>
+      <h1 className="text-2xl font-semibold tracking-tight">FileUpload</h1>
+      <p>
+        Drag-and-drop dropzone with a managed file list. Each row shows the file name,
+        MIME/size meta, optional thumbnail, optional inline progress bar, and optional
+        inline error message. Sortable rows via <code>@dnd-kit/sortable</code>;
+        editable image descriptions via <code>editableFileItems</code>.
+      </p>
+      <h2>Drag-drop implementation</h2>
+      <p>
+        Uses native HTML5 drag events (<code>onDragOver</code> / <code>onDragLeave</code> /
+        <code> onDrop</code>) on the dropzone container with a counter to dedupe child-element
+        drag enters/leaves. Sortable rows use <code>@dnd-kit/core</code> +
+        <code> @dnd-kit/sortable</code> with their <code>MouseSensor</code> and{" "}
+        <code>KeyboardSensor</code>.
+      </p>
+      <h2>Form wrapper</h2>
+      <p>
+        Like FileDownload, FileUpload is intentionally <em>not</em> wrapped in a{" "}
+        <code>&lt;FormField&gt;</code> — title / description are baked in, mirroring
+        LifeSG&rsquo;s decision to not expose <code>Form.FileUpload</code>.
+      </p>
+    </Prose>
+  );
+}
+
 export function FileDownloadIntro() {
   return (
     <Prose>

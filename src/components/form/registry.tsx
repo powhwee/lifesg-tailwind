@@ -12,6 +12,7 @@ import * as dateRangeInputDefault from "./sections/date-range-input-default";
 import * as selectDefault from "./sections/select-default";
 import * as multiSelectDefault from "./sections/multi-select-default";
 import * as fileDownloadDefault from "./sections/file-download-default";
+import * as fileUploadDefault from "./sections/file-upload-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -103,6 +104,10 @@ export const tree: Node[] = [
   folder("file-download", "FileDownload", [
     leaf("introduction", "Introduction", { Prose: prose.FileDownloadIntro }),
     leaf("default",      "Default",      { Ours: fileDownloadDefault.OursPane, LifeSG: fileDownloadDefault.LifeSGPane }),
+  ]),
+  folder("file-upload", "FileUpload", [
+    leaf("introduction", "Introduction", { Prose: prose.FileUploadIntro }),
+    leaf("default",      "Default",      { Ours: fileUploadDefault.OursPane, LifeSG: fileUploadDefault.LifeSGPane }),
   ]),
 ];
 

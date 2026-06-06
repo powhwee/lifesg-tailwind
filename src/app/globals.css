@@ -427,6 +427,11 @@
   --color-lifesg-success-50: var(--lifesg-success-50);
   --color-lifesg-text-disabled: var(--lifesg-text-disabled);
   --color-lifesg-text-error: var(--lifesg-text-error);
+  --color-lifesg-bg-error: var(--lifesg-bg-error);
+  --color-lifesg-bg-error-strong: var(--lifesg-bg-error-strong);
+  --color-lifesg-bg-warning: var(--lifesg-bg-warning);
+  --color-lifesg-bg-warning-strong: var(--lifesg-bg-warning-strong);
+  --color-lifesg-icon-warning: var(--lifesg-icon-warning);
   --color-lifesg-text-hover: var(--lifesg-text-hover);
   --color-lifesg-text-selected: var(--lifesg-text-selected);
   --color-lifesg-text-success: var(--lifesg-text-success);

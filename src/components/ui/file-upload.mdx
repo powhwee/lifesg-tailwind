@@ -1,0 +1,97 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./file-upload.stories";
+
+<Meta of={Stories} />
+
+# FileUpload
+
+Drag-and-drop dropzone with a managed file list. Each row shows the file
+name, MIME/size meta, optional thumbnail, optional inline progress bar, and
+an optional inline error message. Supports drag-reordering via `@dnd-kit`
+and editable image descriptions.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { FileUpload, type FileItemProps } from "@/components/ui/file-upload";`}
+/>
+
+## Default
+
+<Canvas of={Stories.Default} />
+
+## Style types
+
+`bordered` wraps the dropzone in a dashed container; `no-border` drops the
+chrome so the upload control inherits its parent spacing.
+
+<Canvas of={Stories.NoBorder} />
+
+## Progress
+
+Set `progress: 0–1` on a file item to show an inline progress bar in the
+row. Hide the bar by omitting `progress` or setting it to `1`.
+
+<Canvas of={Stories.WithProgress} />
+
+## Errors
+
+`errorMessage` on a per-file basis renders a red row with the message
+underneath. A top-level `errorMessage` prop renders a separate error
+alert beneath the file list.
+
+<Canvas of={Stories.WithErrors} />
+
+## Warnings
+
+`warning` renders a yellow alert at the top of the list (above the file
+items).
+
+<Canvas of={Stories.WithWarning} />
+
+## Read-only
+
+Set `readOnly` to hide the upload button and delete controls. Useful
+for review screens.
+
+<Canvas of={Stories.ReadOnly} />
+
+## Sortable
+
+Set `sortable` to expose a drag handle on each row. Reorder via mouse
+or keyboard; the handler receives the new ordering via `onSort`.
+
+<Canvas of={Stories.Sortable} />
+
+## Editable descriptions
+
+For image files, set `editableFileItems` to expose an "Add description"
+button. Optionally cap the description length via `fileDescriptionMaxLength`.
+
+<Canvas of={Stories.EditableDescriptions} />
+
+## Props
+
+<Controls of={Stories.Default} />
+
+## Accessibility
+
+- The visible upload trigger is a real `<button>`. The native file input is
+  hidden but still triggered programmatically — `multiple`, `accept`, and
+  `capture` are forwarded to it.
+- Each progress bar exposes `role="progressbar"` with `aria-valuenow`.
+- Each row's delete and drag-handle buttons get `aria-label="Remove {name}"`
+  / `aria-label="Reorder {name}"`.
+- The drag overlay surfaces are aria-hidden — the live region for screen
+  readers comes from dnd-kit's announcements.
+
+## Notes
+
+- `@dnd-kit/core` + `@dnd-kit/sortable` are runtime dependencies — added in
+  package.json alongside this port.
+- The dashed dropzone container, padding, and corner radius come from shared
+  `--file-container-*` tokens in `form-tokens.css` (also used by FileDownload).
+- Like FileDownload, FileUpload is deliberately not wrapped in `<FormField>`
+  — it bundles its own title/description and is a self-contained surface,
+  matching LifeSG's decision to not expose `Form.FileUpload`.
