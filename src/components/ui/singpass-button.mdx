@@ -1,0 +1,59 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./singpass-button.stories";
+
+<Meta of={Stories} />
+
+# SingpassButton
+
+The official Singpass call-to-action. Renders the Singpass wordmark on a red or
+white button background and ships in three sizes (`Default`, `Small`, `Large`).
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { SingpassButton } from "@/components/ui/singpass-button";`}
+/>
+
+## Variants
+
+Two style variants — `red-filled` is the standard CTA; `white-filled` is for
+darker / image-heavy backgrounds where the red button would clash.
+
+<Canvas of={Stories.DefaultRedFilled} />
+<Canvas of={Stories.DefaultWhiteFilled} />
+
+## Sizes
+
+Three sizes — `Small` (40px min-height), `Default` (48px), `Large` (64px). All
+three keep the same wordmark height (1.5rem) except `Large` which scales the
+logo to 2.5rem.
+
+<Canvas of={Stories.Sizes} />
+
+## States
+
+<Canvas of={Stories.Disabled} />
+
+## Props
+
+<Controls of={Stories.DefaultRedFilled} />
+
+## Accessibility
+
+- Native `<button>` element; renders with `aria-label="Log in with Singpass"`
+  by default. Override `aria-label` if the surrounding copy already names the
+  destination.
+- Logo is `aria-hidden` — the wordmark is decorative once the aria-label is set.
+- Focus ring uses the shared `--lifesg-border-focus` token via
+  `--singpass-button-ring-focus`.
+
+## Notes
+
+- The red `#f4333d` / hover `#b0262d` and white-border `#c8c9cc` hex values are
+  Singpass brand colours, not from the LifeSG palette. They live in
+  `--singpass-button-*` tokens in `selection-and-input-tokens.css` and can be
+  overridden per parity-principle.
+- The Singpass wordmark SVG path data is inlined in `singpass-button.tsx`
+  (not fetched from LifeSG's CDN) so the button renders offline and avoids
+  an extra network request.

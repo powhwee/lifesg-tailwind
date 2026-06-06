@@ -11,6 +11,7 @@ import * as feedbackRatingDefault from "./sections/feedback-rating-default";
 import * as dateNavigatorDefault from "./sections/date-navigator-default";
 import * as calendarDefault from "./sections/calendar-default";
 import * as filterDefault from "./sections/filter-default";
+import * as singpassButtonDefault from "./sections/singpass-button-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -95,6 +96,10 @@ export const tree: Node[] = [
   folder("filter", "Filter", [
     leaf("introduction", "Introduction", { Prose: prose.FilterIntro }),
     leaf("default",      "Default",      { Ours: filterDefault.OursPane, LifeSG: filterDefault.LifeSGPane }),
+  ]),
+  folder("singpass-button", "SingpassButton", [
+    leaf("introduction", "Introduction", { Prose: prose.SingpassButtonIntro }),
+    leaf("default",      "Default",      { Ours: singpassButtonDefault.OursPane, LifeSG: singpassButtonDefault.LifeSGPane }),
   ]),
 ];
 

@@ -24,10 +24,10 @@ export function SelectionAndInputIntro() {
         LifeSG component on the right.
       </p>
       <p>
-        Subsequent batches will add IconButton, ImageButton, OtpInput, FeedbackRating,
-        DateNavigator, Calendar, and Filter. SingpassButton is intentionally dropped &mdash;
-        Singapore-government-platform-specific. The TimeSlot family (Schedule, TimeSlotBar,
-        TimeSlotBarWeek, TimeSlotWeekView, TimeTable) is deferred to a focused follow-up batch.
+        Subsequent batches added IconButton, ImageButton, OtpInput, FeedbackRating,
+        DateNavigator, Calendar, Filter, and SingpassButton. The TimeSlot family
+        (Schedule, TimeSlotBar, TimeSlotBarWeek, TimeSlotWeekView, TimeTable) is
+        deferred to a focused follow-up batch.
       </p>
     </Page>
   );
@@ -383,6 +383,34 @@ export function FilterIntro() {
           when we add them.
         </li>
       </ul>
+    </Page>
+  );
+}
+
+export function SingpassButtonIntro() {
+  return (
+    <Page title="SingpassButton">
+      <p>
+        The official Singpass call-to-action. Compound API mirrors LifeSG&rsquo;s:{" "}
+        <code>SingpassButton.Default</code>, <code>SingpassButton.Small</code>,{" "}
+        <code>SingpassButton.Large</code>. Two style variants &mdash;{" "}
+        <code>red-filled</code> (standard CTA on light backgrounds) and{" "}
+        <code>white-filled</code> (for darker / image-heavy backgrounds).
+      </p>
+      <p>
+        Built on a native <code>&lt;button&gt;</code> with an inlined SVG wordmark.
+        The wordmark path data is embedded in <code>singpass-button.tsx</code>{" "}
+        rather than fetched from <code>assets.life.gov.sg</code>, so the button
+        renders offline and avoids an external network dependency.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Tokens</h2>
+      <p>
+        L3 tokens in <code>selection-and-input-tokens.css</code>: the brand red{" "}
+        <code>#f4333d</code> / hover <code>#b0262d</code> and the white-button border{" "}
+        <code>#c8c9cc</code> are Singpass brand colours, not from the LifeSG palette,
+        so they sit in dedicated <code>--singpass-button-bg-*</code> variables.
+        Override at consumer-scope to re-skin without touching the component.
+      </p>
     </Page>
   );
 }
