@@ -43,3 +43,88 @@
   --input-group-addon-text:    var(--lifesg-text);
   --input-group-addon-border:  var(--lifesg-border);
 }
+
+/* ═══════════ file-upload + file-download (shared dropzone chrome) ═══════════ */
+/* LifeSG ships file-upload and file-download with a shared "dashed dropzone"
+   container — dashed border, 32px padding (20/32 on mobile), `Radius.sm`
+   corners. We split the tokens into a shared chrome block and per-component
+   blocks so file-download's read-only list and file-upload's drag/upload
+   interactions can diverge without re-deriving the container. */
+
+:root {
+  --file-container-bg:               transparent;
+  --file-container-border:           var(--lifesg-border);
+  --file-container-border-width:     2px;            /* Border.width-040 */
+  --file-container-border-style:     dashed;
+  --file-container-radius:           0.5rem;         /* Radius.sm — 8px */
+  --file-container-padding:          2rem;           /* 32px */
+  --file-container-padding-mobile-x: 1.25rem;        /* 20px on viewports < md */
+
+  /* heading + description (BodyBL title + BodyMD description) */
+  --file-text-title:                 var(--lifesg-text);
+  --file-text-description:           var(--lifesg-text-subtler);
+  --file-gap-title-description:      0.5rem;         /* 8px */
+  --file-gap-text-list:              2rem;           /* 32px */
+}
+
+/* ═══════════ file-upload (drag overlay + uploaded list) ═══════════ */
+:root {
+  --file-upload-overlay-bg:          var(--lifesg-bg-primary-subtler);
+  --file-upload-overlay-border:      var(--lifesg-border-primary);
+  --file-upload-overlay-icon:        var(--lifesg-icon-primary);
+  --file-upload-overlay-text:        var(--lifesg-text-primary);
+  --file-upload-overlay-icon-size:   4rem;           /* 64px cloud-up icon */
+
+  --file-upload-helper-text:         var(--lifesg-text-subtler);
+  --file-upload-button-width:        10rem;          /* fixed CTA width on ≥md */
+
+  /* per-file list item — derived from card chrome */
+  --file-upload-item-bg:             var(--lifesg-bg);
+  --file-upload-item-bg-error:       var(--lifesg-bg-error);
+  --file-upload-item-border:         var(--lifesg-border);
+  --file-upload-item-border-error:   var(--lifesg-bg-error-strong);
+  --file-upload-item-radius:         0.25rem;
+  --file-upload-item-padding:        1rem;
+  --file-upload-item-icon:           var(--lifesg-icon);
+  --file-upload-item-text:           var(--lifesg-text);
+  --file-upload-item-text-meta:      var(--lifesg-text-subtler);
+  --file-upload-item-progress-bg:    var(--lifesg-bg-strong);
+  --file-upload-item-progress-fill:  var(--lifesg-bg-primary);
+  --file-upload-item-active-bg:      var(--lifesg-bg-primary-subtler);  /* drag-sort active */
+}
+
+/* ═══════════ file-download (download list cards) ═══════════ */
+:root {
+  --file-download-item-bg:           var(--lifesg-bg);
+  --file-download-item-border:       var(--lifesg-border);
+  --file-download-item-border-hover: var(--lifesg-border-hover);
+  --file-download-item-radius:       0.25rem;
+  --file-download-item-padding:      1rem;
+  --file-download-item-icon:         var(--lifesg-icon);
+  --file-download-item-text:         var(--lifesg-text);
+  --file-download-item-text-meta:    var(--lifesg-text-subtler);
+  --file-download-item-action:       var(--lifesg-text-primary);
+  --file-download-item-error-text:   var(--lifesg-text-error);
+}
+
+/* ═══════════ predictive-text-input (Input + floating dropdown) ═══════════ */
+/* Wraps existing --input-* tokens for the field shell; only the dropdown
+   surface needs its own tokens. */
+
+:root {
+  --predictive-text-input-dropdown-bg:           var(--lifesg-bg);
+  --predictive-text-input-dropdown-border:       var(--lifesg-border);
+  --predictive-text-input-dropdown-radius:       0.25rem;
+  --predictive-text-input-dropdown-shadow:       0 10px 15px -3px color-mix(in srgb, var(--lifesg-neutral-10) 15%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--lifesg-neutral-10) 10%, transparent);
+  --predictive-text-input-dropdown-max-height:   18rem;       /* ~288px — six rows */
+
+  --predictive-text-input-item-text:             var(--lifesg-text);
+  --predictive-text-input-item-text-highlight:   var(--lifesg-text-primary);  /* matched substring */
+  --predictive-text-input-item-text-meta:        var(--lifesg-text-subtler);
+  --predictive-text-input-item-bg:               transparent;
+  --predictive-text-input-item-bg-hover:         var(--lifesg-bg-hover);
+  --predictive-text-input-item-bg-active:        var(--lifesg-bg-primary-subtler);
+  --predictive-text-input-item-padding-x:        0.75rem;
+  --predictive-text-input-item-padding-y:        0.5rem;
+  --predictive-text-input-item-min-height:       2.75rem;     /* 44px touch target */
+}

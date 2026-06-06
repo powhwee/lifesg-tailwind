@@ -282,3 +282,36 @@
   --filter-min-width:                 11.5rem;    /* 184px — LifeSG intrinsic floor */
 }
 
+/* ═══════════ singpass-button ═══════════ */
+/* LifeSG's official Singpass CTA. Two styleType variants (red-filled,
+   white-filled), three sizes (small/default/large). The red bg is a
+   one-off hard-coded brand color (#f4333d) not from the LifeSG palette;
+   we expose it as a token here so consumers can override per L3
+   parity-principle. */
+
+:root {
+  --singpass-button-radius:           var(--component-radius);  /* 4px */
+  --singpass-button-padding-x:        1rem;          /* 16px */
+  --singpass-button-padding-y:        0.5rem;        /* 8px */
+
+  /* sizing */
+  --singpass-button-min-height:           3rem;      /* 48px — default */
+  --singpass-button-min-height-small:     2.5rem;    /* 40px */
+  --singpass-button-min-height-large:     4rem;      /* 64px */
+  --singpass-button-logo-height:          1.5rem;    /* 24px — default/small */
+  --singpass-button-logo-height-large:    2.5rem;    /* 40px */
+
+  /* red-filled */
+  --singpass-button-bg-red:           #f4333d;
+  --singpass-button-bg-red-hover:     #b0262d;
+  --singpass-button-border-red:       transparent;
+
+  /* white-filled */
+  --singpass-button-bg-white:         var(--lifesg-bg);          /* white */
+  --singpass-button-bg-white-hover:   #f5f5f7;
+  --singpass-button-border-white:     #c8c9cc;
+
+  /* focus — shared, mirrors Button */
+  --singpass-button-ring-focus:       color-mix(in srgb, var(--lifesg-border-focus) 50%, transparent);
+}
+

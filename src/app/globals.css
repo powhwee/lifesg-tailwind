@@ -581,6 +581,103 @@
   --spacing-uneditable-section-py: var(--uneditable-section-py);
   --spacing-uneditable-section-px: var(--uneditable-section-px);
 
+  /* L3 — singpass-button */
+  --color-singpass-button-bg-red:           var(--singpass-button-bg-red);
+  --color-singpass-button-bg-red-hover:     var(--singpass-button-bg-red-hover);
+  --color-singpass-button-border-red:       var(--singpass-button-border-red);
+  --color-singpass-button-bg-white:         var(--singpass-button-bg-white);
+  --color-singpass-button-bg-white-hover:   var(--singpass-button-bg-white-hover);
+  --color-singpass-button-border-white:     var(--singpass-button-border-white);
+  --color-singpass-button-ring-focus:       var(--singpass-button-ring-focus);
+  --radius-singpass-button:                 var(--singpass-button-radius);
+  --spacing-singpass-button-px:             var(--singpass-button-padding-x);
+  --spacing-singpass-button-py:             var(--singpass-button-padding-y);
+  --spacing-singpass-button-min-h:          var(--singpass-button-min-height);
+  --spacing-singpass-button-min-h-small:    var(--singpass-button-min-height-small);
+  --spacing-singpass-button-min-h-large:    var(--singpass-button-min-height-large);
+  --spacing-singpass-button-logo-h:         var(--singpass-button-logo-height);
+  --spacing-singpass-button-logo-h-large:   var(--singpass-button-logo-height-large);
+
+  /* L3 — file-upload + file-download (shared dropzone chrome) */
+  --color-file-container-bg:                var(--file-container-bg);
+  --color-file-container-border:            var(--file-container-border);
+  --color-file-text-title:                  var(--file-text-title);
+  --color-file-text-description:            var(--file-text-description);
+  --radius-file-container:                  var(--file-container-radius);
+  --spacing-file-container-p:               var(--file-container-padding);
+  --spacing-file-container-p-mobile-x:      var(--file-container-padding-mobile-x);
+  --spacing-file-gap-title-description:     var(--file-gap-title-description);
+  --spacing-file-gap-text-list:             var(--file-gap-text-list);
+
+  /* L3 — file-upload */
+  --color-file-upload-overlay-bg:           var(--file-upload-overlay-bg);
+  --color-file-upload-overlay-border:       var(--file-upload-overlay-border);
+  --color-file-upload-overlay-icon:         var(--file-upload-overlay-icon);
+  --color-file-upload-overlay-text:         var(--file-upload-overlay-text);
+  --color-file-upload-helper-text:          var(--file-upload-helper-text);
+  --color-file-upload-item-bg:              var(--file-upload-item-bg);
+  --color-file-upload-item-bg-error:        var(--file-upload-item-bg-error);
+  --color-file-upload-item-border:          var(--file-upload-item-border);
+  --color-file-upload-item-border-error:    var(--file-upload-item-border-error);
+  --color-file-upload-item-icon:            var(--file-upload-item-icon);
+  --color-file-upload-item-text:            var(--file-upload-item-text);
+  --color-file-upload-item-text-meta:       var(--file-upload-item-text-meta);
+  --color-file-upload-item-progress-bg:     var(--file-upload-item-progress-bg);
+  --color-file-upload-item-progress-fill:   var(--file-upload-item-progress-fill);
+  --color-file-upload-item-active-bg:       var(--file-upload-item-active-bg);
+  --radius-file-upload-item:                var(--file-upload-item-radius);
+  --spacing-file-upload-item-p:             var(--file-upload-item-padding);
+  --spacing-file-upload-overlay-icon-size:  var(--file-upload-overlay-icon-size);
+  --spacing-file-upload-button-w:           var(--file-upload-button-width);
+
+  /* L3 — file-download */
+  --color-file-download-item-bg:            var(--file-download-item-bg);
+  --color-file-download-item-border:        var(--file-download-item-border);
+  --color-file-download-item-border-hover:  var(--file-download-item-border-hover);
+  --color-file-download-item-icon:          var(--file-download-item-icon);
+  --color-file-download-item-text:          var(--file-download-item-text);
+  --color-file-download-item-text-meta:     var(--file-download-item-text-meta);
+  --color-file-download-item-action:        var(--file-download-item-action);
+  --color-file-download-item-error-text:    var(--file-download-item-error-text);
+  --radius-file-download-item:              var(--file-download-item-radius);
+  --spacing-file-download-item-p:           var(--file-download-item-padding);
+
+  /* L3 — predictive-text-input */
+  --color-predictive-text-input-dropdown-bg:           var(--predictive-text-input-dropdown-bg);
+  --color-predictive-text-input-dropdown-border:       var(--predictive-text-input-dropdown-border);
+  --color-predictive-text-input-item-text:             var(--predictive-text-input-item-text);
+  --color-predictive-text-input-item-text-highlight:   var(--predictive-text-input-item-text-highlight);
+  --color-predictive-text-input-item-text-meta:        var(--predictive-text-input-item-text-meta);
+  --color-predictive-text-input-item-bg:               var(--predictive-text-input-item-bg);
+  --color-predictive-text-input-item-bg-hover:         var(--predictive-text-input-item-bg-hover);
+  --color-predictive-text-input-item-bg-active:        var(--predictive-text-input-item-bg-active);
+  --radius-predictive-text-input-dropdown:             var(--predictive-text-input-dropdown-radius);
+  --shadow-predictive-text-input-dropdown:             var(--predictive-text-input-dropdown-shadow);
+  --spacing-predictive-text-input-dropdown-max-h:      var(--predictive-text-input-dropdown-max-height);
+  --spacing-predictive-text-input-item-px:             var(--predictive-text-input-item-padding-x);
+  --spacing-predictive-text-input-item-py:             var(--predictive-text-input-item-padding-y);
+  --spacing-predictive-text-input-item-min-h:          var(--predictive-text-input-item-min-height);
+
+  /* L3 — popover-v2 */
+  --color-popover-v2-bg:                  var(--popover-v2-bg);
+  --color-popover-v2-text:                var(--popover-v2-text);
+  --color-popover-v2-border:              var(--popover-v2-border);
+  --color-popover-v2-scrollbar-thumb:     var(--popover-v2-scrollbar-thumb);
+  --radius-popover-v2:                    var(--popover-v2-radius);
+  --shadow-popover-v2:                    var(--popover-v2-shadow);
+  --spacing-popover-v2-p:                 var(--popover-v2-padding);
+  --spacing-popover-v2-max-w:             var(--popover-v2-max-width);
+  --spacing-popover-v2-container-gutter:  var(--popover-v2-container-gutter);
+  --spacing-popover-v2-mobile-pt:         var(--popover-v2-mobile-padding-top);
+  --spacing-popover-v2-mobile-px:         var(--popover-v2-mobile-padding-x);
+  --spacing-popover-v2-mobile-pb:         var(--popover-v2-mobile-padding-bottom);
+  --spacing-popover-v2-offset:            var(--popover-v2-offset);
+
+  /* L3 — popover-v2 inline */
+  --color-popover-inline-text:            var(--popover-inline-text);
+  --color-popover-inline-text-hover:      var(--popover-inline-text-hover);
+  --spacing-popover-inline-icon-gap:      var(--popover-inline-icon-gap);
+
   /* LifeSG breakpoints (mirror --lifesg-breakpoint-*-min from lifesg-tokens.css)
      Used as Tailwind variants, e.g. `lifesg-xl:grid-cols-2`. Tailwind's
      default sm/md/lg/xl breakpoints are kept for general utility. */

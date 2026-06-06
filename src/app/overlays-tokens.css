@@ -74,3 +74,42 @@
   margin-top: var(--modal-v2-slot-y);
 }
 
+/* ═══════════ popover-v2 ═══════════ */
+/* LifeSG ships a v2 popover that is functionally a floating Card.
+   Compound exports:
+     PopoverV2          — root + box (this token block)
+     PopoverV2.Trigger  — the high-level trigger wrapper
+     PopoverV2.Inline   — link-styled trigger (own token sub-block below)
+   On <sm viewports the desktop card hides and ModalV2 takes over. */
+
+:root {
+  --popover-v2-bg:               var(--lifesg-bg);
+  --popover-v2-text:              var(--lifesg-text);
+  --popover-v2-border:            var(--lifesg-border);
+  --popover-v2-radius:            0.5rem;    /* Card radius */
+  --popover-v2-shadow:            0 10px 15px -3px color-mix(in srgb, var(--lifesg-neutral-10) 15%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--lifesg-neutral-10) 10%, transparent);
+  --popover-v2-padding:           1.5rem;    /* 24px — Card default */
+  --popover-v2-max-width:         30rem;     /* 480px */
+  --popover-v2-container-gutter:  1rem;      /* 16px — outer padding for caret/shadow breathing */
+
+  /* scrollbar (rendered when maxHeight + scroll overflow are set) */
+  --popover-v2-scrollbar-width:   14px;
+  --popover-v2-scrollbar-thumb:   var(--lifesg-bg-inverse-subtlest);
+
+  /* mobile ModalV2 takeover — distinct from desktop padding */
+  --popover-v2-mobile-padding-top:    3.5rem;
+  --popover-v2-mobile-padding-x:      1.25rem;
+  --popover-v2-mobile-padding-bottom: 2.5rem;
+
+  /* trigger offset between trigger element and popover */
+  --popover-v2-offset:            1rem;      /* 16px — default floatingUI offset */
+}
+
+/* ═══════════ popover-v2 inline (link-trigger variant) ═══════════ */
+:root {
+  --popover-inline-text:           var(--lifesg-text-primary);
+  --popover-inline-text-hover:     var(--lifesg-text-hover);
+  --popover-inline-font-weight:    600;
+  --popover-inline-icon-gap:       0.25rem;    /* 4px between text and trailing icon */
+}
+
