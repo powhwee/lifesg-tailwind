@@ -1,0 +1,66 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./file-download.stories";
+
+<Meta of={Stories} />
+
+# FileDownload
+
+Renders a list of downloadable files inside an optional dashed dropzone-style
+container. Each row shows a thumbnail (for images) or generic file icon, the
+file name, MIME type and size, and a circular download button that flips to a
+spinner during the download and surfaces an error message if `onDownload`
+rejects.
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { FileDownload, type FileItemDownloadProps } from "@/components/ui/file-download";`}
+/>
+
+## Default
+
+<Canvas of={Stories.Default} />
+
+## Style types
+
+`bordered` (the default) wraps the list in a dashed container with padding;
+`no-border` drops the container chrome so the list inherits its parent
+spacing.
+
+<Canvas of={Stories.NoBorder} />
+
+## Error state
+
+If `onDownload` throws, the row shows an inline error message and turns the
+border red. Items can also be pre-marked with `errorMessage` if the failure
+is server-side.
+
+<Canvas of={Stories.WithErrors} />
+
+## Not ready
+
+Set `ready: false` on an item to disable the download button and show a
+"Not ready" label.
+
+<Canvas of={Stories.NotReady} />
+
+## Props
+
+<Controls of={Stories.Default} />
+
+## Accessibility
+
+- Each download trigger is a native `<button>` with `aria-label="Download {file.name}"`.
+- Thumbnails are decorative (`alt=""`, `aria-hidden`).
+- Error messages render as plain text adjacent to the row, not in a live
+  region — surface a separate ARIA live region if you need announcements.
+
+## Notes
+
+- The container's dashed border, padding, and corner radius come from
+  shared `--file-container-*` tokens in `form-tokens.css` (also used by
+  FileUpload). Per-row colour and spacing come from `--file-download-item-*`.
+- FileUpload and FileDownload deliberately do not get a `<Form.X>` wrapper
+  in LifeSG's API surface — they bundle their own title/description and are
+  self-contained form elements.

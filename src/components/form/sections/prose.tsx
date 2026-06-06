@@ -386,3 +386,30 @@ export function InputGroupIntro() {
     </Prose>
   );
 }
+
+export function FileDownloadIntro() {
+  return (
+    <Prose>
+      <h1 className="text-2xl font-semibold tracking-tight">FileDownload</h1>
+      <p>
+        Renders a list of downloadable files inside an optional dashed dropzone-style container.
+        Each row shows a thumbnail (for image MIME types) or a generic file icon, name,
+        MIME / size meta, and a circular download button that flips to a spinner during the
+        download and surfaces an error message if <code>onDownload</code> rejects.
+      </p>
+      <h2>Style types</h2>
+      <p>
+        <code>bordered</code> wraps the list in a dashed container with 32px padding;{" "}
+        <code>no-border</code> drops the chrome so the list inherits its parent spacing. Shared
+        <code> --file-container-*</code> tokens drive the container — the same tokens also style
+        FileUpload, so updating padding / border style propagates to both.
+      </p>
+      <h2>Form wrapper</h2>
+      <p>
+        FileDownload is intentionally <em>not</em> wrapped in a <code>&lt;FormField&gt;</code> — it
+        bundles its own title / description and is a self-contained surface, mirroring LifeSG&rsquo;s
+        decision to not expose <code>Form.FileDownload</code>.
+      </p>
+    </Prose>
+  );
+}
