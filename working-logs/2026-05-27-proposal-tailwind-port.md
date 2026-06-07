@@ -9,7 +9,7 @@
 
 ## Summary
 
-Our team has built a working port of the LifeSG design system from `styled-components` to Tailwind CSS v4 + Base UI. This port covers 50+ components with visual parity to the current LifeSG component library. We are proposing this as a conversation starter — not a replacement directive — to explore whether this approach could benefit the broader LifeSG ecosystem.
+Our team has built a working port of the LifeSG design system from `styled-components` to Tailwind CSS v4 + Base UI. This port covers 58 components with visual parity to the current LifeSG component library — including the recent batch of FileUpload, FileDownload, PredictiveTextInput, SingpassButton, PopoverV2, and PopoverInline. We are proposing this as a conversation starter — not a replacement directive — to explore whether this approach could benefit the broader LifeSG ecosystem.
 
 **Live Storybook:** https://phapp-93b45.web.app
 **Repository:** https://github.com/powhwee/lifesg-tailwind
@@ -359,12 +359,12 @@ Everything not overridden uses LifeSG's defaults. When LifeSG updates a componen
 
 | Risk | Mitigation |
 |------|------------|
-| Visual regression | The port includes a Storybook with 50+ components for side-by-side comparison. A visual regression test suite can be established. |
+| Visual regression | The port includes a Storybook with 58 components for side-by-side comparison plus a Playwright parity spec running per-component visual snapshots. A visual regression test suite is already in place. |
 | Token drift | L1 tokens are extracted from LifeSG source via a script (`extract-lifesg-tokens.mjs`). Re-extraction keeps them in sync. |
 | Base UI stability | Base UI is maintained by the MUI team (Material UI). It is actively developed and used in production by large organisations. |
 | Tailwind v4 maturity | Tailwind v4 reached stable release. The v3→v4 migration path is documented and straightforward. |
 | Team familiarity | Tailwind CSS is the most widely adopted CSS framework in the React ecosystem. Training overhead is minimal for most teams. |
-| Form.X convenience gap | The port uses `Field` + `Input` (2 components) instead of LifeSG's `Form.Input` (1 component). Thin `Form.X` wrappers (~10 lines each) can be added for teams that prefer the one-liner pattern. |
+| Form.X convenience gap | The port ships `Field` + raw input for full composability, and adds a `FormInput`-style one-liner wrapper alongside every form field that LifeSG ships a `Form.X` for (most recently `FormPredictiveTextInput`). FileUpload and FileDownload deliberately stay without a `<FormField>` wrapper — they bundle their own title / description and are self-contained surfaces, matching LifeSG's decision not to expose `Form.FileUpload` / `Form.FileDownload`. |
 
 ---
 
@@ -385,12 +385,14 @@ src/
   app/
     lifesg-tokens.css         # L1 — extracted from LifeSG source
     core-tokens.css           # L2/L3 — button, card, accordion, etc.
-    form-tokens.css           # L2/L3 — field, input, select, etc.
-    overlays-tokens.css       # L2/L3 — modal, drawer, popover, etc.
+    form-tokens.css           # L2/L3 — field, input, file-upload, file-download, predictive-text-input, etc.
+    overlays-tokens.css       # L2/L3 — modal, modal-v2, drawer, popover, popover-v2, popover-inline, etc.
     navigation-tokens.css     # L2/L3 — navbar, footer, sidenav, etc.
-    globals.css               # Tailwind @theme mappings
+    selection-and-input-tokens.css  # L2/L3 — button, checkbox, radio, toggle, singpass-button, etc.
+    content-tokens.css        # L2/L3 — text-list, table, divider, etc.
+    globals.css               # Tailwind @theme mappings (every L1/L3 token mirrored as a utility class)
   components/
-    ui/                       # 50+ component files
+    ui/                       # 58 component files (each paired with .stories.tsx + .mdx)
     foundations/              # Colour, typography, spacing, motion stories
   lib/
     utils.ts                  # cn() utility (clsx + tailwind-merge)
