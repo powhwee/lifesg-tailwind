@@ -5,9 +5,13 @@ import * as CalendarStories from "./calendar.stories";
 
 # Calendar
 
+## Overview
+
 Inline calendar built on `react-day-picker`. Two variants: `single`
 (pick one date) and `multi` (pick N dates with optional min/max
-selection counts). Values are ISO `YYYY-MM-DD` strings.
+selection counts). Values are ISO `YYYY-MM-DD` strings. Use the bare
+`Calendar` for inline pickers (sidebars, settings panels); for a
+text-entry field with a calendar popover, reach for `DateInput`.
 
 ## Import
 
@@ -35,13 +39,45 @@ const [value, setValue] = React.useState("2026-05-27");
 
 ## Variants
 
+### Bordered
+
+Wrap the calendar in the LifeSG-style bordered chrome — a 1 px border with
+8 px corner radius. Use when the calendar is the primary element on the
+surface and benefits from a visual frame.
+
 <Canvas of={CalendarStories.Bordered} />
+
+### Multi-select
+
+`variant="multi"` switches from `value` / `onChange` (single ISO date) to
+`values` / `onChange` (array of ISO dates). Useful for "pick all the days
+you're free" / availability-style flows.
+
 <Canvas of={CalendarStories.Multi} />
+
+### Multi-select with limits
+
+Pass `minSelectable` and `maxSelectable` to cap the number of dates. The
+picker silently rejects out-of-bounds selections — pair with a visible
+helper text if your UX needs to surface the limit.
+
 <Canvas of={CalendarStories.MultiWithLimit} />
 
 ## Constraints
 
+### With min / max date
+
+`minDate` and `maxDate` clamp the picker's allowed window. Days outside
+the window are visually disabled and unselectable.
+
 <Canvas of={CalendarStories.WithMinMax} />
+
+### With disabled dates
+
+Pass an array of ISO strings to `disabledDates` to mark specific days as
+unselectable while keeping the rest of the month available. Disabled days
+are skipped by keyboard navigation.
+
 <Canvas of={CalendarStories.WithDisabledDates} />
 
 ## Accessibility

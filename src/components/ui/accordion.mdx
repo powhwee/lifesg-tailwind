@@ -5,8 +5,12 @@ import * as AccordionStories from "./accordion.stories";
 
 # Accordion
 
+## Overview
+
 Stacked, collapsible content sections with an optional global expand-all
-control. Uses Base UI's accordion primitives for keyboard nav and ARIA.
+control. Use to group related content (FAQs, application sections, policy
+disclosures) when each section can be hidden by default. Uses Base UI's
+accordion primitives for keyboard nav and ARIA wiring.
 
 ## Import
 
@@ -17,9 +21,18 @@ control. Uses Base UI's accordion primitives for keyboard nav and ARIA.
 
 ## Default
 
+The default `Accordion.Item` uses the standard header type — a 24/32 px
+title with generous chevron padding. Stack as many items as needed and
+let users open/close them independently.
+
 <Canvas of={AccordionStories.Default} />
 
-## Small variant
+## Smaller item titles
+
+Pass `type="small"` to use a compact 18/26 px header type and tighter
+vertical padding. Reach for this when an accordion is embedded inside
+another component (a card, a side panel, etc.) where the standard size
+would dominate the surrounding chrome.
 
 <Canvas of={AccordionStories.SmallVariant} />
 
@@ -40,3 +53,25 @@ header type.
 - Arrow keys move focus between triggers; Home / End jump to first / last.
 - The "Expand all" toggle, when enabled, updates every section's open state
   in sync.
+
+### Heading hierarchy
+
+Wrap each `Accordion.Item` title in the appropriate semantic heading element
+to preserve the document outline. The trigger itself is a `<button>` so the
+heading must be a wrapping element, not the title prop directly:
+
+<Source
+  language="tsx"
+  code={`<Accordion>
+  <Accordion.Item title={<h2>Eligibility</h2>}>
+    {/* …body */}
+  </Accordion.Item>
+  <Accordion.Item title={<h2>Documents required</h2>}>
+    {/* …body */}
+  </Accordion.Item>
+</Accordion>`}
+/>
+
+LifeSG ships an explicit `headingLevel` prop for this. Ours doesn't — pass
+the heading element you need via the `title` prop so the heading level
+matches your page outline.

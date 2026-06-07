@@ -5,8 +5,11 @@ import * as InputStories from "./input.stories";
 
 # Input
 
-Plain single-line text input. For a fully composed form field (label +
-description + error), reach for `FormInput`.
+## Overview
+
+Plain single-line text input. Standalone for one-off uses (search bars,
+inline filters); reach for `FormInput` when you need the standard label +
+description + error layout that most form fields share.
 
 ## Import
 
@@ -21,9 +24,36 @@ description + error), reach for `FormInput`.
 
 ## Variants
 
+### Clearable
+
+Set `allowClear` to expose a clear button on the right side of the input
+whenever the value is non-empty. The button calls `onClear` so consumers
+can reset the controlled value.
+
 <Canvas of={InputStories.Clearable} />
+
+### Disabled
+
+`disabled` greys the input and skips it in tab order. Use when the input
+isn't applicable to the current selection (e.g. a "Spouse name" field
+when the user has indicated they're single).
+
 <Canvas of={InputStories.Disabled} />
+
+### Read-only
+
+`readOnly` keeps the value visible and selectable but blocks edits.
+Useful for review screens and confirmation flows where the user should
+see what was submitted but can't change it.
+
 <Canvas of={InputStories.ReadOnly} />
+
+### Error state
+
+Set `aria-invalid="true"` to flip the input into the error variant (red
+border + matching focus ring). Pair with an inline error message via
+`FormInput` for the standard form-field layout.
+
 <Canvas of={InputStories.ErrorState} />
 
 ## Composite form field

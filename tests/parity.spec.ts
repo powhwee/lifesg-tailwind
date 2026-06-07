@@ -14,6 +14,15 @@ const specs: ParitySpec[] = [
   { name: "table", route: "/content/table/default", panePrefix: "content" },
   { name: "accordion", route: "/content/accordion/default", panePrefix: "content" },
   { name: "modal", route: "/overlays/modal/default", panePrefix: "overlays" },
+  // Components added by the 6-component batch — use component-specific test
+  // ids so snapshots target the inner pane wrapper instead of the route-level
+  // section, which keeps each comparison panel deterministic.
+  { name: "singpass-button",       route: "/selection-and-input/singpass-button/default",  panePrefix: "sni-singpass-button" },
+  { name: "file-download",         route: "/form/file-download/default",                   panePrefix: "form-file-download" },
+  { name: "file-upload",           route: "/form/file-upload/default",                     panePrefix: "form-file-upload" },
+  { name: "predictive-text-input", route: "/form/predictive-text-input/default",           panePrefix: "form-predictive-text-input" },
+  { name: "popover-v2",            route: "/overlays/popover-v2/default",                  panePrefix: "overlays-popover-v2" },
+  { name: "popover-inline",        route: "/overlays/popover-v2/inline",                   panePrefix: "overlays-popover-inline" },
 ];
 
 for (const spec of specs) {

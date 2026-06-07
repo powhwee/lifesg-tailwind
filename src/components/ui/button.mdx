@@ -5,9 +5,12 @@ import * as ButtonStories from "./button.stories";
 
 # Button
 
-Primary call-to-action component. Supports six variants (`default`, `outline`,
-`secondary`, `ghost`, `destructive`, `link`) and seven sizes including four
-icon-only sizes.
+## Overview
+
+Primary call-to-action component. Supports six visual variants (`default`,
+`outline`, `secondary`, `ghost`, `destructive`, `link`) and seven sizes
+including four icon-only sizes. Reach for `Button` for any clickable
+action, including form submissions and navigational anchors.
 
 ## Import
 
@@ -22,10 +25,42 @@ icon-only sizes.
 
 ## Variants
 
+### Outline
+
+`outline` produces a button with a visible border and a transparent fill.
+Reach for it when you have multiple buttons in a row and need to demote
+the secondary action without dropping it to a `link`.
+
 <Canvas of={ButtonStories.Outline} />
+
+### Secondary
+
+`secondary` is the standard alternative to `default` when you need two
+buttons of similar visual weight (e.g. "Save draft" alongside "Submit").
+
 <Canvas of={ButtonStories.Secondary} />
+
+### Ghost
+
+`ghost` has no background at rest and reveals one on hover. Use for
+tertiary actions inside dense surfaces (table rows, list items) where a
+filled button would feel heavy.
+
 <Canvas of={ButtonStories.Ghost} />
+
+### Destructive
+
+`destructive` (red) signals that the action will remove or undo
+something the user has done. Reserve for permanent-loss actions; pair
+with a confirmation modal for high-stakes flows.
+
 <Canvas of={ButtonStories.Destructive} />
+
+### Link
+
+`link` styles the button as a plain inline link. Use when the action is
+navigational and you want it to blend into surrounding prose.
+
 <Canvas of={ButtonStories.Link} />
 
 ## Sizes
