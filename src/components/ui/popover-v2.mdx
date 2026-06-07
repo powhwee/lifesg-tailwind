@@ -1,0 +1,101 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/addon-docs/blocks";
+import * as Stories from "./popover-v2.stories";
+
+<Meta of={Stories} />
+
+# PopoverV2
+
+LifeSG&rsquo;s v2 popover surface — a floating card that opens off a trigger
+element. Compound exports:
+
+- `PopoverV2` — the root card (`Box`-style component that consumers render
+  inside a custom `popoverContent` render function)
+- `PopoverV2.Trigger` — the high-level wrapper that owns the trigger
+  element, the floating positioner, and click / hover open behaviour
+- `PopoverV2.Inline` — a link-styled inline trigger with optional underline
+  treatment and a trailing info icon, for inline use inside body text
+
+## Import
+
+<Source
+  language="tsx"
+  code={`import { PopoverV2 } from "@/components/ui/popover-v2";`}
+/>
+
+## Click trigger
+
+<Canvas of={Stories.ClickTrigger} />
+
+## Hover trigger
+
+Hover-triggered popovers behave like tooltips — a short open / close delay
+prevents jitter. Click is still allowed on touch.
+
+<Canvas of={Stories.HoverTrigger} />
+
+## Positions
+
+Twelve positions supported (`top` / `right` / `bottom` / `left`, each with
+`-start` / `-end` alignment variants).
+
+<Canvas of={Stories.PositionTour} />
+
+## Custom offset
+
+`customOffset` (default 16) controls the gap between trigger and popover.
+
+<Canvas of={Stories.CustomOffset} />
+
+## Rich content
+
+Pass a `<PopoverV2>` root with arbitrary children when you need more than a
+single string. The `PopoverV2` root applies the card padding, radius, and
+shadow tokens.
+
+<Canvas of={Stories.RichContent} />
+
+## Inline — default
+
+<Canvas of={Stories.InlineDefault} />
+
+## Inline — dashed underline
+
+`underlineStyle` and `underlineHoverStyle` set the underline treatment.
+
+<Canvas of={Stories.InlineUnderlineDashed} />
+
+## Inline — custom icon
+
+`icon` overrides the default `Info` glyph.
+
+<Canvas of={Stories.InlineCustomIcon} />
+
+## Inline — icon-only
+
+Drop `content` to surface only a discoverable info icon next to the label.
+
+<Canvas of={Stories.InlineIconOnly} />
+
+## Props
+
+<Controls of={Stories.ClickTrigger} />
+
+## Accessibility
+
+- The popover surface renders as `role="dialog"` with `aria-label` (default
+  `"More information"`; override via `popoverAriaLabel`).
+- `PopoverV2.Inline` puts `role="button"` and `aria-haspopup="dialog"` on
+  the trigger span. When `content` is empty, an `aria-label` is required —
+  fall back to `"More info"` if you don&rsquo;t set one.
+- Focus management is delegated to Base UI&rsquo;s Popover primitive; click
+  trigger opens via Enter / Space and closes via Escape.
+
+## Notes
+
+- The `popoverContent` render-function variant (LifeSG&rsquo;s shape for
+  `enableResize`) is supported, but `enableResize` itself (auto-sizing to
+  fit remaining viewport height) is deferred — set `maxHeight` + `overflow`
+  on the `PopoverV2` root manually instead.
+- Mobile takeover via `ModalV2` (LifeSG renders the popover full-screen on
+  &lt; sm viewports) is also deferred — log a follow-up when first needed.
+- All visual tokens live under `--popover-v2-*` in `overlays-tokens.css`.

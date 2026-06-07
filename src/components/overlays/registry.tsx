@@ -5,6 +5,8 @@ import * as modalV2Default from "./sections/modal-v2-default";
 import * as popoverDefault from "./sections/popover-default";
 import * as drawerDefault from "./sections/drawer-default";
 import * as menuDefault from "./sections/menu-default";
+import * as popoverV2Default from "./sections/popover-v2-default";
+import * as popoverInlineDefault from "./sections/popover-inline-default";
 
 export interface Leaf {
   kind: "leaf";
@@ -57,6 +59,11 @@ export const tree: Node[] = [
   ]),
   folder("overlay", "Overlay", [
     leaf("introduction", "Introduction", { Prose: prose.OverlayIntro }),
+  ]),
+  folder("popover-v2", "PopoverV2", [
+    leaf("introduction", "Introduction", { Prose: prose.PopoverV2Intro }),
+    leaf("default",      "Default",      { Ours: popoverV2Default.OursPane, LifeSG: popoverV2Default.LifeSGPane }),
+    leaf("inline",       "Inline",       { Ours: popoverInlineDefault.OursPane, LifeSG: popoverInlineDefault.LifeSGPane }),
   ]),
 ];
 

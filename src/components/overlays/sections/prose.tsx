@@ -335,3 +335,39 @@ export function ModalIntro() {
     </Page>
   );
 }
+
+export function PopoverV2Intro() {
+  return (
+    <Page title="PopoverV2">
+      <p>
+        LifeSG&rsquo;s v2 popover surface &mdash; a floating card that opens off a trigger
+        element. Compound API: <code>PopoverV2</code> (the card root), <code>PopoverV2.Trigger</code>{" "}
+        (the high-level wrapper with trigger / position / delay knobs),{" "}
+        <code>PopoverV2.Inline</code> (link-styled inline trigger with underline treatment and an
+        optional trailing info icon).
+      </p>
+      <h2 className="text-base font-semibold pt-2">Built on Base UI</h2>
+      <p>
+        Floating positioning uses Base UI&rsquo;s <code>Popover</code> primitives;
+        hover-trigger open / close delays are layered on top of the click-trigger behaviour.
+      </p>
+      <h2 className="text-base font-semibold pt-2">Deferred</h2>
+      <ul className="list-disc pl-6 space-y-1">
+        <li>
+          <strong>enableResize</strong> &mdash; LifeSG sizes the popover to the remaining viewport
+          height automatically. Set <code>maxHeight</code> + <code>overflow</code> on the{" "}
+          <code>PopoverV2</code> card manually for now.
+        </li>
+        <li>
+          <strong>Mobile ModalV2 takeover</strong> &mdash; on <code>&lt; sm</code> viewports
+          LifeSG renders the popover full-screen via ModalV2. Add when the agency&rsquo;s mobile UX
+          is decided.
+        </li>
+        <li>
+          <strong>rootNode portal</strong> &mdash; render-into-rootNode targeting is not yet
+          wired. Falls back to <code>document.body</code>.
+        </li>
+      </ul>
+    </Page>
+  );
+}
