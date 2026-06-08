@@ -14,20 +14,28 @@ export interface DividerProps extends Omit<HTMLAttributes<HTMLHRElement>, "color
 }
 
 function Divider({ thickness, lineStyle, color, className, style, ...props }: DividerProps) {
-  const cssVars: CSSProperties & Record<string, string> = {
+  // Inline style instead of a Tailwind arbitrary-value border-top utility
+  // driven by a CSS variable. That syntax produces a generated CSS rule
+  // where the unresolved `var(…)` ends up as a parse error under Turbopack
+  // and as a warning under `next build`. Driving border-top from `style=`
+  // avoids the codegen path entirely.
+  const cssVars: Record<string, string> = {
     "--_divider-thickness": thickness != null ? `${thickness}px` : "var(--divider-thickness)",
     "--_divider-color": color ?? "var(--divider-color)",
     "--_divider-style": lineStyle ?? "var(--divider-style)",
   }
+  const dividerStyle: CSSProperties = {
+    ...cssVars,
+    borderTopWidth: "var(--_divider-thickness)",
+    borderTopColor: "var(--_divider-color)",
+    borderTopStyle: "var(--_divider-style)" as CSSProperties["borderTopStyle"],
+    ...style,
+  }
   return (
     <hr
       data-slot="divider"
-      className={cn(
-        "w-full border-0 border-t-[length:var(--_divider-thickness)]",
-        "border-t-[color:var(--_divider-color)] [border-top-style:var(--_divider-style)]",
-        className
-      )}
-      style={{ ...cssVars, ...style }}
+      className={cn("w-full border-0", className)}
+      style={dividerStyle}
       {...props}
     />
   )

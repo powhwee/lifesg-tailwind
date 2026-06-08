@@ -51,6 +51,12 @@ preview is decoration.
 
 - Token namespace: `--divider-*` (thickness / style / color). Override
   globally via `:root` or scope via a wrapping `[data-scope]`.
-- Thickness is rendered through `border-t-[length:var(...)]` — Tailwind
-  arbitrary-value syntax — and accepts any CSS length, but stories cap
-  the control at 1–8 px to match LifeSG usage.
+- Thickness is rendered through inline `style.borderTopWidth = var(--_divider-thickness)`
+  (mirrored for `borderTopColor` and `borderTopStyle`). Earlier the
+  component drove these through Tailwind arbitrary-value border-top
+  utilities driven by CSS variables — that codegen path leaked the
+  unresolved `var(…)` into the generated CSS, which Turbopack rejects
+  as a parse error and `next build` only flags as a warning. Inline
+  style sidesteps it.
+- Accepts any CSS length via `thickness`, but stories cap the control
+  at 1–8 px to match LifeSG usage.
