@@ -218,33 +218,43 @@ function PopoverV2Trigger({
       onOpenChange={(next) => handleOpenChange(Boolean(next))}
     >
       <PopoverPrimitive.Trigger
-        render={(triggerProps) => (
-          <span
-            {...triggerProps}
-            data-testid={testId}
-            className={cn("inline cursor-pointer outline-none", className)}
-            onMouseEnter={(e) => {
+        render={(triggerProps) => {
+          // Merge triggerProps onto the consumer's single child element so
+          // the aria-expanded / aria-haspopup attributes Base UI applies
+          // land on an already-interactive element (their <Button>, a
+          // native <button>, or — for PopoverV2.Inline — our own button).
+          // Wrapping with another <button> would nest interactive
+          // elements (axe `nested-interactive`); wrapping with a <span>
+          // would put aria-expanded on a non-interactive carrier
+          // (`aria-allowed-attr`).
+          const child = React.Children.only(children) as React.ReactElement<
+            React.HTMLAttributes<HTMLElement>
+          >;
+          return React.cloneElement(child, {
+            ...triggerProps,
+            "data-testid": testId,
+            className: cn(child.props.className, className),
+            onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
               triggerProps.onMouseEnter?.(e);
+              child.props.onMouseEnter?.(e);
               handleMouseEnter();
-            }}
-            onMouseLeave={(e) => {
+            },
+            onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
               triggerProps.onMouseLeave?.(e);
+              child.props.onMouseLeave?.(e);
               handleMouseLeave();
-            }}
-            onClick={(e) => {
+            },
+            onClick: (e: React.MouseEvent<HTMLElement>) => {
               if (trigger === "hover") {
-                // For hover triggers, click is still allowed for touch users —
-                // dont prevent default; just toggle open.
                 e.stopPropagation();
                 handleOpenChange(!open);
                 return;
               }
               triggerProps.onClick?.(e);
-            }}
-          >
-            {children}
-          </span>
-        )}
+              child.props.onClick?.(e);
+            },
+          } as Record<string, unknown>);
+        }}
       />
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Positioner
@@ -297,22 +307,25 @@ function PopoverV2Inline({
     <Info className="size-4" aria-hidden="true" />
   );
 
+  // PopoverV2Trigger clone-merges Base UIs trigger props onto our single
+  // child, so the child must itself be the interactive trigger element.
+  // We emit a native <button> so aria-expanded / aria-haspopup land on a
+  // valid carrier without nesting interactive elements.
   return (
     <PopoverV2Trigger
       {...triggerProps}
       popoverAriaLabel={popoverAriaLabel ?? ariaLabel}
-      className={cn("inline-flex items-baseline gap-popover-inline-icon-gap", className)}
     >
-      <span
-        role="button"
+      <button
+        type="button"
         aria-label={ariaLabel ?? (hasContent ? undefined : "More info")}
-        aria-haspopup="dialog"
-        tabIndex={0}
         className={cn(
-          "font-semibold text-popover-inline-text hover:text-popover-inline-text-hover focus-visible:text-popover-inline-text-hover focus-visible:outline-none",
+          "inline-flex items-baseline gap-popover-inline-icon-gap bg-transparent border-0 p-0 cursor-pointer outline-none",
+          "font-semibold text-popover-inline-text hover:text-popover-inline-text-hover focus-visible:text-popover-inline-text-hover",
           underlineClass(underlineStyle),
           `hover:${underlineClass(underlineHoverStyle)}`,
           `focus-visible:${underlineClass(underlineHoverStyle)}`,
+          className,
         )}
       >
         {content}
@@ -321,7 +334,7 @@ function PopoverV2Inline({
             {trailingIcon}
           </span>
         )}
-      </span>
+      </button>
     </PopoverV2Trigger>
   );
 }
