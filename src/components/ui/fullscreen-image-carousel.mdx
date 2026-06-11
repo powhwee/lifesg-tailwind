@@ -5,6 +5,8 @@ import * as FicStories from "./fullscreen-image-carousel.stories";
 
 # FullscreenImageCarousel
 
+## Overview
+
 Modal-presented full-screen image viewer. Supports keyboard navigation
 (arrow keys), zoom, thumbnails, optional delete, and a `custom` item
 type for non-image content (PDF previews, embedded documents, etc.).
@@ -30,14 +32,52 @@ type for non-image content (PDF previews, embedded documents, etc.).
 
 ## Variants
 
+### Starting mid-gallery
+
+`initialActiveItemIndex` opens the carousel on a specific item instead
+of the first — use when the user tapped a particular thumbnail in the
+page underneath.
+
 <Canvas of={FicStories.StartingMidGallery} />
+
+### Hidden thumbnails
+
+`hideThumbnail` drops the thumbnail strip along the bottom. Use for
+single-image viewers or when vertical space for the main image matters
+more than quick jumping.
+
 <Canvas of={FicStories.HideThumbnails} />
+
+### Hidden counter
+
+`hideCounter` removes the "n of total" indicator — sensible when the
+thumbnail strip already communicates position.
+
 <Canvas of={FicStories.HideCounter} />
+
+### Hidden magnifier
+
+`hideMagnifier` removes the zoom controls for content where zooming
+adds nothing (e.g. small or low-resolution images).
+
 <Canvas of={FicStories.HideMagnifier} />
 
 ## Interactive
 
+### With delete
+
+Pass `onDelete` to surface a delete button in the chrome — the parent
+owns the item array and removes the entry. Typical for upload-review
+flows.
+
 <Canvas of={FicStories.WithDelete} />
+
+### Custom content
+
+`type: "custom"` items render arbitrary content via `renderContent`
+instead of an image — use when the carousel doubles as a generic file
+viewer (PDF previews, documents).
+
 <Canvas of={FicStories.CustomContent} />
 
 ## Accessibility

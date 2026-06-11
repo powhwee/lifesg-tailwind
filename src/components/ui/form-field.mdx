@@ -5,6 +5,8 @@ import * as FormFieldStories from "./form-field.stories";
 
 # FormField
 
+## Overview
+
 Opinionated wrapper around `Field` that renders label, description,
 children, and an optional error in the standard LifeSG order. Most
 single-input form rows should use this rather than composing `Field`
@@ -23,8 +25,28 @@ parts directly.
 
 ## Variants
 
+### With description
+
+Pass `description` to render helper text between the label and the
+control. Use for formatting hints or constraints the user needs before
+typing, not for error feedback.
+
 <Canvas of={FormFieldStories.WithDescription} />
+
+### With error
+
+Pass `errorMessage` to render a red error line beneath the control.
+Setting it also forwards `invalid` to the underlying `Field`, so the
+child input picks up the invalid styling via Base UI's context.
+
 <Canvas of={FormFieldStories.WithError} />
+
+### Disabled
+
+Set `disabled` to grey out the label and description. This propagates
+through Base UI's `Field` context — pair it with `disabled` on the
+child control to actually block interaction.
+
 <Canvas of={FormFieldStories.Disabled} />
 
 ## reserveErrorSlot

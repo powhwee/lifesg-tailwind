@@ -5,6 +5,8 @@ import * as DateInputStories from "./date-input.stories";
 
 # DateInput
 
+## Overview
+
 Three-segment text input (DD / MM / YYYY) paired with a Popover-mounted
 Calendar. Auto-advances between segments as you type; Backspace at an
 empty segment moves focus back. Values are ISO `YYYY-MM-DD` strings.
@@ -26,19 +28,70 @@ const [value, setValue] = React.useState("");
 
 ## Variants
 
+### Pre-filled
+
+Pass an ISO `YYYY-MM-DD` string as `value` to render the field already
+populated — the segments and the popover calendar both reflect it. Use
+when editing an existing record rather than capturing a new date.
+
 <Canvas of={DateInputStories.PreFilled} />
+
+### With min / max date
+
+`minDate` and `maxDate` propagate to the popover calendar, clamping the
+selectable window. Use for fields like appointment dates where only a
+known range is valid.
+
 <Canvas of={DateInputStories.WithMinMax} />
+
+### With disabled dates
+
+Pass an array of ISO strings to `disabledDates` to block specific days
+(holidays, fully-booked slots) while leaving the rest of the window
+selectable.
+
 <Canvas of={DateInputStories.WithDisabledDates} />
+
+### With Done button
+
+`withButton` switches the popover calendar to a Cancel + Done flow —
+picking a day doesn't fire `onChange` until Done is pressed. Use when
+committing a date is expensive (triggers a fetch, clears dependent
+fields).
+
 <Canvas of={DateInputStories.WithDoneButton} />
 
 ## States
 
+### Error
+
+Set `error` to render the red error border. The bare `DateInput` shows
+only the visual state — pair it with your own message, or use
+`FormDateInput` for the standard wiring.
+
 <Canvas of={DateInputStories.ErrorState} />
+
+### Disabled
+
+`disabled` greys out all three segments and blocks the calendar
+popover.
+
 <Canvas of={DateInputStories.Disabled} />
 
 ## Composite (FormDateInput)
 
+### Form field
+
+`FormDateInput` wraps the input with the standard label + description
+chrome. Reach for it in forms instead of hand-rolling the wrapper.
+
 <Canvas of={DateInputStories.CompositeFormField} />
+
+### Form field with error
+
+Pass `errorMessage` to show the error state with its message in the
+reserved slot — the layout doesn't shift when the error appears.
+
 <Canvas of={DateInputStories.FormFieldWithError} />
 
 ## Accessibility

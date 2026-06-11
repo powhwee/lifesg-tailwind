@@ -5,6 +5,8 @@ import * as FilterStories from "./filter.stories";
 
 # Filter
 
+## Overview
+
 Side-panel filter aggregate. Composite of `Filter` (root), `Filter.Item`
 (generic accordion section), and `Filter.Checkbox` (preset checkbox-list
 section with optional "View more / less"). Built on Base UI's
@@ -35,10 +37,27 @@ section with optional "View more / less"). Built on Base UI's
 
 ## Variants
 
+### Single group
+
+A `Filter` with one `Filter.Checkbox` section. Use `customLabels` to
+retitle the panel header (e.g. "Filter by service") when there is only
+one facet and the generic "Filter" title would be redundant.
+
 <Canvas of={FilterStories.SingleGroup} />
+
+### Minimisable options
+
+Pass `minimisableOptions` with a `minimisedCount` to collapse long
+checkbox lists behind a "View N more / View less" toggle. Reach for
+this when a facet has more options than comfortably fit in the panel.
+
 <Canvas of={FilterStories.Minimisable} />
 
 ## Custom items
+
+`Filter.Item` accepts arbitrary children — drop in date pickers, range
+sliders, or text search inside an accordion section. Pass
+`collapsible={false}` for a static section without a chevron.
 
 <Canvas of={FilterStories.WithCustomItem} />
 

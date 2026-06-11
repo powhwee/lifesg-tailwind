@@ -5,6 +5,8 @@ import * as SelectStories from "./select.stories";
 
 # Select
 
+## Overview
+
 Single-choice dropdown for picking one option from a list. Built on
 `@base-ui/react/select`. Reach for `FormSelect` when you need the standard
 form-field layout (label + description + error).
@@ -22,7 +24,20 @@ form-field layout (label + description + error).
 
 ## Variants
 
+### Disabled
+
+`disabled` greys out the trigger and prevents the listbox from opening.
+Use when the choice depends on an earlier answer that has not been given
+yet.
+
 <Canvas of={SelectStories.Disabled} />
+
+### Error state
+
+`error` flips the trigger chrome to the error border and ring tokens.
+Pair with a visible message via `FormSelect`'s `errorMessage` so the
+failure is announced, not just shown.
+
 <Canvas of={SelectStories.ErrorState} />
 
 ## Composite form field

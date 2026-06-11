@@ -6,6 +6,8 @@ import * as SystemStories from "./typography.system.stories";
 
 # Typography
 
+## Overview
+
 The `Typography` component renders text at a fixed scale (variant) and
 weight, inheriting LifeSG's typography ramp. Use it instead of bare HTML
 elements when you want the scale + weight to be explicit and consistent.
@@ -34,9 +36,16 @@ code" on any canvas to see the canonical variant names.
 
 ### Default
 
+`body-md` (16 / 24) is the workhorse variant for standard copy. Use the
+controls panel to dial through the full ramp and the four weights.
+
 <Canvas of={TypographyStories.Default} />
 
 ### Line clamp
+
+Pass `maxLines` to clamp long text with an ellipsis via CSS line-clamp.
+Use for previews and card summaries where the full text is available
+elsewhere — don't clamp content the user can't otherwise reach.
 
 <Canvas of={TypographyStories.LineClamp} />
 

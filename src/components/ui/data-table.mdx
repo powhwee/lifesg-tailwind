@@ -5,6 +5,8 @@ import * as Stories from "./data-table.stories";
 
 # DataTable
 
+## Overview
+
 Tabular data with sortable headers, optional row selection (single
 checkbox column + select-all), an action bar that appears when rows are
 selected, alternating row stripes, loading + empty states, and
@@ -47,8 +49,28 @@ component renders the matching chevron + `aria-sort` value.
 
 ## Selection
 
+### Multi-select
+
+`enableMultiSelect` adds a checkbox column; `enableSelectAll` adds the
+header checkbox. Selection is controlled — keep `selectedIds` in state
+and update it from `onSelect` / `onSelectAll`.
+
 <Canvas of={Stories.MultiSelect} />
+
+### With action bar
+
+`enableActionBar` shows a bar above the table whenever rows are
+selected. Put bulk actions in `actionBarContent` and wire
+`onClearSelectionClick` for the deselect-all CTA.
+
 <Canvas of={Stories.WithActionBar} />
+
+### Disabled rows
+
+Pass `disabledIds` to grey out specific rows and block their
+checkboxes — e.g. rows the current user lacks permission to act on.
+Make sure your `onSelectAll` handler skips the disabled ids.
+
 <Canvas of={Stories.DisabledRows} />
 
 ## Styling
@@ -57,7 +79,20 @@ component renders the matching chevron + `aria-sort` value.
 
 ## States
 
+### Loading
+
+`loadState="loading"` replaces the body with a centred dot animation.
+Use while the row data is being fetched so the header stays in place
+and the layout doesn't jump.
+
 <Canvas of={Stories.LoadingState} />
+
+### Empty
+
+An empty `rows` array renders the default no-item-found display.
+Override with `emptyView` (or `renderCustomEmptyView`) when you want a
+context-specific message or a call to action.
+
 <Canvas of={Stories.EmptyState} />
 
 ## Custom cell render

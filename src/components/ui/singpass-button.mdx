@@ -5,6 +5,8 @@ import * as Stories from "./singpass-button.stories";
 
 # SingpassButton
 
+## Overview
+
 The official Singpass call-to-action. Renders the Singpass wordmark on a red or
 white button background and ships in three sizes (`Default`, `Small`, `Large`).
 
@@ -17,10 +19,19 @@ white button background and ships in three sizes (`Default`, `Small`, `Large`).
 
 ## Variants
 
-Two style variants — `red-filled` is the standard CTA; `white-filled` is for
-darker / image-heavy backgrounds where the red button would clash.
+### Red filled
+
+`styleType="red-filled"` is the standard Singpass CTA — use it on light
+backgrounds wherever the login action appears.
 
 <Canvas of={Stories.DefaultRedFilled} />
+
+### White filled
+
+`styleType="white-filled"` is for darker / image-heavy backgrounds where
+the red button would clash; it carries a subtle border so it holds its
+shape on white as well.
+
 <Canvas of={Stories.DefaultWhiteFilled} />
 
 ## Sizes

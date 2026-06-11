@@ -5,6 +5,8 @@ import * as BoxContainerStories from "./box-container.stories";
 
 # BoxContainer
 
+## Overview
+
 A titled section that collapses on click. Built on Base UI's
 `Collapsible`. Supports `error` / `warning` display states, a
 call-to-action slot in the header, and a fully static (non-collapsible)
@@ -42,7 +44,21 @@ collapse when clicked:
 
 ## Display states
 
+### Error
+
+`displayState="error"` adds an error icon to the header. Use when the
+collapsed section contains failed validation the user must fix —
+typically paired with a collapsed-by-default section so the icon draws
+the user in.
+
 <Canvas of={BoxContainerStories.ErrorState} />
+
+### Warning
+
+`displayState="warning"` adds a warning icon instead. Use for
+non-blocking issues — something inside needs attention but doesn't stop
+submission.
+
 <Canvas of={BoxContainerStories.WarningState} />
 
 ## Header toggle behaviour

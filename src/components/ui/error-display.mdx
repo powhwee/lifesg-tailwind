@@ -5,6 +5,8 @@ import * as ErrorDisplayStories from "./error-display.stories";
 
 # ErrorDisplay
 
+## Overview
+
 Full-page error layout — illustration, title, description, optional
 action button. Ships with 20 built-in `type`s (HTTP codes, common UX
 states like inactivity / logout / no-item-found). Each type has a
@@ -25,22 +27,93 @@ override per-call.
 
 ## Common HTTP errors
 
+### Not found (404)
+
+The default for broken or stale links — a missing page the user
+navigated to. Pair with an `actionButton` that routes back to a safe
+landing page.
+
 <Canvas of={ErrorDisplayStories.NotFound} />
+
+### Forbidden (403)
+
+Use when the user is authenticated but lacks permission for the
+resource. Prefer this over 404 when revealing the page's existence is
+acceptable.
+
 <Canvas of={ErrorDisplayStories.Forbidden} />
+
+### Server error (500)
+
+Use for unexpected backend failures where retrying later is the only
+remedy. The built-in copy avoids technical detail by design.
+
 <Canvas of={ErrorDisplayStories.ServerError} />
 
 ## UX states
 
+### No item found
+
+Use for empty search results or filtered lists that return nothing —
+an in-content empty state rather than a navigation failure.
+
 <Canvas of={ErrorDisplayStories.NoItemFound} />
+
+### Confirmation
+
+Not an error — a success/acknowledgement state in the same layout.
+Useful at the end of a transaction flow where the page is otherwise
+empty.
+
 <Canvas of={ErrorDisplayStories.Confirmation} />
+
+### Maintenance
+
+Use for planned downtime. Pass `additionalProps` with a `dateString`
+so the built-in copy can tell the user when the service returns.
+
 <Canvas of={ErrorDisplayStories.Maintenance} />
+
+### Inactivity
+
+Use for session-timeout warnings. Pass `additionalProps` with
+`secondsLeft` and `reminderInterval` to drive the countdown copy, and
+an `actionButton` ("I'm still here") to let the user extend the
+session.
+
 <Canvas of={ErrorDisplayStories.Inactivity} />
 
 ## Overrides
 
+### Custom title and description
+
+`title` and `description` override the built-in copy for the chosen
+`type` while keeping its illustration. Use when the default wording
+doesn't fit your flow's tone or specifics.
+
 <Canvas of={ErrorDisplayStories.WithCustomTitle} />
+
+### With action button
+
+`actionButton` takes Button props (`children`, `onClick`, …) and
+renders a primary CTA under the copy. Always offer one when there is a
+sensible next step, e.g. returning to the dashboard.
+
 <Canvas of={ErrorDisplayStories.WithActionButton} />
+
+### Image only
+
+Set `imageOnly` to render just the illustration — useful when the
+surrounding page supplies its own heading and copy.
+
 <Canvas of={ErrorDisplayStories.ImageOnly} />
+
+### Fallback icon
+
+Pass `img={null}` to skip the CDN illustration and show a tone-tinted
+icon disc instead. Reach for this in offline-capable or CDN-restricted
+contexts where the remote image may not load.
+
 <Canvas of={ErrorDisplayStories.FallbackIcon} />
 
 ## Props

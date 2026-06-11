@@ -5,6 +5,8 @@ import * as MenuStories from "./menu.stories";
 
 # Menu
 
+## Overview
+
 Dropdown menu built on Base UI's `Menu`. Supports plain items, link
 items, checkbox items, radio groups, separators, group labels, and
 submenus.
@@ -43,25 +45,49 @@ submenus.
 
 ## With groups
 
+Wrap related items in `MenuGroup` with a `MenuGroupLabel`, separated by
+`MenuSeparator`. Use when a menu mixes different kinds of actions (e.g.
+recent files vs. commands) and a flat list would be hard to scan.
+
 <Canvas of={MenuStories.WithGroups} />
 
 ## Checkbox items
+
+`MenuCheckboxItem` is a controlled boolean toggle (`checked` /
+`onCheckedChange`) with a built-in checkmark. Use for independent
+on/off settings like text formatting flags.
 
 <Canvas of={MenuStories.CheckboxItems} />
 
 ## Radio group
 
+`MenuRadioItem`s inside a `MenuRadioGroup` (`value` / `onValueChange`)
+give an exclusive choice with a built-in dot indicator. Use when
+exactly one option can be active, such as a theme picker.
+
 <Canvas of={MenuStories.RadioGroup} />
 
 ## Submenu
+
+`MenuSubmenu` with a `MenuSubmenuTrigger` nests a second `MenuContent`
+that opens to the side. Use sparingly — one level of nesting for
+variants of the same action (e.g. "Export to…").
 
 <Canvas of={MenuStories.Submenu} />
 
 ## Link items
 
+`MenuLinkItem` renders a real `<a>`, so it gets announced as a link and
+supports `href` / `target` natively. Use for navigation; keep
+`MenuItem` with `onClick` for JS-handled actions.
+
 <Canvas of={MenuStories.LinkItems} />
 
 ## Disabled items
+
+Pass `disabled` to keep an action visible but inert — useful when the
+action exists but its precondition isn't met (no selection, no
+recents). Disabled items are skipped by keyboard navigation.
 
 <Canvas of={MenuStories.DisabledItems} />
 

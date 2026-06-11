@@ -5,6 +5,8 @@ import * as LinkListStories from "./link-list.stories";
 
 # LinkList
 
+## Overview
+
 Vertical list of in-page anchors with title, optional description, and
 chevron affordance. Supports a "View more / View less" toggle when
 `maxShown` is fewer than the items.
@@ -31,11 +33,35 @@ chevron affordance. Supports a "View more / View less" toggle when
 
 ## Variants
 
+### Small
+
+`style="small"` drops the title and description to the compact text
+scale. Use inside denser surfaces (cards, side panels) where the
+default scale would dominate.
+
 <Canvas of={LinkListStories.Small} />
+
+### Title only
+
+Omit `description` on the items and each row collapses to just the
+title and chevron. Use when the link titles are self-explanatory and
+extra copy would be noise.
+
 <Canvas of={LinkListStories.TitleOnly} />
+
+### With secondary description
+
+Pass `secondaryDescription` for a second, subtler line under the
+description — good for metadata like "Updated this week" that
+shouldn't compete with the main copy.
+
 <Canvas of={LinkListStories.WithSecondaryDescription} />
 
 ## Expandable
+
+When `maxShown` is fewer than the number of items, the list truncates
+and renders a "View more / View less" toggle. Use for long task lists
+where you want the first few links visible without a wall of rows.
 
 <Canvas of={LinkListStories.ExpandableViewMore} />
 

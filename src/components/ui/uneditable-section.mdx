@@ -5,6 +5,8 @@ import * as UneditableSectionStories from "./uneditable-section.stories";
 
 # UneditableSection
 
+## Overview
+
 Read-only summary block for displaying a list of label/value pairs —
 typically used to confirm submitted form data before signing or
 submitting. Renders a 2-column grid at the LifeSG XL breakpoint and a
@@ -32,7 +34,20 @@ submitting. Renders a 2-column grid at the LifeSG XL breakpoint and a
 
 ## Variants
 
+### With header
+
+Pass `title` and `description` to render a heading block above the
+items — e.g. "Personal particulars" with a note about where the data
+came from. The title doubles as the section's accessible name.
+
 <Canvas of={UneditableSectionStories.WithHeader} />
+
+### No background
+
+Pass `background={false}` to drop the toned fill and padding. Use when
+the section already sits on a toned surface (a `Card.Body`, a subtle
+page band) and a second background would stack.
+
 <Canvas of={UneditableSectionStories.NoBackground} />
 
 ## Full-width items

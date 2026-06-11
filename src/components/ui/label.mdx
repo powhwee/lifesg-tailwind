@@ -5,6 +5,8 @@ import * as LabelStories from "./label.stories";
 
 # Label
 
+## Overview
+
 Form field label. Wraps a native `<label>` and inherits the LifeSG field
 label tokens (`--field-label`, `--field-text-label`). Pair with an input
 via `htmlFor`.
@@ -22,8 +24,26 @@ via `htmlFor`.
 
 ## States
 
+### Disabled
+
+Set `disabled` to grey the label via the `--field-text-disabled` token.
+Use alongside a disabled input so the whole row reads as inactive — the
+input still owns the semantic `disabled` attribute.
+
 <Canvas of={LabelStories.Disabled} />
+
+### With required mark
+
+Append an `aria-hidden` asterisk for required fields so sighted users
+see the mark while screen readers hear only the label text. Convey
+"required" semantically via `required` / `aria-required` on the input.
+
 <Canvas of={LabelStories.WithRequiredMark} />
+
+### All states
+
+Side-by-side comparison of default, required, and disabled labels.
+
 <Canvas of={LabelStories.States} />
 
 ## Props
@@ -47,4 +67,4 @@ via `htmlFor`.
   do not override with raw `text-sm` etc. (see the component-body
   convention).
 - For more elaborate field composition (label + helper + error),
-  prefer `form-field` once its stories land.
+  prefer `form-field`.

@@ -5,6 +5,8 @@ import * as CheckboxStories from "./checkbox.stories";
 
 # Checkbox
 
+## Overview
+
 Single-selection input for binary or indeterminate boolean state. Two display
 sizes; supports `checked`, `defaultChecked`, `indeterminate`, `disabled`, and
 `aria-invalid`.
@@ -22,8 +24,28 @@ sizes; supports `checked`, `defaultChecked`, `indeterminate`, `disabled`, and
 
 ## Variants
 
+### Checked
+
+Pass `checked` (controlled) or `defaultChecked` (uncontrolled) to render the
+box in its selected state. Use the controlled form when the value lives in
+form state.
+
 <Canvas of={CheckboxStories.Checked} />
+
+### Indeterminate
+
+`indeterminate` renders the mixed "dash" state. Use for a parent checkbox
+whose children are partially selected (e.g. a "select all" header over a
+list where only some rows are checked).
+
 <Canvas of={CheckboxStories.Indeterminate} />
+
+### Small size
+
+`displaySize="small"` shrinks the box from 24 px to 16 px. Reach for it in
+dense surfaces (table rows, compact filter panels) where the default size
+crowds the layout.
+
 <Canvas of={CheckboxStories.SmallSize} />
 
 ## States

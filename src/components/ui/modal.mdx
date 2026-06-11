@@ -5,6 +5,8 @@ import * as ModalStories from "./modal.stories";
 
 # Modal (v1)
 
+## Overview
+
 LifeSG's legacy modal API. `Modal` is the root (takes `show` +
 `onOverlayClick`); `Modal.Box` is the standard content shell with
 optional X close button. Wraps Base UI's `Dialog` with a coloured
@@ -34,13 +36,37 @@ LifeSG-React-DS migrations.
 
 ## Animation directions
 
+The modal box animates in from the bottom by default. `animationFrom`
+switches the entry direction — useful for matching the modal's motion
+to the trigger's position on screen.
+
+### From top
+
 <Canvas of={ModalStories.AnimateFromTop} />
+
+### From left
+
 <Canvas of={ModalStories.AnimateFromLeft} />
+
+### From right
+
 <Canvas of={ModalStories.AnimateFromRight} />
 
 ## Dismissal
 
+### No overlay click
+
+`enableOverlayClick={false}` makes the backdrop inert — the user must
+use the X button or an explicit action button. Use for confirmation
+dialogs where an accidental dismiss would lose work or skip a decision.
+
 <Canvas of={ModalStories.NoOverlayClick} />
+
+### Plain box
+
+`Modal.Box` without `showCloseButton` — typical for short confirmation
+prompts that carry their own footer actions and don't need an X.
+
 <Canvas of={ModalStories.PlainBox} />
 
 ## Accessibility

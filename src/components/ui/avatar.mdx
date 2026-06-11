@@ -5,6 +5,8 @@ import * as AvatarStories from "./avatar.stories";
 
 # Avatar
 
+## Overview
+
 Circular identity indicator. Renders a single initial from a string
 child (LifeSG's first-character rule) or an arbitrary node (image, icon).
 Two sizes: `default` and `small`.
@@ -30,9 +32,34 @@ Two sizes: `default` and `small`.
 
 ## Variants
 
+### Small
+
+`sizeType="small"` for dense chrome — list rows, comment threads,
+compact headers — where the default size would crowd the layout.
+
 <Canvas of={AvatarStories.Small} />
+
+### With image
+
+Pass an `<img>` child for a profile photo; size it with
+`size-full object-cover` so it fills the circle. Remember a meaningful
+`alt` — the wrapper does not supply one.
+
 <Canvas of={AvatarStories.WithImage} />
+
+### With icon
+
+Pass an icon node for anonymous or placeholder users — e.g. a generic
+person glyph before the user has set a photo. Mark the icon
+`aria-hidden` since it's decorative.
+
 <Canvas of={AvatarStories.WithIcon} />
+
+### Initials gallery
+
+String children render only their first character (LifeSG's
+first-character rule) — pass the full name and the component trims it.
+
 <Canvas of={AvatarStories.InitialsGallery} />
 
 ## Props

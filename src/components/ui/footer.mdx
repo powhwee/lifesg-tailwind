@@ -5,6 +5,8 @@ import * as FooterStories from "./footer.stories";
 
 # Footer
 
+## Overview
+
 Page-level footer with optional logo, multi-column link lists,
 disclaimer links (Privacy / Terms / Report Vulnerability), and a
 copyright line. Renders a native `<footer>`.
@@ -30,8 +32,28 @@ copyright line. Renders a native `<footer>`.
 
 ## Variants
 
+### No logo
+
+Pass `hideLogo` to drop the logo block entirely. Use when the footer
+sits inside a shell that already shows branding elsewhere, or when the
+page belongs to a sub-product without its own mark.
+
 <Canvas of={FooterStories.NoLogo} />
+
+### Minimal — disclaimer only
+
+With no `links` at all, the footer collapses to just the logo,
+disclaimer row, and copyright line. Reach for this on lightweight pages
+(error pages, focused single-task flows) that don't need a sitemap.
+
 <Canvas of={FooterStories.MinimalDisclaimerOnly} />
+
+### Custom disclaimer links
+
+Override individual `disclaimerLinks` entries (privacy, terms of use,
+report vulnerability) with real destinations. Only the keys you pass are
+overridden — the rest keep their defaults.
+
 <Canvas of={FooterStories.CustomDisclaimerLinks} />
 
 ## Accessibility

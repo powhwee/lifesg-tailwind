@@ -5,6 +5,8 @@ import * as Stories from "./predictive-text-input.stories";
 
 # PredictiveTextInput
 
+## Overview
+
 A text input with an asynchronous autocomplete dropdown. After the user types
 `minimumCharacters` characters (default 3), the component debounces and calls
 `fetchOptions(input)`. The returned items are rendered as a listbox below the
@@ -38,8 +40,25 @@ value used after selection comes from `displayValueExtractor`.
 
 ## States
 
+### Disabled
+
+`disabled` greys out the input and suppresses fetching entirely.
+
 <Canvas of={Stories.Disabled} />
+
+### Read-only
+
+`readOnly` keeps the value visible and focusable but blocks edits and
+the dropdown. Use for review screens where the field was filled
+earlier in the flow.
+
 <Canvas of={Stories.ReadOnly} />
+
+### Error
+
+Set `error` to render the red error border. Pair with your own
+message, or use `FormPredictiveTextInput` for the standard wiring.
+
 <Canvas of={Stories.ErrorState} />
 
 ## In a form field

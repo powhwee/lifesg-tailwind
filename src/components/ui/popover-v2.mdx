@@ -5,6 +5,8 @@ import * as Stories from "./popover-v2.stories";
 
 # PopoverV2
 
+## Overview
+
 LifeSG&rsquo;s v2 popover surface — a floating card that opens off a trigger
 element. Compound exports:
 
@@ -23,6 +25,10 @@ element. Compound exports:
 />
 
 ## Click trigger
+
+`trigger="click"` (the default) opens the popover on click and dismisses
+on outside-click or Escape. Use for content the user deliberately
+requests, like contextual help behind a button.
 
 <Canvas of={Stories.ClickTrigger} />
 
@@ -55,6 +61,10 @@ shadow tokens.
 <Canvas of={Stories.RichContent} />
 
 ## Inline — default
+
+`PopoverV2.Inline` marks a term inside body text — underlined with a
+trailing info icon — and opens a definition popover on click. Use for
+glossary-style explanations of jargon mid-sentence.
 
 <Canvas of={Stories.InlineDefault} />
 

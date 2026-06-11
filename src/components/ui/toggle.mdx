@@ -5,6 +5,8 @@ import * as ToggleStories from "./toggle.stories";
 
 # Toggle
 
+## Overview
+
 Card-style selection control that wraps a checkbox or radio behaviour in a
 labeled, padded surface. Use for opinionated form choices where a plain
 checkbox or radio would feel under-styled (e.g. "Select a delivery option").
@@ -22,8 +24,27 @@ checkbox or radio would feel under-styled (e.g. "Select a delivery option").
 
 ## Variants
 
+### Checked
+
+Pass `defaultChecked` (uncontrolled) or `checked` (controlled) to render the
+card in its selected state, with the filled indicator and highlighted border.
+
 <Canvas of={ToggleStories.Checked} />
+
+### Disabled
+
+`disabled` greys out the whole card and blocks interaction. Use when the
+option exists but is unavailable in the current context, so the user can
+still see it.
+
 <Canvas of={ToggleStories.Disabled} />
+
+### Error state
+
+`error` flips the card chrome to the destructive palette. Use for required
+selections that failed validation (e.g. terms-and-conditions the user must
+accept before proceeding).
+
 <Canvas of={ToggleStories.ErrorState} />
 
 ## Composite section

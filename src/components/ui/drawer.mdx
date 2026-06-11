@@ -5,6 +5,8 @@ import * as DrawerStories from "./drawer.stories";
 
 # Drawer
 
+## Overview
+
 Side-anchored panel built on Base UI's `Dialog`. Slides in from any of
 four sides, supports header + body + footer slots, and ships with a
 built-in close button (can be hidden for custom chrome).
@@ -36,17 +38,55 @@ built-in close button (can be hidden for custom chrome).
 
 ## Sides
 
+### Right (default)
+
+`side="right"` is the default — the conventional placement for filters,
+detail panes, and settings panels.
+
 <Canvas of={DrawerStories.Default} />
+
+### Left
+
+`side="left"` suits navigation-style drawers that mirror a left-hand
+menu or tree.
+
 <Canvas of={DrawerStories.Left} />
+
+### Top
+
+`side="top"` spans the full viewport width and slides down — useful for
+notification or announcement panels.
+
 <Canvas of={DrawerStories.Top} />
+
+### Bottom
+
+`side="bottom"` slides up from the bottom edge — the natural choice for
+mobile sheet-style interactions.
+
 <Canvas of={DrawerStories.Bottom} />
 
 ## Composition variants
 
+### Hidden close button
+
+`hideClose` removes the built-in X. Use when you supply your own
+dismiss affordance (e.g. a Cancel button in the footer via
+`DrawerClose`) and don't want duplicate close controls.
+
 <Canvas of={DrawerStories.HideClose} />
+
+### Body only
+
+Header and Footer slots are optional — a bare `DrawerBody` works for
+simple content panes that don't need a title bar or action row.
+
 <Canvas of={DrawerStories.BodyOnly} />
 
 ## Triggered
+
+Wrap any clickable element in `DrawerTrigger` to open the drawer on
+click instead of controlling `open` yourself.
 
 <Canvas of={DrawerStories.TriggeredByButton} />
 

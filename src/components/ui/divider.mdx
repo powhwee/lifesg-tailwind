@@ -6,6 +6,8 @@ import * as SystemStories from "./divider.system.stories";
 
 # Divider
 
+## Overview
+
 Horizontal rule with token-driven thickness, line style, and colour.
 Defaults pull from `--divider-thickness`, `--divider-style`, and
 `--divider-color`; per-call props override only what is passed.
@@ -32,8 +34,28 @@ preview is decoration.
 
 ## API examples
 
+### Default
+
+A bare `<Divider />` with no props — 1 px solid line in the token
+colour. This is the right call in almost every case; only reach for the
+props below when a design explicitly diverges.
+
 <Canvas of={DividerStories.Default} />
+
+### Dashed
+
+`lineStyle="dashed"` swaps the solid rule for a dashed one. Use to
+signal a softer or provisional break — e.g. separating optional
+content from the main flow.
+
 <Canvas of={DividerStories.Dashed} />
+
+### Custom color and thickness
+
+`color` and `thickness` override the token defaults per call. Use
+sparingly — a heavier or tinted rule should be an intentional emphasis
+choice, not a default.
+
 <Canvas of={DividerStories.CustomColor} />
 
 ## Props

@@ -5,6 +5,8 @@ import * as BreadcrumbStories from "./breadcrumb.stories";
 
 # Breadcrumb
 
+## Overview
+
 Hierarchical wayfinding for nested routes. Renders an ordered list of links
 with chevron or slash separators.
 
@@ -20,6 +22,10 @@ with chevron or slash separators.
 <Canvas of={BreadcrumbStories.Default} />
 
 ## Slash separator
+
+Pass `separator="slash"` to swap the chevrons for slashes. Use when the
+trail represents a path-like hierarchy (folders, document trees) where
+slashes read more naturally.
 
 <Canvas of={BreadcrumbStories.SlashSeparator} />
 

@@ -5,6 +5,8 @@ import * as LocalNavStories from "./local-nav.stories";
 
 # LocalNav
 
+## Overview
+
 Page-level "in this page" navigator. Two presentations on the same API:
 `LocalNav.Menu` for a vertical list (desktop sidebar), and
 `LocalNav.Dropdown` for a sticky single-button toggle (mobile / narrow
@@ -39,13 +41,24 @@ const items = [
 
 ## Menu
 
+`LocalNav.Menu` renders the vertical list with a 3 px left rail per
+item. Use in a desktop sidebar column alongside long-form content.
+
 <Canvas of={LocalNavStories.Menu} />
 
 ## Dropdown
 
+`LocalNav.Dropdown` collapses the same items behind a single sticky
+toggle button. Use on mobile or in narrow columns where a persistent
+vertical list would eat too much space.
+
 <Canvas of={LocalNavStories.Dropdown} />
 
 ## Custom item rendering
+
+Pass a `renderItem` callback to take over each item's content — the
+callback receives the item plus a `selected` flag so you can decorate
+the active section (badges, counters, etc.).
 
 <Canvas of={LocalNavStories.MenuWithCustomRender} />
 

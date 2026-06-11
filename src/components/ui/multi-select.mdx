@@ -5,6 +5,8 @@ import * as MultiSelectStories from "./multi-select.stories";
 
 # MultiSelect
 
+## Overview
+
 Multi-choice dropdown for picking zero-or-more options. The trigger
 summarizes the current selection; the listbox is a checkbox list inside a
 popover.
@@ -22,7 +24,20 @@ popover.
 
 ## Variants
 
+### Max selectable
+
+`maxSelectable` caps how many options can be picked; once the cap is
+reached, the remaining unselected checkboxes are disabled. Use when the
+backend or UX imposes a hard limit (e.g. "choose up to 2").
+
 <Canvas of={MultiSelectStories.MaxSelectable} />
+
+### Custom summary
+
+`formatSummary` replaces the default comma-joined trigger label with your
+own text built from the selection count and labels. Use when the joined
+list would overflow the trigger or when a count reads better.
+
 <Canvas of={MultiSelectStories.CustomSummary} />
 
 ## Composite form field
@@ -37,6 +52,6 @@ popover.
 
 - `maxSelectable` caps the count of selected options. Once reached, the
   unselected checkboxes are disabled.
-- `formatSummary({ count, labels })` lets you customize the trigger label —
+- `formatSummary(count, labels)` lets you customize the trigger label —
   e.g. "3 fruits selected" instead of the default comma-joined list.
 - Reach for `FormMultiSelect` when you need the standard form-field layout.

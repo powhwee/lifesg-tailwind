@@ -5,6 +5,8 @@ import * as TextListStories from "./text-list.stories";
 
 # TextList
 
+## Overview
+
 Token-driven `<ul>` and `<ol>` with the LifeSG body typography scale.
 Two exports: `UnorderedList` (custom bullets supported as a React node)
 and `OrderedList` (custom counter type + separator).
@@ -22,6 +24,10 @@ and `OrderedList` (custom counter type + separator).
 
 ### Bullet types
 
+The built-in marker shapes — `disc` (default), `circle`, and `square`.
+Use the non-default shapes to visually distinguish nested or secondary
+lists.
+
 <Canvas of={TextListStories.UnorderedBulletTypes} />
 
 Pass any React node as `bulletType` for custom markers:
@@ -34,8 +40,26 @@ Or `"none"` to drop bullets and padding entirely:
 
 ## OrderedList
 
+### Decimal
+
+`counterType="decimal"` numbers items 1, 2, 3 — the default choice for
+step-by-step instructions.
+
 <Canvas of={TextListStories.OrderedDecimal} />
+
+### Lower alpha
+
+`counterType="lower-alpha"` counts a, b, c. Use for option lists and
+sub-clauses where numbers are already taken by the parent list.
+
 <Canvas of={TextListStories.OrderedAlpha} />
+
+### Lower roman
+
+`counterType="lower-roman"` counts i, ii, iii — the deepest level of
+legal-style nesting, or anywhere a formal document convention calls
+for roman numerals.
+
 <Canvas of={TextListStories.OrderedRoman} />
 
 `counterSeparator` defaults to `")"` — override for legal-style

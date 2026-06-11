@@ -5,6 +5,8 @@ import * as UnitStories from "./unit-number-input.stories";
 
 # UnitNumberInput
 
+## Overview
+
 Singapore-style floor + unit pair (e.g. `04-56`) as a single field.
 Two inputs share one shell so focus, hover, error, and disabled states
 read as one control.
@@ -27,17 +29,54 @@ read as one control.
 
 ## Variants
 
+### Pre-filled
+
+Uncontrolled usage: pass `defaultValue` as the joined `"floor-unit"`
+string and let the component manage its own state. Use for simple
+forms read at submit time.
+
 <Canvas of={UnitStories.PreFilled} />
+
+### Controlled
+
+Pass `value` and `onChange` to own the state. `onChange` emits the
+joined string; reach for `onChangeRaw` if you need the floor / unit
+pieces separately.
+
 <Canvas of={UnitStories.Controlled} />
 
 ## States
 
+### Error
+
+Set `error` to render the red error border across the shared shell.
+Pair with your own message, or use `FormUnitNumberInput` for the
+standard wiring.
+
 <Canvas of={UnitStories.ErrorState} />
+
+### Disabled
+
+`disabled` greys out both inputs as one control.
+
 <Canvas of={UnitStories.Disabled} />
 
 ## Composite (FormUnitNumberInput)
 
+### Form field
+
+`FormUnitNumberInput` wraps the input with the standard label +
+description chrome. Reach for it in forms instead of hand-rolling the
+wrapper.
+
 <Canvas of={UnitStories.CompositeFormField} />
+
+### Form field with error
+
+Pass `errorMessage` to show the error state with its message in the
+reserved slot — the layout doesn't shift when the error appears or
+clears.
+
 <Canvas of={UnitStories.FormFieldWithError} />
 
 ## Accessibility

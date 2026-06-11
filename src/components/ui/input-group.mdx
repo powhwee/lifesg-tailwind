@@ -5,6 +5,8 @@ import * as InputGroupStories from "./input-group.stories";
 
 # InputGroup
 
+## Overview
+
 A horizontal flex container that pairs an `<input>` with one or more
 addons (`$`, `https://`, `@gov.sg`, etc.). The whole group reads as a
 single field — focus, hover, error, and disabled states are wired to
@@ -28,17 +30,54 @@ the wrapper so addons and input style together.
 
 ## Variants
 
+### Leading label addon
+
+Place an `InputGroupAddon` before the input for fixed prefixes like
+`https://`. Use when the prefix is constant and typing it would be
+redundant.
+
 <Canvas of={InputGroupStories.LabelAddon} />
+
+### Trailing addon
+
+Place the addon after the input for fixed suffixes like a domain or unit
+(`@gov.sg`, `kg`). Leading and trailing addons can also be combined
+around a single input, as in the Default example.
+
 <Canvas of={InputGroupStories.TrailingAddon} />
 
 ## States
 
+### Error
+
+`error` on the wrapper toggles the error ring tokens across the whole
+group — addons included — so the field reads as one invalid control.
+Pair with `aria-invalid` on the inner input and a visible message.
+
 <Canvas of={InputGroupStories.ErrorState} />
+
+### Disabled
+
+`disabled` on the wrapper greys out the shell; the inner input still
+needs its own `disabled` attribute to actually block typing.
+
 <Canvas of={InputGroupStories.Disabled} />
 
 ## Composite (FormInputGroup)
 
+### With label and description
+
+`FormInputGroup` embeds the group in the standard `FormField` layout,
+wiring the label and description to the control. Prefer it over
+hand-rolling labels around the raw parts.
+
 <Canvas of={InputGroupStories.CompositeFormField} />
+
+### With error message
+
+Pass `errorMessage` to show the validation failure below the field; the
+group shell flips to the error chrome at the same time.
+
 <Canvas of={InputGroupStories.FormFieldWithError} />
 
 ## Props

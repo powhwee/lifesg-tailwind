@@ -5,6 +5,8 @@ import * as NavbarStories from "./navbar.stories";
 
 # Navbar
 
+## Overview
+
 Site-level top navigation: brand on the left, primary nav items in the
 middle, action buttons (Log in / Sign up) on the right. Collapses to a
 hamburger-triggered Drawer on mobile.
@@ -36,9 +38,36 @@ hamburger-triggered Drawer on mobile.
 
 ## Variants
 
+### With selected item
+
+Pass `selectedId` to mark the current page's nav item. The selected item
+gets `aria-current="page"` and the bottom-bar indicator, so users always
+know where they are in the site.
+
 <Canvas of={NavbarStories.WithSelected} />
+
+### With actions
+
+`actions` renders buttons on the right edge (e.g. Log in / Sign up). Each
+action takes an optional `variant` to demote the secondary action to an
+outline button. On narrow shells the actions move into the mobile drawer
+footer automatically.
+
 <Canvas of={NavbarStories.WithActions} />
+
+### With masthead
+
+Set `masthead` to render the standard "A Singapore Government Agency
+Website" strip above the bar. Use for any public-facing government
+service page.
+
 <Canvas of={NavbarStories.WithMasthead} />
+
+### Full chrome
+
+Everything together — masthead, selected item, and action buttons. This
+is the typical configuration for a production service shell.
+
 <Canvas of={NavbarStories.FullChrome} />
 
 ## Accessibility
@@ -61,5 +90,5 @@ hamburger-triggered Drawer on mobile.
 - `fixed` pins the bar to the top via `position: fixed top-0 z-40`.
   Compose with `padding-top` on the page body to avoid content jumping
   under it.
-- For the legacy `Modal v1` style — see the `Overlays/Modal` stories;
-  the drawer pattern here is built on the newer `Drawer` component.
+- The mobile menu is built on the `Drawer` component — see the
+  `Overlays/Drawer` stories for its standalone behavior.

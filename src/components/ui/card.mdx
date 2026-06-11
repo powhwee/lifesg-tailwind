@@ -5,6 +5,8 @@ import * as CardStories from "./card.stories";
 
 # Card
 
+## Overview
+
 Container with token-driven padding, radius, border, and shadow. Exposes
 sub-parts on the same export — `Card.Header`, `Card.Title`,
 `Card.Description`, `Card.Body`, `Card.Footer` — so usage stays compact
@@ -32,8 +34,28 @@ without losing layout structure.
 
 ## Variants
 
+### Title only
+
+A `Card.Title` dropped straight into the card body, with no header,
+description, or footer. Use for compact stat tiles or single-line
+summaries where the full composition would be overkill.
+
 <Canvas of={CardStories.TitleOnly} />
+
+### Full composition
+
+All five sub-parts together: header with title and description, a body,
+and a footer with action buttons. Reach for this shape when the card is
+a self-contained call-to-action surface.
+
 <Canvas of={CardStories.FullComposition} />
+
+### Stacked
+
+Multiple cards in a vertical column. Use to present parallel options of
+equal weight (tiers, eligibility categories) — keep each card's content
+shape consistent so the stack scans as a set.
+
 <Canvas of={CardStories.Stacked} />
 
 ## Accessibility

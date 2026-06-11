@@ -5,6 +5,8 @@ import * as PhoneStories from "./phone-number-input.stories";
 
 # PhoneNumberInput
 
+## Overview
+
 Country-code picker + national number input as a single field. Ships
 with a SG-first ASEAN/APAC default country list (override via
 `countries` prop). Picker is a `Popover` built on Base UI.
@@ -30,15 +32,45 @@ const [value, setValue] = React.useState({ countryCode: "+65" });
 
 ## Variants
 
+### Pre-filled
+
+Pass a value with both `countryCode` and `number` to render the field
+populated. SG numbers display with the `XXXX XXXX` spacing; the stored
+value stays digits-only.
+
 <Canvas of={PhoneStories.PreFilled} />
+
+### Fixed country
+
+`fixedCountry` disables the country picker while keeping the code
+visible for context. Use when the field is bound to a known locale —
+e.g. a registered SG mobile number.
+
 <Canvas of={PhoneStories.FixedCountry} />
 
 ## States
 
+### Error
+
+Set `error` to render the red error border. The bare component shows
+only the visual state — pair with your own message, or use
+`FormPhoneNumberInput` for the standard wiring.
+
 <Canvas of={PhoneStories.ErrorState} />
+
+### Disabled
+
+`disabled` greys out both the picker and the number input.
+
 <Canvas of={PhoneStories.Disabled} />
 
 ## Composite (FormPhoneNumberInput)
+
+### Form field
+
+`FormPhoneNumberInput` wraps the input with the standard label +
+description chrome. Reach for it in forms instead of hand-rolling the
+wrapper.
 
 <Canvas of={PhoneStories.CompositeFormField} />
 

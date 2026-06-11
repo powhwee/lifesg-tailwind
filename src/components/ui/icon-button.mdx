@@ -5,6 +5,8 @@ import * as IconButtonStories from "./icon-button.stories";
 
 # IconButton
 
+## Overview
+
 Square button containing a single icon. Three style types (`primary`,
 `secondary`, `light`) and three size types (`large`, `default`,
 `small`). Wraps Base UI's `Button` primitive — accepts the usual
@@ -41,7 +43,19 @@ actions.
 
 ## States
 
+### Destructive
+
+There is no built-in destructive style type — colour the icon itself
+(e.g. `text-lifesg-text-error` on the glyph) on a `secondary` button to
+signal a delete action.
+
 <Canvas of={IconButtonStories.Destructive} />
+
+### Disabled
+
+`disabled` swaps in the disabled tokens and blocks pointer events across
+all three style types.
+
 <Canvas of={IconButtonStories.Disabled} />
 
 ## Props

@@ -5,6 +5,8 @@ import * as TableStories from "./table.stories";
 
 # Table
 
+## Overview
+
 Composite table with `Table.Container`, `Table.Head`, `Table.Body`,
 `Table.Row`, `Table.HeaderCell`, `Table.Cell`. The container provides
 the rounded border + overflow clip; the table itself is a plain
@@ -38,7 +40,20 @@ the rounded border + overflow clip; the table itself is a plain
 
 ## Variants
 
+### Numeric alignment
+
+Right-align number columns with `className="text-right tabular-nums"`
+on both the header cell and the data cells — `tabular-nums` keeps
+digits the same width so figures line up down the column.
+
 <Canvas of={TableStories.NumericAlignment} />
+
+### Long content
+
+Multi-line cell content wraps naturally; cells align to the top so a
+short label stays anchored beside the first line of its long
+neighbour. Constrain the container width rather than truncating.
+
 <Canvas of={TableStories.LongContent} />
 
 ## Accessibility

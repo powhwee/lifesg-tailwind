@@ -5,6 +5,8 @@ import * as MastheadStories from "./masthead.stories";
 
 # Masthead
 
+## Overview
+
 The Singapore Government "official agency website" banner that sits
 above the navbar. Collapsible — clicking "How to identify" reveals the
 .gov.sg / HTTPS / Scam-alert disclosures.
@@ -25,6 +27,10 @@ above the navbar. Collapsible — clicking "How to identify" reveals the
 <Canvas of={MastheadStories.Default} />
 
 ## Stretched
+
+Pass `stretch` to remove the `max-w-screen-xl` cap and let the banner
+run full-bleed. Use when the masthead lives inside a navbar shell that
+manages its own content width.
 
 <Canvas of={MastheadStories.Stretched} />
 

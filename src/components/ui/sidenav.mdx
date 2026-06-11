@@ -5,6 +5,8 @@ import * as SidenavStories from "./sidenav.stories";
 
 # Sidenav
 
+## Overview
+
 Icon-rail side navigation. Items optionally expand into a secondary
 drawer panel showing nested DrawerItems and DrawerSubitems. Inspired by
 LifeSG dashboard chrome (and apps like VS Code's activity bar).
@@ -34,9 +36,18 @@ LifeSG dashboard chrome (and apps like VS Code's activity bar).
 
 ## With groups
 
+Multiple `Sidenav.Group`s split the rail into sections; pass
+`separator` on a group to draw a divider after it. Use to separate
+primary destinations from utilities like settings.
+
 <Canvas of={SidenavStories.WithGroups} />
 
 ## With expanding drawer
+
+Give an item children (`Sidenav.DrawerItem` / `Sidenav.DrawerSubitem`)
+and an explicit `id`, and clicking the icon opens a secondary drawer
+panel with the nested navigation. Use for sections that have too many
+destinations to surface as top-level icons.
 
 <Canvas of={SidenavStories.WithExpandingDrawer} />
 

@@ -5,6 +5,8 @@ import * as PaginationStories from "./pagination.stories";
 
 # Pagination
 
+## Overview
+
 Controlled page navigator with prev/next, optional first/last buttons,
 ellipsis collapsing for long page lists, and an optional page-size
 changer (built on `Select`).
@@ -29,13 +31,46 @@ changer (built on `Select`).
 
 ## Variants
 
+### Few pages
+
+Below the ellipsis threshold (9 pages), every page number renders
+inline — nothing collapses. No configuration needed; this is purely a
+function of `totalItems / pageSize`.
+
 <Canvas of={PaginationStories.FewPages} />
+
+### Many pages
+
+Past the threshold, the page list collapses to `first / last / active
+± 2` with ellipsis cells in between, keeping the control compact even
+for hundreds of pages.
+
 <Canvas of={PaginationStories.ManyPages} />
+
+### Single page
+
+With only one page of results, the control still renders (prev/next
+disabled). Hide it at the consumer level if your UX prefers no chrome
+for unpaginated lists.
+
 <Canvas of={PaginationStories.SinglePage} />
 
 ## Optional UI
 
+### First / last navigation
+
+Pass `showFirstAndLastNav` to add jump-to-first / jump-to-last buttons
+on the edges. Useful for long result sets where users need to reach the
+ends quickly.
+
 <Canvas of={PaginationStories.WithFirstLastNav} />
+
+### Page-size changer
+
+Pass `showPageSizeChanger` with `pageSizeOptions` to render a `Select`
+beside the pager. Wire `onPageSizeChange` — it reports both the
+adjusted page and the new size so the active page stays in range.
+
 <Canvas of={PaginationStories.WithPageSizeChanger} />
 
 ## Accessibility

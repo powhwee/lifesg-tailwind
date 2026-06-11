@@ -5,6 +5,8 @@ import * as FeedbackRatingStories from "./feedback-rating.stories";
 
 # FeedbackRating
 
+## Overview
+
 A controlled five-star rating with banner illustration, optional prompt
 text, and a submit button. Stacks vertically on mobile and shifts to a
 horizontal layout from `md` upwards.
@@ -31,8 +33,27 @@ const [rating, setRating] = React.useState(0);
 
 ## Variants
 
+### With description
+
+Pass `description` to render prompt text alongside the stars. Use it
+to anchor the rating to a specific question ("How was your experience
+with this service today?") rather than a bare scale.
+
 <Canvas of={FeedbackRatingStories.WithDescription} />
+
+### Pre-filled
+
+Pass a non-zero `rating` to render with stars already selected — e.g.
+when the user is revisiting and can revise an earlier rating. The
+submit button is enabled from the start.
+
 <Canvas of={FeedbackRatingStories.PreFilled} />
+
+### Custom button label
+
+`buttonLabel` replaces the default submit text. Use when the
+surrounding flow needs a more specific verb, like "Send feedback".
+
 <Canvas of={FeedbackRatingStories.CustomButtonLabel} />
 
 ## Accessibility

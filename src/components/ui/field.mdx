@@ -5,6 +5,8 @@ import * as FieldStories from "./field.stories";
 
 # Field
 
+## Overview
+
 Low-level field composition kit. Thin wrapper around Base UI's `Field`
 primitives — `Field`, `FieldLabel`, `FieldDescription`, `FieldError`,
 `FieldControl`, `FieldValidity` — styled with LifeSG field tokens.
@@ -31,8 +33,28 @@ label + description + error pattern, prefer `FormField`.
 
 ## Variants
 
+### With description
+
+Place a `FieldDescription` between the label and the control to surface
+formatting hints or constraints. Base UI wires it into the control's
+`aria-describedby` automatically.
+
 <Canvas of={FieldStories.WithDescription} />
+
+### With error
+
+Set `invalid` on the `Field` root and render a `FieldError` after the
+control. Use when validation fails and the user needs an inline,
+field-scoped explanation rather than a page-level alert.
+
 <Canvas of={FieldStories.WithError} />
+
+### Disabled
+
+Set `disabled` on the `Field` root to grey out the label and hide the
+description (`FieldDescription` is hidden for disabled fields so screen
+readers don't announce instructions for an unreachable control).
+
 <Canvas of={FieldStories.Disabled} />
 
 ## Accessibility

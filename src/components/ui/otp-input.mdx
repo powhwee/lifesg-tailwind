@@ -5,6 +5,8 @@ import * as OtpStories from "./otp-input.stories";
 
 # OtpInput
 
+## Overview
+
 One-time-password input with N cells, optional prefix, error message,
 and a verify button with cooldown countdown. Built on Base UI's
 `OTPField` primitive.
@@ -31,7 +33,19 @@ const [value, setValue] = React.useState<string[]>(Array(6).fill(""));
 
 ## Variants
 
+### With prefix
+
+Pass `prefix` (a value plus separator, e.g. "OTP-") to render a static
+label before the cells. Use when the code the user receives includes a
+fixed prefix they shouldn't have to type.
+
 <Canvas of={OtpStories.WithPrefix} />
+
+### Four digit
+
+`numOfInput` controls the cell count — the `value` array must match its
+length. Use 4 for short PIN-style codes, 6 for standard SMS OTPs.
+
 <Canvas of={OtpStories.FourDigit} />
 
 ## States
@@ -40,7 +54,20 @@ const [value, setValue] = React.useState<string[]>(Array(6).fill(""));
 
 ## Layout modes
 
+### OTP only
+
+`otpOnly` strips the verify button and cooldown UI, leaving just the
+cells. Use when the surrounding form supplies its own submit
+affordance.
+
 <Canvas of={OtpStories.OtpOnly} />
+
+### Custom action label
+
+Pass `actionButtonProps` to relabel (or otherwise customise) the verify
+button — e.g. "Send code" for a flow where the button requests the OTP
+rather than verifying it.
+
 <Canvas of={OtpStories.CustomActionLabel} />
 
 ## Accessibility

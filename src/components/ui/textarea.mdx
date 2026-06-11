@@ -5,6 +5,8 @@ import * as TextareaStories from "./textarea.stories";
 
 # Textarea
 
+## Overview
+
 Multiline text input. Shares the LifeSG `--input-*` token system with
 `Input`, plus an optional character counter for length-limited fields.
 Exposes two exports: raw `Textarea` and a `FormTextarea` composite that
@@ -23,14 +25,51 @@ embeds it in `FormField`.
 
 ## Variants
 
+### With counter
+
+Pair `showCounter` with `maxLength` to render a live "N characters left"
+row below the control. Use for length-limited fields (feedback boxes,
+SMS-style messages) where users benefit from seeing the remaining budget.
+
 <Canvas of={TextareaStories.WithCounter} />
+
+### Disabled
+
+`disabled` greys out the control and removes it from the tab order. Use
+when the field is not applicable in the current context.
+
 <Canvas of={TextareaStories.Disabled} />
+
+### Read-only
+
+`readOnly` shows a previously submitted value without allowing edits, but
+keeps the control focusable so users can select and copy the text.
+
 <Canvas of={TextareaStories.ReadOnly} />
+
+### Error state
+
+`aria-invalid="true"` switches the border and focus ring to the error
+tokens. Pair with a visible error message (see `FormTextarea` below) so
+the failure is announced, not just shown.
+
 <Canvas of={TextareaStories.ErrorState} />
 
 ## Composite (FormTextarea)
 
+### With label and description
+
+`FormTextarea` wraps the control in `FormField`, wiring up the label and
+optional description with the right `id` / `aria-describedby` plumbing.
+Prefer it over hand-rolling labels around the raw `Textarea`.
+
 <Canvas of={TextareaStories.CompositeFormField} />
+
+### With error message
+
+Pass `errorMessage` together with `aria-invalid="true"` to show the
+validation failure below the field and announce it to screen readers.
+
 <Canvas of={TextareaStories.FormFieldWithError} />
 
 ## Props

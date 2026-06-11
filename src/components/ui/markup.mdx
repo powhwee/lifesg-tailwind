@@ -5,6 +5,8 @@ import * as MarkupStories from "./markup.stories";
 
 # Markup
 
+## Overview
+
 Renders CMS-authored HTML with the LifeSG typography scale. Tag-level
 styles flow from the design system; consumers can override the baseline
 text size and colour per call.
@@ -24,8 +26,28 @@ text size and colour per call.
 
 ## Variants
 
+### With base text size
+
+`baseTextSize="sm"` (or `bl` / `md` / `xs`) applies the matching body
+scale to the whole block instead of inheriting from the parent. Use
+when CMS content lands in a context whose inherited typography doesn't
+suit it — e.g. compact sidebars or footnote regions.
+
 <Canvas of={MarkupStories.WithBaseTextSize} />
+
+### With base text color
+
+`baseTextColor` tints the baseline text colour for the whole block.
+Use for de-emphasised or themed surfaces; tag-level colours (links,
+headings) still come from the design system.
+
 <Canvas of={MarkupStories.WithBaseTextColor} />
+
+### Inline
+
+`inline` renders a `<span>` wrapper instead of a `<div>` so a fragment
+of CMS-formatted text can sit mid-sentence within surrounding copy.
+
 <Canvas of={MarkupStories.Inline} />
 
 ## Props

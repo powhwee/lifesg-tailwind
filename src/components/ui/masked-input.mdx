@@ -5,6 +5,8 @@ import * as MaskedInputStories from "./masked-input.stories";
 
 # MaskedInput
 
+## Overview
+
 Input that masks part or all of its value behind bullets and exposes a
 reveal/hide toggle. Built on `Input`; supports masking by index range,
 unmask range, regex, or full mask.
@@ -26,13 +28,44 @@ unmask range, regex, or full mask.
 the first one provided wins. Range tuples are `[start, end)`
 (end-exclusive).
 
+### Mask range
+
+`maskRange={[start, end]}` hides only the characters inside the range.
+Use when a specific slice of the value is sensitive (e.g. the middle
+digits of an ID).
+
 <Canvas of={MaskedInputStories.MaskRange} />
+
+### Unmask range
+
+`unmaskRange={[start, end]}` inverts the rule — everything is masked
+except the given slice. Use for the common "show last 4 digits" pattern.
+
 <Canvas of={MaskedInputStories.UnmaskRange} />
+
+### Mask regex
+
+`maskRegex` masks every character matching the pattern, regardless of
+position. Use when the sensitive characters are defined by kind (e.g.
+all digits) rather than by index.
+
 <Canvas of={MaskedInputStories.MaskRegex} />
 
 ## Variants
 
+### Start unmasked
+
+`disableMask` renders the value in the clear initially; the toggle still
+lets the user hide it. Use when the value is only mildly sensitive and
+hiding it by default would slow users down.
+
 <Canvas of={MaskedInputStories.StartUnmasked} />
+
+### Custom mask character
+
+`maskChar` swaps the default `•` bullet for another character such as
+`*`. Use to match the aesthetics of surrounding form controls.
+
 <Canvas of={MaskedInputStories.CustomMaskChar} />
 
 ## Composite (FormMaskedInput)
